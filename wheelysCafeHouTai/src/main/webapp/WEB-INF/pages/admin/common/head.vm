@@ -1,0 +1,111 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<link rel="icon" type="image/png" href="${staticPath}img/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="${staticPath}img/app-icon72x72@2x.png">
+<link rel="stylesheet" href="${staticPath}css/add/amazeui.min.css" />
+<link rel="stylesheet" href="${staticPath}css/add/admin.css">
+<link rel="stylesheet" href="${staticPath}css/add/theme.css" media="all">
+<script type="text/javascript" src="${staticPath}dpicker/WdatePicker.js"></script>
+<script src="${staticPath}js/add2/jquery.min.js"></script>
+<script src="${staticPath}js/add2/amazeui.min.js"></script>
+<script src="${staticPath}js/add2/app.js"></script>
+<script src="${staticPath}js/add2/jquery.min1.js"></script>
+<style>
+/* @font-face{
+font-family:FontAwesome;
+src:url(${staticPath}css/fonts/fontawesome-webfont.woff2);
+src:url(${staticPath}css/fonts/fontawesome-webfont.eot) format('embedded-opentype'),url(${staticPath}css/fonts/fontawesome-webfont.woff2) format('woff2'),url(${staticPath}css/fonts/fontawesome-webfont.woff) format('woff'),url(${staticPath}css/fonts/fontawesome-webfont.ttf) format('truetype'),url(${staticPath}css/fonts/fontawesome-webfont.svg) format('svg')
+} */
+th ,td{text-align:center; padding:.7rem 0 !important;}
+@font-face{
+font-family:FontAwesome;
+src:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/fonts/fontawesome-webfont.woff2);
+src:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/fonts/fontawesome-webfont.eot) format('embedded-opentype'),url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/fonts/fontawesome-webfont.woff2) format('woff2'),url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/fonts/fontawesome-webfont.woff) format('woff'),url(${staticPath}css/fonts/fontawesome-webfont.ttf) format('truetype'),url(${staticPath}css/fonts/fontawesome-webfont.svg) format('svg')
+}
+.left{float:left !important;}
+.current {
+	background-color: rgba(0, 255, 150, 0.5);
+}
+
+.prev, .num, .next, .current {
+	width: auto;
+	height: auto;
+	margin: 3px;
+	padding: 1px 2px;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+	background-color: rgba(255, 255, 255, 0.1);
+}
+
+#collapse-nav .active {
+	background: red;
+}
+
+li.red1 {
+	background-color: #ccc;
+}
+
+.red2 {
+	background-color: #fff;
+}
+
+.mydisplay { //
+	width: 230px;
+	border: 1px solid red;
+	display: none; //
+	position: relative;
+	position: absolute; //
+	left: 650px;
+	left: 65%;
+	background: #fff;
+	float: left;
+}
+
+.mydisplay1 { //
+	width: 230px;
+	border: 1px solid red;
+	display: none; //
+	position: relative;
+	position: absolute;
+	left: 400px;
+	background: #fff;
+	float: left;
+}
+
+.mydisplay2 { //
+	width: 230px;
+	border: 1px solid red;
+	display: none; //
+	position: relative;
+	position: absolute;
+	left: 490px;
+	background: #fff;
+	float: left;
+}
+
+#topbar-collapse {
+	padding: 21px 21px 0px 21px;
+	border-bottom: 5px solid #FF0000;
+}
+
+.admin-main {
+	padding: 21px;
+}
+
+#admin-offcanvas {
+	background-color: #393D49;
+}
+
+body {
+	padding: 0px;
+}
+#page{font-size:14px;}
+#page a.on{
+	color:#bdbdbd;
+}
+.center{text-align:center}
+.borderRed{border-color:#ed2626 !important;}
+</style>

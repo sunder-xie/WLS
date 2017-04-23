@@ -1,0 +1,11 @@
+<div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+</div> 
+<script type="text/javascript">
+$.ajax({
+	dataType: 'html',
+	url:'${basePath}admin/common/menu.xhtml',
+    success:function(data){
+		$('#admin-offcanvas').append(data);
+    }
+});
+</script>

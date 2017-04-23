@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.CafeRecruit" table="wheelys_recruit">
+		<id name="id" column="id" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="name" column="name" type="string" />
+		<property name="sex" column="sex" type="string" />
+		<property name="idcard" column="idcard" type="string" />
+		<property name="phone" column="phone" type="string" />
+		<property name="wxid" column="wxid" type="string" />
+		<property name="email" column="email" type="string" />
+		<property name="company" column="company" type="string" />
+		<property name="address" column="Address" type="string" />
+		<property name="companyphone" column="companyphone" type="string" />
+		<property name="values1" column="values1" type="string" />
+		<property name="values2" column="values2" type="string" />
+		<property name="values3" column="values3" type="string" />
+		<property name="values4" column="values4" type="string" />
+		<property name="values5" column="values5" type="string" />
+		<property name="values6" column="values6" type="string" />
+		<property name="values7" column="values7" type="string" />
+		<property name="values8" column="values8" type="string" />
+		<property name="values9" column="values9" type="string" />
+		<property name="times"   column="times"   type="long" />
+		<property name="state"   column="state"   type="integer" />
+	</class>
+</hibernate-mapping>

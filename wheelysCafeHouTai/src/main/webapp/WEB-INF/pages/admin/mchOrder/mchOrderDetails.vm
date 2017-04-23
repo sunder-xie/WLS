@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<style>
+#inputMod input{width:150px; float:left; margin-right:5px;}
+.clickMod a{display:block; width:30%; margin:0 10%; padding:5px 0; float:left; text-align:center; font-size:16px; color:#fff; background:#ed2626; border-radius:5px; border:1px solid #ed2626}
+.tbMod{min-width:800px;}
+.tbmod_2 ,.tbmod_2 th{ text-align:center !important;}
+.listMod{margin:20px 0 20px 15px;}
+.listMod h3{font-size:16px; font-weight:bold;}
+.listMod .money{float:right; width:160px; text-align:center;}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+#if($!mchorder.status eq 'accept')
+<div id="pop_1" style="width:500px; min-height:300px; background:#fff;border-radius:5px;padding:20px 0; display:none;">
+	<h2 style="width:100%;text-align:center;padding:20px 0;">你确定供应商发货了么</h2>
+	<p><textarea id="expressInfo" name="expressInfo" placeholder="请录入发货信息，具体包括：物流方式、物流公司、物流单号、物流师傅联系方式等信息" style="margin-left: 20px;max-width:443px;max-height:596px;" rows="10" cols="70">$!mchorder.expressInfo</textarea></p>
+	<div class="clickMod" style="margin-top: 10px;">
+		<a style="background:#fff; color:#ed2626;" href="javascript:topop.close();">取消</a>
+		<a onclick="submit_2();">是的</a></div>
+</div>
+#end
+
+#if($!mchorder.status eq 'new_confirm')
+<div id="pop_2" style="width:500px; height:150px; background:#fff;border-radius:5px; padding:20px 0;display:none;">
+	<h2 style="width:100%; text-align:center">你确定已经和财务确认收到<br>足够款项并可以接单了吗?</h2>
+	<div class="clickMod" style="margin-top: 10px;">
+		<a style="background:#fff; color:#ed2626;" href="javascript:topop.close();">取消</a>
+		<a href="javascript:toajax('接单');">是的</a></div>
+</div>
+#end
+#if($!mchorder.status eq 'new_confirm'||$!mchorder.status eq 'send'||$!mchorder.status eq 'accept')
+<div id="pop_3" style="width:500px; height:150px; background:#fff;border-radius:5px; padding:20px 0; display:none;">
+	<h2 style="width:100%; text-align:center">取消订单不可逆<br>确定取消订单吗?</h2>
+	<div class="clickMod" style="margin-top: 10px;"><a style="background:#fff; color:#ed2626;" href="javascript:topop.close();">取消</a>
+	<a href="javascript:toajax('取消');">是的</a></div>
+</div>
+#end
+
+	<div class="am-fl am-cf tbMod" style="width: 75%;">
+		<strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;订单详情</strong>
+	    <br><br>
+	    <p class="am-padding-left">补货清单</p>
+	     <!-- 增删改查 -->
+	        <div class="am-btn-toolbar" style="float:right;margin-right:30px;">
+	          <div class="am-btn-group am-btn-group-xs">
+	           <button type="button" class="am-btn am-btn-default"  disabled="true" style="font-size: 1.2rem;">
+	         	#if($!mchorder.status =='accept')
+					已接单
+				#elseif($!mchorder.status =='send')		
+				           已发货
+				#elseif($!mchorder.status =='new_confirm')
+					已下单
+				#elseif($!mchorder.status =='finish')
+					交易完成
+				#elseif($!mchorder.status =='cancel')
+					已取消
+				#elseif($!mchorder.status =='paid')
+					已支付
+				#end
+	           </button>
+	           
+	           #if($!mchorder.status ne 'cancel' && $!mchorder.status ne 'finish' )
+	           <a  onclick="topop('pop_3')" onclick="toajax('取消')">
+	           <button type="button" name="cancel" class="am-btn am-btn-default" style="font-size: 1.2rem;" >取消</button>
+	           </a>
+				#end
+	           
+	         
+	         	#if($!mchorder.status =='new_confirm' || $!mchorder.status eq 'accept')
+	         	<span>
+						<input type="submit" name="status" id="submit$!{mchorder.id}" mchid="$!{mchorder.id}" 
+							#if(${mchorder.status} eq 'accept') 
+							 	onclick="topop('pop_1')"  
+                      			value="发货"
+								style="width: 40px; height: 25px; border-radius: 5px; background: #fff; color: red"
+							#elseif(${mchorder.status} eq 'new_confirm')
+							onclick="topop('pop_2')" 
+								 value="接单"
+							 	 onclick="toajax('接单')"  
+								 style="width:40px;height:25px;border-radius:5px;background:#fff;color: green"
+							#end>
+												
+			 	</span>
+	         	#end
+	         	
+	          </div>
+	        </div>
+	      <!-- 增删改查 -->
+	
+	    <div class="am-g">
+	      <div class="am-u-sm-12">
+	          <table class="am-table am-table-striped am-table-hover table-main tbmod_2">
+	            <thead>
+	             <tr>
+	                <!-- <th class="table-check"><input type="checkbox" /></th> -->
+	                <th class="table-author am-hide-sm-only">名称</th>
+	                <th class="table-date am-hide-sm-only">规格</th>
+	                <th class="table-date am-hide-sm-only">单位</th>
+	                <th class="table-date am-hide-sm-only">单价</th>
+	                <th class="table-date am-hide-sm-only">数量</th> 
+	                <th class="table-date am-hide-sm-only">金额</th>
+	              </tr>
+	          </thead>
+	          <tbody>
+			    #foreach($mchD in $mchDetailList)
+			            <tr>              
+			                <td>$mchD.productname</td>
+			                <td>
+			                #if(!$mchD.description)
+			               	#elseif($mchD.description)
+			               		$mchD.description
+			     			#end
+			                </td>
+			                 <td>$!mchD.unit</td>
+			                <td>$VmUtils.getDoubleAmount($mchD.price)</td>
+			                <td>$mchD.quantity</td>
+			                <td>$VmUtils.getDoubleAmount($mchD.totalfee)</td>
+			           </tr>
+			    #end
+			    </tbody>
+			  </table>
+			  <div class="mod_list">
+				  <div class="listMod">
+				  	<h3>物流费用</h3>
+				  	<ul>
+				  		<li><span>$!mchorder.expressDes</span><span class="money">$VmUtils.getDoubleAmount($mchorder.expressfee)</span></li>
+				  	</ul>
+				  	
+				  </div>
+				  <div class="listMod">
+				  	<h3>邮寄信息</h3>
+				  	<ul>
+				  		<li><span>收货人：$!mchorder.contacts</span></li>
+				  		<li><span>收货地址：$!mchorder.address</span></li>
+				  		<li><span>联系电话：$!mchorder.mobile</span></li>
+				  	</ul>
+				  </div>
+				#if($mchorder.remark)
+				  <div class="listMod">
+					<h3>备注信息</h3>
+				  	 	<ul>
+				  		<li><span> $!mchorder.remark</span></li>
+				  	</ul>
+				  	</div>
+					#end
+			
+				
+				  <div class="listMod">
+						<h3>优惠信息</h3>
+						<ul>
+						#if("" == $mchorder.disreason)
+						暂无优惠信息
+						#elseif($!mchorder.discount==0)
+						单笔订单满$!mchorder.disreason元则减免物流费用，您可以返回修改订单以享受此优惠政策。
+						#elseif($!mchorder.discount >0)			
+					  	<li><span>优惠理由:订单满$!mchorder.disreason元减免物流费用  
+					  	</span><span class="money">优惠金额:-￥$VmUtils.getDoubleAmount($!mchorder.discount)</span></li>
+					  	</ul>
+					  	</div>
+						#end	
+					
+					  	#if($mchorder.expressInfo && ${mchorder.status} ne 'send')
+						  <div class="listMod">
+					 	 	<h3>物流信息</h3>
+					  	 	<ul>
+					  			<li><span>$!mchorder.expressInfo</span></li>
+							</ul>
+						  </div>
+						#end
+				  <div style="clear:both; margin-top:30px;height:50px;"><b style="float:right; min-width:160px; text-align:center;display:block">合计:￥$VmUtils.getDoubleAmount($mchorder.payfee)</b></div>
+			  </div>
+		#if(${mchorder.status} eq 'send')
+ 	 		<h3>物流信息</h3>
+		  <textarea style="width:600px; height:200px;" id="expressInfo" name="expressInfo">$!mchorder.expressInfo</textarea>
+		  <div class="am-margin">
+		    <input type="submit" onclick="toajax('发货')" class="am-btn am-btn-primary am-btn-xs" value="保存" />
+		  </div> 
+		  #end
+	     </div>
+	     </div>
+</div>
+
+<script type="text/javascript">
+function submit_2(){
+	if($('#expressInfo').val()== ''){
+		alert('表单不能为空')
+		return false;
+	}else{
+		toajax('发货');
+	}
+}
+
+
+function topop(el){
+	var el = $('#'+el);
+	var zIndex = 500;
+	var cover = $("<div />",{});
+	el.show();
+	cover.css({
+		'background':'rgba(0,0,0,.6)',
+		'position':'fixed',
+		'left':'0',
+		'top':'0',
+		'width': '100%',
+		'height': '100%',
+		'z-index':zIndex-1
+	});
+	$('body').append(cover);
+	topop.close = function(){
+		cover.remove();
+		el.hide();
+	}
+	$(cover).click(function(){
+		topop.close();
+	})
+	var width = el.css('width')/2;
+	var height = el.css('width')/2;
+	el.css({
+		'left':'50%',
+		'margin-left':-el.width()/2+'px',
+		'margin-top':-el.height()/2+'px',
+		'top':'50%',
+		'display': 'block',
+		'transform-style': 'preserve-3D',
+		'-webkit-transform-style': 'preserve-3D',
+		'z-index':zIndex,
+		'position':'fixed'
+		
+	})
+}
+
+function toajax(neir){
+	var status = '';
+	var expressInfo = '';
+	if(neir == '接单'){
+		status = 'accept';                     // 判断当前商品是否上架
+	}else if(neir == '发货'){
+		status = 'send';
+		expressInfo = $('#expressInfo').val();
+	}else if(neir == '完成'){
+		status = 'finsh';
+	}else if(neir == '取消'){
+		status = 'cancel';
+	}
+	var obj = $(this);
+	$.ajax({
+		url:"${basePath}admin/order/status.xhtml",
+		type:'post',
+		dataType:'json',
+		data:'orderid='+${mchorder.id}+'&status='+status+"&expressInfo="+expressInfo,
+		success:function(data){	
+				location.href = location.href;	
+		}
+	});	
+}
+
+
+</script>
+</body>
+   
+</html>

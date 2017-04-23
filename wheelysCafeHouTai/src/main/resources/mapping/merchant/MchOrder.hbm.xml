@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.merchant.MchOrder" table="MCHORDER">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		
+		<property name="tradeno" column="TRADENO" type="string" />
+		<property name="ordertitle" column="ORDERTITLE" type="string" />
+		<property name="mchid" column="MCHID" type="long" />
+		<property name="shopid" column="SHOPID" type="long" />
+		<property name="mchname" column="MCHNAME" type="string" />
+		<property name="shopname" column="SHOPNAME" type="string" />
+		<property name="citycode" column="CITYCODE" type="string" />
+		<property name="cityname" column="CITYNAME" type="string" />
+		<property name="status" column="STATUS" type="string" />
+		<property name="paystatus" column="PAYSTATUS" type="string" />
+		<property name="username" column="USERNAME" type="string" />
+		<property name="mobile" column="MOBILE" type="string" />
+		<property name="totalfee" column="TOTALFEE" type="integer" />
+		<property name="quantity" column="QUANTITY" type="integer" />
+		<property name="discount" column="DISCOUNT" type="integer" />
+		<property name="disreason" column="DISREASON" type="string" />
+		<property name="expressfee" column="EXPRESSFEE" type="integer" />
+		<property name="payfee" column="PAYFEE" type="integer" />
+		<property name="netpaid" column="NETPAID" type="integer" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+		<property name="paidtime" column="PAIDTIME" type="timestamp" />
+		<property name="sendtime" column="SENDTIME" type="timestamp" />
+		<property name="weight" column="WEIGHT" type="long" />
+		<property name="address" column="ADDRESS" type="string" />
+		<property name="contacts" column="CONTACTS" type="string" />
+		<property name="expressInfo" column="EXPRESSINFO" type="string" />
+		<property name="expressDes" column="EXPRESSDES" type="string" />
+		<property name="remark" column="REMARK" type="string" />
+		<property name="otherinfo" column="OTHERINFO" type="string" />
+		<property name="supplierid" column="SUPPLIERID" type="long" />
+		<property name="acceptstatus" column="ACCEPTSTATUS" type="string" />
+	</class>
+</hibernate-mapping>
+

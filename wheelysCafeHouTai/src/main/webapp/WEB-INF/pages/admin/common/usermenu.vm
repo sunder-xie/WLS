@@ -1,0 +1,47 @@
+
+<head>
+<style>
+.close{color: #000000;}
+</style>
+</head>
+
+<div class="am-offcanvas-bar admin-offcanvas-bar"
+	style="height: 600px">
+	<ul class="am-list admin-sidebar-list">
+		<li><a href="${basePath}admin/index.xhtml"><span></span>首页</a></li>
+		#foreach($key in $webModuleMap.keySet())
+		<li class="admin-parent " >
+			<a class="am-cf a-toggle" data-am-collapse="{target: '#collapse-nav'} onclick="submitForm_2();"><span>$key.menutitle</span><span></span></a>
+			#foreach($webModule in $webModuleMap.get($key))	
+			<ul class="am-list admin-sidebar-sub am-collapse am-in" id="collapse-nav-caiwu" >
+				#if($!webModule.moduleurl ne 'update'&& 
+				$!webModule.moduleurl ne 'delate'&& $!webModule.moduleurl ne 'pei' && $!webModule.moduleurl ne 'product'
+				&&$!webModule.moduleurl ne 'banner'&&$!webModule.moduleurl ne 'user')
+				<li class="red2"><a href="${basePath}$webModule.moduleurl"
+					class="am-cf"> <span>$webModule.menutitle</span><span></span></a></li>
+				#end
+			</ul>
+			#end	
+		</li>
+		#end
+	<li class="admin-parent"><a class="am-cf" href="${basePath}admin/staff/showPassword.xhtml"> <span>密码修改</span> <span></span></a></li> 			
+		<li class="admin-parent"><a class="am-cf" href="${basePath}cas/logout.xhtml"> <span>退出</span> <span></span></a></li> 
+	</ul>
+</div>
+<script>
+	/* $(document).ready(function() {
+		$('.a-toggle').siblings().css('display', 'none');
+	}); */
+	$('.a-toggle').click(function() {
+		$(this).siblings().toggle();
+	   
+	})
+	 $(document).ready(function() {
+		 $('.red2').click(function(){
+				$(this).css('background','gray').siblings().css('background','#ffffff');
+			})
+	}); 
+	
+		
+
+</script>

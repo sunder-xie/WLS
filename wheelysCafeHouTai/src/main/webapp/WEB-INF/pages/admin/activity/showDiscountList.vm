@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+
+<head>
+    <title>Wheelys</title> #parse("/admin/common/head.vm")
+    <style>
+    .select {
+        border: 1px #7F9DB9 solid;
+        width: 80px;
+        float: left;
+        margin-left: 90px;
+        height: 30px;
+        overflow: hidden;
+    }
+    
+    .wselect {
+        width: 70px;
+        float: right;
+        height: 30px;
+        margin-left: 300px;
+    }
+    
+    .wselect {
+        width: 100px;
+        height：50px;
+    }
+    
+    .topshow {
+        float: left;
+        margin: 8px;
+    }
+    
+    #inputMod input {
+        width: 150px;
+        float: left;
+        margin-right: 5px;
+    }
+    </style>
+</head>
+
+<body style="padding: 0px">
+    #parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+    <div class="admin-content">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;优惠活动管理</strong> / <small>优惠活动展示</small></div>
+            <br/>
+            <hr width="100%" />
+            <div>
+                <div class="topshow">
+                    <button style="height: 30px" type="button" class="am-btn am-btn-default am-btn-xs" name="add">
+                        新建优惠活动
+                    </button>
+                </div>
+                <div class="topshow">
+                    <form id="inputMod" class="am-input-group am-input-group-sm" action="${basePath}admin/ticket/showDiscountList.xhtml" method="get">
+                        <input type="text" name="actname" height="10px" style="height: 30px" id="txtSeach" placeholder="活动名称">
+                        <select name="activitytype" class="am-input-sm" placeholder="所有分类" style="width:150px;height:33px;float:left;">
+                            <option value="">所有分类</option>
+                            #foreach($activitytype in $activitymap.keySet())
+                            <option value="$activitytype">$!activitymap.get($activitytype)</option>
+                            #end
+                        </select>
+                        <span>
+                        <button class="am-btn am-btn-default" type="submit" name="sou">搜索</button>
+                        </span>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="am-g">
+            <div class="am-u-sm-12">
+                <table class="am-table am-table-striped am-table-hover table-main">
+                    <thead>
+                        <tr>
+                            <th class="table-type">编号</th>
+                            <th class="table-type">分类</th>
+                            <th class="table-title">名称</th>
+                            <th class="table-author am-hide-sm-only">使用期限</th>
+                            <th class="table-author am-hide-sm-only" height="30px" width="400px;">使用店铺</th>
+                            <th class="table-type">优先级</th>
+                            <th class="table-set">状态</th>
+                            <th class="table-date am-hide-sm-only center">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        #foreach($dis in $discountList)
+                        <tr class="showactive">
+                            <td>$!dis.discountActity.id</td>
+                            <td>
+                                $!activitymap.get($!dis.discountActity.type)
+                            </td>
+                            <td>$!dis.discountActity.name</td>
+                            <td>$DateUtil.formatDate($!dis.discountActity.begintime)~$DateUtil.formatDate($!dis.discountActity.endtime)</td>
+                            <td>$!dis.shopname</td>
+                            <td>
+                                $!prioritymap.get($!dis.discountActity.priority)
+                            </td>
+                            <td class="state">
+                                <font color="red">$!dis.discountActity.getActive()</font>
+                            </td>
+                            <td>
+                                <div class="am-btn-toolbar center">
+                                    <div class="am-btn-group-xs">
+                                        <a href="${basePath}admin/ticket/activitydetail.xhtml?id=$dis.discountActity.id">
+                                            <button style="color: blue" type="button" class="am-btn am-btn-default am-btn-xs" name="detail">详情
+                                            </button> &nbsp;
+                                        </a>
+                                        #if($!dis.discountActity.getbz()=="y")
+                                        <span style="display: none"> 
+                                            <button name="activity" style="color: blue" class="am-btn am-btn-default am-btn-xs" status="$!dis.discountActity.getbz()" 
+                                            id="on_$dis.discountActity.id" value="$dis.discountActity.id">
+    										    <span>中止</span>
+
+    										</button>
+                                        </span>
+                                        <span style="display: none"> 
+                                            <button name="activity" style="color: blue" class="am-btn am-btn-default am-btn-xs" status="$!dis.discountActity.getbz()" 
+                                            id="on_$dis.discountActity.id" value="$dis.discountActity.id">
+    										    <span>开启</span>
+    										</button>
+                                        </span> 
+                                        #end 
+                                        #if($!dis.discountActity.getbz()=="k")
+                                        <span style="display: none"> 
+                                            <button name="activity" style="color: blue" class="am-btn am-btn-default am-btn-xs" status="$!dis.discountActity.getbz()" 
+                                            id="on_$dis.discountActity.id" value="$dis.discountActity.id">
+    										    <span>中止</span>
+    										</button>
+                                        </span>
+                                        <span style="display: blank"> 
+                                            <button name="activity" style="color: blue" class="am-btn am-btn-default am-btn-xs" status="$!dis.discountActity.getbz()" 
+                                            id="on_$dis.discountActity.id" value="$dis.discountActity.id">
+    											<span>开启</span>
+    										</button>
+                                        </span> 
+                                        #end 
+                                        #if($!dis.discountActity.getbz()=="z")
+                                        <span style="display: blank"> 
+                                            <button name="activity"  style="color: blue" class="am-btn am-btn-default am-btn-xs" status="$!dis.discountActity.getbz()" 
+                                            id="on_$dis.discountActity.id" value="$dis.discountActity.id">
+    											<span>中止</span>
+    										</button>
+                                        </span>
+                                        <span style="display: none"> 
+                                            <button name="activity" style="color: blue" class="am-btn am-btn-default am-btn-xs" status="$!dis.discountActity.getbz()" 
+                                            id="on_$dis.discountActity.id" value="$dis.discountActity.id">
+    										    <span>开启</span>
+    										</button>
+                                        </span> 
+                                        #end
+                                        <a href="${basePath}admin/ticket/copyactivity.xhtml?id=$!dis.discountActity.id">
+                                            <button style="color: blue" type="button" class="am-btn am-btn-default am-btn-xs" name="copyact">复制
+                                            </button> &nbsp;
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        #end
+                    </tbody>
+                </table>
+                #parse('include/pageUtil.vm')
+            </div>
+        </div>
+    </div>
+    <script>
+    $('button[name=add]').click(
+        function() {
+            window.location.href = "${basePath}admin/ticket/addDiscount.xhtml"
+        });
+
+    $('button[name=sou]').click(function() {
+            var v = $.trim($("#txtSeach").val());
+            $("#txtSeach").attr("value", v);
+        })
+        // 判断活动处于那种状态
+    $(function() {
+        $('.showactive input[input="hidden"]').each(function(e, a) {
+
+        })
+    })
+
+    $('button[name=activity]').click(function() {
+        var id = $(this).val();
+        var status = $(this).attr('status')
+        var obj = $(this).parents('.showactive');
+        var child = $(obj).children('.state').children('font')
+        $.ajax({
+            url: "${basePath}admin/ticket/actbegin.xhtml",
+            type: 'post',
+            dataType: 'json',
+            data: 'id=' + id,
+            success: function(data) {
+                    var text = data.data == 'Y'?"中止":"开启";
+                    var thistext = data.data == 'Y'?"优惠中":"已中止"
+                    //改变文字
+                    $('#on_'+id+' span').html(text);
+                    $(child).html(thistext)
+            }
+        });
+    })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!doctype html>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+</head>
+<style>
+.am-text-right, .am-u-md-6 {
+	height: 32.16px;
+	line-height: 32.16px;
+}
+
+.am-tabs {
+	margin-top: 50px;
+}
+
+.list {
+	
+}
+</style>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+
+	<div class="admin-content" style="min-height:700px">
+		<div class="am-cf am-padding">
+
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">物流管理</strong>
+			</div>
+			<div class="am-tabs am-margin" data-am-tabs>
+			<!-- 	<ul class="am-tabs-nav am-nav am-nav-tabs">
+					<li class="am-active"><a href="#tab1">商家信息</a></li>
+				</ul> -->
+				<div class="am-form">
+					<div id="inputList" class="am-tabs-bd" style="overflow:visible;">
+						<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+							<div class="am-g am-margin-top">
+								<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">所在城市</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<select data-am-selected="{btnSize: 'sm'}" name="citycode">
+										#foreach($key in $itMap.keySet())
+										<option value="$key"#if($key==
+											$operator.citycode)
+											selected="selected" #end>$!itMap.get($key)</option>
+										 #end
+									</select>
+								</div>
+							</div>
+							</div>
+							#if($!rules.id)
+							<input type="hidden" value="$!rules.id" name="id">
+							#end
+							<input type="hidden" value="$supplierid" name="supplierid"/>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">每公斤运费</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<div class="am-btn-group" data-am-button>
+											<input type="text" id="option1" name="morefreight" #if($!rules.id)value="$!VmUtils.getDoubleAmount($!rules.morefreight)"#else value=""#end
+											onkeyup="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" onBlur="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" maxlength="5">
+									</div>
+								</div>
+							</div>
+
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">每单配送费</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<div class="am-btn-group" data-am-button>
+											<input type="text" id="option1" name="morecost" #if($!rules.id) value="$!VmUtils.getDoubleAmount($!rules.morecost)"#else value=""#end
+											onkeyup="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" onBlur="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" maxlength="5">
+									</div>
+								</div>
+							</div>
+					</div>
+					<div class="am-margin">
+						<input type="submit" id="submit" onclick="submitForm_2();"
+							class="am-btn am-btn-primary am-btn-xs" value="提交保存" />
+					</div>
+				</div>
+				</div>
+				</div>
+			</div>
+		<a href="#"
+			class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+			data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+		<script>
+			function submitForm_2() {
+				var data = {};
+				$('#inputList select').each(function(e, a) {
+					var attr = $(a).attr('name');
+					data[attr] = $(a).val();
+				})
+
+				$('#inputList input').each(function(e, a) {
+					var attr = $(a).attr('name');
+					data[attr] = $(a).val();
+				})
+				console.info(data)
+				$.ajax({
+					url : "${basePath}admin/order/addrule.xhtml",
+					type : 'post',
+					dataType : 'json',
+					data : data,
+					success : function(data) {
+						if (data.success) {
+							location.href = '${basePath}admin/order/showruleList.xhtml?supplierid=$supplierid';
+						}else {
+							alert(data.msg);
+						}
+					}
+				});
+			}
+		</script>
+</body>
+</html>

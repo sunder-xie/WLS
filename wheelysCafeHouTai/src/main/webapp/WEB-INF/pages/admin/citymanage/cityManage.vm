@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.wselect{
+	width: 70px;
+	float:right;
+	height: 30px;
+	margin-left: 300px;
+
+}
+.wselect{
+	width: 100px;
+	height：50px;
+
+}
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">
+					&nbsp;&nbsp;&nbsp;城市管理</strong>
+			</div>
+			<br><br>
+			<!-- 增删改查 -->
+			<div class="am-btn-toolbar" style="float: right; margin-right: 30px;">
+				<div class="am-btn-group am-btn-group-xs">
+					<a href="${basePath}admin/setup/showAddCity.xhtml"><button
+							type="button" class="am-btn am-btn-default"
+							style="font-size: 1.2rem;">添加城市</button></a>
+				</div>
+			</div>
+		</div>
+		<div class="am-g">
+			<div class="am-u-sm-12">
+					<table class="am-table am-table-striped am-table-hover table-main">
+						<thead>
+							<tr>
+								<th class="table-type">城市编号</th>
+								<th class="table-type">城市名称</th>
+								<th class="table-title">所属大区</th>
+								<th class="table-type">运营商</th>
+								<th class="table-author am-hide-sm-only">运营商店铺</th>
+								<th class="table-author am-hide-sm-only">排序</th>
+								<th class="table-author am-hide-sm-only">状态</th>
+								<th class="table-date am-hide-sm-only center">操作</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+						#foreach($!vo in $voList)
+							<tr class="showactive">
+								<td id=id>$!vo.city.citycode</td>
+								<td id=name>$!vo.city.cityname</td>
+								<td class="am-hide-sm-only">$!vo.city.region</td>
+								<td class="am-hide-sm-only">$!vo.companyname</td>
+								<td class="am-hide-sm-only">$!vo.shopname</td>
+								<td class="am-hide-sm-only">
+								<input type="text" id="$!{vo.city.id}" name="sn" style="width:30%;  text-align:center;" value="$!vo.city.sn" />
+								</td>
+								<td class="state">#if($!vo.city.status eq 'normal')
+									<span style='color: green'>正常</span>
+									#elseif($!vo.city.status eq 'recommend')
+									<span style='color: red'>推荐中</span>
+									#end
+								</td>
+								<td>
+									<div class="am-btn-toolbar center">
+										<div class="am-btn-group-xs">
+											<span class="normal" #if($!vo.city.status eq 'recommend') style="display: inline-block" #else style="display: none"#end> 
+                                           		 <button name="cstatus" index=0 style="color: blue" class="am-btn am-btn-default am-btn-xs" 
+                                           		 status="normal" id="on_$!{vo.city.id}" value="$!{vo.city.id}">
+    										    	<span style="color:blue">下架</span>
+    											</button>
+                                        	</span>
+                                        	
+                                        	<span class="recommend" #if($!vo.city.status eq 'normal') style="display: inline-block" #else style="display: none" #end > 
+                                            	<button name="cstatus" index=1 style="color: blue" class="am-btn am-btn-default am-btn-xs" 
+                                            	status="recommend" id="on_$!{vo.city.id}" value="$!{vo.city.id}">
+    												<span style="color:blue">推荐</span>
+    											</button>
+                                        	</span> 
+											<a href="${basePath}admin/setup/showAddCity.xhtml?id=$vo.city.id">
+												<button type="button" name="update"
+													class="am-btn am-btn-default am-btn-xs am-text-secondary">
+													<span> 修改 </span>
+												</button>
+											</a>
+											<button type="button" class="am-btn am-btn-default am-btn-xs" name="delete">
+												删除
+												<input type="hidden" name="deleteid" id="$!{vo.city.id}"value="删除" />
+											</button>
+										</div>
+									</div>
+								</td>
+							</tr>
+							#end
+						</tbody>
+					</table>
+					#parse('include/pageUtil.vm')
+			</div>
+		</div>
+	</div>
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+<script>
+$('button[name=delete]').click(function() {
+    var that = $(this);
+    var id = $(this).children().attr('id');
+    $.ajax({
+        url: "${basePath}admin/setup/showshopname.xhtml",
+        type: 'get',
+        dataType: 'json',
+        data: 'id=' + id,
+        success: function(data) {
+            if (data.success) {
+                if (confirm("确认删除吗")) {
+                    $.ajax({
+                        url: "${basePath}admin/setup/delCity.xhtml",
+                        type: 'get',
+                        dataType: 'json',
+                        data: 'id=' + id,
+                        success: function(data) {
+                            that.parent().parent().parent().parent().remove();
+                        }
+                    });
+                }
+            } else {
+                alert('此城市尚有如下运营商未取消关联:' + data.msg + '。请取消关联后再做删除操作')
+            }
+        }
+    });
+
+});
+
+$('input[name=sn]').blur(function (){
+	    var id = $(this).attr('id');
+	    var sn = $(this).val();
+	    console.info(id)
+	    console.info(sn)
+		$.ajax({
+	       url:"${basePath}admin/setup/delCity.xhtml",
+	       type:'post',
+	       dataType:'json',
+	       data:'id='+id+'&sn='+sn,
+	       success:function(data){}
+		});
+	});
+	$('button[name=cstatus]').click(function() {
+        var id = $(this).val();
+        var status = $(this).attr('status')
+        var obj = $(this).parents('.showactive');
+        var child = $(obj).children('.state').children('span');
+        var _this = this;
+        $.ajax({
+            url: "${basePath}admin/setup/changestatus.xhtml",
+            type: 'post',
+            dataType: 'json',
+            data: 'id='+ id+'&status='+status,
+            success: function(data) {
+                    var text = data.data == 'recommend'?"下架":"推荐";
+                    var thistext = data.data == 'recommend'?"推荐中":"正常"
+                    //改变文字
+                    $('#on_'+id+' span').html(text);
+                    $(child).html(thistext)
+
+                    $('#on_'+id).css({"color":(data.data == 'recommend'?"red":"green")})
+					$(child).css({"color":(data.data == 'recommend'?"red":"green")})
+					if($(_this).parent().hasClass('recommend')){
+						$(_this).parent().css('display','none').prev().css('display','inline-block');
+					}else if($(_this).parent().hasClass('normal')){
+						$(_this).parent().css('display','none').next().css('display','inline-block');
+				}
+            }
+        });
+    })
+</script>
+</body>
+</html>

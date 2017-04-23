@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.merchant.Mchrules" table="MCHRULES">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="citycode" column="CITYCODE" type="string" />
+		<property name="lessfreight" column="LESSFREIGHT" type="integer" />
+		<property name="lesscost" column="LESSCOST" type="integer" />
+		<property name="morefreight" column="MOREFREIGHT" type="integer" />
+		<property name="morecost" column="MORECOST" type="integer" />
+		<property name="supplierid" column="SUPPLIERID" type="long" />
+		<property name="delstatus" column="DELSTATUS" type="string" />
+	</class>
+</hibernate-mapping>
+

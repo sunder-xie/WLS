@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Login Page | Amaze UI Example</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<script src="/houtai/js/add2/jquery.min.js"></script>
+	<style>
+		body{ margin:0;padding:0; font-family:'黑体';}
+		#body{background:url('http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/houtai/bg.jpg?v=00006') center 100% no-repeat; width:100%; height:100%; margin:0; position:relative;}
+		.moble{width:1000px; backgrund-color:rgba(0,0,0,0.2); margin:0 auto; height:100%; background:url('http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/houtai/bg2.png?v=00006') repeat;}
+		.moble h2{text-align:center; font-size:30px; color:#e0e0e0; margin:0;}
+		.loginMod{background:#fff; border-radius:10px; width:400px; height:300px; padding:50px; font-size:18px; margin:50px auto 0;}
+		.loginMod p{height:50px; line-height:50px; margin:0 0 25px;}
+		.loginMod p span ,.loginMod p input ,.loginMod p img{display:inline-block; float:left}
+		.loginMod p span{color:#474747;margin-right:15px; width:60px;}
+		.loginMod p input{ padding:0 5px; background:#f5f5f5; height:48px; border:1px solid #eaeaea; width:300px; font-size:18px; color:#9a9a9a;}
+		.loginMod p input.select{color:#474747;}
+		.loginMod p.vr input{width:180px;margin-right:20px;}
+		.loginMod p img{border:none;}
+		.loginBtn{color:#fff; border-radius:3px; background:#f72f2f; margin:10px auto 0; width:80%; text-align:center; font-size:18px; display:block; height:50px; line-height:50px;}
+		.logo{font-size:18px; position:absolute; left:0; top:10px; border-bottom:1px solid #908f8d; padding:5px 0; width:100%; height:70px;}
+		.logo img ,.logo span{float:left; margin:10px 0;}
+		.logo img{ margin:10px 20px 10px 50px; }
+		.logo span{color:#fff;height:48px; line-height:48px; display:inline-block; font-size:24px;}
+		.err{color:#ed2626; font-size:14px; height:20px; text-align:right; padding-right:20px;}
+		.mobleMod{position:absolute; top:50%; margin-top:-300px;left:50%; margin-left:-250px;}
+		#myLoginCaptchaImg , .loginBtn{cursor:pointer;} 
+		.mobleMod{transform:scale(.8,.8);}
+	</style>
+ </head>
+ <body>
+ 	<div id="body">
+	 	<div class="moble">
+	 		<div class="mobleMod">
+		 		<h2>欢迎您登录WheelysCafe电商管理后台</h2>
+		 		<div class="loginMod">
+		 			<p><span>用户名</span><input data-type="username" data-text="enter" id="username" maxlength="15" name="username" type="text" placeholder="请输入您的用户名" /></p>
+		 			<p><span>密&nbsp;&nbsp;码</span><input data-type="password" data-text="enter" maxlength="15" id="password" name="password" type="password" placeholder="请输入您的密码" /></p>
+		 			<p class="vr">
+			 			<span>验证码</span>
+			 			<input type="hidden" data-type="captchaId" name="captchaId" id="myLoginCaptcha" />
+						<label class="verify">
+							<input data-type="captcha" type="text" data-text="enter" maxlength="4" class="G_input captcha" id="myLoginCaptchaInput" name="captcha" placeholder="输入验证码" />
+						</label>
+						<img id="myLoginCaptchaImg" width="100" height="50" onclick="refreshCaptcha();" />
+		 			</p>
+		 			<div id="err" class="err"></div>
+		 			<a class="loginBtn" onclick="javascript:loginAjax();">登&nbsp;&nbsp;录</a>
+		 		</div>
+	 		</div>
+	 	</div>
+	 	<div class="logo">
+	 		<img src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/houtai/loginLogo.png" /><span>电商管理后台</span>
+	 	</div>
+ 	</div>
+<script>
+$(document).ready(function(){
+	$('.moble').css('min-height',$(window).height());
+	refreshCaptcha();
+	enter();
+});
+function enter(){
+	$('input[data-text=enter]').each(function(index,item){
+		$(item).keydown(function (e){
+			if(e.keyCode==13&&$(this).val()!=''){
+				var n = index+1;
+				 if(n==3){
+					if($('input[data-text=enter]').val()==''){
+						
+					}else{
+						loginAjax();
+					}
+					
+				 }else{
+				   $('input[data-text=enter]')[n].focus();
+				 } 
+			}
+		})
+	})
+}
+function loginAjax(){
+	var data ={};
+	$('.loginMod input').each(function(e,a){
+		var val = $(a).val();
+		if(val == ""){
+			alert('所有选项不能为空');
+			return;
+		}else{
+			data[$(a).attr('data-type')] = $(a).val();
+		}
+	});
+	$.ajax({
+		url:"${basePath}ajax/common/asynchLogin.xhtml",
+		type:'post',
+		dataType:'json',
+		data:data,
+		success:function(data){
+			if(data.success){
+				location.href = '${basePath}admin/index.xhtml'
+			}else{
+				$('#err').html(data.msg);
+				$("#myLoginCaptchaInput").focus();
+				$("#myLoginCaptchaInput").val('');
+				refreshCaptcha();
+			}
+		}
+	});
+}
+function refreshCaptcha(){
+	$.ajax({
+		url:"${basePath}getCaptchaId.xhtml",
+		type:'post',
+		dataType:'json',
+		success:function(ratval){
+			if(ratval.success){
+				$('#myLoginCaptcha').val(ratval.data);
+				$('#myLoginCaptchaImg').attr("src","${basePath}captcha.xhtml?captchaId="+ratval.data+"&r="+(new Date).getTime());
+			}
+		}
+	});
+}
+</script>
+ </body>
+ </html>
+  

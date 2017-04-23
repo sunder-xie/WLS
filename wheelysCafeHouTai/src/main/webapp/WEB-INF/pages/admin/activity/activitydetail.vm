@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<link rel="stylesheet" type="text/css" href="${staticPath}css/ticket/newticket.css" />
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.wselect {
+	width: 70px;
+	float: right;
+	height: 30px;
+	margin-left: 300px;
+}
+
+.wselect {
+	width: 100px;
+	height：50px;
+}
+.clear {
+	clear: both;
+}
+.cardType_2{display:none}
+.categroy-ul2 li{width:220px;}
+.item-rigth{width:600px; margin:10px 0; }
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div id="inputList" class="admin-content">
+		<!--右侧开始-->
+		<div class="am-cf am-padding">
+		 <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;活动管理</strong> / <small>活动详情</small></div>
+			<hr width="100%" />
+			<div class="">
+			<a style="margin-right:60px;" class="am-btn am-btn-primary am-btn-xs" href="${basePath}admin/ticket/showDiscountList.xhtml">返回列表页面</a>	
+				<div class="con-t2-left">
+					<table width="100%" border="0" cellspacing="0">
+						<tr>
+							<td style="text-align:right" width="60">活动分类<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+							$!activitymap.get($!activity.type)
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">名称<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.name
+							</td>
+						</tr>
+						<tr >
+							<td style="text-align:right" width="60">优惠标记</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.discountmark
+							</td>
+						</tr>
+						#if($activity.type=='ZHEKOU' || $activity.type=='SECONDCUP')
+						<tr id="rqid" style="display:blank">
+							<td style="text-align:right" width="60">折扣<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.discountrate%
+							</td>
+						</tr>
+						<tr id="tsid" style="display:none">
+							<td style="text-align:right" width="60">价格<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.fixamount元
+							</td>
+						</tr>
+						#end
+						#if($activity.type=='FIRSTCUP' || $activity.type=='FIXAMOUNT')
+						<tr id="rqid" style="display:none">
+							<td style="text-align:right" width="60">折扣<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.discountrate%
+							</td>
+						</tr>
+						<tr id="tsid" style="display:blank">
+							<td style="text-align:right" width="60">价格<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.fixamount元
+							</td>
+						</tr>
+						#end
+						#if($activity.type=='ONEBUYONE')
+						<tr id="rqid" style="display:none">
+							<td style="text-align:right" width="60">折扣<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.discountrate
+							</td>
+						</tr>
+						<tr id="tsid" style="display:none">
+							<td style="text-align:right" width="60">价格<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.fixamount元
+							</td>
+						</tr>
+					
+						#end
+						#if($activity.type=='MANJIAN')
+						<tr id="rqid" style="display:none">
+							<td style="text-align:right" width="60">折扣<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.discountrate
+							</td>
+						</tr>
+						<tr id="tsid" style="display:none">
+							<td style="text-align:right" width="60">价格<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.fixamount元
+							</td>
+						</tr>
+						#if($!activity.limitcup>0)
+						<tr id="rqid" style="display:blank">
+							<td style="text-align:right" width="60">满<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.limitcup件
+							</td>
+						</tr>
+						<tr id="rqid" style="display:none">
+							<td style="text-align:right" width="60">满<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.limitamount元
+							</td>
+						</tr>
+						#end
+						#if($!activity.limitamount>0)
+						<tr id="rqid" style="display:none">
+							<td style="text-align:right" width="60">满<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.limitcup件
+							</td>
+						</tr>
+						<tr id="rqid" style="display:blank">
+							<td style="text-align:right" width="60">满<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.limitamount元
+							</td>
+						</tr>
+						#end
+						<tr id="tsid" style="display:blank">
+							<td style="text-align:right" width="60">减<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.discountamount元
+							</td>
+						</tr>
+						#end
+						#if("$activity.addprice" == "" || !$activity.addprice)
+						<tr id="rqid" style="display:none">
+							<td style="text-align:right" width="60">附加选项</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								 $!appendmap.get($!activity.addprice)
+							</td>
+						</tr>
+						#else
+						<tr id="rqid" style="display:blank">
+							<td style="text-align:right" width="60">附加选项</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								 $!appendmap.get($!activity.addprice)
+							</td>
+						</tr>
+						#end
+							<tr>
+							<td style="text-align:right" width="60">期限<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$DateUtil.formatDate($!activity.begintime)~$DateUtil.formatDate($!activity.endtime)
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">周期<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								#foreach($week in $weeklist)
+									$!week,
+								#end
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">活动时间段<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.hourfrom 至 $!activity.hourto
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">优先级<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!prioritymap.get($!activity.priority)
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">备注</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!activity.remark
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">数量限制</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								#if($!activity.limitmaxnum)总：$!activity.limitmaxnum 卖：#if($!activity.allowaddnum)$!activity.allowaddnum#{else}0#end#else无#end
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+	 		<div class="con-t3" id="allshopclass">
+				<div style="width: 30%; float: left; text-align: right;margin-right: 10px;">
+				 	<span style="font-size: 20px">参与店铺</span> &nbsp;&nbsp;
+				</div>
+				<div style="width: 56%; float: left; background:#E4E4E4 ;">
+				<ul class="categroy-ul">
+					#foreach($shop in $shopList)
+ 				<li>
+					$!shop.shopname
+ 				</li>
+ 					#end
+				</ul>
+				<div class="clear"></div>
+				</div>
+			</div> 
+			
+			<div class="con-t4">
+				<div class="con-t4-left" style="width:20%;">
+					<span style="font-size: 20px">商品分类</span>
+				</div>
+				
+				<div id="allClass" class="con-t4-right" style="width:80%">
+					<div class="con-t4-right-item" style="width:100%">
+						#foreach($key in $itemproductMap.keySet())
+						<div class="clearfix">
+							<div class="item-left">
+								$key.name
+							</div>
+							<div class="item-rigth">
+								<ul class="categroy-ul2">
+								#foreach($product in $itemproductMap.get($key))
+								<li>$product.name</li>
+								#end
+								</ul>
+							</div>
+						</div>
+						#end
+					</div>
+				</div>
+			</div>
+			<div class="con-t4" style="text-align:center;">
+		</div>
+			
+		</div> 
+		<!--右侧结束-->			
+   </div>
+<!--    <script type="text/javascript" src="${staticPath}js/ticket/jedate.js"></script>
+ <script type="text/javascript" src="${staticPath}js/ticket/jquery.min.js"></script>
+  <script type="text/javascript" src="${staticPath}js/ticket/ticket.js"></script> -->
+  <script type="text/javascript">
+	
+  </script>
+	
+</body>
+</html>

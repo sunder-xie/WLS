@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.orderrefund.RefundOrder" table="REFUNDORDER" optimistic-lock="version">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<version  name="version" column="ORDER_VERSION" type="integer"/> 
+		<property name="shopname" column="SHOPNAME" type="string" />
+		<property name="shoptype" column="SHOPTYPE" type="integer" />
+		<property name="shoprole" column="SHOPROLE" type="string" />
+		<property name="shoptelephone" column="SHOPTELEPHONE" type="string" />
+		<property name="refundamount" column="REFUNDAMOUNT" type="integer" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="refundcompletetime" column="REFUNDCOMPLETETIME" type="timestamp" />
+		<property name="refundtime" column="REFUNDTIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+		<property name="status" column="REFUNDSTATUS" type="string" />
+		<property name="tradeno" column="TRADENO" type="string" />
+		<property name="ordertype" column="ORDERTYPE" type="string" />
+		<property name="roleid" column="ROLEID" type="long" />
+		<property name="refunduserid" column="REFUNDUSERID" type="long" />
+		<property name="userid" column="USERID" type="long" />
+		<property name="refundtype" column="REFUNDTYPE" type="string" />
+		<property name="shopid" column="SHOPID" type="long" />
+		<property name="refundinfo" column="REFUNDINFO" type="string" />
+		<property name="refundfaildlinfo" column="CANCELINFO" type="string" />
+		<property name="paystatus" column="PAYSTATUS" type="string" />
+		<property name="paymethod" column="PAYMETHOD" type="string" />
+		<property name="membername" column="MEMBERNAME" type="string" />
+		<property name="category" column="CATEGORY" type="string" />
+		<property name="netpaid" column="NETPAID" type="integer" />
+		<property name="operaterid" column="OPERATERID" type="long" />
+		<property name="operatename" column="OPERATERNAME" type="string" />
+	</class>
+</hibernate-mapping>
+

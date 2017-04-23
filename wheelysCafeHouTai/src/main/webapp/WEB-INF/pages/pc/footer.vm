@@ -1,0 +1,104 @@
+<div id="Ifooter" style="text-align: center;">
+    <ul class="Ifooter_nav clear">
+        <li>
+            <dl>
+                <dt>关于我们</dt>
+                <a href="${basePath}pc/team.xhtml">
+                    <dd>品牌故事</dd>
+                </a>
+                <a href="${basePath}pc/partner.xhtml">
+                    <dd>加入我们</dd>
+                </a>
+                <dd>隐私声明</dd>
+                <!-- <dd>联系地址</dd> -->
+           </dl>
+        </li>
+       <!--  <li>
+            <dl>
+                <dt>商务合作</dt>
+                <dd>市场合作</dd>
+                <dd>入驻平台</dd>
+                <dd>媒体合作</dd>
+            </dl>
+        </li>
+        <li>
+            <dl>
+                <dt>新手上路</dt>
+                <dd>购物流程</dd>
+                <dd>会员介绍</dd>
+            </dl>
+        </li> -->
+        <li>
+            <dl>
+                <dt>帮助中心</dt>
+                <dd>常见问题</dd>
+               <!--  <dd>服务协议</dd>
+                <dd>支付帮助</dd>
+                <dd>退款说明</dd>
+                <dd>入驻流程</dd> -->
+            </dl>
+        </li>
+        <li class="img-gif">
+            <!--<i class="icon icon-rabbit"></i>-->
+            <img src="${pcPath}Public/home/img/newsletter_bunny.gif" alt="" />
+        </li>
+        <li class="coffee_about">
+            <p>想获取最新最酷的咖啡讯息？</p>
+            <p>快加入订阅吧!</p>
+            <div class="Email_form">
+                <input type="text" id="email" placeholder="请输入您的电子邮箱"  name="email" value="" maxlength="30">
+                <button name="email" type="submit" class="button_">Go</button>
+            </div>
+            <div class="logo">
+                <p>LOVE US & WE LOVE YOU</p>
+                <i class="icon icon-wx class_dis_"></i>
+
+                <div style="width:258px;height:258px;display:none" class="disc_">
+                    <img src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/2016-11-21/erwei.jpg" width="258" height="258" /> <!-- 二维码 -->
+                </div>
+                <!-- <i class="icon icon-wb"></i> -->
+            </div>
+        </li>
+    </ul>
+    <div class="copyInfor clear">
+    	<p>Copyright Wheelys Café Incorporated. All Rights Reserved <a href="http://www.miibeian.gov.cn/" class="ml10 mr5" target="_blank">沪ICP备16041831号-1</a></p>
+        <div class="right"><i class="icon icon-loving"></i></div>
+    </div>
+<!--    <div class="question_btn">
+        <button>常见问题</button>
+    </div>-->
+</div>
+<script>
+    $(document).ready(function(){
+        inputValue();
+        textareaValue(".Bbs");
+        $(".button_").click(function(){
+            if(!$('input[name=email]').val()){
+                alert('请填写正确的邮箱');
+                return;
+            }
+            var email   = $('input[name=email]').val(); 
+            var filter  = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if(filter.test(email)){
+            	var email = $('input[name=email]').val(); 
+        		$.ajax({	
+        		      url:"${basePath}pc/addEmail.xhtml",
+        		      type:'post',
+        		      dataType:'json',
+        		      data:'email='+email,
+        		      success:function(data){
+        		    	  if(data.success){
+        		    		  alert('订阅成功')
+        		    		location.href = '${basePath}pc/pcIndex.xhtml';
+        		    	  }else{
+        	  		    	alert(data.msg);
+        		      }
+        		      }
+        		});
+            }else{
+                 alert('您的电子邮件格式不正确');
+                 return false;
+             }
+         })
+    }); 
+</script>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	 "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.booking.Booking" table="BOOKING">
+		<id name="id" column="ID" type="long">
+			<generator class="identity"/>
+		</id>
+		<property name="shopid" column="SHOPID" type="long"/>
+		<property name="companyid" column="COMPANYID" type="long"/>
+		<property name="reason" column="REASON" type="string"/>
+		<property name="applytime" column="APPLYTIME" type="timestamp"/>
+		<property name="passtime" column="PASSTIME" type="timestamp"/>
+		<property name="status" column="STATUS" type="string" />
+		<property name="type" column="TYPE" type="string" />
+		<property name="contant" column="CONTANT" type="string" />
+		<property name="telephone" column="TELEPHONE" type="string" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+	</class>
+</hibernate-mapping>
+

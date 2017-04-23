@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+</head>
+<body style="padding:0px">
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;报表统计</strong> / <small>咖啡统计报表</small></div>
+    <br><br>
+    <div class="admin-content"> 
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                 <th class="table-title">序号</th>
+                 <th class="table-title">排名</th>
+                 <th class="table-type">店铺</th>
+                 <th class="table-type">日期</th>
+                 <th class="table-title">品项</th>
+                 <th class="table-title">数量</th>
+                 <th class="table-title">实付金额</th>
+                 <th class="table-title">原价</th>
+              </tr>
+          </thead>
+          <tbody>
+        #set($paidfee = 0)
+        #set($totalfee = 0)
+        #set($quantity = 0)
+        #set($index = 0)
+        #set($curdate = "")
+        #foreach($vo in ${reportProductList})
+	        #set($paidfee = $paidfee+${vo.paidfee})
+	        #set($totalfee = $totalfee+${vo.totalfee})
+	        #set($quantity = $quantity+${vo.quantity})
+        	#if($curdate ne ${vo.date})
+      		  #set($index = 1)
+      		#else
+      		  #set($index = $index+1)
+        	#end
+       		#set($curdate = $vo.date)
+            <tr>
+                 <td class="table-type">$!{velocityCount}</td>
+                 <td class="table-type">$!{index}</td>
+                 <td class="table-type">$vo.shopname</td>
+                 <td class="table-type">$!curdate</td>
+                 <td class="table-type">$!{vo.productname}</td>
+                 <td class="table-type">$!{vo.quantity}</td>
+                 <td class="table-type">$!VmUtils.getAmount(${vo.paidfee})</td>
+                 <td class="table-type">$!VmUtils.getAmount(${vo.totalfee})</td>
+            </tr> 
+		#end
+           <tr>
+                <td class="table-type"></td>
+                <td class="table-type"></td>
+                <td class="table-type"></td>
+                <td class="table-type"></td>
+                <td class="table-type">总计</td>
+                <td class="table-type">$quantity</td>
+                <td class="table-type">$VmUtils.getAmount($paidfee)</td>
+                <td class="table-type">$VmUtils.getAmount($totalfee)</td>
+           </tr> 
+		</tbody>
+        </table>
+      <div class="am-cf">
+      <div class="am-fr">
+      <ul class="am-pagination">
+        <li ></li>
+      </ul>
+  </div>
+  </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

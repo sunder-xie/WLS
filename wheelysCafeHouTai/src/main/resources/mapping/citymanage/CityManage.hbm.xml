@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	 "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.citymanage.CityManage" table="CITY_MANAGE">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>	
+		<property name="citycode" column="CITYCODE" type="string"/>
+		<property name="cityname" column="CITYNAME" type="string"/>
+		<property name="companyids" column="COMPANYIDS" type="string" />
+		<property name="shopids" column="SHOPIDS" type="string"/>
+		<property name="delstatus" column="DELSTATUS" type="string"/>
+		<property name="region" column="REGION" type="string"/>
+		<property name="sn" column="SN" type="integer"/>
+		<property name="status" column="STATUS" type="string"/>
+	</class>
+</hibernate-mapping>
+

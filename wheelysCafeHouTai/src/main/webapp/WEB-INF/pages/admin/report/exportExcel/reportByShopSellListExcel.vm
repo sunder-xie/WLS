@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+<style type="text/css">
+   th{
+      border:1px solid #dddddd;
+   }
+</style>
+</head>
+<body style="padding:0px">
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;报表统计</strong> / <small>按条件查询</small></div>
+    <br><br>
+    <div class="admin-content"> 
+      <!-- 增删改查 -->
+        <div class="am-btn-toolbar" style="float:right;margin-right:30px;">
+          <div class="am-btn-group am-btn-group-xs">
+          </div>
+        </div>
+      <!-- 增删改查 -->
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+                 <th class="table-title" rowspan="2" style="min-width:80px;border-top:1px solid #dddddd;">商铺编号</th>
+                 <th class="table-title" rowspan="2" style="min-width:80px;border-top:1px solid #dddddd;">城市</th>
+                 <th class="table-title" rowspan="2" style="min-width:80px;border-top:1px solid #dddddd;">商铺名字</th>
+                 <th class="table-title" rowspan="2" style="min-width:80px;border-top:1px solid #dddddd;">统计日期</th>
+                 <th class="table-type" colspan="3" style="min-width:80px;border-top:1px solid #dddddd;">新用户</th>
+                 <th class="table-type" colspan="2" style="min-width:80px;border-top:1px solid #dddddd;">老用户</th>
+                 <th class="table-type" rowspan="2" style="min-width:80px;border-top:1px solid #dddddd;">总下单用户数</th>
+                 <th class="table-type" rowspan="2" style="min-width:80px;border-top:1px solid #dddddd;">总订单数</th>
+                 <th class="table-type" rowspan="2" style="min-width:80px;border-top:1px solid #dddddd;">总金额</th>
+              </tr>
+              <tr>
+                 <th class="table-type">首单用户数</sth>
+                 <th class="table-type">未下单用户数</th>
+                 <th class="table-type">新注册用户数</th>
+                 <th class="table-type">首单用户数</th>
+                 <th class="table-type">复购用户数</th>
+              </tr>
+          </thead>
+          <tbody>
+        #set($newregisteredmemberorder=0)
+        #set($firstordernum=0)
+        #set($repurchasenum=0)
+        #set($sumdailyorderusernum=0)
+        #set($sumdailyordernum=0)
+        #set($sumdailyorderpaidfee=0)
+        #foreach($report in ${reportList})
+	        #set($newregisteredmemberorder=$!report.newregisteredmemberorder+$newregisteredmemberorder)
+	        #set($firstordernum=$!report.firstordernum+$firstordernum)
+	        #set($repurchasenum=$!report.repurchasenum+$repurchasenum)
+	        #set($sumdailyorderusernum=$!report.sumdailyorderusernum+$sumdailyorderusernum)
+	        #set($sumdailyordernum=$!report.sumdailyordernum+$sumdailyordernum)
+	        #set($sumdailyorderpaidfee=$!report.sumdailyorderpaidfee+$sumdailyorderpaidfee)
+            <tr>
+                 <th class="table-type">$!report.shopid</th>
+                 <th class="table-type">$!citynamemap.get($report.shopid)</th>
+                 <th class="table-type">$!report.shopname</th>
+                 <th class="table-type">$!report.day</th>
+                 <th class="table-type">$!report.newregisteredmemberorder</th>
+                 <th class="table-type">0</th>
+                 <th class="table-type">0</th>
+                 <th class="table-type">$!report.firstordernum</th>
+                 <th class="table-type">$!report.repurchasenum</th>
+                 <th class="table-type">$!report.sumdailyorderusernum</th>
+                 <th class="table-type">$!report.sumdailyordernum</th>
+                 <th class="table-type">$!VmUtils.getAmount($report.sumdailyorderpaidfee)</th>
+            </tr>
+		#end
+           <tr>
+                <th class="table-type"></th>
+                <th class="table-type"></th>
+                 <th class="table-type"></th>
+                <th class="table-type"></th>
+                <th class="table-type">$newregisteredmemberorder</th>
+                <th class="table-type">0</th>
+                <th class="table-type">0</th>
+                <th class="table-type">$firstordernum</th>
+                <th class="table-type">$repurchasenum</th>
+                <th class="table-type">$sumdailyorderusernum</th>
+                <th class="table-type">$sumdailyordernum</th>
+                <th class="table-type">$!VmUtils.getAmount($sumdailyorderpaidfee)</th>
+           </tr>
+		</tbody>
+        </table>
+      <div class="am-cf">
+      <div class="am-fr">
+      <ul class="am-pagination">
+        <li ></li>
+      </ul>
+  </div>
+  </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

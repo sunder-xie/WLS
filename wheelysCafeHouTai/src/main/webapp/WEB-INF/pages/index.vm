@@ -1,0 +1,13 @@
+<form action="${basePath}test/uploadImg.xhtml" method="post" enctype="multipart/form-data">
+	<input type="file" name="testImg1"><br/>
+	<input type="file" name="testImg2"><br/>
+	<input type="file" name="testImg3"><br/>
+	<input type="file" name="testImg4"><br/>
+	<input type="file" name="testImg5"><br/>
+	<input type="file" name="testImg6"><br/>
+	<input type="file" name="testImg7"><br/>
+	<input type="file" name="testImg8"><br/>
+	<input type="file" name="testImg9"><br/>
+	<input type="file" name="testImg10">
+	<input type="submit" value="提交">
+</form>

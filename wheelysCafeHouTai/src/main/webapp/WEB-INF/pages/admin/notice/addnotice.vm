@@ -1,0 +1,168 @@
+
+<!doctype html>
+<html class="no-js">
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<link rel="stylesheet" type="text/css" href="${staticPath}css/ticket/newticket.css" /> 
+
+</head>
+<style>
+ .am-text-right,.am-u-md-6{
+    height:32.16px;
+    line-height:32.16px;
+    
+ }
+ 
+</style>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm") 
+		<div class="admin-content">
+			<div class="am-cf am-padding">
+				<div class="am-fl am-cf">
+					<strong class="am-text-primary am-text-lg">通知管理</strong> 
+				</div>
+			</div>
+			<div class="am-tabs am-margin" data-am-tabs>
+				<ul class="am-tabs-nav am-nav am-nav-tabs">
+					<li class="am-active"><a href="#tab1">通知信息</a></li>
+				</ul>
+				
+				<div class="am-tabs-bd" id="inputList">
+					<div class="am-form">
+						#if($!notice.id)
+						<input type="hidden" value="$!notice.id" name="id">
+						#end
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right" >通知名称</div>
+							<div class="am-u-sm-8 am-u-md-4">
+								<input type="text" class="am-input-sm" id="noticename"  value="$!notice.noticename"  name="noticename" maxlength="25">
+							</div>
+							<div class="am-hide-sm-only am-u-md-6">
+								<span style="color: red">*</span>必填，为汉字
+							</div>
+						</div>
+	
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">通知内容</div>
+							<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+								<textarea rows="5" class="am-input-sm" cols="200" name="content" id="content"  maxlength="800">$!notice.content</textarea>
+							</div>
+							<div class="am-hide-sm-only am-u-md-6">
+								<span style="color: red">*</span>必填
+							</div>
+						</div>
+
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">开始时间</div>
+							<input type="text" class="am-form-field" id="begintime" name="begintime" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!{notice.begintime}" placeholder="开始时间" style="width:175px;height:33px;float:left;margin-left:10px;">
+							<div class="am-hide-sm-only am-u-md-6"><span id="_publishtime" style="color:red">*</span>必填</div>
+							<br>
+						</div>
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">结束时间</div>
+							<input type="text" class="am-form-field" id="endtime" name="endtime" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!{notice.endtime}" placeholder="结束时间" style="width:175px;height:33px;float:left;margin-left:10px;">
+							<div class="am-hide-sm-only am-u-md-6"><span id="_publishtime" style="color:red">*</span>必填</div>
+							<br>
+						</div>
+
+				</div>
+				<div class="con-t3" id="allshopclass">
+					<div
+						style="width: 30%; float: left; text-align: right; margin-right: 10px;">
+						<span style="font-size: 20px">参与店铺</span><span
+							style="color: red; size: 10">*</span> &nbsp;&nbsp; <input
+							type="checkbox" id="checkAllshopID" name="checkAllshop">
+						全部
+					</div>
+					<input type="hidden" id="shopid">
+					<div class="shopidids"
+						style="width: 56%; float: left; background: #E4E4E4;">
+						<ul class="categroy-ul">
+							#foreach($shop in $shopList)
+							<li><input type="checkbox" id="shoponeID" name="validshopid"
+							#if($idList.contains($shop.esname)) checked="checked"#end
+								value="$shop.shopid">$shop.esname</li> #end
+						</ul>
+					</div>
+				</div>
+			</div>
+				<div class="am-margin">
+					<input type="submit" onclick="submitForm_2();" class="am-btn am-btn-primary am-btn-xs" 
+						value="提交保存" />
+				</div>
+				</div>
+			</div>
+			<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+		<footer>
+			<hr>
+			<p class="am-padding-left">2016 Wheelys.com.cn</p>
+		</footer>
+     <script >
+     $('#checkAllshopID').change(function(){
+   		var check = $(this).attr('checked');
+   		$('#allshopclass input[type="checkbox"]').each(function(e,a){
+   			$(a).attr('checked',check);
+   		})
+   	})
+   	 function checkDate(){
+ 			 var time1 = $("#begintime").val();
+ 			 var time2 = $("#endtime").val();
+ 			 var date1 = time1.split("-");          
+ 			 var date2 = time2.split("-");        
+ 			if(date1!=null && date2!=null){
+ 				if (date1 < date2){  
+ 					return true; 
+ 				}else{
+ 				 	alert ("提示: 开始时间不能大于结束时间或者开始时间等于结束时间,且时间不能为空");
+ 					return false; 
+ 				}
+ 			}
+ 	}
+	function submitForm_2(){
+		if(!checkDate()){
+			return false;
+		}
+		 var data = {};
+		$('#inputList select').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		})
+		$('#inputList input').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();	
+		})
+		$('#inputList textarea').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		})
+		//店铺ids
+		var validshopid=new Array();
+        $("input[name='validshopid']:checked").each(function (e,a) {
+        	validshopid.push($(a).val());
+        });
+       
+        //判断店铺如果不选
+        data['validshopid']= validshopid.join(",");
+		
+        console.info(data)
+		$.ajax({
+			url:"${basePath}admin/content/addnotice.xhtml",
+			type:'post',
+			dataType:'json',
+			data:data,
+			success:function(data){
+				if(data.success){
+					location.href = '${basePath}admin/content/shownotice.xhtml';
+				}else{
+					alert(data.msg);
+				}
+			}
+		})
+		
+	}
+	
+</script>
+</body>
+</html>

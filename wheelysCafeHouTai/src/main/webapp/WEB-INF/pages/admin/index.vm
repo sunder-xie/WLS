@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<style>
+.l48:before{line-height:48px;}
+.l34:before{line-height:18px;}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	<div class="am-cf admin-main">
+	#parse("/admin/common/menu.vm") 
+	<!--   这里是表格输出的地方   -->
+	<div class="admin-content">
+	    <div class="am-cf am-padding">
+	      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> / <small>一些常用模块</small></div>
+	    </div>
+	    <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+	      <li>
+	        <span  class="am-text-success">
+	          <span class="am-icon-btn am-icon-file-text l48" style="default"></span>
+	          <br/> 当日订单<br/>
+	          $!topage.dayorder 
+	         </span>
+	      </li>
+	       <li>
+	        <span class="am-text-success">
+	          <span class="am-icon-btn am-icon-file-text l48" style="default"></span>
+	          <br/> 当日销售额<br/>     
+	          $VmUtils.getAmount($topage.daysales)  
+	         </span>
+	      </li>
+	      <li>
+	        <span class="am-text-warning">
+	          <span class="am-icon-btn am-icon-briefcase l48" style="default">
+	          </span><br/>总订单数<br/>
+	            #if(!$topage.allsales )
+	          	#elseif($topage.allsales)
+	         	$topage.allsales
+	          	#end
+	   		 </span>
+	      </li>
+	      <li>
+	        <sapn class="am-text-secondary">
+	          <span class="am-icon-btn am-icon-user-md l48" style="default">
+	          </span><br/>会员人数<br/>
+	           #if(!$topage.user )
+	          	#elseif($topage.user)
+	         	$topage.user
+	          	#end
+	   		</sapn>
+	      </li>
+	    </ul>
+	    <div class="am-g">
+	    </div>
+	    <div class="am-g">
+	      <div class="am-u-md-6">
+	        <div class="am-panel am-panel-default">
+	          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-2'}">商家统计<span class="am-icon-chevron-down am-fr l34"></span></div>
+	          <div id="collapse-panel-2" class="am-in">
+	            <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+	              <tbody>
+	              <tr>
+	              	<th class="table-title">实收排名</th>
+	                <th>商家名称</th>
+	                <th>原价</th>
+	                <th>优惠</th>
+	                 <th>实收</th>
+	                <th>杯数</th>
+	                <th>订单数</th>
+	                <th>查看</th>
+	              </tr>
+	          #set($totalfee=0)
+	          #set($netpaid=0)
+	          #set($quantity=0)
+	          #set($ordercount=0)
+	          #set($discount=0)
+	     	  #foreach($merchant in ${topage.reportshop}) 
+		          #set($totalfee=$totalfee+$merchant.totalfee)
+		          #set($netpaid=$netpaid+$merchant.netpaid)
+		          #set($quantity=$quantity+$merchant.quantity)
+		          #set($ordercount=$ordercount+$merchant.ordercount)
+		          #set($discount=$discount+$merchant.discount)
+		       #end
+		       
+	     	  #foreach($merchant in ${topage.reportshop}) 
+	 		<tr>
+             	 	<td class="table-type">$!{velocityCount}</td>
+	                <td>$merchant.shopname</td>
+	                <td>$VmUtils.getAmount($merchant.totalfee)</td>
+	                <td>$VmUtils.getAmount($merchant.discount)</td>
+	                <td>$VmUtils.getAmount($merchant.netpaid)($VmUtils.getPercent($merchant.netpaid,$netpaid))</td>
+	                <td>${merchant.quantity}($VmUtils.getPercent($merchant.quantity,$quantity))</td>
+	                 <td>${merchant.ordercount}</td>
+	                 <td class="table-title">
+	                 <a href="${staticPath}admin/report/reportOrderList.xhtml?id=${merchant.shopid}" class="am-cf">
+	                    <span > 查看详情</span>
+	                    <span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span>
+	                  </a>
+	                  </td>
+	              </tr>
+			 #end 
+	 			<tr>
+	                <td></td>
+	                <td>总计</td>
+	                <td>$VmUtils.getAmount($totalfee)</td>
+	                <td>$VmUtils.getAmount($discount)</td>
+	                <td>$VmUtils.getAmount($netpaid)</td>
+	                <td>$quantity</td>
+	                <td>$ordercount</td>
+	                <td class="table-title"></td>
+	              </tr>
+	         		</tbody>
+	            </table>
+	          </div>
+	        </div>
+	      </div>
+	      <div class="am-u-md-6">
+	        <div class="am-panel am-panel-default">
+	          <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">品项统计<span class="am-icon-chevron-down am-fr l34"></span></div>
+	          <div class="am-in" id="collapse-panel-3">
+	             <table class="am-table am-table-bd am-table-bdrs am-table-striped am-table-hover">
+	              <tbody>
+	              <tr>
+	              	<th class="table-title">排名</th>
+	                <th>品项名</th>
+	                <th>杯数</th>
+	                <th>实付</th>
+	              </tr>
+					#set($quantity=0)
+					#set($paidfee=0)
+					#set($totalfee=0)
+					#set($discount=0)
+					#foreach($vo in $porductList) 
+					#set($quantity=$vo.quantity+$quantity)
+					#set($paidfee=$vo.paidfee+$paidfee)
+					#set($totalfee=$vo.totalfee+$totalfee)
+					#set($discount=$vo.discount+$discount)
+					#end
+					#foreach($vo in $porductList) 
+					<tr>
+	             	 	<td class="table-type">$!{velocityCount}</td>
+		                <td>${vo.productname}</td>
+		                <td>${vo.quantity}($VmUtils.getPercent($vo.quantity,$quantity))</td>
+		                <td>$VmUtils.getAmount($vo.paidfee)($VmUtils.getPercent($vo.paidfee,$paidfee))</td>
+					</tr>
+			 		#end 
+	 				<tr>
+		                <td></td>
+		                <td>总计</td>
+		                <td>$quantity</td>
+		                <td>$VmUtils.getAmount($paidfee)</td>
+	              	</tr>
+					</tbody>
+	            </table>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    </div>
+	</div>
+</body>
+</html>

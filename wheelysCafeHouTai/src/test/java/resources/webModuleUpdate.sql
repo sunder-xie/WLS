@@ -1,0 +1,2 @@
+UPDATE WEBMODULE SET MODULEURL='admin/banner/bannerList.xhtml?type=NEWS_INDEX' WHERE RECORDID='26';
+

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<bean id="VmUtils" class="com.wheelys.util.VmUtils" />
+	<bean id="config" class="com.wheelys.Config">
+		<property name="pageMap">
+			<map>
+				<entry key="basePath" value="/houtai/" />
+				<entry key="staticPath" value="/houtai/" />
+				<entry key="pcPath" value="/houtai/" />
+				<entry key="absPath" value="http://houtai.wheelyschina.com/houtai/" />
+				<entry key="picPath" value="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/"/>
+				<entry key="ossPath" value="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/"/>
+				<entry key="wpsPath" value="http://www.wheelyschina.com/wheelyscafe/"/>
+				<entry key="mobilePath" value="/" />
+				<entry key="VmUtils" value-ref="VmUtils" />
+			</map>
+		</property>
+		<property name="configMap">
+			<map>
+				<entry key="cerDir" value="/opt/lamp/cert/"></entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${aliyun.mysql.url}" />
+		<property name="username" value="${aliyun.mysql.username}" />
+		<property name="password" value="${aliyun.mysql.password}" />
+		<property name="validationQuery" value="select 1" />
+        <!--maxActive: 最大连接数量-->    
+        <property name="maxActive" value="50"/>  
+        <!--minIdle: 最小空闲连接-->    
+        <property name="minIdle" value="3"/>  
+        <!--maxIdle: 最大空闲连接-->    
+        <property name="maxIdle" value="10"/>  
+        <!--initialSize: 初始化连接-->    
+        <property name="initialSize" value="5"/>  
+	</bean>
+	<bean id="readOnlyDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${aliyun.mysql.url}" />
+		<property name="username" value="${aliyun.mysql.username}" />
+		<property name="password" value="${aliyun.mysql.password}" />
+		<property name="validationQuery" value="select 1" />
+        <!--maxActive: 最大连接数量-->    
+        <property name="maxActive" value="50"/>  
+        <!--minIdle: 最小空闲连接-->    
+        <property name="minIdle" value="3"/>  
+        <!--maxIdle: 最大空闲连接-->    
+        <property name="maxIdle" value="10"/>  
+        <!--initialSize: 初始化连接-->    
+        <property name="initialSize" value="5"/>  
+	</bean>
+</beans>

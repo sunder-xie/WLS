@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.user.OpenMember" table="OPENMEMBER">
+		<id name="id" column="id" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="memberid" column="memberid" type="long" />
+		<property name="loginname" column="loginname" type="string" />
+		<property name="source" column="source" type="string" />
+		<property name="category" column="category" type="string" />
+		<property name="nickname" column="nickname" type="string" />
+		<property name="headpic" column="headpic" type="string" />
+		<property name="otherinfo" column="otherinfo" type="string" />
+		<property name="relateid" column="relateid" type="long" />
+		<property name="mobile" column="mobile" type="string" />
+		<property name="validtime" column="validtime" type="timestamp" />
+		<property name="unionid" column="unionid" type="string" />
+	</class>
+</hibernate-mapping>
+

@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Wheelys</title>
+    #parse("/admin/common/head.vm")
+    <style type="text/css">
+    #inputMod input {
+        width: 150px;
+        height: 33px;
+        float: left;
+        margin-right: 5px;
+    }
+    </style>
+</head>
+
+<body style="padding:0px">
+    #parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+    <div class="admin-content">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;报表统计</strong> / <small>咖啡统计报表</small></div>
+            <br>
+            <br>
+            <div class="admin-content">
+                <div class="am-u-sm-12">
+                    <div class="am-input-group am-input-group-sm">
+                        #set($cafeshopid=0) #set($begintime=0) #set($endtime=0)
+                        <form class="am-input-group am-input-group-sm" action="${staticPath}admin/report/reportByProduct.xhtml" id="inputMod" method="post">
+                            <p class="am-input-group-btn">
+                                <select name="shopid" class="am-input-sm" placeholder="商铺名字" style="width:150px;height:33px;float:left;">
+                                    <option value="">全部</option>
+                                    #foreach($shop in $shopList)
+                                    <option #if($shop.shopid eq $params.shopid) selected="selected" #end value="$shop.shopid" #set($cafeshopid=$params.shopid)>$!shop.esname</option>
+                                    #end
+                                </select>
+                                <input type="text" class="am-form-field" name="productName" maxlength="20" id="productName" value="" placeholder="品项">
+                                <input type="text" class="am-form-field" name="begin" id="time1" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.begin" #set($begintime=$!params.begin) placeholder="开始时间" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                                <input type="text" class="am-form-field" name="end" id="time2" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.end" #set($endtime=$!params.end) placeholder="结束时间" style="width:150px;height:33px;float:left;">
+                                <button class="am-btn am-btn-default" type="submit" style="float:left;margin-left: 10px;" onclick="checkDate()">搜索</button>
+                            </p>
+                        </form>
+                        <a href="${basePath}admin/report/reportByProductExcel.xhtml?shopid=$!cafeshopid&begin=$!begintime&end=$!endtime">
+                            <button type="button" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" name="export">
+                                <input type="hidden">导出</input>
+                            </button>
+                        </a>
+                    </div>
+                </div>
+                <!-- 增删改查 -->
+                <div class="am-btn-toolbar" style="float:right;margin-right:30px;">
+                    <div class="am-btn-group am-btn-group-xs">
+                        <a href="${basePath}admin/report/getReportProductListByDate.xhtml">
+                            <button type="button" class="am-btn am-btn-default" style="font-size: 1.2rem;">格式报表1</button>
+                        </a>
+                    </div>
+                </div>
+                <!-- 增删改查 -->
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <form class="am-form">
+                        <table class="am-table am-table-striped am-table-hover table-main">
+                            <thead>
+                                <tr>
+                                    <th class="table-title">序号</th>
+                                    <th class="table-title">排名</th>
+                                    <th class="table-type">店铺</th>
+                                    <th class="table-type">日期</th>
+                                    <th class="table-title">品项</th>
+                                    <th class="table-title">数量</th>
+                                    <th class="table-title">实付金额</th>
+                                    <th class="table-title">原价</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                #set($paidfee = 0) #set($totalfee = 0) #set($quantity = 0) #set($index = 0) #set($curdate = "") #foreach($vo in ${reportProductList}) #set($paidfee = $paidfee+${vo.paidfee}) #set($totalfee = $totalfee+${vo.totalfee}) #set($quantity = $quantity+${vo.quantity}) #if($curdate ne ${vo.date}) #set($index = 1) #else #set($index = $index+1) #end #set($curdate = $vo.date)
+                                <tr>
+                                    <td class="table-type">$!{velocityCount}</td>
+                                    <td class="table-type">$!{index}</td>
+                                    <td class="table-type">$vo.shopname</td>
+                                    <td class="table-type">$!curdate</td>
+                                    <td class="table-type">$!{vo.productname}</td>
+                                    <td class="table-type">$!{vo.quantity}</td>
+                                    <td class="table-type">$!VmUtils.getAmount(${vo.paidfee})</td>
+                                    <td class="table-type">$!VmUtils.getAmount(${vo.totalfee})</td>
+                                </tr>
+                                #end
+                                <tr>
+                                    <td class="table-type"></td>
+                                    <td class="table-type"></td>
+                                    <td class="table-type"></td>
+                                    <td class="table-type"></td>
+                                    <td class="table-type">总计</td>
+                                    <td class="table-type">$quantity</td>
+                                    <td class="table-type">$VmUtils.getAmount($paidfee)</td>
+                                    <td class="table-type">$VmUtils.getAmount($totalfee)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="am-cf">
+                            <div class="am-fr">
+                                <ul class="am-pagination">
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function checkDate() {
+        var time1 = $("#time1").val();
+        var time2 = $("#time2").val();
+        if (time1 != "" && time2 != "") {
+            var date1 = time1.split("-");
+            var date2 = time2.split("-");
+            var myDate1 = new Date(date1[0], date1[1], date1[2]);
+            var myDate2 = new Date(date2[0], date2[1], date2[2]);
+            if (myDate1 <= myDate2) {
+
+                return true;
+            } else {
+                alert("提示: 开始时间不能大于结束时间！");
+                return false;
+            }
+        }
+    }
+    </script>
+</body>
+
+</html>

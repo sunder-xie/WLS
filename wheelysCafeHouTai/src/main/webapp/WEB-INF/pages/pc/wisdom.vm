@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Wheelys Coffee</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<link rel="stylesheet" href="${pcPath}Public/home/css/main_css.css">
+<link rel="stylesheet" href="${pcPath}Public/home/css/bootstrap.min.css" >
+<script src="${pcPath}Public/home/js/main.js"></script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<style>
+    a{
+		cursor:pointer;
+       color:#000;
+       text-decoration:none;
+    }
+    a:hover{
+        text-decoration:none;
+       /**/
+    }
+</style>
+<script>
+$(document).ready(function(){
+    NavShow();
+    $(".wheelysCoffeeCar").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+     $(".left").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+      $(".right").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+	$('.class_dis').mouseover(function(){
+         $('.disc').css('display','block');
+    }).mouseout(function(){
+         $('.disc').css('display','none');
+    })
+
+    $('.class_dis_').mouseover(function(){
+         $('.disc_').css('display','block');
+    }).mouseout(function(){
+         $('.disc_').css('display','none');
+    })
+    $('.menuBox').each(function(e,a){
+    	$(a).on('click',function(){
+    		$('.menuList').slideUp();
+    		if($(a).hasClass('select')){
+        		$('.menuBox').removeClass('select');
+    			return;
+    		}else{
+        		$('.menuBox').removeClass('select');
+    		}
+    		$(a).addClass('select');
+    		var left = $(this).offset().left+'px';
+    		var width = $(this).width()+40+'px';
+    		$('.menuList').each(function(i,z){
+    			if(i == e){
+        			$(z).css({
+        				'left':left,
+        				'min-width':width
+        			});
+        			$(z).slideDown();
+    			}
+    		})
+    	})
+    })
+ //     $('.displaymy').mouseover(function(){
+ //   $(this).prev().css('display','block');
+ // }).mouseout(function(){
+ //    $(this).prev().css('display','none');
+ // });
+ })
+</script>
+</head>
+<body>
+#parse("/pc/header.vm")
+<div class="nav_warp clear" id="test">
+    <div class="left">
+        <div class="name1">
+        <a href="${basePath}pc/wisdom.xhtml" style="color:#fff;">
+            <span>咖啡世界</span>
+            <span>新潮流</span>
+        </a>
+        </div>
+        <div class="name2">
+        <a href="${basePath}pc/worth.xhtml"style="color:red">
+            <span>霸道而纯粹的</span>
+            <span>咖啡原味</span>  
+        </a>
+        </div>
+    </div>
+     <div class="right_nav">
+        <dl>
+            <dt>关于 WHEELYS CAFÉ</dt>
+            <dd><a href="${basePath}pc/wisdom.xhtml">智慧范</a></dd>
+            <dd><a href="${basePath}pc/technology.xhtml">科技范</a></dd>
+            <dd><a href="${basePath}pc/worth.xhtml">品质范</a></dd>
+            <dt>风靡全球的WHEELYS</dt>
+            <dd><a href="${basePath}pc/team.xhtml">也许是最酷的创业团队！</a></dd>
+            <dd><a href="https://wheelyscafe.com/">看看全球还有哪些WHEELYS？</a></dd>
+            <dt>加入WHEELYS</dt>
+            <dd><a href="http://mp.weixin.qq.com/s?__biz=MzIxMDE4MjMwNw==&mid=503749680&idx=1&sn=58ecd77a87812214f1bc11afb1efc5fa&scene=18#rd">城市运营商招募计划</a></dd>
+            <dd><a href="${basePath}pc/showSignupForm.xhtml">报名表</a></dd>
+            <dt class="no"><a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzIxMDE4MjMwNw==&hid=2&sn=aa0793a5d27620b905c876b8d0d59638&uin=Mjc3OTQxMTk1&key=c3acc508db720376ee29711487ac69cecad3f491555c8e84cba8fdae7428454067e308ba0cb26de1017a570325c47b8e&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1">媒体报道</a></dt>
+        </dl>
+    </div>
+</div>
+<div class="dreamCoffee Iwrap">
+    <div style=" position:absolute;left:3%;top:15%;width:258px;height:258px;display:none" class="disc">
+                    <img src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/2016-11-21/erwei.jpg" width="258" height="258" />
+    </div>
+    <img src="${pcPath}Public/home/img/wisdom_banner.jpg" />
+</div>
+<div class="worth_content clear">
+    <div class="worth_left">
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-bean"></i>
+                <i class="icon icon-points"></i>
+            </div>
+            <div class="year_right">
+                <strong></strong>
+                <p></p>
+            </div>
+        </div>
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-Wmax"></i>
+                <i class="icon icon-points"></i>
+            </div>
+            <div class="year_right">
+                <strong>2014</strong>
+                <p>Wheelys在隆德开了第一家自行车咖啡馆。第一批在马尔摩手工打造的咖啡车也在这一年被运送到智利和约旦。</p>
+            </div>
+        </div>
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-Wmax"></i>
+                <i class="icon icon-points"></i>
+            </div>
+            <div class="year_right">
+                <strong>2015</strong>
+                <p>Wheelys被全世界最著名的创业孵化器Y Combinator公司接收。</p>
+            </div>
+        </div>
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-Wmax"></i>
+                <!-- <i class="icon icon-points"></i> -->
+            </div>
+            <div class="year_right">
+                <strong>2016</strong>
+                <p>5月份正式进入中国市场，掀起咖啡行业的新变革。</p>
+            </div>
+        </div>
+    </div>
+    <div class="worth_right">
+        <div class="venture_team Twrap">
+            <span class="cotton"></span>
+            <i class="icon icon-W"></i>
+            <span class="cotton"></span>
+            <h2><span class="Brandon_med">Wheelys</span>智慧范</h2>
+            <div class="bottom">
+                <span></span>
+            </div>
+            <i class="icon icon-points"></i>
+        </div>
+        <div class="wisdom_text Twrap">
+            <p><span class="Brandon_med">Wheelys</span>咖啡是一个环保的“移动咖啡馆”连锁品牌，我们使得每一个人都能够自己做生意！最初，Wheelys只有3个雇员，然而在6个月不到的时间里，我们就建立起了全球的销售网络。Wheelys在Y Combinator公司经历了孵化、成长并获得来自Paul Buchheit (Gmail发明者)、Jared Friedman (Scribd创始人)、Justin Waldron (Zynga联合创始人)等人的鼎力支持。从2015年开始，Wheelys经历了全球爆发式增长。我们的总部远在斯德哥尔摩，但Wheelys的车轮早已驶进了超过50多个国家和地区。</p>
+            <img src="${pcPath}Public/home/img/wisdom_img1.gif" />
+            <p>“我们将打破工业快餐连锁的霸权，为有机革命打通一条出路。帮助我们的是来自全世界各地年轻的渴望生态的企业家们。”</p>
+            <p class="right">——Maria De La Croix, CEO of Wheelys</p>
+            <img src="${pcPath}Public/home/img/wisdom_img2.jpg" />
+            <p>作为目前全球发展速度最快的食品品牌，Wheelys拥有可能是世界上最独一无二、个性十足的咖啡，更将成为唯一一家以绿色革命为口号，挑战工业快餐连锁霸权的公司！</p>
+        </div>
+        <div class="wisdom_list Twrap">
+            <h3>拥有一辆Wheelys小车是种怎样的体验？</h3>
+            <img src="${pcPath}Public/home/img/wisdom_img3.jpg" />
+            <p>在Wheelys咖啡，每个人都拥有创业的机会，每一辆Wheelys咖啡车都有一个有爱有梦想的主人。拥有一辆Wheelys咖啡车，你将拥有悠闲自由、无拘无束的生活；你将拥有收集顾客笑脸的绝佳体验；你将跟这个星球上各个国家的车主们交朋友，交流煮出完美咖啡的小窍门；你将处在第三波社会数字化浪潮的前沿，引领咖啡品牌的变革。</p>
+            <p>咖啡车仅仅是一个工具，互联网则是另一个工具，然而，拥有一辆Wheelys咖啡车，你能拥有的是一种全新的事业和生活方式，并建立起和全世界年轻人沟通的网络。</p>
+        </div>
+        <div class="wisdom_list Twrap">
+            <h3>Wheelys与连锁咖啡店的不同</h3>
+            <img src="${pcPath}Public/home/img/wisdom_img4.jpg" />
+            <p>包括X巴克在内，连锁咖啡店的全球霸权建立在一致性上。星X克在全世界各地的咖啡馆都冲泡着同样的咖啡，他们坚持“始终如一的品质”，而人们也总是选择着他们已知的咖啡，而不是未知的口味。但事实上，每个人都是不同的。这就是Wheelys咖啡的不同，我们不像星巴X一样为打安全牌而只生产一种咖啡，而是远离套路，选择用不同的咖啡和真诚来打动你。</p>
+        </div>
+        <div class="venture_team Twrap">
+            <span class="cotton"></span>
+            <i class="icon icon-W"></i>
+            <span class="cotton"></span>
+            <h2>我们的愿景</h2>
+            <p class="green_choose">一场绿色的革命</p>
+            <div class="bottom">
+                <span></span>
+            </div>
+            <i class="icon icon-points"></i>
+        </div>
+        <div class="wisdom_over Twrap">
+            <p>Wheelys的绿色远不只那些流于表面的口号，我们在由体力和阳光驱动的咖啡车上供应有机食品，我们期待着由我们引领的一场绿色革命。</p>
+            <p class="center">Wheelys不完美，但是我们直面不完美，并敢为人先、勇敢前行。</p>
+        </div>
+        <div style="text-align:center; margin-top:10px;">
+        	<div style="display:inline-block; padding:5px 40px;border-bottom:1px solid #000; width:30%;"><img width="100%" src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/mobile/redLogo.png?v=00000" /></div>
+        	<p style="font-size:16px; margin-top:5px;">一杯好咖啡的正确打开方式</p>
+        	<img width="40%" src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/mobile/erwei.jpg?v=00000" />
+        	<p style="font-size:16px; margin-top:10px;">扫描二维码 开启Wheelys咖啡2.0时代</p>
+        </div>
+    </div>
+</div>
+#parse("/pc/footer.vm")
+<script>
+    $(document).ready(function(){
+        inputValue();
+        NavShow();
+    });
+</script>
+<!-- <! [if IE 6]> -->
+<script src="${pcPath}Public/home/js/DD_belatedPNG_0.0.8a.js"> </script>
+<script>
+    DD_belatedPNG.fix('*')
+</script>
+<script>
+    $(document).ready(function(){
+       $(".dreamCoffee").click(function(){
+            $(".nav_warp").css("display",'none')
+            var dis = 'icon icon-ul';
+           $(".logo_left > .icon").attr('class',dis);
+       })
+    })
+</script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<script src="${pcPath}Public/home/js/bootstrap.min.js"></script>
+<!-- [if IE 6] --> 
+<script src="${pcPath}Public/home/js/DD_belatedPNG_0.0.8a.js"> </script>
+<script>
+    DD_belatedPNG.fix('*')
+</script>
+<!-- [end if] -->
+</body>
+</html>

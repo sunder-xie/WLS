@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.wselect {
+	width: 70px;
+	float: right;
+	height: 30px;
+	margin-left: 300px;
+}
+
+.wselect {
+	width: 100px;
+	height：50px;
+}
+.topshow {
+	float: left;
+	margin: 8px;
+	
+} 	
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;订单管理</strong> / <small>活动订单</small></div>
+			<br/>
+			<hr width="100%" />
+			<div >
+			<di	v class="topshow">
+				<form class="am-input-group am-input-group-sm"
+					action="${basePath}admin/activeOrder/activeOrdersearch.xhtml" method="get">
+					<input type="text" name="mobile" height="10px" style="height: 30px"
+						id="txtSeach" placeholder="手机号"> <span 
+						>
+						<button class="am-btn am-btn-default" type="submit" name="sou">搜索</button>
+					</span>
+				</form>
+				</div>
+			</div>
+		
+		<div class="am-g">
+			<div class="am-u-sm-12">
+				<table class="am-table am-table-striped am-table-hover table-main">
+					<thead>
+						<tr>
+							<th class="table-type">订单编号</th>
+							<th class="table-type">微信ID</th>
+							<th class="table-title">手机号</th>
+							<th class="table-author am-hide-sm-only">购买时间</th>
+							<th class="table-type">金额</th>
+							<th class="table-set">领鲜花时间</th>
+							<th class="table-set">使用店铺</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($dis in $ordList)
+						<tr class="showactive">
+							<td>$!dis.tradeno</td>
+							<td>
+								$!dis.membername
+							</td>
+							<td>$!dis.mobile</td>
+							<td>$!dis.paidtime</td>
+							<td>
+								$!dis.payfee
+							</td>
+							<td >
+								$!dis.otherinfo 
+							</td>
+							<td>
+							
+							</td>
+							
+						</tr>
+						#end
+					</tbody>
+				</table>
+				#parse('include/pageUtil.vm')
+			</div>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$('button[name=add]').click(
+				function() {
+					window.location.href="${basePath}admin/ticket/addDiscount.xhtml"					
+				});
+		
+		$('button[name=sou]').click(function(){
+			var v = $.trim($("#txtSeach").val());
+			$("#txtSeach").attr("value",v);
+		})
+		$(function(){
+		})
+		
+	</script>
+</body>
+</html>

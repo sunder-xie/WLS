@@ -1,0 +1,4 @@
+#foreach($field in $fieldList)$helper.getLabel($field)	#end
+#foreach($row in $dataList)
+$helper.getRowString($row,$fieldList)
+#end

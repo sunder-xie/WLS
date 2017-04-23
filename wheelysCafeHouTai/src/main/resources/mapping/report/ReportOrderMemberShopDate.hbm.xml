@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.report.ReportOrderMemberShopDate" table="report_wheelysorder_member_shop_date">
+		<id name="id" column="id" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="shopid" column="SHOPID" type="long" />
+		<property name="shopname" column="SHOPNAME" type="string"/>
+		<property name="day" column="DAY" type="date" />
+		<property name="dailykey" column="DAILYKEY" type="string" />
+		<property name="firstordernum" column="FIRSTORDERNUM" type="integer" />
+		<property name="firstorderusernum" column="FIRSTORDERUSERNUM" type="integer" />
+		<property name="sumdailyordernum" column="SUMDAILYORDERNUM" type="integer" />
+		<property name="sumdailyorderusernum" column="SUMDAILYORDERUSERNUM" type="integer" />
+		<property name="newregisteredmemberorder" column="NEWREGISTEREDMEMBERORDER" type="integer" />
+		<property name="sumdailyorderpaidfee" column="sumdailyorderpaidfee" type="integer" />
+		
+	</class>
+</hibernate-mapping>
+
+
+
+

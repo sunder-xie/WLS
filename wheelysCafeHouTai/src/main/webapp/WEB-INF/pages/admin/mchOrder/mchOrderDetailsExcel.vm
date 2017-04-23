@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Wheelys</title>
+<meta charset="utf-8">
+<style type="text/css">
+body {
+   background: #fff; 
+   font-size: 12pt; 
+   font-family: "宋体", arial; 
+   margin: 0;
+   padding: 0;
+   line-height: 1em;
+   color: #444;
+}
+.table {
+   margin-top: 2px;
+   border-collapse: collapse;
+   border: 2px solid #74B3DC;
+   color: #000;
+   background: #fff;
+   width: 800px;
+}
+
+.table caption {
+   padding: 3px;
+   font-size: 14px;
+   font-weight: bold;
+   text-align: left;
+   color: #000;
+   background: transparent;
+   height:28px;
+}
+
+.table td,.table th{
+   border: 1px solid #e0e0e0;
+   padding: 2px;
+}
+
+.table thead th{
+   border: 1px solid #e0e0e0;
+   text-align: left;
+   font-size: 1em;
+   font-weight: bold;
+   background: #d7e9f5;
+}
+
+.table tfoot th,tfoot td {
+   border: 1px solid #e0e0e0;
+   text-align: left;
+   font-size: 1em;
+   background: #e8e8cf;
+}
+
+.table tfoot th {
+   font-weight: bold;
+}
+
+.table tbody th,.table tbody td {
+   text-align: left;
+}
+
+.table tfoot td {
+   border: 1px solid #996;
+}
+.table tr.over {
+   background: #ffffd9 !important;
+}
+.table tr.even {
+   background: #fff !important;
+}
+
+.table tr.odd {
+   background: #eee !important;
+}
+</style>
+</head>
+<body>
+	<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;<p>补货清单</p></strong></div>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>名称</th>
+				<th>规格</th>
+				<th style="width: 100px;">单位</th>
+				<th style="width: 100px;">单价</th>
+				<th style="width: 100px;">数量</th> 
+				<th style="width: 100px;">金额</th>
+			</tr>
+		</thead>
+		<tbody>
+			#foreach($mchD in $mchDetailList)
+			<tr>         
+				<td>$mchD.productname</td>
+				<td>$!mchD.description</td>
+				<td>$!mchD.unit</td>
+				<td>$VmUtils.getDoubleAmount($mchD.price)</td>
+				<td>$mchD.quantity</td>
+				<td>$VmUtils.getDoubleAmount($mchD.totalfee)</td>
+			</tr>
+			#end
+			<tr>         
+				<td colspan="6">
+					<strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;<p>物流费用</p></strong>
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="5">
+					$mchorder.expressDes
+				</td>
+				<td>$VmUtils.getDoubleAmount($mchorder.expressfee)</td>
+			</tr>
+			<tr>         
+				<td colspan="6">
+					<strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;<p>邮寄信息</p></strong>
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="6">
+					<p>收货人：$mchorder.contacts</p>
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="6">
+					<p>收货地址：$mchorder.address</p>
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="6">
+					<p>联系电话：$mchorder.mobile</p>
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="6">
+					<strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;<p>备注信息</p></strong>
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="6">
+					 $!mchorder.remark
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="6">
+					<strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;<p>优惠信息</p></strong>
+				</td>
+			</tr>
+			<tr>         
+				<td colspan="5">
+					$!mchorder.disreason
+				</td>
+				<td>$VmUtils.getDoubleAmount($!mchorder.discount)</td>
+			</tr>
+			<tr>         
+				<td colspan="5">合计：</td>
+				<td>$VmUtils.getDoubleAmount($mchorder.totalfee)</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

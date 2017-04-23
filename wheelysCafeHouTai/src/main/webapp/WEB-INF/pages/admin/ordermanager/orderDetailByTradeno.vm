@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+    <title>Wheelys</title> #parse("/admin/common/head.vm")
+    <style>
+    #inputMod input {
+        width: 150px;
+        float: left;
+        margin-right: 5px;
+    }
+    
+    .clickMod a {
+        display: block;
+        width: 30%;
+        margin: 0 10%;
+        padding: 5px 0;
+        float: left;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+        background: #ed2626;
+        border-radius: 5px;
+        border: 1px solid #ed2626
+    }
+    
+    .tbMod {
+        min-width: 800px;
+    }
+    
+    .tbmod_2,
+    .tbmod_2 th {
+        text-align: center !important;
+    }
+    
+    .listMod {
+        margin: 20px 0 20px 15px;
+    }
+    
+    .listMod h3 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .listMod .money {
+        float: right;
+        width: 160px;
+        text-align: center;
+    }
+    
+    .list {
+        padding-left: 25px;
+    }
+    
+    .list2 {
+        padding-left: 25px;
+    }
+    </style>
+</head>
+
+<body style="padding: 0px">
+    #parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+    <div class="am-fl am-cf tbMod" style="width: 75%;">
+        <strong class="am-text-primary am-text-lg">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;订单详情</strong>
+        <br>
+        <br>
+        <ul>
+            <li>
+                &nbsp;&nbsp;订单ID：$!order.tradeno
+            </li>
+            <li>
+                &nbsp;&nbsp;订单状态：$statusMap.get($!order.status)
+            </li>
+            <li>
+                &nbsp;&nbsp;店铺：$!order.shop.shopname
+            </li>
+            <li>
+                &nbsp;&nbsp;商品：$!order.productName
+            </li>
+            <li>
+                &nbsp;&nbsp;原价：$!VmUtils.getAmount($!order.totalfee)
+            </li>
+            <li>
+                &nbsp;&nbsp;优惠：$!VmUtils.getAmount($!order.discount)
+            </li>
+            <li>
+                &nbsp;&nbsp;实付：$!VmUtils.getAmount($!order.payfee)
+            </li>
+            <li>
+                &nbsp;&nbsp;优惠方式：$!order.disreason
+            </li>
+            <li>
+                &nbsp;&nbsp;配送方式：$!categoryMap.get($order.category)
+            </li>
+            <li>
+                &nbsp;&nbsp;支付方式：$!payMap.get($!order.paymethod)
+            </li>
+            <li>
+                &nbsp;&nbsp;支付时间：$!order.paidtime
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

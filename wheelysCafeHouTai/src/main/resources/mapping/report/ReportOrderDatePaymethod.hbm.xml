@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.report.ReportOrderDatePaymethod" table="report_wheelysorder_date_paymethod">
+		<id name="id" column="id" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="shopid" column="shopid" type="long" />
+		<property name="date" column="rdate" type="date" />
+		<property name="shopname" column="shopname" type="string" />
+		<property name="paymethod" column="paymethod" type="string" />
+		<property name="totalfee" column="totalfee" type="integer" />
+		<property name="netpaid" column="netpaid" type="integer" />
+		<property name="quantity" column="quantity" type="integer" />
+		<property name="discount" column="discount" type="integer" />
+		<property name="ordercount" column="ordercount" type="integer" />
+		<property name="ukey" column="ukey" type="string" />
+		<property name="citycode" column="citycode" type="string" />
+		<property name="paybrokerage" column="paybrokerage" type="integer" />
+		<property name="payrate" column="payrate" type="double" />
+		<property name="companybrokerage" column="companybrokerage" type="integer" />
+		<property name="companyrate" column="companyrate" type="double" />
+		<property name="settlementamount" column="settlementamount" type="integer" />
+		<property name="sellmethod" column="sellmethod" type="string" />
+	</class>
+</hibernate-mapping>
+
+
+
+

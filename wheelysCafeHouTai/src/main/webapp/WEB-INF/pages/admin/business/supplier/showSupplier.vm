@@ -1,0 +1,100 @@
+<!doctype html>
+<head>
+<title>Wheelys</title>
+ #parse("/admin/common/head.vm")
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+   
+<div class="admin-content">
+			<div class="am-cf am-padding">
+
+				<div class="am-fl am-cf">
+					<strong class="am-text-primary am-text-lg">
+						&nbsp;&nbsp;&nbsp;运营商招募计划</strong>
+				</div>
+				<br> <br>
+				<div class="admin-content">
+					<div class="am-u-sm-12 am-u-md-4">
+						<div class="am-input-group am-input-group-sm">
+							<form class="am-input-group am-input-group-sm"
+								action="${basePath}admin/shop/showSupplier.xhtml"
+								method="get">
+								<input type="text" class="am-form-field"  name="name" id="txtSeach" maxlength="20" value=""
+									placeholder="姓名"> <span class="am-input-group-btn">
+									<button class="am-btn am-btn-default" type="submit" name="sou">搜索</button>
+								</span>
+							</form>
+						</div>
+					</div>
+					<!-- 增删改查 -->
+					<div class="am-btn-toolbar"
+						style="float: right; margin-right: 30px;">
+						</div>
+					</div>
+					<!-- 增删改查 -->
+
+					<div class="am-g">
+						<div class="am-u-sm-12">
+								<table
+									class="am-table am-table-striped am-table-hover table-main" style="border:1px solid #ddd;margin-top:5px;">
+									<thead>
+										<tr>
+											<!-- <th class="table-check"><input type="checkbox" /></th> -->
+											<th class="table-id">ID</th>
+											<th class="table-title">姓名</th>
+											<th class="table-type">性别</th>
+											<th class="table-author am-hide-sm-only">身份证</th>
+											<th class="table-date am-hide-sm-only">联系方式</th>
+											<th class="table-date am-hide-sm-only">微信ID</th>
+											<th class="table-date am-hide-sm-only">E-mail</th>
+											<th class="table-date am-hide-sm-only">提交时间</th>	
+										</tr>
+									</thead>
+									<tbody>
+										#foreach($recruit in $recruitList)
+										<tr>
+											<td>$!recruit.id</td>
+											<td><a
+										href="${basePath}admin/shop/recruitDetail.xhtml?id=$!recruit.id"
+										class="click">$!recruit.name</a></td>
+											<td>
+											#if($!recruit.sex ==1)
+											男
+											#elseif($!recruit.sex ==0)
+											女
+											#end
+											</td>
+											<td>$!recruit.idcard</td>
+											<td>$!recruit.phone</td>
+											<td>$!recruit.wxid</td>
+											<td>$!recruit.email</td>
+											#set($times=$!recruit.times*1000)
+											<td>$DateUtil.formatTimestamp($times)</td>			
+											<td>
+												<div class="am-btn-toolbar">
+													<div class="am-btn-group am-btn-group-xs">
+													</div>
+												</div>
+											</td>
+										</tr>
+										#end
+									</tbody>
+								</table>
+									</div>
+								</div>	
+									#parse('include/pageUtil.vm')
+						</div>
+					</div>
+	
+<script>
+		
+			$('button[name=sou]').click(function(){
+				var v = $.trim($("#txtSeach").val());
+				$("#txtSeach").attr("value",v);
+			})
+</script>
+</body>
+</html>
+</html>

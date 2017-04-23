@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+</head>
+<style>
+  .col_end{
+  }
+</style>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">
+					&nbsp;&nbsp;&nbsp;BANNER设置</strong>
+			</div>
+		
+			<br>
+			<br>
+			<div class="am-g" id="inputList">
+				<div class="am-u-sm-12">
+					<table class="am-table am-table-striped am-table-hover table-main">
+						<div class="admin-content">
+							<h2>
+								#if($!banner.id) 
+								修改banner 
+								#else 
+								添加banner 
+								#end
+							</h2>
+							<div class="am-tabs-bd" id="inputList">
+								#if($!banner.id) <input type="hidden" value="$!banner.id"
+									name="id"> #end
+								<div class="clearfix" style="margin: 10px 0;">
+									<div class="left" style="width: 100px; text-align: right;">名称</div>
+									<div class="left" style="margin-left: 10px;">
+										<input type="text" class="am-input-sm" name="title"
+											value="$!banner.title" maxlength="20">
+									</div>
+								</div>
+								<div class="clearfix" style="margin: 10px 0;">
+									<div class="left" style="width: 100px; text-align: right;">分类
+									</div>
+									<div class="left" style="margin-left: 10px;">
+										<select id="MySelect" name="type" class="am-input-sm"
+													style="width: 100px; float: left;">
+													#foreach($key in $itMap.keySet())
+														<option value="$key" 
+													#if($key == $!banner.type)
+													selected="selected"
+													#end
+													>
+													#if($key ne 'SHOP_INDEX' )
+													$!itMap.get($key)
+													#end
+													</option>
+													#end
+										</select>
+									</div>
+								</div>
+								<div class="clearfix" style="margin: 10px 0;">
+									<div class="left" style="width: 100px; text-align: right;">指向地址</div>
+									<div class="left" style="margin-left: 10px;">
+									#if($!banner.id)
+									 <input type="text" class="am-input-sm" id="tourl" name="tourl" 
+									 value="$!banner.tourl"
+									 >
+									 #else
+									  <input type="text" class="am-input-sm"  id="tourl" name="tourl" 
+									 value="http://"
+									 >
+									 #end
+									</div>
+								</div>
+								<div class="clearfix" style="margin: 10px 0;display:flex;-webkit-display:flex;-moz-display:flex;flex-direction:column;-webkit-flex-direction:column;-moz-flex-direction:column;margin-left:100px;">
+									<div class="left" style="width: 100px; text-align: right;"></div>
+									<div class="left" style="margin-left: 10px;">
+										<iframe id="iframeImg" name="iframeImg"  src="${basePath}admin/shop/touploadimg.xhtml?imgurl=$!banner.imageurl" width="100%"> 
+										</iframe>
+									</div>
+								</div>
+								<div class="clearfix btnList">
+									<a href="${basePath}admin/content/bannerList.xhtml">
+									<input type="button" class="am-btn am-btn-primary am-btn-xs" value="取消" /></a> 
+									<input type="submit" onclick="submitForm_2();"
+										class="am-btn am-btn-primary am-btn-xs" value="保存" />
+								</div>
+							</div>
+						</div>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	function submitForm_2(){  
+		var data = {};
+	        if($('#iframeImg').contents().find('#imgurl').val() == ''){
+	        	alert('图片没有上传成功');
+	        	return false;
+	        }else{
+	        	data['imgurl'] = $('#iframeImg').contents().find('#imgurl').val();
+	        }
+		$('#inputList select').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();	
+		});
+		$('#inputList input').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		});
+		
+		$.ajax({
+		      url:"${basePath}admin/shop/addUpdateBanner.xhtml",
+		      type:'get',
+		      dataType:'json',
+		      data:data,
+		      success:function(data){
+		    	  if(data.success){
+					alert('保存成功')
+					location.href = '${basePath}admin/content/bannerList.xhtml?type='+$('#MySelect').val();
+		    	  }else{
+		    		alert(data.msg);
+		    	  }
+		      }
+		});
+	}
+	
+	
+	</script>
+</body>
+</html>

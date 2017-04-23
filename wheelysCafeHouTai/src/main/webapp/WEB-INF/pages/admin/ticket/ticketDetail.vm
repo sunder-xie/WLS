@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<link rel="stylesheet" type="text/css" href="${staticPath}css/ticket/newticket.css" />
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.wselect {
+	width: 70px;
+	float: right;
+	height: 30px;
+	margin-left: 300px;
+}
+
+.wselect {
+	width: 100px;
+	height：50px;
+}
+.cardType_2{display:none}
+.categroy-ul2 li{width:220px;}
+.item-rigth{width:600px; margin:10px 0; }
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div id="inputList" class="admin-content">
+		<!--右侧开始-->
+		<div class="am-cf am-padding">
+		 <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;优惠券管理</strong> / <small>优惠券详情</small></div>
+			<br>
+			<hr width="100%" />
+			<div class="">
+			<a style="margin-right:60px;" class="am-btn am-btn-primary am-btn-xs" href="${basePath}admin/ticket/showTicketList.xhtml">返回列表页面</a>	
+				<div class="con-t2-left">
+					<table width="100%" border="0" cellspacing="0">
+					<input type="hidden" id="typename" value="$!elecCardBatch.cardtype" />
+						<tr>
+							<td style="text-align:right" width="60">分类<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+							$!cardMap.get($!elecCardBatch.cardtype)
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">名称<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.cardname
+							</td>
+						</tr>
+						
+						<tr class="cardType cardType_1" id="qeid" style="display:none">
+							<td style="text-align:right" width="60">
+							$!priceMAP.get($!elecCardBatch.amountmark)
+							<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.amount元
+							</td>
+						</tr>
+						<tr class="cardType cardType_1" id="minid" style="display:none">
+							<td style="text-align:right" width="60">最低消费<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.minPrice元
+							</td>
+						</tr>
+						<tr class="cardType cardType_1" id="limitcupid" style="display:none">
+							<td style="text-align:right" width="60">最低杯数<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.limitcup杯
+							</td>
+						</tr>
+						<tr class="cardType cardType_2" id="dhid" style="display:none">
+							<td style="text-align:right" width="60">兑换名称<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.dhname
+							</td>
+						</tr>
+						<tr class="cardType cardType_2" id="maxid" style="display:none">
+							<td style="text-align:right" width="60">最高兑换额<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.maxPrice元
+							</td>
+						</tr>
+						#if($elecCardBatch.daynum==0)
+						<tr id="rqid" style="display:blank">
+							<td style="text-align:right" width="60">期限<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$DateUtil.formatDate($!elecCardBatch.timefrom)~$DateUtil.formatDate($!elecCardBatch.timeto)
+							</td>
+						</tr>
+						<tr id="tsid" style="display:none">
+							<td style="text-align:right" width="60">期限<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.daynum天
+							</td>
+						</tr>
+						#else
+						<tr id="rqid" style="display:none">
+							<td style="text-align:right" width="60">期限<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$DateUtil.formatDate($!elecCardBatch.timefrom)~$DateUtil.formatDate($!elecCardBatch.timeto)
+							</td>
+						</tr>
+						<tr id="tsid" style="display:blank">
+							<td style="text-align:right" width="60">期限<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.daynum天
+							</td>
+						</tr>
+						#end
+						<tr>
+							<td style="text-align:right" width="60">说明<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.description
+							</td>
+						</tr>
+						
+						<tr>
+							<td style="text-align:right" width="60">结算分类<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+									#if("$!elecCardBatch.jstype"=="")
+									 未选择结算类型
+									#else $!jsMap.get($!elecCardBatch.jstype)
+									#end
+							</td>
+						</tr>
+						
+						<tr>
+							<td style="text-align:right" width="60">数量<span style="color:red;size: 10">*</span></td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.cardcount张
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">口令:</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.command
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">备注:</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.remark
+							</td>
+						</tr>
+						
+						<tr>
+							<td style="text-align:right" width="60">附赠商品:</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+							<ul class="categroy-ul">
+								#foreach($pro in $proList)
+								$!pro.name,
+ 								#end
+							</ul>
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">口令:</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.command
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">每次领取数量:</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.receivenum张
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">每人领取周期:</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.cycleday天
+							</td>
+						</tr>
+						<tr>
+							<td style="text-align:right" width="60">本券成本额 :</td>
+							<td width="10">&nbsp;</td>
+							<td style="text-align:left" width="260">
+								$!elecCardBatch.costprice元
+							</td>
+						</tr>
+						
+					</table>
+				</div>
+			</div>
+			<div class="con-t3" id="allshopclass">
+				<div style="width: 30%; float: left; text-align: right;margin-right: 10px;">
+				 	<span style="font-size: 20px">参与店铺</span> &nbsp;&nbsp;
+				</div>
+				<div style="width: 56%; float: left; background:#E4E4E4 ;">
+				<ul class="categroy-ul">
+					#foreach($shop in $shopList)
+ 				<li>
+					$!shop.shopname
+ 				</li>
+ 					#end
+				</ul>
+				</div>
+			</div>
+			
+			<div class="con-t4">
+				<div class="con-t4-left" style="width:20%;">
+					<span style="font-size: 20px">商品分类</span>
+				</div>
+				
+				<div id="allClass" class="con-t4-right" style="width:80%">
+					<div class="con-t4-right-item" style="width:100%">
+						#foreach($key in $itemproductMap.keySet())
+						<div class="clearfix">
+							<div class="item-left">
+								$key.name
+							</div>
+							<div class="item-rigth">
+								<ul class="categroy-ul2">
+								#foreach($product in $itemproductMap.get($key))
+								<li>$product.name</li>
+								#end
+								</ul>
+							</div>
+						</div>
+						#end
+					</div>
+				</div>
+			</div> 
+			<div class="con-t4" style="text-align:center;">
+		</div>
+			
+		</div> 
+		<!--右侧结束-->			
+   </div>
+<!--    <script type="text/javascript" src="${staticPath}js/ticket/jedate.js"></script>
+ <script type="text/javascript" src="${staticPath}js/ticket/jquery.min.js"></script>
+  <script type="text/javascript" src="${staticPath}js/ticket/ticket.js"></script> -->
+  <script type="text/javascript">
+  	$(function(){
+  		if($("#typename").val()=="1"){
+  			$("#qeid").show();
+  			$("#minid").show();
+  			$("#limitcupid").show();
+  			$("#dhid").hide();
+  			$("#maxid").hide();
+  		}else if($("#typename").val()=="2"){
+  			$("#qeid").hide();
+  			$("#minid").hide();
+  			$("#limitcupid").hide();
+			$("#dhid").show();
+			$("#maxid").show();
+  		}
+  		
+  		
+  	})
+	
+  </script>
+	
+</body>
+</html>

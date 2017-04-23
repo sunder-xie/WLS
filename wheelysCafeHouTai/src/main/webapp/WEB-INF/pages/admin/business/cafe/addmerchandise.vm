@@ -1,0 +1,152 @@
+<title>添加商品</title>
+<style type="text/css">
+table tr td, th {
+	border: 1px solid #000;
+}
+</style>
+</head>
+
+<body>
+
+	<!doctype html>
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+.wh1 {
+	font-family: "楷体";
+	font-size: 20px;
+}
+
+.wh2 {
+	position: relative;
+	margin-right: 150px;
+}
+
+.wh3 {
+	word-break: break-all;
+	width: 80px;
+	font-size: 20px;
+}
+
+.itemMod {
+	margin: 20px 0;
+}
+
+.itemMod h2 {
+	color: #000;
+	font-size: 18px;
+	margin: 10px 0;
+}
+
+.cafeMod {
+	font-size: 14px;
+	display: inline-block;
+	width: 20%;
+	border: 1px solid #f9f9f9;
+	text-align: center;
+	float: left;
+	padding: 5px 0;
+}
+
+.cafeMod input {
+	margin-left: 5px;
+}
+
+#ti {
+	width: 180px;
+	height: 50px;
+}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div class="am-cf am-padding">
+		<div class="am-fl am-cf">
+			<a
+				href="${basePath}admin/shop/details.xhtml?psshopid=$cafeShop.shopid">
+				<button type="button" 
+					class="am-btn am-btn-primary am-btn-xs" style="font-size: 1.2rem;">返回</button>
+			</a> <strong class="am-text-primary am-text-lg"
+				style="margin-left: 20px;"> $cafeShop.shopname添加新品</strong>
+
+		</div>
+		<br> <br>
+		<div class="admin-content">
+			<div class="am-u-sm-12 am-u-md-4">
+				<div class="am-input-group am-input-group-sm"></div>
+			</div>
+			<div class="am-g" id="inputList">
+				<div class="am-u-sm-12">
+					#foreach($item in $cafeItemList)
+					<div class="itemMod">
+						<h2>$item.name</h2>
+						<div class="clearfix">
+							#foreach($product in $productMap.get($item.id))
+							<div class="cafeMod">
+								$product.name<input id="$product.id" name="product[]"
+									type="checkbox"
+									#if($productidList.contains($product.id)) checked="checked"
+									#end value="$product.id" />
+							</div>
+							<input type="hidden" value="$s"> #end
+						</div>
+					</div>
+					#end
+				</div>
+			</div>
+
+			<button type="submit" onclick="submitForm_2();"
+				class="am-btn am-btn-primary am-btn-xs">确定</button>
+
+
+			<button type="submit"  name="cancel"
+				class="am-btn am-btn-primary am-btn-xs">取消</button>
+		</div>
+	</div>
+
+	<!-- content end -->
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+	<script>	 
+  function submitForm_2(){
+ 		var arr;
+ 		var productidList;
+ 		var data = {'shopid':'$shopid','productidList':'$productidStr'};
+ 		data.arr= '';
+ 		$('#inputList input').each(function(e,a){
+ 			var name = $(a).attr('name');
+ 			var attr = $(a).attr('id');
+ 			if(name == "product[]"){
+ 				if($(a).attr('checked')){
+     				data['arr'] += $(a).val()+',';
+ 				}
+ 			}
+ 		})
+ 		console.info(data)
+		$.ajax({
+ 		      url:"${basePath}admin/shop/addProductShop.xhtml", 
+ 		      type:'post',
+ 		      dataType:'json',
+ 		      data:data,  
+ 		      success:function(data){
+ 		    	  if(data.success){
+ 		   			location.href = '${basePath}admin/shop/details.xhtml?psshopid=$params.shopid';
+ 		    	  }else{
+ 		    		alert(data.msg);   
+ 		    	  }
+ 		      }
+ 		});  
+	}  
+		
+  
+  $('button[name=cancel]').click(function() {
+		if(confirm("确认取消吗")){
+			location.href = '${basePath}admin/shop/details.xhtml?psshopid=$params.shopid';
+		}
+	});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html class="no-js">
+<head>
+  <title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<script type="text/javascript" charset="utf-8" src="${basePath}ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${basePath}ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${basePath}ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+   
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">动态报表</strong>&nbsp;&nbsp;&nbsp; <small>编辑动态报表</small></div>
+		</div>
+		<div class="am-tabs am-margin" data-am-tabs>
+		    <ul class="am-tabs-nav am-nav am-nav-tabs">
+				<li class="am-active"><a href="#tab1">动态报表详情</a></li>
+		    </ul>
+		    <div class="am-tabs-bd">
+				<form name="reportForm" id="reportForm" action="${basePath}admin/sysmgr/report/executeReport.xhtml" class="am-form">
+					<input type="hidden" name="rid" id="rid" value="$!report.id"/>
+					<input type="hidden" name="download" id="download" value=""/>
+					#foreach($field in $helper.paramList)
+					<div class="am-g am-margin-top">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">$helper.getLabel($field.fieldname)：</div>
+						<div class="am-u-sm-8 am-u-md-4">
+							<input name="$field.fieldname" type="text" value="" #if($field.fieldtype eq 'timestamp') onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"#elseif($field.fieldtype eq 'date') onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})")#end/></div>
+						<div class="am-hide-sm-only am-u-md-6">
+							<span id="_category" style="color:red">*</span>&nbsp;&nbsp;</div>
+					</div>
+					#end
+					<div class="am-g am-margin-top">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">$!report.qrysql</div>
+				    </div><br/>
+					<input type="button" class="am-btn am-btn-primary am-btn-xs" value="查询" onclick="$('#download').val('');$('#reportForm').submit()"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" class="am-btn am-btn-default am-btn-xs" value="下载TXT" onclick="$('#download').val('txt');$('#reportForm').submit()"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" class="am-btn am-btn-default am-btn-xs" value="取消" onclick="window.location.href='${basePath}admin/sysmgr/report/dynamicReportList.xhtml'"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</form>
+			</div>
+		</div>
+	</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+	#parse("/admin/common/footer.vm")
+</body>
+</html>

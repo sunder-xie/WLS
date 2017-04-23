@@ -1,0 +1,466 @@
+<!doctype html>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+</head>
+<style>
+.am-text-right, .am-u-md-6 {
+	height: 32.16px;
+	line-height: 32.16px;
+}
+
+.am-tabs {
+	margin-top: 50px;
+}
+
+.list {
+	
+}
+</style>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">商家管理</strong> /
+
+				#if($!upCafeShop.shopid) <small> 商家修改 </small> #else <small>
+					添加商家 </small> #end
+			</div>
+			<div class="am-tabs am-margin" data-am-tabs>
+				<ul class="am-tabs-nav am-nav am-nav-tabs">
+					<li class="am-active"><a href="#tab1">商家信息</a></li>
+				</ul>
+
+
+				<div class="am-form">
+					<div id="inputList" class="am-tabs-bd">
+						<input type="hidden" value="$upCafeShop.shopid" name="shopid">
+						<div class="am-tab-panel am-fade am-in am-active" id="tab1">
+							<div class="am-g am-margin-top">
+								<input type="hidden" value="$!upCafeShop.shopid" name="shopid"
+									data-id="null"> #if($!upCafeShop.id) <input
+									type="hidden" value="$!upCafeShop.shopid" name="shopid">
+								#end
+
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">所在城市</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<select data-am-selected="{btnSize: 'sm'}" name="citycode">
+										#foreach($key in $itMap.keySet())
+										<option value="$key" #if($key==
+											$upCafeShop.citycode)
+				selected="selected" #end>$!itMap.get($key)</option>
+										#end
+									</select>
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">所属运营商</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<select id="companyid" name="companyid" data-am-selected="{btnSize: 'sm'}">
+									<option  selected="selected" value="">请选择运营商</option>
+										#foreach($key in $!operatorMap.keySet())
+										<option value="$key" #if($key==
+											$!upCafeShop.operatorid)
+											selected="selected" #end>$!operatorMap.get($key).name</option>
+										#end
+									</select>
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">开关店</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<div class="am-btn-group" data-am-button>
+										<label
+											class="am-btn am-btn-default am-btn-xs #if($upCafeShop.booking eq 'open') am-active #end">
+											<input type="radio" id="option1" name="booking" value="open"
+											#if($upCafeShop.booking eq "open") checked="checked" #end>
+											开店
+										</label> <label
+											class="am-btn am-btn-default am-btn-xs  #if($upCafeShop.booking eq 'close' ||!$!upCafeShop.shopid ) am-active #end">
+											<input type="radio" name="booking" id="option2" value="close"
+											#if($upCafeShop.booking eq "close") checked="checked" #end>
+											关店
+										</label>
+									</div>
+									#if(!$upCafeShop.shopid) <span
+										style="margin: 0 5px; height: 26px; line-height: 26px;"><span
+										style="color: red">*</span>默认关店</span> #end
+								</div>
+							</div>
+
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">店铺状态</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<div class="am-btn-group" data-am-button>
+										<label
+											class="am-btn am-btn-default am-btn-xs #if($upCafeShop.shopstatus ==0) am-active #end">
+											<input type="radio" id="option1" name="shopstatus" value=0
+											#if($upCafeShop.shopstatus==0) checked="checked" #end>
+											自营
+										</label> <label
+											class="am-btn am-btn-default am-btn-xs #if($upCafeShop.shopstatus ==1 ||!$upCafeShop.shopid ) am-active #end ">
+											<input type="radio" name="shopstatus" id="option3" value=1
+											#if($upCafeShop.shopstatus==1) checked="checked" #end>
+											运营商
+										</label>
+									</div>
+								</div>
+							</div>
+
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">供应商</div>
+								<div class="am-u-sm-8 am-u-md-10">
+									<div class="am-btn-group" data-am-button>
+										<label
+											class="am-btn am-btn-default am-btn-xs #if($upCafeShop.supplierid == 1) am-active #end">
+											<input type="radio" id="option1" name="supplierid" value=1
+											#if($upCafeShop.supplierid== 1) checked="checked" #end>
+											圣唐
+										</label> <label
+											class="am-btn am-btn-default am-btn-xs #if($upCafeShop.supplierid == 2  ) am-active #end ">
+											<input type="radio" name="supplierid" id="option3" value=2
+											#if($upCafeShop.supplierid== 2) checked="checked" #end>
+											香季
+										</label>
+									</div>
+								</div>
+							</div>
+							<!-- <form class="am-form"> -->
+							#if($!upCafeShop.shopid)
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">商家账号</div>
+								<div class="am-u-sm-8 am-u-md-4">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.shopaccount" id="shopaccount"
+										readonly="true" readonly="readonly" name="shopaccount"
+										onkeyup="value=value.replace(/[^1234567890-]+/g,'')"
+										maxlength="15">
+								</div>
+								<div class="am-hide-sm-only am-u-md-6"></div>
+							</div>
+							#end
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">店长头像</div>
+								<div class="am-g am-margin-top" style="margin-left: 300px;">
+									<iframe id="iframeImg" name="iframeImg"
+										src="${basePath}admin/shop/touploadimg.xhtml?imgurl=$!upCafeShop.shopimg"
+										width="100%"> </iframe>
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">商家名称</div>
+								<div class="am-u-sm-8 am-u-md-4">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.shopname" id="shopname" name="shopname"
+										maxlength="30">
+
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，不可重复
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">内部名称</div>
+								<div class="am-u-sm-8 am-u-md-4">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.esname" id="esname" name="esname"
+										maxlength="30">
+
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，不可重复
+								</div>
+							</div>
+
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">商家地址</div>
+								<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.shopaddress" id="shopaddress"
+										name="shopaddress" maxlength="50">
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，不可重复
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">商家电话</div>
+								<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.shoptelephone" id="shoptelephone"
+										name="shoptelephone" maxlength="11">
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，不可重复
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">经度</div>
+								<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.shoplon" id="shoplon" name="shoplon"
+										maxlength="15">
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，不可重复
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">纬度</div>
+								<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.shoplat" id="shoplat" name="shoplat"
+										maxlength="15">
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，不可重复
+								</div>
+							</div>
+
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">联系人</div>
+								<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+									<input type="text" class="am-input-sm"
+										value="$!upCafeShop.contacts" id="contacts" name="contacts"
+										maxlength="15">
+									<div style="display: none" id="errorcontacts">联系人为空</div>
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，不可重复
+								</div>
+							</div>
+
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">营业时间</div>
+								<div class="am-u-sm-8 am-u-md-4">
+									#if(!$upCafeShop.shopid)
+									<div class="am-input-sm">
+										<select name="time1" class="am-input-sm"
+											style="width: 100px; float: left;">
+											<option value="06:00">06:00</option>
+											<option value="06:30">06:30</option>
+											<option value="07:00">07:00</option>
+											<option value="07:30">07:30</option>
+											<option value="08:00">08:00</option>
+											<option value="08:30">08:30</option>
+											<option value="09:00">09:00</option>
+											<option value="09:30">09:30</option>
+											<option value="10:00">10:00</option>
+											<option value="10:30">10:30</option>
+											<option value="11:00">11:00</option>
+											<option value="11:30">11:30</option>
+											<option value="12:00">12:00</option>
+										</select> <span style="float: left">&nbsp;&nbsp;&nbsp;到&nbsp;&nbsp;&nbsp;</span>
+										<select name="time2" class="am-input-sm"
+											style="width: 100px; flost: left;">
+											<option value="17:00">17:00</option>
+											<option value="17:30">17:30</option>
+											<option value="18:00">18:00</option>
+											<option value="18:30">18:30</option>
+											<option value="19:00">19:00</option>
+											<option value="19:30">19:30</option>
+											<option value="20:00">20:00</option>
+											<option value="20:30">20:30</option>
+											<option value="21:00">21:00</option>
+											<option value="21:30">21:30</option>
+											<option value="22:00">22:00</option>
+											<option value="22:30">22:30</option>
+											<option value="23:00">23:00</option>
+										</select>
+									</div>
+									#else
+									<div class="am-input-sm">
+										<select name="time1" class="am-input-sm"
+											style="width: 100px; float: left;">
+											<option value="$time1">$!time1</option>
+											<option value="06:00">06:00</option>
+											<option value="06:30">06:30</option>
+											<option value="07:00">07:00</option>
+											<option value="07:30">07:30</option>
+											<option value="08:00">08:00</option>
+											<option value="08:30">08:30</option>
+											<option value="09:00">09:00</option>
+											<option value="09:30">09:30</option>
+											<option value="10:00">10:00</option>
+											<option value="10:30">10:30</option>
+											<option value="11:00">11:00</option>
+											<option value="11:30">11:30</option>
+											<option value="12:00">12:00</option>
+										</select> <span style="float: left">&nbsp;&nbsp;&nbsp;到&nbsp;&nbsp;&nbsp;</span>
+										<select name="time2" class="am-input-sm"
+											style="width: 100px; flost: left;">
+											<option value="$time2">$!time2</option>
+											<option value="17:00">17:00</option>
+											<option value="17:30">17:30</option>
+											<option value="18:00">18:00</option>
+											<option value="18:30">18:30</option>
+											<option value="19:00">19:00</option>
+											<option value="19:30">19:30</option>
+											<option value="20:00">20:00</option>
+											<option value="20:30">20:30</option>
+											<option value="21:00">21:00</option>
+											<option value="21:30">21:30</option>
+											<option value="22:00">22:00</option>
+											<option value="22:30">22:30</option>
+											<option value="23:00">23:00</option>
+										</select>
+									</div>
+									#end
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填
+								</div>
+							</div>
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right">公司扣点比例</div>
+								<div class="am-u-sm-8 am-u-md-4">
+									<div class="am-input-sm">
+
+										<input type="text" class="am-input-sm" id="shopproportion"
+											name="shopproportion"
+											#if($!upCafeShop.shopproportion)value="$!upCafeShop.shopproportion"
+											#end
+											onkeyup="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]"
+											onBlur="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]"
+											maxlength="4">
+									</div>
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span>%</span> <span style="color: red">*</span>必填
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="am-margin">
+						<input type="submit" id="submit" onclick="submitForm();"
+							class="am-btn am-btn-primary am-btn-xs" value="提交保存" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<a href="#"
+			class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+			data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+		<script>
+			var nameZero = false;
+			$('#inputList input').focus(function() {
+				$('.errMod').remove();
+			})
+			function submitForm() {
+				var isgo = true;
+				$('.errMod').remove();
+				$('#inputList input')
+						.each(
+								function(e, a) {
+									if ($(a).val() == ''
+											&& $(a).attr('name') != 'imgurl'
+											&& $(a).attr('data-id') != 'null') {
+
+										if ($(a).val() == '') {
+											var idT = 'tip' + $(a).attr('id');
+											if ($('#' + idT).length > 0) {
+												isgo = false;
+												return false;
+											}
+											var html = '<div class="errMod" id="'+idT+'" style="color:#ed2626">此内容不能为空</div>';
+											$(a).after(html);
+											isgo = false;
+										}
+
+										if (isgo) {
+											if ($(a).attr('name') == 'shoptelephone'
+													&& !(/^1(3|4|5|7|8)\d{9}$/
+															.test($(a).val()))) {
+												var html = '<div class="errMod" style="color:#ed2626">手机号码有误</div>';
+												$(a).after(html);
+												isgo = false;
+											}
+										}
+									}
+								})
+				if (isgo)
+					submitForm_2();
+			}
+
+			function submitForm_2() {
+				var data = {};
+				if ($('#iframeImg').contents().find('#imgurl').val() == '') {
+					alert('图片没有上传成功');
+					return false;
+				} else {
+					data['imgurl'] = $('#iframeImg').contents().find('#imgurl').val();
+				}
+				$('#inputList select').each(function(e, a) {
+					var attr = $(a).attr('name');
+					if(attr =='operatorid'){console.info($(a).val());
+						if($(a).val()==null){
+							$(a).val('');
+						}
+					}
+					data[attr] = $(a).val();
+				})
+
+				$('#inputList input').each(function(e, a) {
+					var attr = $(a).attr('name');
+					if (attr == "booking") {
+						if ($(a).parents('label').hasClass('am-active'))
+							data[attr] = $(a).val();
+					} else if (attr == "shopstatus") {
+						if ($(a).parents('label').hasClass('am-active')) {
+							data[attr] = $(a).val();
+						}
+					} else if (attr == "supplierid") {
+						if ($(a).parents('label').hasClass('am-active')) {
+							data[attr] = $(a).val();
+						}
+					} else {
+						data[attr] = $(a).val();
+					}
+				})
+				console.info(data)
+				$.ajax({
+					url : "${basePath}admin/shop/updateCafeShop.xhtml",
+					type : 'post',
+					dataType : 'json',
+					data : data,
+					success : function(data) {
+						if (data.success) {
+							location.href = '${basePath}admin/shop/store.xhtml';
+						} else {
+							if (data.msg == "Y") {
+								if (confirm("页面未修改，确认页面不修改吗")) {
+									location.href = '${basePath}admin/shop/store.xhtml';
+								}
+							} else {
+								if (data.msg == "商家名称已存在") {
+									if ($('#tipshopname').length > 0) {
+										isgo = false;
+										return false;
+									}
+									var html = '<div class="errMod" id="tipshopname" style="color:#ed2626">商家名称重复</div>';
+									$('#shopname').after(html);
+									isgo = false;
+								} else if (data.msg == "手机号码不正确！") {
+									if ($('#tipshopname').length > 0) {
+										isgo = false;
+										return false;
+									}
+									var html = '<div class="errMod" id="tipshopname" style="color:#ed2626">手机号码不正确</div>';
+									$('#shoptelephone').after(html);
+									isgo = false;
+								} else {
+									alert(data.msg);
+								}
+							}
+						}
+					}
+						});
+			}
+		</script>
+</body>
+</html>

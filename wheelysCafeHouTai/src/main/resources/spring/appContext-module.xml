@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd">
+	
+	<bean id="multipartResolver"
+		class="com.wheelys.web.support.GewaMultipartResolver">
+		<property name="maxUploadSize" value="209171520" /><!-- 20M -->
+		<property name="defaultEncoding" value="UTF-8"/>
+		<property name="maxInMemorySize" value="40960"/>
+	</bean>
+	<bean id="resourceStatsFilter" class="com.wheelys.web.filter.ResourceStatsFilter" />
+	
+	<bean id="ossClient" class="com.aliyun.oss.OSSClient">
+		<constructor-arg value="${aliyun.oss.endpoint}"/>
+		<constructor-arg value="${aliyun.oss.accessKeyId}"/>
+		<constructor-arg value="${aliyun.oss.accessKeySecret}"/>
+	</bean>
+</beans>

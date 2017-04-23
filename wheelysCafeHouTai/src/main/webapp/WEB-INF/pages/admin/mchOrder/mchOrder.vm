@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+#inputMod input{width:150px; float:left; margin-right:5px;}
+.clickMod a{display:block; width:30%; margin:0 10%; padding:5px 0; float:left; text-align:center; font-size:16px; color:#fff; background:#ed2626; border-radius:5px; border:1px solid #ed2626}
+.clickList a{display:inline-block; width:150px; margin:20px 0; text-align:center;}
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">
+					&nbsp;&nbsp;&nbsp;订单管理</strong> / <small>全部订单列表</small>
+				
+			</div>
+			<br>
+			<br>
+			<div class="clickList">
+				<a href="${basePath}admin/order/mchorder.xhtml"><span >全部订单</span></a>
+				<a href="${basePath}admin/order/mchorder.xhtml?status=new_confirm"><span>已下单</span></a>
+				<a href="${basePath}admin/order/mchorder.xhtml?status=paid"><span>已支付</span></a>
+				<a href="${basePath}admin/order/mchorder.xhtml?status=accept " ><span>已接单</span></a>
+				<a href="${basePath}admin/order/mchorder.xhtml?status=send" ><span>已发货</span></a>
+				<a href="${basePath}admin/order/mchorder.xhtml?status=finish" ><span>交易完成</span></a>
+				<a href="${basePath}admin/order/mchorder.xhtml?status=cancel"><span>已取消</span></a>
+			</div>
+			<div class="admin-content">
+				<div class="am-input-group am-input-group-sm">
+					<form id="inputMod" class="am-input-group am-input-group-sm"
+						action="${basePath}admin/order/mchorder.xhtml"
+						method="get">
+						<input type="text" class="am-form-field"  id="tradeno" name="tradeno" value="$!params.tradeno" placeholder="订单编号" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" / maxlength="16"  > 
+						<input type="text" class="am-form-field" id="mchname" name="mchname" value="$!params.mchname" placeholder="商户名称"> 
+						<input type="text" class="am-form-field" name="time1" id="time1" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.time1" placeholder="开始时间">
+						<input type="text" class="am-form-field" name="time2" id="time2" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.time2" placeholder="结束时间">
+						<select id="supplierid" name="supplierid" class="am-input-sm" style="width: 100px; float: left;">
+								<option value=" ">请选择分类</option>
+								#foreach($key in $comMap.keySet())
+								<option value="$key"
+								>$comMap.get($key)</option>
+								#end
+							</select>
+						<button class="am-btn am-btn-default" type="submit" name="sou" onclick="checkDate() ">搜索</button>
+					</form>
+				</div>
+				<div class="am-btn-toolbar"
+					style="float: right; margin-right: 30px;">
+				</div>
+			</div>
+			<div class="am-g">
+				<div class="am-u-sm-12">
+			
+						<table class="am-table am-table-striped am-table-hover table-main">
+							<thead>
+								<tr class="trList">
+									<th class="table-author am-hide-sm-only"">订单编号</th>
+									<th class="table-title">订单名称</th>
+									<th class="table-title">供应商</th>
+									<th class="table-title">商户名</th>
+									<th class="table-title">城市</th>	
+									<th class="table-title">店长</th>
+									<th class="table-title">联系电话</th>
+									<th class="table-title">下单时间</th>
+									<th class="table-title">订单总额(元)</th>
+									<th class="table-title">状态</th>
+									<th class="table-author am-hide-sm-only center">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								#foreach($mch in $mchOrderList)
+								<tr>
+								
+									<td>$!mch.tradeno</td>
+									<td>$!mch.ordertitle</td>
+									
+									<td>#if($!mch.supplierid==1)
+									圣唐
+									#elseif($!mch.supplierid==2)
+									香季
+									 #end</td>
+									<td>$!mch.mchname</td>
+									<td>$!mch.cityname</td>
+									<td>$!mch.contacts</td>
+									<td>$!mch.mobile</td>
+									<td>$!mch.createtime</td>
+									<td>$!VmUtils.getDoubleAmount($mch.payfee)</td>
+									<td title="$mch.status">
+									#if($!mch.status =='accept')
+									已接单
+									#elseif($!mch.status =='send')		
+									已发货
+									#elseif($!mch.status =='new_confirm')
+									已下单
+									#elseif($!mch.status =='finish')
+									交易完成
+									#elseif($!mch.status =='cancel')
+									已取消
+									#elseif($!mch.status =='paid')
+									已支付
+									#end
+									</td>
+									<td>
+										<div class="am-btn-toolbar center" >
+											<div class="am-btn-group-xs">
+													<a href="${basePath}admin/order/mchorderdetails.xhtml?id=$mch.id">
+													<button type="button"
+														class="am-btn am-btn-default am-btn-xs am-text-secondary"
+														name="details">
+														<span>详情</span>
+													</button>
+													</a>
+													<a href="${basePath}admin/order/orderdetailsExcel.xhtml?id=$mch.id">
+													<button type="button"
+														class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+														name="export">
+														<input type="hidden">导出</input>
+													</button>
+													</a>
+													<a>
+														<span>
+															#if(${mch.status} =='accept') 
+															<input type="submit" onclick="topop('pop_1','submit$!{mch.id}');" 
+																class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+															id="submit$!{mch.id}" mchid="$!{mch.id}" 
+			                      				 				value="发货"/>
+															#elseif(${mch.status} =='new_confirm'||${mch.status} =='paid')
+															<input type="submit" onclick="topop('pop_2','submit$!{mch.id}');" 
+																	class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+																	 id="submit$!{mch.id}" mchid="$!{mch.id}" 
+			                      				 				value="接单"  />
+													
+															#end
+														</span>
+													</a>
+													<a>
+													<span>
+														#if(${mch.status} =='send' || ${mch.status} =='new_confirm' ||${mch.status} =='accept'||${mch.status} =='paid') 
+														<input type="submit" onclick="topop('pop_3','cancel$!{mch.id}');"
+																class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+																 id="cancel$!{mch.id}" mchid="$!{mch.id}"
+																 value="取消" />
+														#end
+													</span>
+													</a>
+											</div>
+										</div>
+									</td>
+								</tr>
+							#end
+							</tbody>
+						</table>
+						#parse('include/pageUtil.vm')
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+	<footer>
+	<hr>
+	<p class="am-padding-left">© 2016 Wheelys.com.cn</p>
+	</footer>
+	
+<div id="pop_1" style="width:500px; min-height:300px; background:#fff;border-radius:5px;padding:20px 0; display:none;">
+	<h2 style="width:100%; text-align:center;padding:20px 0;">你确定供应商发货了么</h2>
+	<p><textarea id="expressInfo" name="expressInfo" placeholder="请录入发货信息，具体包括：物流方式、物流公司、物流单号、物流师傅联系方式等信息" style="margin-left: 20px;max-width:443px;max-height:596px;" rows="10" cols="70"></textarea></p>
+	<div class="clickMod" style="margin-top: 10px;"><a style="background:#fff; color:#ed2626;" href="javascript:topop.close();">取消</a><a onclick="submit_2();">是的</a></div>
+</div>
+<div id="pop_2" style="width:500px; background:#fff;border-radius:5px; display:none;padding:20px 0;">
+	<h2 style="width:100%; text-align:center;padding-bottom:20px;">你确定已经和财务确认收到<br>足够款项并可以接单了吗?</h2>
+	<div class="clickMod" style="margin-top: 10px;"><a style="background:#fff; color:#ed2626;" href="javascript:topop.close();">取消</a><a href="javascript:toajax();">是的</a></div>
+</div>
+<div id="pop_3" style="width:500px; height:150px; background:#fff;border-radius:5px;padding:20px 0; display:none;">
+	<h2 style="width:100%; text-align:center">取消订单不可逆<br>确定取消订单吗?</h2>
+	<div class="clickMod" style="margin-top: 10px;"><a style="background:#fff; color:#ed2626;" href="javascript:topop.close();">取消</a><a href="javascript:toajax();">是的</a></div>
+</div>
+<script >
+function submit_2(){
+	if($('#expressInfo').val()== ''){
+		alert('表单不能为空')
+		return false;
+	}else{
+		toajax();
+	}
+}
+
+var mchel;
+function topop(el,elmchid){
+	var el = $('#'+el);
+	mchel = $('#'+elmchid);
+	var zIndex = 500;
+	var cover = $("<div />",{});
+	el.show();
+	cover.css({
+		'background':'rgba(0,0,0,.6)',
+		'position':'fixed',
+		'left':'0',
+		'top':'0',
+		'width': '100%',
+		'height': '100%',
+		'z-index':zIndex-1
+	});
+	$('body').append(cover);
+	topop.close = function(){
+		cover.remove();
+		el.hide();
+	}
+	$(cover).click(function(){
+		topop.close();
+	})
+	var width = el.css('width')/2;
+	var height = el.css('width')/2;
+	el.css({
+		'left':'50%',
+		'margin-left':-el.width()/2+'px',
+		'margin-top':-el.height()/2+'px',
+		'top':'50%',
+		'display': 'block',
+		'transform-style': 'preserve-3D',
+		'-webkit-transform-style': 'preserve-3D',
+		'z-index':zIndex,
+		'position':'fixed'
+		
+	})
+}
+function toajax(){
+	var mchid = mchel.attr('mchid');          //  接收当前商品的id
+	var status = '';
+	var expressInfo = '';
+	var neir = mchel.val();
+	if(neir == '接单'){
+		status = 'accept';                     // 判断当前商品是否上架
+	}else if(neir == '发货'){
+		status = 'send';
+		expressInfo = $('#expressInfo').val();
+	}else if(neir == '取消'){
+		status = 'cancel';
+	}
+	var obj = $(this);
+	$.ajax({
+			url:"${basePath}admin/order/status.xhtml",
+			type:'post',
+			dataType:'json',
+			data:'orderid='+mchid+'&status='+status+'&expressInfo='+expressInfo,
+			success:function(data){
+				topop.close();
+				location.href = location.href;
+		}
+	});	
+}
+
+ function checkDate(){
+	 var time1 = $("#time1").val();
+	 var time2 = $("#time2").val();
+	if(time1 !=""&& time2 !=""){
+		var date1 = time1.split("-");          
+		var date2 = time2.split("-");        
+		var myDate1 = new Date(date1[0],date1[1],date1[2]); 
+		var myDate2 = new Date(date2[0],date2[1],date2[2]);  
+		if (myDate1 <= myDate2){  
+	
+			return true; 
+		}else{
+		 	alert ("提示: 开始时间不能大于结束时间！");
+			 return false; 
+		}
+	}
+}
+ $('button[name=sou]').click(function(){
+		var v = $.trim($("#tradeno").val());
+		$("#tradeno").attr("value",v);
+		
+		var v = $.trim($("#mchname").val());
+		$("#mchname").attr("value",v);
+		
+		var v = $.trim($("#time1").val());
+		$("#time1").attr("value",v);
+		
+		var v = $.trim($("#time2").val());
+		$("#time2").attr("value",v);
+	})
+
+</script>
+</body>
+</html>

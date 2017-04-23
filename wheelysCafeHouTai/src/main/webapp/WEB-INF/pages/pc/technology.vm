@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Wheelys Coffee</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<link rel="stylesheet" href="${pcPath}Public/home/css/main_css.css">
+<link rel="stylesheet" href="${pcPath}Public/home/css/bootstrap.min.css" >
+<script src="${pcPath}Public/home/js/main.js"></script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<style>
+    a{
+		cursor:pointer;
+		color:#000;
+		text-decoration:none;
+    }
+    a:hover{
+        text-decoration:none;
+       /**/
+    }
+</style>
+<script>
+$(document).ready(function(){
+    NavShow();
+    $(".wheelysCoffeeCar").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+     $(".left").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+      $(".right").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+	$('.class_dis').mouseover(function(){
+         $('.disc').css('display','block');
+    }).mouseout(function(){
+         $('.disc').css('display','none');
+    })
+
+    $('.class_dis_').mouseover(function(){
+         $('.disc_').css('display','block');
+    }).mouseout(function(){
+         $('.disc_').css('display','none');
+    })
+    $('.menuBox').each(function(e,a){
+    	$(a).on('click',function(){
+    		$('.menuList').slideUp();
+    		if($(a).hasClass('select')){
+        		$('.menuBox').removeClass('select');
+    			return;
+    		}else{
+        		$('.menuBox').removeClass('select');
+    		}
+    		$(a).addClass('select');
+    		var left = $(this).offset().left+'px';
+    		var width = $(this).width()+40+'px';
+    		$('.menuList').each(function(i,z){
+    			if(i == e){
+        			$(z).css({
+        				'left':left,
+        				'min-width':width
+        			});
+        			$(z).slideDown();
+    			}
+    		})
+    	})
+    })
+ //     $('.displaymy').mouseover(function(){
+ //   $(this).prev().css('display','block');
+ // }).mouseout(function(){
+ //    $(this).prev().css('display','none');
+ // });
+ })
+</script>
+</head>
+<body>
+#parse("/pc/header.vm")
+<div class="nav_warp clear" id="test">
+    <div class="left">
+        <div class="name1">
+        <a href="${basePath}pc/wisdom.xhtml" style="color:#fff;">
+            <span>咖啡世界</span>
+            <span>新潮流</span>
+        </a>
+        </div>
+        <div class="name2">
+        <a href="${basePath}pc/worth.xhtml"style="color:red">
+            <span>霸道而纯粹的</span>
+            <span>咖啡原味</span>  
+        </a>
+        </div>
+    </div>
+    <div class="right_nav">
+        <dl>
+            <dt>关于 WHEELYS CAFÉ</dt>
+            <dd><a href="${basePath}pc/wisdom.xhtml">智慧范</a></dd>
+            <dd><a href="${basePath}pc/technology.xhtml">科技范</a></dd>
+            <dd><a href="${basePath}pc/worth.xhtml">品质范</a></dd>
+            <dt>风靡全球的WHEELYS</dt>
+            <dd><a href="${basePath}pc/team.xhtml">也许是最酷的创业团队！</a></dd>
+            <dd><a href="https://wheelyscafe.com/">看看全球还有哪些WHEELYS？</a></dd>
+            <dt>加入WHEELYS</dt>
+            <dd><a href="http://mp.weixin.qq.com/s?__biz=MzIxMDE4MjMwNw==&mid=503749680&idx=1&sn=58ecd77a87812214f1bc11afb1efc5fa&scene=18#rd">城市运营商招募计划</a></dd>
+            <dd><a href="${basePath}pc/showSignupForm.xhtml">报名表</a></dd>
+            <dt class="no"><a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzIxMDE4MjMwNw==&hid=2&sn=aa0793a5d27620b905c876b8d0d59638&uin=Mjc3OTQxMTk1&key=c3acc508db720376ee29711487ac69cecad3f491555c8e84cba8fdae7428454067e308ba0cb26de1017a570325c47b8e&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1">媒体报道</a></dt>
+        </dl>
+    </div>
+</div>
+<div class="Iwrap">
+     <div style=" position:absolute;left:3%;top:15%;width:258px;height:258px;display:none" class="disc">
+                    <img src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/2016-11-21/erwei.jpg" width="258" height="258" />
+    </div>
+    <div class="venture_team ">
+        <span class="cotton"></span>
+        <i class="icon icon-W"></i>
+        <span class="cotton"></span>
+        <h2><span class="Brandon_med">Wheelys</span>科技范</h2>
+        <div class="bottom">
+            <span></span>
+        </div>
+        <i class="icon icon-points"></i>
+    </div>
+    <div class="techology_car Twrap">
+        <img src="${pcPath}Public/home/img/techology_car.jpg" />
+    </div>
+    <div class="green_warrior Twrap">
+        <h2 class="Brandon_med">Wheelys 4<span>“绿色骑士”</span>（Green Warrior）</h2>
+        <h3>引进一家移动咖啡馆，重新定义咖啡馆的功能。</h3>
+        <p>经过一年多的研发，Wheelys咖啡车现已推出第四代智能咖啡车，也就是“绿色骑士”（Green Warrior）。与以往的车型相似，这是一家功能完备的移动咖啡店，包括一个冰柜、三个炉子以及一个展示新鲜咖啡植物的移动温室，可出售咖啡、冷饮和饼干小食。Wheelys 4采用电力驱动，而车顶的太阳能电池板和风能发电器也可为整个移动咖啡车供给电力，在阴天的时候，车内自带的蓄电池也可以满足供电。“绿色骑士”甚至还自带一个空气过滤装置，每天过滤超过6,500立方米的空气，减少周边空气污染。此外，我们还有一个内置的水循环系统和垃圾分类系统。</p>
+    </div>
+    <div class="warrior_img Twrap">
+        <img src="${pcPath}Public/home/img/warrior_img1.jpg" />
+        <img src="${pcPath}Public/home/img/warrior_img2.jpg" />
+        <img src="${pcPath}Public/home/img/warrior_img3.jpg" />
+    </div>
+    <div class="warrior_img Twrap">
+        <p>Wheelys咖啡是与众不同的。自我们开始运营起，就一直在太阳能和体力驱动的咖啡车上为大家提供绿色有机食品。</p>
+        <p>Wheelys 4“绿色骑士”（Green Warrior）配备太阳能电池板，此外，还可选择在咖啡车上安装风能发电器。</p>
+        <img src="${pcPath}Public/home/img/warrior_img4.jpg" />
+        <p style="margin-top: 24px">将咖啡渣撒进装有鲜花种子和泥土的小型培养容器中，这样，我们可以边工作边种花。没错，这不是开玩笑。</p>
+        <img src="${pcPath}Public/home/img/warrior_img5.jpg" />
+        <div class="win">
+            <span></span>
+            <strong>获奖设计</strong>
+            <span></span>
+        </div>
+    </div>
+    <div class="warrior_img Twrap">
+        <p>Wheelys 4“绿色骑士”（Green Warrior）是经过多年研究、研发、测试、改进、健康课题调研以及售卖成千上万杯咖啡而得出的成果，我们懂咖啡。</p>
+        <img src="${pcPath}Public/home/img/warrior_img6.jpg" />
+        <img class="wheely_fous" src="${pcPath}Public/home/img/warrior_img7.jpg" />
+        <i class="icon icon-points"></i>
+    </div>
+    <div class="wheely_Num Twrap">
+        <strong class="Brandon_med">Wheelys 3</strong>
+        <p>所有的Wheelys 3™都配备有自来水、三个炉子、冰柜，还有一个帮助爬坡的电动马达。</p>
+        <img src="${pcPath}Public/home/img/wheelys_num1.jpg" />
+    </div>
+    <div class="wheely_Num Twrap">
+        <strong class="Brandon_med">Wheelys 2</strong>
+        <p>Wheelys 2 是一项获奖的瑞典发明。它是世界上最小、设计最优的咖啡馆，其完全包裹在一辆高科技脚踏车里。</p>
+        <img style="margin-left: 50px" src="${pcPath}Public/home/img/wheelys_num2.jpg" />
+    </div>
+    <div class="wheely_Num Twrap">
+        <strong class="Brandon_med">Wheelys 1</strong>
+        <p>Wheelys 1 是我们在马尔摩的地下室里亲手打造出来的。</p>
+        <img src="${pcPath}Public/home/img/wheelys_num3.jpg" />
+    </div>
+    <div class="coffee_app Twrap">
+        <i class="icon icon-points"></i>
+        <h3>用APP定制私人咖啡</h3>
+        <img src="${pcPath}Public/home/img/wheelys_app.jpg" />
+        <p>每个人都有不同的个性，自己的咖啡当然要自己做主！</p>
+        <p class="left">打开手机，你不仅可以路过就买杯Wheelys咖啡去上班，获得比连锁品牌还要便宜的价格。在不久的将来，还会有更棒的新技能解锁——点击Wheelys APP/微信客户端，你不仅可以订制个性化的咖啡口味以及选择咖啡豆的种类，还可自定义咖啡的温度、压制咖啡的压力、烹煮咖啡的时间——要知道，这三个要素是影响咖啡口味的关键。手机一点，美味即来。Wheelys的智能科技，将为每一个独一无二的你带来一种全新的个性化体验。</p>
+    </div>
+</div>
+#parse("/pc/footer.vm")
+<script>
+    $(document).ready(function(){
+        inputValue();
+        NavShow();
+    });
+</script>
+<script>
+    $(document).ready(function(){
+       $(".venture_team ").click(function(){
+            $(".nav_warp").css("display",'none')
+            var dis = 'icon icon-ul';
+           $(".logo_left > .icon").attr('class',dis);
+       })
+    })
+</script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<script src="${pcPath}Public/home/js/bootstrap.min.js"></script>
+<!-- [if IE 6]  --> 
+<script src="${pcPath}Public/home/js/DD_belatedPNG_0.0.8a.js"> </script>
+<script>
+    DD_belatedPNG.fix('*')
+</script>
+<!-- [end if] --> 
+</body>
+</html>

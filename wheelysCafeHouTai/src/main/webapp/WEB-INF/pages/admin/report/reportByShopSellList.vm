@@ -1,0 +1,184 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+</head>
+<style>
+   /* table{
+    border-top:1px solid #dddddd;
+   } */
+   th{
+      border:1px solid #dddddd;
+   }
+</style>
+<body style="padding:0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm") 
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;报表统计</strong> / <small>咖啡统计报表</small></div>
+    <br><br>
+    <div class="admin-content"> 
+      <div class="am-u-sm-12">
+        <div class="am-input-group am-input-group-sm">
+        	#set($cafeshopid=0)
+      		#set($citycode=0)
+      		#set($begintime=0)
+      		#set($endtime=0)
+          <form class="am-input-group am-input-group-sm" action="${staticPath}admin/report/reportByShopSellList.xhtml" method="post">
+	          <p class="am-input-group-btn">
+				<select name="shopid"  class="am-input-sm" placeholder="商铺名字" style="width:150px;height:33px;float:left;">
+					<option value="">全部店铺</option>
+					#foreach($shop in $shopList)
+					<option #if($shop.shopid eq $params.shopid) selected="selected" #end value="$shop.shopid" #set($cafeshopid=$params.shopid)>$!shop.esname</option>
+					#end
+                </select>
+              <select name="cityname"  class="am-input-sm" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                   <option value="">全部城市</option>
+                   #foreach($key in $citymap.keySet())
+	                 <option #if($key eq $params.cityname) selected="selected" #end value="$key" #set($citycode=$params.cityname)>$!citymap.get($key)</option>
+                  	#end
+	            </select>
+	         	<input type="text" class="am-form-field" name="begin" id="time1" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.begin" #set($begintime=$!params.begin) placeholder="开始时间" style="width:150px;height:33px;float:left;margin-left: 10px;">
+				<input type="text" class="am-form-field" name="end" id="time2" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.end" #set($endtime=$!params.end) placeholder="结束时间" style="width:150px;height:33px;float:left;">
+	            <button class="am-btn am-btn-default" type="submit" style="float:left;margin-left: 10px;" onclick="checkDate()">搜索</button>
+	          </p>
+          </form>
+          				<a
+							href="${basePath}admin/report/reportByShopSellListExcel.xhtml?shopid=$!cafeshopid&cityname=$!citycode&begin=$!begintime&end=$!endtime">
+							<button type="button"
+								class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+								name="export">
+								<input type="hidden">导出</input>
+							</button>
+						</a>
+        </div>
+      </div> 
+      <!-- 增删改查 -->
+        <div class="am-btn-toolbar" style="float:right;margin-right:30px;">
+          <div class="am-btn-group am-btn-group-xs">
+          </div>
+        </div>
+      <!-- 增删改查 -->
+    </div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12" style="overflow-x:scroll;">
+          <table class="am-table am-table-striped am-table-hover table-main" >
+            <thead>
+            
+              <tr>
+                 <th class="table-title" rowspan="3" style="min-width:80px;border-top:1px solid #dddddd;">店铺</th>
+				#foreach($date in $dateList)
+                 <th class="table-title" colspan="4" rowspan="2" style="min-width:90px;border-top:1px solid #dddddd;">$date</th>
+              	#end
+                 <th class="table-title" colspan="5" style="min-width:90px;border-top:1px solid #dddddd;">起始日期时间段统计</th>
+            	 </tr>
+            	 <tr>
+                 	<th class="table-title" colspan="3" style="min-width:90px;border-top:1px solid #dddddd;">合计</th>
+                 	<th class="table-title" colspan="2" style="min-width:90px;border-top:1px solid #dddddd;">日均</th>
+            	 </tr>
+              <tr>
+				#foreach($date in $dateList)
+                 <th class="table-title"  style="min-width:60px;">销售方式</th>
+                 <th class="table-title"  style="min-width:60px;">金额</th>
+                 <th class="table-title"  style="min-width:60px;">杯数</th>
+                 <th class="table-title"  style="min-width:60px;">折算单价</th>
+              	#end
+                 <th class="table-title"  style="min-width:60px;">金额</th>
+                 <th class="table-title"  style="min-width:60px;">杯数</th>
+                 <th class="table-title"  style="min-width:60px;">折算单价</th>
+                 <th class="table-title"  style="min-width:60px;">金额</th>
+                 <th class="table-title"  style="min-width:60px;">杯数</th>
+              </tr>
+          </thead>
+          <tbody>
+          	#set($ttotalfee=0)
+          	#set($tquantity=0)
+	        #set($sumtotalfee=0)
+	        #set($sumquantity=0)
+	        #set($sumavprice=0)
+	        #set($sumdayprice=0)
+	        #set($sumdayquantity=0)
+	        
+			#foreach($cafeshop in $cafeShopList)
+          	   #set($unitprice2=0) 
+		       #set($count=0)
+		       #set($paidfee=0)
+		       #set($totalfee=0)
+		       #set($dayavtotalfee=0)
+		       #set($dayavquantity=0)
+		       
+           <tr>
+                <th class="table-title">$!cafeshop.shopname</th>
+				#foreach($date in $dateList)
+				#set($count=$count+1)
+				
+				#set($key = $cafeshop.shopid+'_'+$date)
+				#set($shopDate = $shopDateMap.get($key))
+				#set($unitprice1=0)
+				#if($shopDate)
+				#set($shopDate = $shopDateMap.get($key))
+				
+	          	#set($unitprice1=$shopDate.subtotalfee/$shopDate.subquantity)
+	          	#set($paidfee=$paidfee+$!shopDate.subtotalfee)
+	          	#set($totalfee=$totalfee+$!shopDate.subquantity)
+	          	#set($unitprice2=$paidfee/$totalfee)
+	          	#set($dayavtotalfee=$paidfee/$count)
+	          	#set($dayavquantity=$totalfee/$count)
+				#end
+				#if($VmUtils.isNotEmpty($!shopDate.sellmethod))
+                 <th class="table-title">$!shopDate.sellmethod</th>
+                 #else
+                 <th class="table-title">原价</th>
+                #end
+                 <th class="table-title">#if($!shopDate.subtotalfee)$VmUtils.getAmount($!shopDate.subtotalfee) #else 0#end</th>
+                 <th class="table-title">#if($!shopDate.subquantity)$!shopDate.subquantity #else 0#end</th>
+                 <th class="table-title">#if($!unitprice1)$VmUtils.getAmount($!unitprice1) #else 0#end</th>
+                 #end
+                 
+                 <th class="table-title">$VmUtils.getAmount($paidfee)</th>
+                 <th class="table-title">$totalfee</th> 
+                 <th class="table-title">$VmUtils.getAmount($unitprice2)</th>
+                 <th class="table-title">$VmUtils.getAmount($dayavtotalfee)</th>
+                 <th class="table-title">$dayavquantity</th>
+           </tr> 
+           #set($sumtotalfee=$sumtotalfee+$paidfee)
+           #set($sumquantity=$sumquantity+$totalfee)
+           #set($sumavprice=$sumtotalfee/$sumquantity)
+           #set($sumdayprice=$sumtotalfee/$count)
+           #set($sumdayquantity=$sumquantity/$count)
+           #end
+           <tr>
+                 <th class="table-title">合计</th>
+				 #foreach($date in $dateList)
+				 #set($key1 = $date+'_subtotalfee')
+				 #set($key2 = $date+'_subquantity')
+				 #if($totalMap.get($key1))
+				 #set( $ttotalfee=$totalMap.get($key1))
+				 #end
+				 #if($totalMap.get($key2))
+				 #set($tquantity=$totalMap.get($key2))
+				 #end
+				 #set($dayavprice=$ttotalfee/$tquantity)
+				 
+                 <th class="table-title">_</th>
+                 <th class="table-title">#if($totalMap.get($key1))$VmUtils.getAmount($totalMap.get($key1)) #else 0#end</th>
+                 <th class="table-title">#if($totalMap.get($key2))$totalMap.get($key2) #else 0#end</th>
+                 <th class="table-title">$VmUtils.getAmount($dayavprice)</th>
+                 #end
+                 <th class="table-title">$VmUtils.getAmount($sumtotalfee)</th>
+                 <th class="table-title">$sumquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($sumavprice)</th>
+                 <th class="table-title">$VmUtils.getAmount($sumdayprice)</th>
+                 <th class="table-title">$sumdayquantity</th>
+           </tr> 
+		</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

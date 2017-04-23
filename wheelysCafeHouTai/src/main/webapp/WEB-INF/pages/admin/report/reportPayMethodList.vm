@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<style>
+.table-title{border:1px solid #ddd}
+</style>
+</head>
+<body style="padding:0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm") 
+   
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;报表统计</strong> / <small>门店格式报表</small></div>
+    <br><br>
+    <div class="admin-content"> 
+      <div class="am-u-sm-12">
+        <div class="am-input-group am-input-group-sm" id="inputList">
+       		#set($cafeshopid=0)
+      		#set($citycode=0)
+      		#set($begintime=0)
+      		#set($endtime=0)
+          <form class="am-input-group am-input-group-sm" action="${staticPath}admin/report/reportPayMethodList.xhtml" method="post">
+	          <p class="am-input-group-btn">
+					<select name="shopid"  class="am-input-sm" style="width:150px;height:33px;float:left;">
+	                 <option value="">全部店铺</option>
+	                #foreach($shop in $shopList)
+					<option #if($shop.shopid eq $params.shopid) selected="selected" #end value="$shop.shopid" #set($cafeshopid=$params.shopid)>$!shop.esname</option>
+					#end
+	                </select>
+	                <select name="cityname"  class="am-input-sm" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                   <option value="">全部城市</option>
+                   #foreach($key in $citymap.keySet())
+	                 <option #if($key eq $params.cityname) selected="selected" #end #set($citycode=$params.cityname) value="$key">$!citymap.get($key)</option>
+                  	#end
+	                </select>
+					<input type="text" class="am-form-field" name="begin" id="time1" value="$!params.begin"  onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" #set($begintime=$!params.begin) placeholder="开始时间" style="width:150px;height:33px;float:left;margin-left: 10px;">
+					<input type="text" class="am-form-field" name="end" id="time2" value="$!params.end" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" #set($endtime=$!params.end)  placeholder="结束时间" style="width:150px;height:33px;float:left;">
+	            <button class="am-btn am-btn-default" type="submit" style="float:left;margin-left: 10px;" onclick="checkDate()">搜索</button>
+	           <!--  <a href="${staticPath}admin/report/reportPayMethodList.xhtml">
+	            <button class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+	             type="button" style="color: green;height: 33px;margin-left: 40px">导出Excel</button>
+	            </a> -->
+	            </p>
+          </form>
+						<a
+							href="${basePath}admin/report/reportPayMethodListExcel.xhtml?shopid=$!cafeshopid&cityname=$!citycode&begin=$!begintime&end=$!endtime">
+							<button type="button"
+								class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+								name="export">
+								<input type="hidden">导出</input>
+							</button>
+						</a>
+					</div>
+      </div> 
+    </div>
+	 <div class="am-g">
+      <div class="am-u-sm-12" style="overflow-x:scroll;">
+      <br>
+      
+      		#set($totalsellprice=0)
+      		#set($totalsellquantity=0)
+      		#set($totalday=0)
+      		#set($avsellprice=0)
+      		#set($avsellquantity=0)
+      		#set($avsell=0)
+            #foreach($cafeshop in $payMethodVoMap.keySet())
+          <table class="am-table am-table-striped am-table-hover table-main" >
+            <thead>
+              <tr>
+                 <th class="table-title" style="min-width:80px;border-top:1px solid #dddddd;">营业点</th>
+                 <th class="table-title" colspan="8" style="min-width:90px;border-top:1px solid #dddddd;">$!cafeshop.shopname</th>
+              </tr>
+              <tr>
+                 <th class="table-title" rowspan="3" style="min-width:60px;">日期</th>
+                 <th class="table-title" colspan="3" style="min-width:60px;">理论销售(含销售杯数、赠杯、无优惠)</th>
+                 <th class="table-title" colspan="8" style="min-width:60px;">实际销售(折扣后+折扣退款后)</th>
+              </tr>
+              <tr>
+                 <th class="table-title" rowspan="2">杯数</th>
+                 <th class="table-title" rowspan="2">金额</th>
+                 <th class="table-title" rowspan="2">平均单价</th>
+                 <th class="table-title" colspan="2">微信</th>
+                 <th class="table-title" colspan="2">支付宝</th>
+                 <th class="table-title" colspan="2">合计</th>
+                 <th class="table-title" rowspan="2">销售方式</th>
+              </tr>
+              <tr>
+                 <th class="table-title">杯数</th>
+                 <th class="table-title">金额</th>
+                 <th class="table-title">杯数</th>
+                 <th class="table-title">金额</th>
+                 <th class="table-title">杯数</th>
+                 <th class="table-title">金额</th>
+              </tr>
+          </thead>
+          <tbody>
+          	#set($count=0)
+          	#set($totalquantity=0)
+          	#set($totalfee=0)
+          	#set($avprice=0)
+          	#set($wquantity=0)
+          	#set($wnetpaid=0)
+          	#set($zquantity=0)
+          	#set($znetpaid=0)
+          	#set($totalprice=0)
+			#foreach($report in $payMethodVoMap.get($cafeshop))
+			#set($count=$count+1)
+			#set($totalquantity = $totalquantity+$report.totalquantity)
+			#set($totalfee = $totalfee+$report.totalfee)
+			#set($wquantity = $wquantity+$report.wquantity)
+			#set($wnetpaid = $wnetpaid+$report.wnetpaid)
+			#set($zquantity = $zquantity+$report.zquantity)
+			#set($znetpaid = $znetpaid+$report.znetpaid)
+			#set($totalprice = $totalprice+$report.totalprice)
+           <tr>
+                 <th class="table-title">$report.date</th>
+                 <th class="table-title">$report.totalquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($report.totalfee)</th>
+                 <th class="table-title">$report.avprice</th>
+                 <th class="table-title">$report.wquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($report.wnetpaid)</th>
+                 <th class="table-title">$report.zquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($report.znetpaid)</th>
+                 <th class="table-title">$report.totalquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($report.totalprice)</th>
+                 #if($VmUtils.isNotEmpty($!report.sellmethod))
+                 <th class="table-title">$!report.sellmethod</th>
+                 #else
+                 <th class="table-title">原价</th>
+                 #end
+           </tr>
+           #end
+             #set($totalsellprice = $totalsellprice+$totalprice)
+             #set($totalsellquantity = $totalsellquantity+$totalquantity)
+             #set($totalday=$totalday+$count)
+             #set($avsellprice=$totalsellprice/$totalday)
+             #set($avsellquantity=$totalsellquantity/$totalday)
+             #set($avsell=$avsellprice/$avsellquantity)
+          	 #set($avprice=$totalfee/$totalquantity)
+        	   <tr>
+                 <th class="table-title">$count条</th>
+                 <th class="table-title">$totalquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($totalfee)</th>
+                 <th class="table-title">$!VmUtils.getAmount($avprice)</th>
+                 <th class="table-title">$wquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($wnetpaid)</th>
+                 <th class="table-title">$zquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($znetpaid)</th>
+                 <th class="table-title">$totalquantity</th>
+                 <th class="table-title">$VmUtils.getAmount($totalprice)</th>
+                 <th class="table-title"></th>
+           </tr>
+		</tbody>
+        </table>
+		#end
+		<tr>
+      	<td>合计实际销售额:$VmUtils.getAmount($totalsellprice)</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	<td>合计实际销售杯数:$totalsellquantity</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	<td>日平均销售额:$VmUtils.getAmount($avsellprice)</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	<td>日平均销售杯数:$avsellquantity</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      	<td>日平均单杯均价:$VmUtils.getAmount($avsell)</td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </tr>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+/* function checkDate(){
+	 var time1 = $("#time1").val();
+	 var time2 = $("#time2").val();
+	if(time1 !=""&& time2 !=""){
+		var date1 = time1.split("-");          
+		var date2 = time2.split("-");        
+		var myDate1 = new Date(date1[0],date1[1],date1[2]); 
+		var myDate2 = new Date(date2[0],date2[1],date2[2]);  
+		if (myDate1 <= myDate2){  
+	
+			return true; 
+		}else{
+		 	alert ("提示: 开始时间不能大于结束时间！");
+			 return false; 
+		}
+	}
+} */
+function submitForm_2(){
+	var data = {};
+	$('#inputList select').each(function(e, a) {
+		var attr = $(a).attr('name');
+		data[attr] = $(a).val();
+	})
+	$('#inputList input').each(function(e, a) {
+		var attr = $(a).attr('name');
+		data[attr] = $(a).val();
+	})
+	console.info(data)
+	$.ajax({
+		url : "${basePath}admin/report/reportPayMethodListExcel.xhtml",
+		type : 'post',
+		dataType : 'json',
+		data : data, 
+		success : function(data) {
+			
+		}
+	});
+}
+</script>
+</body>
+</html>

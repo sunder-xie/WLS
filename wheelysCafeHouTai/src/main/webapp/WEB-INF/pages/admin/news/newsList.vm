@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+</head>
+<body style="padding:0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+   
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;新闻列表</strong></div>
+    <br><br>
+	<div class="admin-content"> 
+		<div class="am-u-sm-12">
+			<div class="am-input-group am-input-group-sm">
+				<form class="am-input-group am-input-group-sm" action="${staticPath}admin/content/newsList.xhtml" method="post">
+					<input type="text" class="am-form-field" placeholder="按文章标题搜索" name="title" id="title" style="width:200px;height:33px;float:left;margin-left: 10px;>
+					<p class="am-input-group-btn">
+						<input type="text" class="am-form-field" name="fromdate" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.begin" placeholder="开始时间" style="width:150px;height:33px;float:left;margin-left: 10px;"/>
+						<input type="text" class="am-form-field" name="todate" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.begin" placeholder="结束时间" style="width:150px;height:33px;float:left;margin-left: 10px;"/>
+						<select name="category"  class="am-input-sm" placeholder="根据分类筛选" style="width:150px;height:33px;float:left;">
+				            <option selected="selected" value="">—根据分类筛选—</option>
+							<option  value="品牌介绍">品牌介绍</option>
+							<option  value="媒体报道">媒体报道</option>
+							<option  value="活动相关">活动相关</option>
+							<option  value="招募计划">招募计划</option>
+							<option  value="项目介绍">项目介绍</option>
+							<option  value="其他">其他</option>
+						</select>
+				        <button class="am-btn am-btn-default" type="submit" style="float:left;margin-left: 10px;">搜索</button>
+					</p>
+				</form>
+			</div>
+		</div> 
+	     <!-- 增删改查 -->
+	       <div class="am-btn-toolbar" style="float:right;margin-right:30px;">
+	         <div class="am-btn-group am-btn-group-xs">
+			<button class="am-btn am-btn-default" type="button" style="float:left;margin-left: 10px;" onclick=newArticle()>新建文章</button>
+	         </div>
+	       </div>
+	</div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main" style="table-layout: fixed;">
+            <thead>
+              <tr>
+              	 <th class="table-type">新闻标题</th>
+                 <th class="table-type">发布时间</th>
+                 <th class="table-type">作者</th>
+                 <th class="table-type">简介</th>
+                 <th class="table-type">阅读量</th>
+                 <th class="table-type" align="center">分类</th>
+                 <th class="table-type">状态</th>
+                 <th class="table-type">操作</th>
+              </tr>
+          </thead>
+          <tbody>
+        #foreach($news in ${newsList})
+            <tr>
+                 <th class="table-type">$!news.title</th>
+                 <td class="table-type">$!news.publishtime</td>
+                 <td class="table-type">$!news.writer</td>
+                 <td class="table-type" style="width: 16;white-space:nowrap;overflow:hidden;text-overflow: ellipsis;">$!news.overview</td>
+                 <td class="table-type">$!news.pageview</td>
+                 <td class="table-type">$!news.category</td>
+                 <td class="table-type">#if($!news.publishstatus == 'Y')已发布#elseif($!news.publishstatus == 'N')已下架#end</td>
+                 <td class="table-type">
+                 	<a href="${basePath}admin/content/updatePublishstatus.xhtml?id=$!{news.id}">#if($!news.publishstatus == 'Y')下架#elseif($!news.publishstatus == 'N')发布#end</a>
+                 	&nbsp;
+                 	<!-- <button type="button" class="am-btn am-btn-default am-btn-xs" name="newDetail">
+						预览
+					<input type="hidden" name="newDetail" id="$!{news.id}" value="yu'lan" />
+					</button> -->
+                 	<a href="${wpsPath}news/newsDetail.xhtml?id=$!{news.id}" target="_blank">预览</a>
+                 	&nbsp;
+                 	<a target="_blank" href="${basePath}admin/content/showNewsDetail.xhtml?id=$!{news.id}">编辑</a>
+                 	&nbsp;
+                 	<button type="button" class="am-btn am-btn-default am-btn-xs" name="delete">
+						删除
+					<input type="hidden" name="deleteid" id="$!{news.id}" value="删除" />
+					</button>
+                 </td>
+            </tr>
+		#end
+		</tbody>
+        </table>
+        </form>
+		#parse('include/pageUtil.vm')
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+	function newArticle(){
+		window.location.href="${basePath}admin/content/showNewsDetail.xhtml";
+	}
+	
+	$('button[name=delete]').click(function() {
+		if(confirm("确认删除吗")){
+			var id = $(this).children().attr('id');
+			var node = $(this).parent().parent().remove();
+			$.ajax({
+				url : "${basePath}admin/content/deleteNews.xhtml",
+				type : 'get',
+				dataType : 'json',
+				data : 'id=' + id,
+				success : function(data) {}
+			});
+		}
+	});
+</script>
+</body>
+</html>

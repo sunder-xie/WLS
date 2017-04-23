@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)http://form.mikecrm.com/nwfiQW -->
+<html class=" js " style="background-repeat: repeat;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>Wheelys</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="robots" content="noindex">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+        <meta name="renderer" content="webkit">
+        <meta name="description" content="全国城市运营商招募计划报名表">
+      
+       <!--  <link rel="icon" href="http://asset.mikecrm.com/favicon.ico" type="image/x-icon">
+       <link rel="shortcut icon" href="http://asset.mikecrm.com/favicon.ico" type="image/x-icon"> -->
+    <link href="${pcPath}Public/home/css/form.mobile.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        html{background-color: #faf1af;color:#000000;background-position:left top;}.f_optionsLi {color: #7a727a;}.fs_cValidate{color:#7a727a;}.fs_cDescribe a, .fs_cDescribe a:visited{color:#b3a8b3}.fs_cDescribe, .fs_cLink, .fs_cLink:visited{color:#b3a8b3}.fs_cExtraDescribe{color:#b3a8b3}.fs_sectionDescribe, .fs_imgDescribe{color:#b3a8b3}.fs_component{background-color: #b8b8b8;color:#7a727a}.fs_header{background-color: #72cccc;color:#705e70;}.fs_main{background-color: #f2f2f2;color:#7a727a;}.fs_submitBtn,.fs_mobile_vcode_btn{background-color:#72cccc;color:#fff;box-shadow: 0 2px 4px -2px #91e2e2;}.fs_submitBtn:hover,.fs_mobile_vcode_btn:hover{background-color:#91e2e2}.f_chartViewBtn {color:#fff; background-color: #72cccc;}.f_chartViewBtn:active{color:#fff}.f_chartViewBtn:visited{color:#fff;}.f_chartViewBtn:hover {background-color: #91e2e2;}.f_viewBtn {color:#fff; background-color: #72cccc;}.f_viewBtn:active{color:#fff}.f_viewBtn:visited{color:#fff;}.f_viewBtn:hover {background-color: #91e2e2;}.f_copyright .fs_powerby{color:#333;}.Zebra_DatePicker td.dp_selected{background-color:#72cccc;color:#fff;}.Zebra_DatePicker td.dp_current{color:#91e2e2}
+        .fonts{font-size:15px;}
+        .lineh{line-height:1.25;}
+        .colors{color:#FAFAFA}
+        .medium {
+          width: 100%;
+          }
+         input{
+          padding:5px 0;
+          padding-left:3px;
+         }
+         textarea{
+          padding:5px 0;
+          padding-left:3px;
+         }
+         .fs{
+           padding: 5px;
+		    line-height: 20px;
+		    color: #444;
+		    border-top: 1px solid #d9d9d9;
+		    font-size: .8em;
+         }
+        .layout{
+             width:1024px;
+             margin:0 auto;
+           }
+            @media screen and (max-width: 768px) {
+			    .layout {
+			        width:95%;
+			        margin:0 auto;
+			    }
+          }
+           @media screen and (max-width: 640px) {
+			    .layout {
+			        width:95%;
+			        margin:0 auto;
+			    }
+          }
+           
+    </style>
+    </head>
+    <body>
+    <div class="f_wrapper fs_wrapper">
+        <div class="f_main fs_main"> 
+        <div id="inputList" onSubmit="return check();">
+            <div class="f_header fs_header" style="background-color:#E51111;">  
+                <div class="f_text_no_logo">  
+                    <h2 class="f_title fs_title colors" style='font-size:20px;'>全国城市运营商招募计划报名表</h2> 
+         		</div>
+            </div> 
+            <div class="f_body fs_body" style="margin-top:0px;"> 
+            <div class="f_component" style="padding-bottom: 0px; padding-left: 0px; padding-top: 0px; padding-right: 0px; " com-name="id_picture" name="com31" serialnum="0">
+                 <a class="f_pictureImg" style="cursor:default;text-align:center;"> 
+                    <img src="http://wheelys.oss-cn-shanghai.aliyuncs.com/img/2016-07-28/wheelys_coffeecar.png" border="none" style="width:100%"> 
+                </a> 
+                <p class="f_imgDescribe fs_imgDescribe" style="text-align:left"></p> 
+            </div>  
+        <div class="layout">  
+	        <div style="text-align:justify;background-color:#FAFAFA;width:100%"> 
+	          <div  style="line-height:1.75;background-color:#FAFAFA;height:100%;padding:0; border:0px"  class="textarea medium fs_content fs_input" disabled="true">
+	           <p style="margin:4px 5px;">
+	               1、 按要求填写并提交此表格是成为Wheelys中国城市运营商的第一步，请根据题目要求认真填写。
+	           </p>
+	           <p style="margin:4px 5px;">
+	               2、我们将认真对待每一份报名资料，并组织专业的团队进行评估，一旦入选，我们将第一时间与您联络。
+	           </p>
+	           <p style="margin:4px 5px;">
+	               3、 我们也将严格保密每一份报名资料，同时，我们承诺将秉承公平、公正、公开的原则，开展本次全国地区的城市运营商招募计划。
+	           </p>
+	          </div>
+	        </div>  
+	        <div class="f_component" com-name="id_section" name="com8" serialnum="1"> 
+	            <p class="f_cTitle fs_cTitle" style="text-align:left;padding-bottom:5px;">一、关于您的资料</p>
+	             <p class="f_sectionDescribe fs_sectionDescribe" style="text-align:left;padding:0;"></p>
+	        </div>
+	        	 <div class="f_component" com-name="basic_name"  serialnum="2" >
+		              <p class="fonts" >姓名:
+		                <span class="f_cValidate fs_cValidate"></span>
+		              </p>  <input type="text" id="name" name="name" class="input medium fs_content fs_input" maxlength="30" value="">
+	              </div>
+	  
+	         <div class="f_component" com-name="basic_gender" serialnum="3"> 
+	             <p class="fonts">性别:
+	                <span class="f_cValidate fs_cValidate"></span>
+	             </p>  
+	             <ul class="f_optionGarden layout-single">  
+	             	<input name="sex" id="sex_" value="1" type="hidden"/>
+	                <li class="f_optionsLi"> 
+	                      <span>
+	                       <input  type="radio" name="abc" id="radio-id-3-2" onclick="$('#sex_').val(1)" checked="checked">  
+	                        <span>男</span>
+	                      </span>
+	                      &nbsp; &nbsp; &nbsp;
+	                      <span>
+	                        <input type="radio" name="abc" id="radio-id-3-1" onclick="$('#sex_').val(0)">  
+	                        <span>女</span>
+	                      </span>
+	                </li>  
+	                <li class="clearB"></li> 
+	             </ul> 
+	              <p class="f_sectionDescribe fs_sectionDescribe fs" style="text-align:left;padding:0;"></p>
+	             
+	          </div>
+	          <div class="f_component" com-name="id_singleLine" serialnum="5" > 
+	              <p class="fonts">身份证号码:
+	                <span class="f_cValidate fs_cValidate"></span>
+	              </p>  
+	              <input type="text" id="idcard" name="idcard" class="input medium fs_content fs_input" value="" maxlength="20"> 
+	          </div>   
+	          <div class="f_component" com-name="id_singleLine"  serialnum="5" > 
+	              <p class="fonts">手机:
+	                <span class="f_cValidate fs_cValidate"></span>
+	              </p>  
+	              <input type="text" id="phone" name="phone" class="input medium fs_content fs_input" value="" maxlength="11"> 
+	          </div>  
+	          <div class="f_component" com-name="basic_qq"  serialnum="6" > 
+	            <p class="fonts">微信ID:
+	                <span class="f_cValidate fs_cValidate"></span>
+	            </p>  
+	            <input type="text" id="wxid" name="wxid" class="input medium fs_content fs_input" value="" maxlength="30"> 
+	          </div>  
+	          <div class="f_component" com-name="basic_email" id="email" name="email" serialnum="7" > 
+	            <p class="fonts">E-mail:
+	                <span class="f_cValidate fs_cValidate"></span>
+	            </p>  
+	            <input type="text" id="email" name="email" class="input medium fs_content fs_input" value="" maxlength="30">
+	          </div> 
+	           <div class="f_component" com-name="basic_email" id="company" name="company" serialnum="7" >  
+	            <p class="fonts">公司名称:
+	                <span class="f_cValidate fs_cValidate"></span>
+	            </p>  
+	            <input type="text" id="company" name="company"  class="input medium fs_content fs_input" value="" maxlength="80">
+	          </div> 
+	           <div class="f_component" com-name="basic_email" name="address" serialnum="7"> 
+	            <p class="fonts">公司地址:
+	                <span class="f_cValidate fs_cValidate"></span>
+	            </p>  
+	            <input type="text" id="address" name="address" class="input medium fs_content fs_input" value="" maxlength="80">
+	          </div> 
+	           <div class="f_component" com-name="basic_email" id="companyphone" name="companyphone" serialnum="13" > 
+	            <p class="fonts">公司电话:
+	                <span class="f_cValidate fs_cValidate"></span>
+	            </p>  
+	            <input type="text" id="companyphone" name="companyphone" class="input medium fs_content fs_input" value="" maxlength="15">
+	            <input type="hidden" name="types"  value="ok">
+	          </div> 
+	           
+	          <div class="f_component" com-name="id_section" name="com9" serialnum="8"> 
+	            <p class="f_cTitle fs_cTitle" style="text-align:left">二、运营设想</p> 
+	            <p class="f_sectionDescribe fs_sectionDescribe" style="text-align:left"></p> 
+	          </div>  
+	          <div class="f_component" com-name="id_singleLine" name="com10" serialnum="9"> 
+	              <p class="fonts lineh">1.成为Wheelys全国地区的城市运营商，您的意向城市及地区是？如您是来自上海地区的，请直接填写意向城市及地区，比如：上海市长宁区</p>  <br>
+	              <input type="text" id="values1" name="values1" class="input medium fs_content fs_input" placeholder="第一意向(必填)" value="" maxlength="1500"> 
+	              <input type="text" id="values2" name="values2" data-value="noMust"  class="input medium fs_content fs_input"  placeholder="第二意向" value="" maxlength="1500"> 
+	              <input type="text" id="values3" name="values3" data-value="noMust"  class="input medium fs_content fs_input"  placeholder="第三意向" value="" maxlength="1500"> 
+	          </div> 
+	          <div id="textList">
+	          <div class="f_component" com-name="id_singleLine"id="values4" name="values4" serialnum="10"> 
+	            <br><p class="fonts lineh">2.能胜任Wheelys全国地区的城市运营商，您拥有哪些关键资源、关键能力、竞争优势？
+	            </p>  <br>
+	             <textarea name="values4"  class="textarea medium fs_content fs_input" maxlength="1500"></textarea> 
+	          </div>  
+	          <div class="f_component" com-name="id_singleLine" name="com11" serialnum="10"> 
+	           <br> <p class="fonts lineh">3.对于意向城市及地区，您准备如何经营并规划未来的发展？
+	            </p>  <br>
+	             <textarea name="values5"  class="textarea medium fs_content fs_input" maxlength="1500"></textarea> 
+	          </div> 
+	          <div class="f_component" com-name="id_singleLine" name="com11" serialnum="10"> 
+	           <br> <p class="fonts lineh">4.在意向城市及地区的经营和发展，您认为最大的困难和障碍是什么？（至少列出三项）
+	            </p>  <br>
+	             <textarea name="values6"  class="textarea medium fs_content fs_input" maxlength="1500"></textarea> 
+	          </div> 
+	          <div class="f_component" com-name="id_singleLine" name="com11" serialnum="10"> 
+	            <br><p class="fonts lineh">5.您最希望从Wheelys得到哪些支持和帮助？（至少列出三项）
+	            </p>  <br>
+	             <textarea name="values7"  class="textarea medium fs_content fs_input" maxlength="1500"></textarea> 
+	          </div> 
+	           <div class="f_component" com-name="id_section" name="com9" serialnum="8"> 
+	            <p class="f_cTitle fs_cTitle" style="text-align:left">三、产业基金</p> 
+	            <p class="f_sectionDescribe fs_sectionDescribe" style="text-align:left"></p> 
+	          </div>  
+	           <div  style="text-align:justify;background-color:#FAFAFA;"> 
+	          <div  class="fonts" style="line-height:1.25;background-color:#FAFAFA;height:100%;padding:5px 10px 0px 10px; border:0px;text-indent:30px;line-height:30px;"  >为支持城市运营商的发展，并与城市运营商共担风险共享发展成果，Wheelys拟邀请基金公司共同成立Wheelys中国产业基金，通过入股的方式对有需要的城市运营商提供资金支持。</br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;同时，城市运营商也可以投资购买产业基金，在享受本区域规模化经营的丰硕成果外，也与Wheelys共同分享在整个大中华区的发展成果。<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您是否愿意产业基金入股或投资产业基金将不影响Wheelys对城市运营商的评估和选择。</div> 
+	          </div> 
+	          <div class="f_component" com-name="id_singleLine" name="com11" serialnum="10"> 
+	            <br><p class="fonts lineh" style="line-height:20px;">1.是否同意Wheelys中国产业基金入股您的公司，为您在区域内的规模化经营提供财务支持？如同意，您希望的参股比例是多少？范围从20%到49%。如不同意，原因是什么？请罗列三条。
+	                <span class="f_cValidate fs_cValidate"></span>
+	            </p>  <br>
+	             <textarea name="values8" class="textarea medium fs_content fs_input" maxlength="1500"></textarea> 
+	          </div>  
+	          <div class="f_component" com-name="id_singleLine" name="com11" serialnum="10"> 
+	            <br><p class="fonts lineh">2.您是否愿意投资Wheelys中国产业基金，与Wheelys共同分享在整个大中华地区发展的收益？
+	                <span class="f_cValidate fs_cValidate"></span>
+	            </p>  <br>
+	             <textarea name="values9"  class="textarea medium fs_content fs_input" maxlength="1500"></textarea> 
+	          </div>   
+	         
+	        <div class="f_component" com-name="id_section" name="com27" serialnum="22"> 
+	            <p class="fonts" style="text-align:center;padding-bottom:5px;">感谢您对Wheelys的支持！</p>
+	            <p class="f_sectionDescribe fs_sectionDescribe fonts" style="text-align:center;">点击下方按钮进行下一步操作
+	            </p> 
+	        </div>  
+	        <div class="f_error"></div> 
+	        <div class="f_submit">  
+	            <a  class="f_submitBtn fs_submitBtn validate_submit" onclick="submitForm();" style="background-color:#E51111;border:0;border-radius:5px;">下一步</a>            
+	        </div> 
+        </div>
+    </div>
+  </div>
+</div>
+</div>
+    <script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+    <script>
+    function submitForm(){
+        var isokey = true;
+      	$('#inputList input').each(function(e,a){
+      		if($(a).attr('name')=="name" && $(a).val()==''){
+      			alert("姓名不能为空")
+      			isokey = false
+      			return false
+      		}
+      		if($(a).attr('name')=="idcard" && $(a).val()==''){
+      			alert("身份证不能为空")
+      			isokey = false
+      			return false
+      		}
+      		
+      		if($(a).attr('name')=="idcard" && !(/^(\d{15}|\d{17}[0-9xX]{1})$/.test($(a).val()))){
+      			alert("身份证有误")
+      			isokey = false
+      			return false
+      		}
+      		
+      		if($(a).attr('name')=="phone" && $(a).val()==''){
+      			alert("手机号不能为空")
+      			isokey = false
+      			return false
+      		}
+      		if($(a).attr('name') == 'phone' && !(/^0?1[3|4|5|8|7][0-9]\d{8}$/.test($(a).val()))){
+       			alert('手机有误');
+       			isokey = false;
+       			return false;
+       		}
+      		if($(a).attr('name')=="email" && $(a).val()==''){
+      			alert("邮箱不能为空")
+      			isokey = false
+      			return false
+      		}
+      		 if($(a).attr('name') == 'email' && !(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/.test($(a).val()))){
+        		alert('邮箱有误');
+        		isokey = false;
+        		return false;
+        	}
+      		if($(a).attr('name')=="wxid" && $(a).val() == ''){
+      			alert('微信不能为空')
+      			isokey = false
+      			return false
+      		}
+  			if($(a).attr('name')=="company" && $(a).val()==''){
+  				alert('公司名称不能为空')
+      			isokey = false
+      			return false
+  			}
+  			if($(a).attr('name')=="address" && $(a).val()==''){
+  				alert('公司地址不能为空')
+      			isokey = false
+      			return false
+  			}
+  			if($(a).attr('name')=="companyphone" && $(a).val()==''){
+  				alert('公司电话不能为空')
+      			isokey = false
+      			return false
+  			}
+       		if($(a).attr('name') == 'companyphone' && !(/^[\d\-]+$/.test($(a).val()))){
+       			alert('公司电话有误');
+       			isokey = false;
+       			return false;
+       		} 
+       		if($(a).attr('name')=='values1'&& $(a).val()==''){
+       			alert('第一意向不能为空')
+       			isokey = false;
+       			return false;
+       		}
+      	})
+      
+      	 if(isokey)submitFrom_3()
+      }	
+    
+   	function submitFrom_3(){
+        var isokey = true;
+   		 $('#textList textarea').each(function(e,a){
+   			if($(a).attr('name')=='values4'&& $(a).val()==''){
+   	 			alert('关键资源、关键能力、竞争优势信息不能为空')
+   	 			isokey  = false;
+   	 			return false;
+   	 		}
+   			if($(a).attr('name')=='values5'&& $(a).val()==''){
+   	 			alert('规划未来的发展信息不能为空')
+   	 			isokey  = false;
+   	 			return false;
+   	 		}
+   			
+   			if($(a).attr('name')=='values6'&& $(a).val()==''){
+   	 			alert('最大的困难和障碍信息不能为空')
+   	 			isokey = false;
+   	 			return false;
+   	 		}
+   			if($(a).attr('name')=='values7'&& $(a).val()==''){
+   	 			alert('支持和帮助信息不能为空')
+   	 			isokey  = false;
+   	 			return false;
+   	 		}
+   			if($(a).attr('name')=='values8'&& $(a).val()==''){
+   	 			alert('第一条产业基金信息不能为空')
+   	 			isokey  = false;
+   	 			return false;
+   	 		}
+   			if($(a).attr('name')=='values9'&& $(a).val()==''){
+   	 			alert('第二条产业基金信息不能为空')
+   	 			isokey  = false;
+   	 			return false;
+   	 		}	
+   	  })
+
+   	  if(isokey)submitForm_2()
+   	}
+
+          function submitForm_2(){
+       		var data = {};
+       		var valNull = true;
+       		$('#inputList input').each(function(e,a){
+       			var attr = $(a).attr('name');
+       			if($(a).attr('data-value') == 'must'){
+       				if($(a).val()==''){
+       					valNull = false;
+       					return
+       				}else{
+       					data[attr] = $(a).val();
+       				}
+       			}else{
+           			data[attr] = $(a).val();
+       			}
+       		});
+       		$('#inputList textarea').each(function(e,a){
+       			var attr = $(a).attr('name');
+       			data[attr] = $(a).val();
+       		});
+       		if(valNull){
+           		$.ajax({
+  	       		      url:"${basePath}pc/addSignupForm.xhtml",
+  	       		      type:'post',
+  	       		      dataType:'json',
+  	       		      data:data,
+  	       		      success:function(data){
+  	       		    	  if(data.success){
+  	       		    		location.href = '${basePath}pc/info.xhtml';
+  	       		    	  }else{
+  	       		    		alert(data.msg);   
+  	       		    	  }
+  	       		      }
+  	       		});
+       		}else{
+       			alert('必填项不能为空')
+       		}
+       	}
+</script>
+</body>
+</html>
+

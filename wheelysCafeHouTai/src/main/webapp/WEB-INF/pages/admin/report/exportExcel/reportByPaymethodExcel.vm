@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+</head>
+<body style="padding:0px">
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;报表统计</strong> / <small>多条件查询</small></div>
+    <br><br>
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main">
+            <thead>
+              <tr>
+              <th class="table-type">商铺id</th>
+                 <th class="table-type">城市</th>
+                 <th class="table-type">商铺名字</th>
+                 <th class="table-title">日期</th>
+                 <th class="table-type">支付方法</th>
+                 <th class="table-title">原价</th>
+                 <th class="table-title">优惠金额</th>
+                 <th class="table-type">实际金额</th>
+                 <th class="table-type">杯数</th>
+                 <th class="table-title">订单数</th>
+                 <th class="table-type">微信支付扣点</th>
+                 <th class="table-title">公司扣点比例</th>
+                 <th class="table-type">公司扣点</th>
+                 <th class="table-title">应结算额</th>
+                 <th class="table-title">详情</th>
+              </tr>
+          </thead>
+          <tbody>
+        #set($totalfee = 0)
+        #set($discount = 0)
+        #set($netpaid = 0)
+        #set($quantity = 0)
+        #set($ordercount = 0)
+        #set($paybrokerage = 0)
+        #set($companybrokerage = 0)
+        #set($settlementamount = 0)
+        #set($companyrate =0)
+        #foreach($order in $shopReportList)
+	        #set($totalfee = $totalfee+$order.totalfee)
+	        #set($discount = $discount+$order.discount)
+	        #set($netpaid = $netpaid+$order.netpaid)
+	        #set($quantity = $quantity+$order.quantity)
+  			#set($ordercount = $ordercount+$order.ordercount)
+  			#set($paybrokerage = $paybrokerage + $order.paybrokerage)
+  			#set($companybrokerage = $companybrokerage+$order.companybrokerage)
+  			#set($settlementamount = $settlementamount + $order.settlementamount)
+  			#set($companyrate = $order.companyrate)
+            <tr>
+                 <th class="table-type">${order.shopid}</th>
+                 <th class="table-type">$!citynamemap.get(${order.shopid})</th>
+                 <td class="table-type">${order.shopname}</td>
+                 <td class="table-type">${order.date}</td>
+                 <td class="table-type">${order.paymethod}</td>
+                 <td class="table-type">$VmUtils.getAmount($order.totalfee)</td>
+                 <td class="table-type">$VmUtils.getAmount($order.discount)</td>
+                 <td class="table-title">$VmUtils.getAmount($order.netpaid)</td>
+                 <td class="table-title">${order.quantity}</td>
+                 <td class="table-title">${order.ordercount}</td>
+                 <td class="table-title">$VmUtils.getAmount($!order.paybrokerage)</td>
+                 <td class="table-title">$!{order.companyrate}%</td>
+                 <td class="table-title">$VmUtils.getAmount($!order.companybrokerage)</td>
+                 <td class="table-title">$VmUtils.getAmount($!order.settlementamount)</td>
+            </tr> 
+		#end
+            <tr>
+                 <th class="table-type"></th>
+                 <td class="table-type"></td>
+                 <th class="table-type"></th>
+                 <td class="table-type"></td>
+                 <td class="table-type">总计</td>
+                 <td class="table-type">$VmUtils.getAmount($totalfee)</td>
+                 <td class="table-type">$VmUtils.getAmount($discount)</td>
+                 <td class="table-title">$VmUtils.getAmount($netpaid)</td>
+                 <td class="table-title">${quantity}</td>
+                 <td class="table-title">${ordercount}</td>
+                 <td class="table-title">$VmUtils.getAmount($!{paybrokerage})</td>
+                 <td class="table-title"></td>
+                 <td class="table-title">$VmUtils.getAmount($!{companybrokerage})</td>
+                 <td class="table-title">$VmUtils.getAmount($!{settlementamount})</td>
+            </tr> 
+		</tbody>
+        </table>
+      <div class="am-cf">
+      <div class="am-fr">
+      <ul class="am-pagination">
+        <li ></li>
+      </ul>
+  </div>
+  </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

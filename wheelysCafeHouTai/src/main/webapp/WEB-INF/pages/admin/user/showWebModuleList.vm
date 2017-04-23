@@ -1,0 +1,125 @@
+<title>权限管理</title>
+<style type="text/css">
+table tr td, th {
+	border: 1px solid #000;
+}
+</style>
+</head>
+
+<body>
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+
+.wh1 {
+	font-family: "楷体";
+	font-size: 20px;
+}
+.wh2 {
+	position: relative;
+	margin-right: 150px;
+}
+.wh3 {
+		word-break:break-all;
+	 	width:80px; 
+	 	font-size: 20px;
+}
+.itemMod{margin:20px 0;}
+.itemMod h2{color:#000; font-size:18px; margin:10px 0;}
+.cafeMod{font-size:14px;display:inline-block; width:20%;border:1px solid #f9f9f9; text-align:center; float:left; padding:5px 0;}
+.cafeMod input{margin-left:5px;}
+#ti{width:180px;height:50px;}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+	<div class="am-cf am-padding">
+		<div class="am-fl am-cf">
+			  <a href="${basePath}admin/staff/showUserList.xhtml">
+	           <button type="button" class="am-btn am-btn-primary am-btn-xs" style="font-size: 1.2rem; " >返回</button>
+	           </a>
+			<strong class="am-text-primary am-text-lg" style="margin-left:20px;">
+				权限管理</strong>
+		</div>
+		<br> <br>
+		<div class="admin-content" id="inputList">
+			#foreach($key in $webModuleMap.keySet())
+			<div class="am-u-sm-12">
+				<h2>$key.menutitle</h2>
+		   		#foreach($webModule in $webModuleMap.get($key))	
+					<p>$webModule.menutitle<input type="checkbox" name="product[]" id="$webModule.id" #if($webidList.contains($webModule.rolenames)) checked="checked" #end	
+					 name="$user.id" value="$webModule.id" /></p>
+				#end	
+			</div>
+			#end	
+	
+			
+			<div class="am-g">
+				<div class="am-u-sm-12">	
+				</div>
+			</div>
+			 <!-- <a href="${basePath}admin/staff/showUserList.xhtml"> -->
+	    		<button type="submit" onclick="submitForm_2();"  class="am-btn am-btn-primary am-btn-xs">确定</button>
+	    		<button type="submit" name="cancel"   class="am-btn am-btn-primary am-btn-xs">取消</button>
+	    	<!--  </a> -->
+		</div>
+	</div>
+	
+	<!-- content end -->
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+	<script>
+	/* $('input[type="checkbox"]').click(function(){
+		var id = $(this).attr('id');
+		var userid =$(this).attr('name');
+		var status = $(this).attr('checked')?'Y':'N';
+		$.ajax({
+				url :'${basePath}admin/staff/upshowWebModule.xhtml',
+				type : 'get',
+				dataType : 'json',
+				data : 'id=' + id+'&userid='+userid+'&status='+status,
+				success : function(data) {
+				}
+		});	
+	}); */
+	 function submitForm_2(){
+ 		var arr;
+ 		var webidList;
+ 		var data = {'userid':'$user.id'};
+ 		data.arr= '';
+ 		$('#inputList input').each(function(e,a){
+ 			var name = $(a).attr('name');
+ 			var attr = $(a).attr('id');
+ 			if(name == "product[]"){
+ 				if($(a).attr('checked')){
+     				data['arr'] += $(a).val()+',';
+ 				}
+ 			}
+ 		})
+ 		console.info(data)
+		$.ajax({
+ 		      url:"${basePath}admin/staff/upshowWebModule.xhtml", 
+ 		      type:'post',
+ 		      dataType:'json',
+ 		      data:data,  
+ 		      success:function(data){
+ 		    	  if(data.success){
+ 		   			location.href = '${basePath}admin/staff/showUserList.xhtml';
+ 		    	  }else{
+ 		    		alert(data.msg);   
+ 		    	  }
+ 		      }
+ 		});  
+	}  
+	 $('button[name=cancel]').click(function() {
+			if(confirm("确认取消吗")){
+				location.href = '${basePath}admin/staff/showUserList.xhtml';
+			}
+		});
+		
+</script>
+</body>
+</html>

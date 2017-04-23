@@ -1,0 +1,217 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<title>Wheelys</title>
+ #parse("/admin/common/head.vm")
+ <style>
+ </style>
+</head>
+<body style="padding:0px">
+#parse("/admin/common/top.vm") 
+#parse("/admin/common/menu.vm") 
+<div class="admin-content">
+  <div class="am-cf am-padding">
+    <div class="am-cf"><strong class="am-text-primary am-text-lg">商品管理</strong> / 
+    #if($!cafeProduct.id)
+		<small>	
+		修改商品	
+		</small>
+	#else
+		<small>	
+		添加商品	
+		</small>
+	#end
+    
+    </div>
+ <div class="am-tabs am-margin" data-am-tabs>
+    <ul class="am-tabs-nav am-nav am-nav-tabs">
+      <li class="am-active"><a href="#tab1">添加商品</a></li>
+    </ul>
+    <div class="am-tabs-bd" id="inputList">
+          <div class="am-g am-margin-top">
+			    	<input type="hidden" value="$!cafeProduct.id" name="id" data-id="null">
+						#if($!cafeProduct.id)
+						<input type="hidden" value="$!cafeProduct.id" name="id">
+						#end
+		            <div class="clearfix" style="margin:10px 0;">
+			            <div class="am-u-sm-4 am-u-md-2 am-text-right">商品分类*</div>
+			            <div class="am-u-sm-8 am-u-md-4 left">
+			            	<select id="MySelect" name="itemid" class="am-input-sm" style="width: 100px; float: left;">
+								<option value=" ">请选择分类</option>
+								#foreach($key in $productMap.keySet())
+								<option value="$key" 
+								#if($key == $!cafeProduct.itemid)
+								selected="selected"
+								#end
+								>$productMap.get($key).name</option>
+								#end
+							</select>
+			            </div>
+		            </div>
+		            <div class="clearfix" style="margin:10px 0;">
+			            <div class="am-u-sm-4 am-u-md-2 am-text-right">商品名称*</div>
+			            <div class="am-u-sm-8 am-u-md-4 left">
+			              <input type="text" class="am-input-sm" name="prodname" value="$!cafeProduct.name" maxlength="20">
+			            </div>
+		            </div>
+		            <div class="clearfix" style="margin:10px 0;">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right"> 英文名称* </div>
+						<div class="am-u-sm-8 am-u-md-4 left">
+						  <input type="text" class="am-input-sm" name="prodenname" value="$!cafeProduct.enname">
+						</div>
+					</div>
+		            <div class="clearfix" style="margin:10px 0;">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">价格*</div>
+						<div class="am-u-sm-8 am-u-md-4 left">
+						  <input type="text" class="am-input-sm" name="prodprice" maxlength="4" value="$!cafeProduct.price" onkeyup="value=value.replace(/[^1234567890-]+/g,'')" onBlur="value=value.replace(/[^1234567890-]+/g,'')">
+						</div>
+					</div>
+		            <div class="clearfix" style="margin:10px 0;">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">商品图片*</div>
+			            <div class="am-u-sm-8 am-u-md-4 left">
+			             <iframe id="iframeImg" name="iframeImg" src="${basePath}admin/shop/touploadimg.xhtml?imgurl=$!cafeProduct.img" style="overflow:hidden;">
+						</iframe>
+			            </div>
+		            <div class="am-hide-sm-only am-u-md-6"></div>
+		          </div>
+		
+		         <div class="am-g am-margin-top">
+		          <div class="am-u-sm-4 am-u-md-2 am-text-right">冷热</div>
+		          <div class="am-u-sm-8 am-u-md-10">
+		            <div class="am-btn-group" data-am-button>
+		              <label class="am-btn am-btn-default am-btn-xs #if(!$cafeProduct.cafehot)am-active#end#if($!cafeProduct.cafehot==0)am-active#end">
+		                <input type="radio" name="cafehot" id="option" value="0" #if($cafeProduct.cafehot ==0) checked="checked" #end>无
+		              </label>
+		              <label class="am-btn am-btn-default am-btn-xs #if($!cafeProduct.cafehot==1)am-active #end">
+		                <input type="radio" name="cafehot" id="option" value="1" #if($cafeProduct.cafehot ==1) checked="checked" #end>有
+		              </label>
+		            </div>
+		          </div>
+		        </div>
+		        
+		        <div class="am-g am-margin-top">
+		          <div class="am-u-sm-4 am-u-md-2 am-text-right">咖啡豆</div>
+		          <div class="am-u-sm-8 am-u-md-10">
+		            <div class="am-btn-group" data-am-button>
+		              <label class="am-btn am-btn-default am-btn-xs #if(!$cafeProduct.cafebean)am-active#end#if($!cafeProduct.cafebean==0)am-active#end">
+		                <input type="radio" name="cafebean" id="option" value="0" #if($cafeProduct.cafebean ==0) checked="checked" #end>无
+		              </label>
+		              <label class="am-btn am-btn-default am-btn-xs  #if($!cafeProduct.cafebean==1)am-active #end">
+		                <input type="radio" name="cafebean" id="option" value="1" #if($cafeProduct.cafebean ==1) checked="checked" #end>有
+		              </label>
+		            </div>
+		          </div>
+		        </div>
+		
+		         <div class="am-g am-margin-top">
+		          <div class="am-u-sm-4 am-u-md-2 am-text-right">牛奶</div>
+		          <div class="am-u-sm-8 am-u-md-10">
+		            <div class="am-btn-group" data-am-button>
+		              <label class="am-btn am-btn-default am-btn-xs #if(!$cafeProduct.cafemilk)am-active#end#if($!cafeProduct.cafemilk==0)am-active#end">
+		                <input type="radio" name="cafemilk" id="option" value="0" #if($cafeProduct.cafemilk ==0) checked="checked" #end>无
+		              </label>
+		              <label class="am-btn am-btn-default am-btn-xs #if($!cafeProduct.cafemilk==1)am-active #end">
+		                <input type="radio" name="cafemilk" id="option" value="1" #if($cafeProduct.cafemilk ==1) checked="checked" #end>有
+		              </label>
+		            </div>
+		          </div>
+		        </div>
+		        
+		         <div class="am-g am-margin-top">
+		          <div class="am-u-sm-4 am-u-md-2 am-text-right">饮品</div>
+		          <div class="am-u-sm-8 am-u-md-10">
+		            <div class="am-btn-group" data-am-button>
+		              <label class="am-btn am-btn-default am-btn-xs #if(!$cafeProduct.drink)am-active#end#if($!cafeProduct.drink==0)am-active#end">
+		                <input type="radio" name="drink" id="option" value="0" #if($cafeProduct.drink ==0) checked="checked" #end>无
+		              </label>
+		              <label class="am-btn am-btn-default am-btn-xs #if($!cafeProduct.drink==1)am-active #end">
+		                <input type="radio" name="drink" id="option" value="1" #if($cafeProduct.drink ==1) checked="checked" #end>有
+		              </label>
+		            </div>
+		          </div>
+		        </div>
+		   </div>
+		  <div class="am-margin">
+		    <input type="submit" class="am-btn am-btn-primary am-btn-xs" onclick="submitForm();" value="提交" />
+		  </div> 
+    </div>
+</div>
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+<footer>
+  <hr>
+  <p class="am-padding-left">? 2016 Wheelys.com.cn</p>
+</footer>
+
+<script >
+var nameZero = false;
+$('#inputList input').focus(function(){
+		$('.errMod').remove();
+})
+function submitForm(){
+	 var isgo = true;
+	 $('.errMod').remove();
+   $('#inputList input').each(function(e,a){
+     if($(a).val() == '' && $(a).attr('name') != 'imgurl'&&$(a).attr('data-id') != 'null'){
+   		var idT = 'tip'+$(a).attr('id');
+			if($('#'+idT).length>0){
+				isgo = false;
+				return false;
+			}
+       	var html = '<div class="errMod" id="'+idT+'" style="color:#ed2626">此内容不能为空</div>';
+       	$(a).after(html);
+			isgo = false;
+			return false;
+     	}
+     })
+     if(isgo)submitForm_2();
+}	    
+
+
+function submitForm_2(){  
+	var data = {};
+        if($('#iframeImg').contents().find('#imgurl').val() == ''){
+        	alert('图片没有上传成功');
+        	return false;
+        }else{
+        	data['imgurl'] = $('#iframeImg').contents().find('#imgurl').val();
+        }
+
+	$('#inputList select').each(function(e,a){
+		var attr = $(a).attr('name');
+		data[attr] = $(a).val();	
+	});
+	$('#inputList input').each(function(e,a){
+		var attr = $(a).attr('name');
+		if(attr == 'cafehot' || attr == 'cafebean' || attr == 'cafemilk'|| attr == 'drink'){
+			if($(a).parent().hasClass('am-active')){
+				data[attr] = $(a).val();
+			}
+		}else{
+			data[attr] = $(a).val();
+		}
+	})
+	
+	console.info(data);
+	
+	$.ajax({
+	      url:"${basePath}admin/shop/addProduct.xhtml",
+	      type:'get',
+	      dataType:'json',
+	      data:data,
+	      success:function(data){
+	    	  if(data.success){
+	    		location.href = '${basePath}admin/shop/cafePossess.xhtml';
+	    	  }else{
+	    		alert(data.msg);
+	    	  }
+	      }
+	});
+}
+
+
+
+
+</script>
+
+</body>
+</html>

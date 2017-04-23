@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+#inputMod input {
+    width: 150px;
+    float: left;
+    margin-right: 5px;
+}
+</style>
+</head>
+
+<body style="padding: 0px">
+    #parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+    <div class="admin-content">
+        <div class="am-cf am-padding">
+            <div class="am-fl am-cf">
+                <strong class="am-text-primary am-text-lg">
+                    &nbsp;&nbsp;&nbsp;商户管理</strong> / <small>全部商家列表</small>
+            </div>
+            <br>
+            <br>
+            <div class="admin-content">
+                <div class="am-u-sm-12 am-u-md-4">
+                    <div class="am-input-group am-input-group-sm">
+                        <form id="inputMod" class="am-input-group am-input-group-sm" action="${basePath}admin/shop/store.xhtml" method="get">
+                            <input type="text" class="am-form-field" name="name" maxlength="20" id="txtSeach" value="" placeholder="商家名称">
+                            <select id="operatorid" name="operatorid"  class="am-input-sm" style="width: 120px; float: left;">
+                                <option selected="selected" value="">请选择运营商</option>
+                                #foreach($key in $!operatorMap.keySet())
+                                <option value="$key">$!operatorMap.get($key).name</option>
+                                #end
+                            </select>
+                            <select id="citycode" name="citycode" class="am-input-sm" style="width: 100px; float: left;">
+                                <option value="">请选择城市</option>
+                                #foreach($key in $itMap.keySet())
+                                <option value="$key">$!itMap.get($key)</option> 
+                                #end
+                            </select>
+                            <span class="am-input-group-btn">
+                                <button class="am-btn am-btn-default" name="sou" type="submit">搜索</button>
+                            </span>
+                            
+                        </form>
+                    </div>
+                </div>
+                <a href="${basePath}admin/shop/showallStopList.xhtml">
+                    <button type="button" style="margin-left: 900px" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                        <span>永久关店店铺 </span>
+                    </button>
+                </a>
+                <!-- 增删改查 -->
+                <div class="am-btn-toolbar" style="float: right; margin-right: 30px;">
+                </div>
+                <!-- 增删改查 -->
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <table class="am-table am-table-striped am-table-hover table-main" style="border:1px solid #ddd;margin-top:5px;">
+                        <thead>
+                            <tr class="trList">
+                                <th class="table-id">商户编号</th>
+                                <th class="table-title">商家名称</th>
+                                 <th class="table-title">商家简称</th>
+                                <th class="table-type">运营商名称</th>
+                                <th class="table-type">所在城市</th>
+                                <th class="table-type">店长</th>
+                                <th class="table-author am-hide-sm-only">联系电话</th>
+                                <th class="table-date am-hide-sm-only">营业时间</th>
+                                 <th class="table-date am-hide-sm-only">开店状态</th>
+                                <th class="table-date am-hide-sm-only center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #foreach($shop in $shopList)
+                            <tr>
+                                <td>$!shop.shopaccount</td>
+                                <td><a href="${basePath}admin/shop/showShopDetail.xhtml?shopid=$!shop.shopid">$!shop.shopname</a></td>
+                                <td>$!shop.esname</td>
+                                <td>$!shop.operatorName</td>
+                                <td>$!itMap.get($!shop.citycode)</td>
+                                <td>$!shop.contacts</td>
+                                <td class="am-hide-sm-only">$!shop.shoptelephone</td>
+                                <td>
+                                    $!shop.shoptime
+                                </td>
+                                <td> #if($!shop.booking eq 'open')
+                                		 <span style='color: green;' >开店</span>
+                                	 #elseif($!shop.booking eq 'close')
+                                	 	 <span style='color: blue;'>打烊</span>
+                                	 #elseif($!shop.booking eq 'closedown')
+                                	 	 <span style='color: red;'>关店</span>
+                                	 #end
+                                </td>
+                                <td>
+								#if($wbList.contains('updateShop'))
+                                    <div class="am-btn-toolbar center">
+                                        <div class="am-btn-group-xs">
+                                            <a href="${basePath}admin/shop/upCafeShop.xhtml?shopid=$shop.shopid">
+                                                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                    <span> 修改 </span>
+                                                </button>
+                                            </a>
+                                            #end
+                                            
+                                            #if($wbList.contains('peizhiShop'))
+                                            <a href="${basePath}admin/shop/showExprInfo.xhtml?shopid=$shop.shopid">
+                                                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                    <span> 配置 </span>
+                                                </button>
+                                            </a>
+                                             #end
+                                             #if($wbList.contains('delateShop'))
+                                            <button type="button" class="am-btn am-btn-default am-btn-xs" name="delete">
+                                                <input type="hidden" name="deleteid" id="$!{shop.shopid}">删除</input>
+                                            </button>
+                                           #end
+                                            #if($wbList.contains('productShop'))
+                                            <a href="${basePath}admin/shop/details.xhtml?psshopid=$shop.shopid" class="click">
+                                                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                    <span> 商品 </span>
+                                                </button>
+                                            </a>
+                                            #end
+                                            #if($wbList.contains('bannerShop'))
+                                            <a href="${basePath}admin/shop/banner/shopBannerList.xhtml?shopid=$shop.shopid" class="click">
+                                                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                    <span>设置Banner </span>
+                                                </button>
+                                            </a>
+                                            #end
+                                            #if($wbList.contains('userShop'))
+                                            <a href="${basePath}admin/shop/seller/showSellerList.xhtml?shopid=$shop.shopid" class="click">
+                                                <button type="button" class="am-btn am-btn-default am-btn-xs am-text-secondary">
+                                                    <span>员工 </span>
+                                                </button>
+                                            </a>
+                                            #end
+                                           <button type="button" class="am-btn am-btn-default am-btn-xs" name="close">
+                                                <input  type="hidden"  id="$!{shop.shopid}" >
+                                                		<span style="color: red;">永久关店</span>	
+                                                </input>
+                                            </button>
+                                        </div>
+                                       </div>
+                                 
+                                </td>
+                            </tr>
+                            #end
+                        </tbody>
+                    </table>
+                    <div class="am-cf">
+                        <div class="am-fr">
+                            <ul class="am-pagination">
+                            </ul>
+                        </div>
+                    </div>
+                    <p></p>
+                    </div>
+                    #parse('include/pageUtil.vm')
+                </div>
+            </div>
+        </div>
+        <a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+        <footer>
+            <hr>
+            <p class="am-padding-left">© 2016 Wheelys.com.cn</p>
+        </footer>
+        <script>
+        
+        $('button[name=close]').click(function() {
+            if (confirm("确认永久关闭此家店铺吗?")) {
+                var shopid = $(this).children().attr('id');
+                var node = $(this).parent().parent().parent().parent().remove();
+                $.ajax({
+                    url: "${basePath}admin/shop/shopclose.xhtml",
+                    type: 'post',
+                    dataType: 'json',
+                    data: 'shopid=' + shopid ,
+                    success: function(data) {
+                    }
+                });
+            }
+        });
+        $('button[name=delete]').click(function() {
+            if (confirm("确认删除吗")) {
+                var shopid = $(this).children().attr('id');
+                var node = $(this).parent().parent().parent().parent().remove();
+                $.ajax({
+                    url: "${basePath}admin/shop/shopdelete.xhtml",
+                    type: 'post',
+                    dataType: 'json',
+                    data: 'shopid=' + shopid ,
+                    success: function(data) {
+
+                    }
+                });
+            }
+        });
+
+        $('button[name=sou]').click(function() {
+            var v = $.trim($("#txtSeach").val());
+            $("#txtSeach").attr("value", v);
+
+            var v = $.trim($("#operatorid").val());
+            $("#operatorid").attr("value", v);
+
+            var v = $.trim($("#citycode").val());
+            $("#citycode").attr("value", v);
+        })
+        </script>
+</body>
+
+</html>

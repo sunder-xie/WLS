@@ -1,0 +1,91 @@
+<!doctype html>
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+
+
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">
+					&nbsp;&nbsp;&nbsp;运营商报名详细信息</strong> 
+					  <button type="button" name="cancel"onclick="dayin()" class="am-btn am-btn-primary am-btn-xs" style="font-size: 1.2rem; margin-left:50px;" >打印</button>
+			</div>
+			<br> <br>
+			<div class="admin-content">
+				<div class="am-u-sm-12 am-u-md-4">
+					<div class="am-input-group am-input-group-sm"></div>
+				</div>
+				<!-- 增删改查 -->
+				<div class="am-btn-toolbar"
+					style="float: right; margin-right: 30px;"></div>
+			</div>
+			<div class="am-g">
+				<div class="am-u-sm-12">
+					<table class="am-table am-table-striped am-table-hover table-main">
+						<thead>
+							<div class="mod_list">
+								<div class="listMod">
+									<h1>基本资料</h1>
+									<ul>
+										<li><span>姓名:&nbsp;&nbsp;$!cafeRecruit.name</span>
+										<li><span>性别: &nbsp;&nbsp; #if($!cafeRecruit.sex
+												==1) 男 #elseif($!cafeRecruit.sex ==0) 女 #end </span>
+										<li><span>联系方式:&nbsp;&nbsp;$!cafeRecruit.phone</span>
+										<li><span>E-mail:&nbsp;&nbsp;$!cafeRecruit.email</span>
+										<li><span>身份证号:&nbsp;&nbsp;$!cafeRecruit.idcard</span>
+										<li><span>微信ID:&nbsp;&nbsp;$!cafeRecruit.wxid</span>
+										<li><span>公司名称:&nbsp;&nbsp;$!cafeRecruit.company</span>
+										<li><span>公司电话:&nbsp;&nbsp;$!cafeRecruit.companyphone</span>
+										<li><span>公司地址:&nbsp;&nbsp;$!cafeRecruit.address</span>
+									</ul>
+
+								</div>
+								<div class="listMod">
+									<h1>运营设想</h1>
+									<ul>
+										<li><span><h3>1.成为Wheelys全国地区的城市运营商，您的意向城市及地区是？如您是来自上海地区的，请直接填写意向城市及地区，比如：上海市长宁区</h3></span></li>
+										<li><span>第一意向:$!cafeRecruit.values1</span></li>
+										<li><span>第二意向:$!cafeRecruit.values2</span></li>
+										<li><span>第三意向:$!cafeRecruit.values3</span></li>
+										<li><span><h3>2.能胜任Wheelys全国地区的城市运营商，您拥有哪些关键资源、关键能力、竞争优势？</h3></span></li>
+										<li><span>$!cafeRecruit.values4</span></li>
+										<li><span><h3>3.对于意向城市及地区，您准备如何经营并规划未来的发展？</h3></span></li>
+										<li><span>$!cafeRecruit.values5</span></li>
+										<li><span><h3>4.在意向城市及地区的经营和发展，您认为最大的困难和障碍是什么？（至少列出三项）</h3></span></li>
+										<li><span>$!cafeRecruit.values6</span></li>
+										<li><span><h3>5.您最希望从Wheelys得到哪些支持和帮助？（至少列出三项）</h3></span></li>
+										<li><span>$!cafeRecruit.values7</span></li>
+									</ul>
+								</div>
+							
+								<div class="listMod">
+									<h1>产业基金</h1>
+									<ul>
+										<li><span><h3>1.是否同意Wheelys中国产业基金入股您的公司，为您在区域内的规模化经营提供财务支持？如同意，您希望的参股比例是多少？范围从20%到49%。如不同意，原因是什么？请罗列三条。</h3></span></li>
+										<li><span>$!cafeRecruit.values8</span></li>
+										<li><span><h3>2.您是否愿意投资Wheelys中国产业基金，与Wheelys共同分享在整个大中华地区发展的收益？</h3></span></li>
+										<li><span>$!cafeRecruit.values9</span></li>
+									</ul>
+								</div>
+							</div>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+function dayin(){
+	window.print();
+
+}
+</script>
+</body>
+</html>
+

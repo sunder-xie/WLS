@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Wheelys Coffee</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<link rel="stylesheet" href="${pcPath}Public/home/css/main_css.css">
+<link rel="stylesheet" href="${pcPath}Public/home/css/bootstrap.min.css" >
+<script src="${pcPath}Public/home/js/main.js"></script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<style>
+    a{
+		cursor:pointer;
+       color:#000;
+       text-decoration:none;
+    }
+    a:hover{
+        text-decoration:none;
+       /**/
+    }	
+</style>
+<script>
+$(document).ready(function(){
+    NavShow();
+    $(".wheelysCoffeeCar").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+     $(".left").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+      $(".right").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+	$('.class_dis').mouseover(function(){
+         $('.disc').css('display','block');
+    }).mouseout(function(){
+         $('.disc').css('display','none');
+    })
+
+    $('.class_dis_').mouseover(function(){
+         $('.disc_').css('display','block');
+    }).mouseout(function(){
+         $('.disc_').css('display','none');
+    })
+    $('.menuBox').each(function(e,a){
+    	$(a).on('click',function(){
+    		$('.menuList').slideUp();
+    		if($(a).hasClass('select')){
+        		$('.menuBox').removeClass('select');
+    			return;
+    		}else{
+        		$('.menuBox').removeClass('select');
+    		}
+    		$(a).addClass('select');
+    		var left = $(this).offset().left+'px';
+    		var width = $(this).width()+40+'px';
+    		$('.menuList').each(function(i,z){
+    			if(i == e){
+        			$(z).css({
+        				'left':left,
+        				'min-width':width
+        			});
+        			$(z).slideDown();
+    			}
+    		})
+    	})
+    })
+ //     $('.displaymy').mouseover(function(){
+ //   $(this).prev().css('display','block');
+ // }).mouseout(function(){
+ //    $(this).prev().css('display','none');
+ // });
+ })
+</script>
+</head>
+<body>
+#parse("/pc/header.vm")
+<div class="nav_warp clear" id="test">
+    <div class="left">
+        <div class="name1">
+        <a href="${basePath}pc/wisdom.xhtml" style="color:#fff;">
+            <span>咖啡世界</span>
+            <span>新潮流</span>
+        </a>
+        </div>
+        <div class="name2">
+        <a href="${basePath}pc/worth.xhtml"style="color:red">
+            <span>霸道而纯粹的</span>
+            <span>咖啡原味</span> 
+        </a>
+        </div>
+    </div>
+     <div class="right_nav">
+        <dl>
+            <dt>关于 WHEELYS CAFÉ</dt>
+            <dd><a href="${basePath}pc/wisdom.xhtml">智慧范</a></dd>
+            <dd><a href="${basePath}pc/technology.xhtml">科技范</a></dd>
+            <dd><a href="${basePath}pc/worth.xhtml">品质范</a></dd>
+            <dt>风靡全球的WHEELYS</dt>
+            <dd><a href="${basePath}pc/team.xhtml">也许是最酷的创业团队！</a></dd>
+            <dd><a href="https://wheelyscafe.com/">看看全球还有哪些WHEELYS？</a></dd>
+            <dt>加入WHEELYS</dt>
+            <dd><a href="http://mp.weixin.qq.com/s?__biz=MzIxMDE4MjMwNw==&mid=503749680&idx=1&sn=58ecd77a87812214f1bc11afb1efc5fa&scene=18#rd">城市运营商招募计划</a></dd>
+            <dd><a href="${basePath}pc/showSignupForm.xhtml">报名表</a></dd>
+            <dt class="no"><a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzIxMDE4MjMwNw==&hid=2&sn=aa0793a5d27620b905c876b8d0d59638&uin=Mjc3OTQxMTk1&key=c3acc508db720376ee29711487ac69cecad3f491555c8e84cba8fdae7428454067e308ba0cb26de1017a570325c47b8e&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1">媒体报道</a></dt>
+        </dl>
+    </div>
+</div>
+<div class="dreamCoffee Iwrap">
+    <div style=" position:absolute;left:3%;top:15%;width:258px;height:258px;display:none" class="disc">
+                    <img src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/2016-11-21/erwei.jpg" width="258" height="258" />
+    </div>
+    <img src="${pcPath}Public/home/img/worth_banner.jpg" />
+</div>
+<div class="worth_content clear">
+    <div class="worth_left">
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-Wmax"></i>
+                <i class="icon icon-points"></i>
+            </div>
+            <div class="year_right">
+                <strong>印尼偶像</strong>
+                <p>一款厚实深沉、层次丰富且略带辛味的咖啡，糖浆状的水体，较低的酸度，外加巧克力和黑樱桃带来丰富的、自然的口感，给你不一样的味觉刺激。</p>
+            </div>
+        </div>
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-Wmax"></i>
+                <i class="icon icon-points"></i>
+            </div>
+            <div class="year_right">
+                <strong>卢旺达爆裂</strong>
+                <p>该新品将于2016年上市</p>
+            </div>
+        </div>
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-Wmax"></i>
+                <i class="icon icon-points"></i>
+            </div>
+            <div class="year_right">
+                <strong>危地马拉毒药</strong>
+                <p>该新品将于2016年上市</p>
+            </div>
+        </div>
+        <div class="year_nav clear">
+            <div class="year_left">
+                <i class="icon icon-Wmax"></i>
+                <i class="icon icon-points"></i>
+            </div>
+            <div class="year_right">
+                <strong>肯尼亚神风</strong>
+                <p>该新品将于2016年上市</p>
+            </div>
+        </div>
+    </div>
+    <div class="worth_right">
+        <div class="venture_team Twrap">
+            <span class="cotton"></span>
+            <i class="icon icon-W"></i>
+            <span class="cotton"></span>
+            <h2><span class="Brandon_med">Wheelys</span>品质范</h2>
+            <div class="bottom">
+                <span></span>
+            </div>
+            <i class="icon icon-points"></i>
+        </div>
+        <div class="worth_text Twrap">
+            <p>欢迎来到Wheelys咖啡世界！在这里，你可以和我们一起探索世界各地的咖啡，感受咖啡原原本本的味道。在这里，我们要加入“远离” 的大潮，远离灵魂麻木的大品牌。</p>
+            <p>数十年以来，全球连锁品牌通过“一致性”建立了霸权——人们倾向于选择已知的事物而不是未知的事物，这是为什么星X克在其世界各地的咖啡馆都冲泡同样的咖啡，并美其名曰“始终品质如一”。</p>
+            <p>但是，根本没有一种咖啡是能博得所有人欢心或被所有人厌恶的，没有恨也就没有爱。</p>
+            <p>这是大多数研究食品的科学家的共识：当你找到一种没人讨厌的产品，那它也将是没人喜欢的产品。这也是许多像星X克、麦X劳等食品连锁企业的咖啡很少遭人讨厌，但也从不受人喜爱的道理。他们的“咖啡”要经过精心调配以不负众望，唯一的办法就是调配出一种不激起任何情感的口味，无论好坏。经历了40年以后，全球的咖啡连锁企业制造了一种类似食品版的电梯音乐或日间肥皂剧。</p>
+            <p>Wheelys想要反其道而行之，激发你爱恨分明的态度，就像巴赫的《戈尔德堡变奏曲》。</p>
+            <h3 >100%有机，100%公平买卖。</h3>
+            <h3 style="margin-bottom: 40px">无农药添加，只有霸道而纯粹的有机咖啡。</h3>
+            <p>这就是Wheelys的咖啡，我们的咖啡是有机的、纯粹的。我们试图寻找逐渐淡出我们脑海中食物最本真、朴素的味道，探索出一条产品线，让食物口味回归本来的面貌。我们的目标是：“没有化工污染，没有农药！”</p>
+        </div>
+        <div class="venture_team Twrap">
+            <span class="cotton"></span>
+            <i class="icon icon-W"></i>
+            <span class="cotton"></span>
+            <h2>举个栗子：印尼偶像</h2>
+            <div class="bottom">
+                <span></span>
+            </div>
+            <i class="icon icon-points"></i>
+        </div>
+        <div class="arabica Twrap">
+            <img src="${pcPath}Public/home/img/arabica_img.jpg" />
+            <p>在围绕着Tawar湖的印度尼西亚苏门答腊岛北部的山上，可以找到世界上最浓郁的Arabica咖啡。Gayo族人种植这种咖啡已经将近一个世纪了。1500米处的空气和土壤组合培育出的咖啡，是世界上公认的味道最醇正的咖啡。它是一种醇厚的咖啡，有着糖浆状的水体，较低的酸度，外加巧克力和黑樱桃带来层次丰富、自然的口感。</p>
+            <ul>
+                <li><strong>地区：</strong>Gayo "Atu Lintang"</li>
+                <li><strong>海拔：</strong>1500米</li>
+                <li><strong>豆种：</strong>Ateng Arabica咖啡豆</li>
+                <li><strong>加工方法：</strong>半水洗</li>
+                <li><strong>装杯说明：</strong>糖浆状水体，酸度低，外加巧克力和黑樱桃带来丰富的、自然的口感</li>
+            </ul>
+            <p>如果口感厚重、带有巧克力和黑樱桃风味的"印尼偶像"还未构成致命的诱惑，那不妨期待一下即将上市的"卢旺达爆裂"、"危地马拉毒药"和"肯尼亚神风"吧！</p>
+            <p>除了提供连锁品牌咖啡已有的意式咖啡，Wheelys咖啡更主推考验咖啡豆品质和制作技艺的手冲咖啡和滴滤咖啡。在Wheelys，我们保证总有一款咖啡能让你爱如潮水、欲罢不能。100%有机，100%绿色，霸道而纯粹，时尚而狂野，这就是Wheelys咖啡！</p>
+        </div>
+        <div style="text-align:center; margin-top:20px;">
+        	<div style="display:inline-block; padding:5px 40px;border-bottom:1px solid #000; width:30%;"><img width="100%" src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/mobile/redLogo.png?v=00000" /></div>
+        	<p style="font-size:16px; margin-top:5px;">一杯好咖啡的正确打开方式</p>
+        	<img width="40%" src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/mobile/erwei.jpg?v=00000" />
+        	<p style="font-size:16px; margin-top:10px;">扫描二维码 开启Wheelys咖啡2.0时代</p>
+        </div>
+    </div>
+</div>
+#parse("/pc/footer.vm")
+<script>
+    $(document).ready(function(){
+        inputValue();
+        NavShow();
+    });
+</script>
+<script>
+    $(document).ready(function(){
+       $(".dreamCoffee").click(function(){
+            $(".nav_warp").css("display",'none')
+            var dis = 'icon icon-ul';
+           $(".logo_left > .icon").attr('class',dis);
+       })
+    })
+</script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<script src="${pcPath}Public/home/js/bootstrap.min.js"></script>
+<!-- [if IE 6]> --> 
+<script src="${pcPath}Public/home/js/DD_belatedPNG_0.0.8a.js"> </script>
+<script>
+    DD_belatedPNG.fix('*')
+</script>
+<!--[end if]  -->
+</body>
+</html>

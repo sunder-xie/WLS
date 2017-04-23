@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.merchant.MchOrderDetail" table="MCHORDERDETAIL">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="orderid" column="ORDERID" type="long" />
+		<property name="productid" column="PRODUCTID" type="long" />
+		<property name="price" column="PRICE" type="integer" />
+		<property name="productname" column="PRODUCTNAME" type="string" />
+		<property name="productimg" column="PRODUCTIMG" type="string" />
+		<property name="quantity" column="QUANTITY" type="integer" />
+		<property name="totalfee" column="TOTALFEE" type="integer" />
+		<property name="paidfee" column="PAIDFEE" type="integer" />
+		<property name="discount" column="DISCOUNT" type="integer" />
+		<property name="unit" column="UNIT" type="string" />
+		<property name="description" column="DESCRIPTION" type="string" />
+	</class>
+</hibernate-mapping>
+

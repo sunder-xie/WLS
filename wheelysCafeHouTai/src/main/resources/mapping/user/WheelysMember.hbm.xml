@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.user.WheelysMember" table="WHEELYSMEMBER">
+		<id name="id" column="id" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="nickname" column="nickname" type="string" />
+		<property name="email" column="email" type="string" />
+		<property name="password" column="password" type="string" />
+		<property name="mobile" column="mobile" type="string" />
+		<property name="rejected" column="rejected" type="string" />
+		<property name="bindStatus" column="bindStatus" type="string" />
+		<property name="prikey" column="prikey" type="string" />
+		<property name="needValid" column="needValid" type="string" />
+		<property name="lastLoginTime" column="lastLoginTime" type="long" />
+		<property name="headpic" column="headpic" type="string" />
+		<property name="addtime" column="addtime" type="timestamp" />
+		<property name="ip" column="ip" type="string" />
+	</class>
+</hibernate-mapping>
+

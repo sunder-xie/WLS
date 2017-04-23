@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Wheelys</title>
+ #parse("/admin/common/head.vm")
+<style>
+#inputMod input{width:150px; float:left; margin-right:5px;}
+.clickMod a{display:block; width:30%; margin:0 10%; padding:5px 0; float:left; text-align:center; font-size:16px; color:#fff; background:#ed2626; border-radius:5px; border:1px solid #ed2626}
+.tbMod{min-width:800px;}
+.tbmod_2 ,.tbmod_2 th{ text-align:center !important;}
+.listMod{margin:20px 0 20px 15px;}
+.listMod h3{font-size:16px; font-weight:bold;}
+.listMod .money{float:right; width:160px; text-align:center;}
+.btnList{text-align:center; width:40%;}
+.btnList a{border:1px solid #f5f5f5; border-radius:5px; display:inline-block; padding:5px 10px;  margin:0 20px;}
+small{
+
+  font-size: 1.8rem;
+  color: #0e90d2;
+}
+h3{
+ padding:1.6rem;
+}
+#inputList{
+ padding-bottom:50px;
+}
+</style>
+</head>
+<body>
+#parse("/admin/common/top.vm") 
+#parse("/admin/common/menu.vm") 
+<div class="admin-content">
+<h3>
+#if($!seller.id)
+	<small>	
+	修改员工
+	</small>
+	#else
+	<small>	
+	添加员工	
+	</small>
+	#end
+</h3>
+	<div class="am-tabs-bd" id="inputList">
+	<input type="hidden" value="$!cafeShop.shopid" name="shopid">
+	#if($!seller.id)
+	<input type="hidden" value="$!seller.id" name="id">
+	#end
+
+	
+	<div class="clearfix" style="margin:10px 0;">
+	        <div class="left" style="width:100px; text-align:right;">姓名
+	        
+	        </div>
+								
+	        <div class="left" style="margin-left:10px;">
+	          <input type="text" class="am-input-sm" name="username" value="$!seller.username" maxlength="30">
+	        </div>
+	        
+	</div>
+	<div class="clearfix" style="margin: 10px 0;">
+									<div class="left" style="width: 100px; text-align: right;">角色
+									</div>
+									<div class="left" style="margin-left: 10px;">
+										<select id="MySelect" name="role" class="am-input-sm"
+													style="width: 100px; float: left;">
+													<option value="0" #if ($!seller.role == 0) selected="selected" #end >
+													店长
+													</option>
+													<option value="1" #if ($!seller.role == 1) selected="selected" #end>
+													员工
+													</option>
+												
+													
+										</select>
+									</div>
+								</div>
+	<div class="clearfix" style="margin:10px 0;">
+		<div class="left" style="width:100px; text-align:right;">账号 </div><span style="color: red;">*</span>必填
+		<div class="left" style="margin-left:10px;">
+		  <input type="text" class="am-input-sm" name="loginname" value="$!seller.loginname" maxlength="30">
+		</div>
+	</div>
+	<div class="clearfix" style="margin:10px 0;">
+		<div class="left" style="width:100px; text-align:right;">密码</div><span style="color: red;">*</span>必填
+		<div class="left" style="margin-left:10px;">
+		  	#if($!seller.id)
+			<input type="text"  class="am-input-sm" placeholder="密码已隐藏" name="password" data-value="$!seller.userpwd" value=""  maxlength="14">
+			#else
+			<input type="text"  class="am-input-sm" name="password" value="" maxlength="14">
+			#end
+		</div>
+	</div>
+	<div class="clearfix" style="margin:10px 0;">
+		<div class="left" style="width:100px; text-align:right;">电话</div>
+		<div class="left" style="margin-left:10px;">
+		  <input type="text" class="am-input-sm" name="mobile" maxlength="11"value="$!seller.mobile" >
+		</div>
+	</div>
+	<div class="clearfix btnList" style="padding-top:50px;">
+		<a href="${basePath}admin/shop/showSellerList.xhtml?shopid=$!cafeShop.shopid">取消</a>
+		<input type="submit" onclick="submitForm_2();" class="am-btn am-btn-primary am-btn-xs" 
+		value="确认" />
+	</div>
+</div>
+</div>
+<script>
+
+function submitForm_2(){
+		var data = {};
+		$('#inputList input').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		});
+		$('#inputList select').each(function(e,a){
+  			var attr = $(a).attr('name');
+  			data[attr] = $(a).val();	
+  		});
+		$.ajax({
+		      url:"${basePath}admin/shop/addUpdateSeller.xhtml",
+		      type:'post',
+		      dataType:'json',
+		      data:data,
+		      success:function(data){
+		    	  if(data.success){
+		    		  alert('保存成功')
+		    		location.href = '${basePath}admin/shop/showSellerList.xhtml?shopid=$params.shopid';
+		    	  }else{
+	  		    	alert(data.msg);
+		      }
+		      }
+		});
+	}
+</script>
+</body>
+</html>

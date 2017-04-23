@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<link rel="stylesheet" type="text/css"
+	href="${staticPath}css/ticket/newticket.css" />
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+td {
+	font-size: 12px;
+	color: #444;
+	font-style: normal;
+}
+
+.wselect {
+	width: 70px;
+	float: right;
+	height: 30px;
+	margin-left: 300px;
+}
+
+.wselect {
+	width: 100px;
+	height：50px;
+}
+
+.con-t4-button {
+	width: 1573px;
+	float: left;
+	margin-top: 40px;
+	height: 30px;
+}
+
+.cardType_2 {
+	display: none
+}
+
+.categroy-ul2 li {
+	width: 220px;
+}
+
+.item-rigth {
+	width: 600px;
+	margin: 10px 0;
+}
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div id="inputList" class="admin-content">
+		<!--右侧开始-->
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">
+					&nbsp;&nbsp;&nbsp;活动管理</strong> / <small>新建优惠活动</small>
+			</div>
+			<br />
+			<hr width="100%" />
+			<div class="con-t2-left">
+				<table width="100%" border="0" cellspacing="0">
+					<tr>
+						<td style="text-align: right" width="60">分类<span
+							style="color: red; size: 10">*</span></td>
+						<td width="3%">&nbsp;</td>
+						<td style="text-align: left" width="260"><select
+							data-type="must" name="type" onchange="selectValue(this);">
+								<option value="">--请选择分类--</option> #foreach($key in
+								$activitymap.keySet())
+								<option value="$key">$!activitymap.get($key)</option> #end
+						</select></td>
+					</tr>
+					<tr>
+						<td style="text-align: right" width="60">名称<span
+							style="color: red; size: 10">*</span></td>
+						<td width="5">&nbsp;</td>
+						<td style="text-align: left" width="260"><input
+							data-type="must" name="name" id="name" type="text" maxlength="20" />
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right" width="60">优惠标记</td>
+						<td width="5">&nbsp;</td>
+						<td style="text-align: left" width="260"><input data-type=""
+							name="discountmark" type="text" maxlength="10" /></td>
+					</tr>
+					<tr class="cardType cardType_ZHEKOU">
+						<td style="text-align: right" width="60">折扣<span
+							style="color: red; size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260"><input data-type=""
+							name="discountrate" placeholder="请输入小于100的正整数" type="text"
+							maxlength="5" /></td>
+					</tr>
+					<tr class="cardType cardType_FIRSTCUP">
+						<td style="text-align: right" width="60">价格<span
+							style="color: red; size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260"><input data-type=""
+							name="fixamount" type="text" maxlength="10" /> &nbsp;元</td>
+					</tr>
+					<tr class="cardType cardType_MANJIAN">
+						<td style="text-align: right" width="60">满<span
+							style="color: red; size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260">
+							<input type="radio" name="radio" width="10"  id="manjianId"> 
+							<input data-type="" name="limitcup" id="fullpiece" placeholder="请输入小于100的数字"
+							type="text" maxlength="5" style="width: 130px" />&nbsp;件</td>
+					</tr>
+					<tr class="cardType cardType_MANJIAN">
+						<td style="text-align: right" width="60"></td>
+						<td width="10">&nbsp;
+						</td>
+						<td style="text-align: left" width="260">
+						<input type="radio" name="radio" width="10" id="manyuanId"> 
+						<input data-type="" name="limitamount" id="manyuan" placeholder="请输入正整数"
+						type="text" maxlength="5" style="width: 130px" />&nbsp;元</td>
+					</tr>
+					<tr class="cardType cardType_MANJIAN">
+						<td style="text-align: right" width="60"></td>
+						<td width="10">&nbsp;
+						</td>
+						<td style="text-align: left" width="260">
+						<input type="radio" name="radio" width="10" id="buxianId"> 
+						&nbsp;不限制</td>
+					</tr>
+					<tr class="cardType cardType_MANJIAN">
+						<td style="text-align: right" width="60">减<span
+							style="color: red; size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260"><input
+							data-type="must" name="discountamount" id="subyuan" placeholder="请输入小于1000的数字"
+							type="text" maxlength="5" style="width: 130px" />&nbsp;元</td>
+					</tr>
+					<tr id="addpri">
+						<td style="text-align: right" width="60"></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260">
+						#foreach($key in $appendmap.keySet()) 
+							<input name="addprice" id="addprice"
+							checked="checked" value="$key" type="checkbox" />
+							&nbsp;$!appendmap.get($key)
+						#end
+						</td>
+					</tr>
+
+					<tr>
+						<td style="text-align: right" width="60">期限<span
+							style="color: red; size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260"><input type="text"
+							data-type="must" class="am-form-field" name="begintime"
+							id="time1" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})"
+							placeholder="时间(年月日)"
+							style="width: 120px; height: 35px; display: inline-block">
+							至 <input type="text" data-type="must" class="am-form-field"
+							name="endtime" id="time2"
+							onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})"
+							placeholder="时间(年月日)"
+							style="width: 120px; height: 35px; display: inline-block">
+						</td>
+					</tr>
+
+					<tr>
+						<td style="text-align: right" width="60">周期</td>
+						<td width="3%"></td>
+						<td width="70%">#foreach($key in $weekmap.keySet()) <span
+							style="margin: 0 10px"><input type="checkbox" name="week"
+								value="$key" />$!weekmap.get($key)</span> #end
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right" width="60"></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260"><input type="text"
+							class="am-form-field" name="hourfrom" id="hour1"
+							onfocus="new WdatePicker({dateFmt:'HH:mm'})"
+							placeholder="时间(24小时)"
+							style="width: 120px; height: 35px; display: inline-block">
+							至 <input type="text" class="am-form-field" name="hourto"
+							id="hour2" onfocus="new WdatePicker({dateFmt:'HH:mm'})"
+							placeholder="时间(24小时)"
+							style="width: 120px; height: 35px; display: inline-block">
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right" width="60">优先级<span
+							style="color: red; size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						
+						<td style="text-align: left" width="260">#foreach($key in
+							$prioritymap.keySet()) <input style="width: 30px;" type="radio"
+							name="priority" #if($key== "1")
+										checked="checked" #end
+							value="$key" />$!prioritymap.get($key) #end
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right" width="60">备注</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260"><textarea
+								style="width: 260px;" name="remark" maxlength="500"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align: right" width="60">数量限制</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align: left" width="260"><input type="text" name="limitmaxnum" /> 为空不限制</td>
+					</tr>
+				</table>
+			</div>
+			<div class="con-t3" id="allshopclass">
+				<div
+					style="width: 30%; float: left; text-align: right; margin-right: 10px;">
+					<span style="font-size: 20px">参与店铺</span> <span
+						style="color: red; size: 10">*</span> &nbsp;&nbsp; <input
+						type="checkbox" id="checkAllshopID" name="checkAllshop">
+					全部
+				</div>
+				<input type="hidden" id="shopid">
+				<div class="shopidids"
+					style="width: 56%; float: left; background: #E4E4E4;">
+					<ul class="categroy-ul">
+						#foreach($shop in $shopList)
+						<li><input type="checkbox" id="shoponeID" name="shopids"
+							value="$shop.shopid">$shop.esname</li> #end
+					</ul>
+				</div>
+			</div>
+
+			<div class="con-t4">
+				<div class="con-t4-left" style="width: 20%;">
+					<span style="font-size: 20px">商品分类</span> <span
+						style="color: red; size: 10">*</span> &nbsp;&nbsp; <input
+						type="checkbox" id="allItemID" />全品类
+				</div>
+
+				<div id="allClass" class="con-t4-right" style="width: 80%">
+					<input type="hidden" id="productid">
+					<div class="con-t4-right-item" style="width: 100%" id="itemClass">
+						#foreach($item in $cafeItemList)
+						<div class="clearfix">
+							<div class="item-left">
+								<input type="checkbox" name="validitemid" id="$item.id"
+									value="$item.id"> $item.name
+							</div>
+							<div class="item-rigth productidids" data-id="$item.id">
+								<ul class="categroy-ul2">
+									#foreach($product in $productMap.get($item.id))
+									<li><input class="validproductid_$item.id" type="checkbox"
+										name="validproductid" data-type="$item.id" id="$product.id"
+										value="$product.id" />$product.name</li> #end
+								</ul>
+							</div>
+						</div>
+						#end
+					</div>
+				</div>
+			</div>
+			<div class="con-t4-button" style="text-align: center;">
+				<input class="am-btn am-btn-primary am-btn-xs" type="button"
+					id="cancels" onclick="submitForm_1();" value="取消" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit" id="submit" onclick="submitForm();"
+					class="am-btn am-btn-primary am-btn-xs" value="提交保存" />
+			</div>
+
+		</div>
+		<!--右侧结束-->
+	</div>
+
+	<script type="text/javascript">
+  
+	$('#checkAllshopID').change(function(){
+  		var check = $(this).attr('checked');
+  		$('#allshopclass input[type="checkbox"]').each(function(e,a){
+  			$(a).attr('checked',check);
+  		})
+  	})
+  	$('#allItemID').change(function(){
+  		var check = $(this).attr('checked');
+  		$('#allClass input[type="checkbox"]').each(function(e,a){
+  			$(a).attr('checked',check);
+  		})
+  	})
+  	$('input[name="validitemid"]').change(function(){
+  		var check = $(this).attr('checked');
+  		var tid = $(this).val();
+  		$('input[data-type="'+tid+'"]').each(function(e,a){
+  			$(a).attr('checked',check);
+  		})
+  		checkAllType()
+  	})
+  	$('#allClass input[name="validproductid"]').change(function(){
+  		var check = $(this).attr('checked');
+  		var tid = $(this).attr('data-type');
+  		
+  		if(check==false){
+  			$('#allClass input[name="validitemid"]').each(function(e,a){
+  				if($(a).val()==tid)$(a).attr('checked',check);
+  			})
+  		}else{
+  			var isok = true;
+  			$('.validproductid_'+tid+'').each(function(e,a){
+  				console.info($(a).attr('checked'));
+  				if(!$(a).attr('checked')){
+  					isok = false
+  		  			console.info(isok);
+  					return
+  				}
+  			})
+  			$('#'+tid+'').attr('checked',isok);
+  		}
+  		checkAllType()
+  	})
+  	function checkAllType(){
+  		var isAll = true;
+  		$('#allClass input[type="checkbox"]').each(function(e,a){
+  			if(!$(a).attr('checked')){
+  	  			isAll = false;
+  			} 
+  		})
+  		$('#allItemID').attr('checked',isAll);
+  	}
+  	
+  	$(function(){
+  		$('.cardType').hide();
+  		$("#addpri").hide();
+  	})
+  	$("#manjianId").mouseleave(function(){
+  		if($("#manjianId").attr('checked')){
+  			$("#manyuan").attr("disabled",true);
+  			$("#manyuan").val("")
+  			$("#fullpiece").attr("disabled",false);
+  		}else{
+  			$("#manyuan").attr("disabled",false);
+  		}
+  	})
+  	$("#manyuanId").mouseleave(function(){
+  		if($("#manyuanId").attr('checked')){
+  			$("#fullpiece").attr("disabled",true);
+  			$("#fullpiece").val("")
+  			$("#manyuan").attr("disabled",false);
+  		}else{
+  			$("#fullpiece").attr("disabled",false);
+  		}
+  	})
+  	$("#buxianId").mouseleave(function(){
+  		if($("#buxianId").attr('checked')){
+  			$("#fullpiece").attr("disabled",true);
+  			$("#manyuan").attr("disabled",true);
+  			$("#fullpiece").val("")
+  			$("#manyuan").val("")
+  		}
+  	})
+  	
+ 	function selectValue(that){
+		var v = $(that).val();
+		if(v=='ZHEKOU' || v=='SECONDCUP'){
+			$('.cardType').hide();
+			$('.cardType_'+'ZHEKOU').show();	
+		}else if(v=='FIRSTCUP' || v=='FIXAMOUNT'){
+			$('.cardType').hide();
+			$('.cardType_'+'FIRSTCUP').show();
+		}else{
+			$('.cardType').hide();
+			$('.cardType_'+v).show();
+		}
+		if($("select[name='type']").val()=='FIRSTCUP' || $("select[name='type']").val()=='FIXAMOUNT'){
+			$("#addpri").show();
+		}else{
+			$("#addpri").hide();
+			$("#addprice").val("");
+		}
+		
+	}
+  	//判断是否特浓加价
+  	 	var flag = true;
+		function chkRadio(id) {
+		id.checked = flag;
+		flag = !flag;
+		} 
+
+	function OnPropChanged(event){
+		console.info(event);
+	}
+	function OnInput(event){
+		console.info(event)
+	}
+	$('#inputList input').focus(function(){
+		$('.errMod').remove();
+	})
+	
+	function submitForm(){
+		var isgo = true;
+		$('.errMod').remove();
+		if($("select[name='type']").val()=='MANJIAN'){
+		$('#inputList input').each(function(e,a){
+			if($.trim($(a).val())=='' && $(a).attr('data-type')=="must"){
+				var html = '<div class="errMod" style="color:#ed2626">选项不能为空</div>';
+				$(a).after(html);
+				isgo = false;
+			}
+		 })
+		}
+		 //名称不能为空格   
+		 if($.trim($("#name").val())==""){
+				var html = '<div class="errMod" style="color:#ed2626">名称不能为空</div>';
+				$("#name").after(html);
+				isgo = false;
+		 }
+		 
+		$('#inputList select').each(function(e,a){
+			if($(a).val()=='' && $(a).attr('data-type')=="must"){
+				var html = '<div class="errMod" style="color:#ed2626">请选择分类</div>';
+				$(a).after(html);
+				isgo = false;
+			}
+		 })
+		  //判断哪个活动校验相对的输入框
+		  $('#inputList input').each(function(e,a){
+		  if($("select[name='type']").val()=='ZHEKOU' || $("select[name='type']").val()=='SECONDCUP'){
+			if($(a).attr('name') == 'discountrate' && !(/^[1-9][0-9]{0,1}$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入1-99的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+		  	 }
+		  if($("select[name='type']").val()=='FIRSTCUP' || $("select[name='type']").val()=='FIXAMOUNT'){
+			if($(a).attr('name') == 'fixamount' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+		  	 }
+		  if($("select[name='type']").val()=='MANJIAN'){
+			  if($("#manjianId").attr('checked')){
+			  if($(a).attr('name') == 'limitcup' && !(/^[1-9][0-9]{0,1}$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入1-99的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+			  }
+			  if($("#manyuanId").attr('checked')){
+			  if($(a).attr('name') == 'limitamount' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+			  }
+			  if($(a).attr('name') == 'discountamount' && !(/^[1-9]\d{0,2}$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入1-999的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+		  	 }
+		  })
+		  if($("select[name='type']").val()=='MANJIAN'){
+			  if($("#manyuanId").attr('checked')){
+				//满元钱数不能小于减得钱数
+				  var yuanprice=parseInt($("#manyuan").val());
+				  var jianprice=parseInt($("#subyuan").val());
+				  if(yuanprice<jianprice){
+					 var html = '<div class="errMod" style="color:#ed2626">满元钱数不能小于所减钱数</div>';
+					 $("#manyuan").after(html);
+					 isgo = false;
+				   } 
+			  }
+		  }
+		  
+		/*日期校验 */
+		 var time1 = $("#time1").val();
+		 var time2 = $("#time2").val();
+		 var currentTime='$DateUtil.getCurDateStr()';
+		 if(time1>time2 || time1<currentTime){
+			var html = '<div class="errMod" style="color:#ed2626">请选择正确的日期时间</div>';
+			$("#time2").after(html);
+		 	isgo = false;
+		}
+		//时间段校验
+		if($("#hour1").val()!="" && $("#hour2").val()!=""){
+		 var hour1 = $("#hour1").val();
+		 var hour2 = $("#hour2").val();
+		 if(hour1>=hour2){
+			 var html = '<div class="errMod" style="color:#ed2626">请选择正确的时间段</div>';
+			 $("#hour2").after(html);
+			 isgo = false;
+		 	}
+		}
+	
+		//设置时间段的默认值
+		if($("#hour1").val()=="" && $("#hour2").val()==""){
+			$("#hour1").val("00:00")
+			$("#hour2").val("23:59")
+		}
+		
+		 //判断商品是否为空
+		 var cbox = false;
+		 $('.productidids input[type="checkbox"]').each(function(e,a){
+			 console.info($(a).attr('checked'));
+			 if($(a).attr('checked')){
+				cbox = true;
+			 }
+		 }) 
+		 if(!cbox){
+			 var html = '<div class="errMod" style="color:#ed2626">请选择你所需要的商品</div>';
+			 $("#productid").after(html);
+			 isgo = false;
+		 }
+		 //判断商铺是否为空
+		 var cbox1 = false;
+		 $('.shopidids input[type="checkbox"]').each(function(e,a){
+			 if($(a).attr('checked')){
+				cbox1 = true;
+			 }
+		 }) 
+		 if(!cbox1){
+			 var html = '<div class="errMod" style="color:#ed2626">请选择你所需要的店铺</div>';
+			 $("#shopid").after(html);
+			 isgo = false;
+		 }
+		
+			
+		if(isgo){
+			if(confirm("确认提交吗?")){
+				submitForm_2();
+			}
+		}else{
+			$('.errMod').each(function(e,a){
+				if(e==0){
+					var top = $(a).offset().top - 30;
+					window.scrollTo('0',top);
+				};
+			})
+			
+		  }
+		} 
+	function submitForm_1(){
+		if(confirm("您所填写的信息不会保留,确定取消吗?")){
+			location.href = '${basePath}admin/ticket/showDiscountList.xhtml';
+		}
+	}
+	function submitForm_2(){
+		var data = {};
+		$('#inputList select').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		})
+		$('#inputList input').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();	
+		})
+		$('#inputList textarea').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		})
+		//获取是否加价的及其他加价分类
+		var addprice=new Array();
+		if($("select[name='type']").val()=='FIRSTCUP' || $("select[name='type']").val()=='FIXAMOUNT'){
+			$("input[name='addprice']:checked").each(function(e,a){
+				addprice.push($(a).val());
+			});
+		     	data['addprice']=addprice.join(",");
+		}
+		//店铺ids
+		var shopids=new Array();
+        $("input[name='shopids']:checked").each(function (e,a) {
+        	shopids.push($(a).val());
+        });
+        data['shopids']= shopids.join(",");
+        //周期数据组装
+        var week=new Array();
+        $("input[name='week']:checked").each(function (e,a) {
+        	week.push($(a).val());
+        });
+        data['week']= week.join(",");
+        //优先级数据组装
+        var priority=new Array();
+        $("input[name='priority']:checked").each(function (e,a) {
+        	priority.push($(a).val());
+        });
+        data['priority']= priority.join(",");
+		//品类ids
+        var itemids=new Array();
+		var itemidJson = '{';
+        $('#itemClass .item-rigth').each(function (e,a) {
+        	var productidJson = '';
+            $(a).find('input[type=checkbox]:checked').each(function (e,a) {
+            	productidJson += ','+$(a).val();
+            });
+            if(productidJson != ''){
+            	itemidJson += '"'+$(a).attr('data-id') + '":"' + productidJson.substring(1,productidJson.length) +'",';
+            }
+        });
+        itemidJson = itemidJson.substring(0,itemidJson.length-1) + '}';
+        data['producrids']= itemidJson;
+        console.info(data['producrids'])
+		$.ajax({
+			url:"${basePath}admin/ticket/updateDiscount.xhtml",
+			type:'get',
+			dataType:'json',
+			data:data,
+			success:function(data){
+				if(data.success){
+					location.href = '${basePath}admin/ticket/showDiscountList.xhtml';
+				}else{
+					alert(data.msg);
+				}
+			}
+		})
+	}
+	
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.wselect{
+	width: 70px;
+	float:right;
+	height: 30px;
+	margin-left: 300px;
+
+}
+.wselect{
+	width: 100px;
+	height：50px;
+
+}
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">
+					&nbsp;&nbsp;&nbsp;物流规则</strong>  / <small>
+					#if($supplierid==1)
+					圣唐物流规则
+					#elseif($supplierid==2)
+					香季物流规则
+					 #end</small>
+			</div>
+			<br><br>
+			#if($supplierid==1)
+			<div id="inputList" class="admin-content" style="width: 80%;">
+					上海地区物流规则
+					<span>1.订单额小于<input type="text" name="lesscost" 
+					onkeyup="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" onBlur="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" maxlength="5"
+					#if($!rules.id)value="$!VmUtils.getDoubleAmount($!rules.lesscost)"#end/>元</span>&nbsp&nbsp<span>运费<input type="text" name="lessfreight"
+					onkeyup="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" onBlur="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" maxlength="5"
+					#if($!rules.id)value="$!VmUtils.getDoubleAmount($!rules.lessfreight)"#end/>元</span>
+					<span><input type="hidden" name="supplierid" value="$supplierid"/></span><span><input type="hidden" name = "citycode"value="310000"/></span>
+					<input type="hidden" name ="id" value="$!rules.id"/>
+					</p><span>2.其它情况运费为0</span>
+					</p><button class="am-btn am-btn-default" type="submit" name="sou" onclick="submitForm_2() ">保存</button>
+			</div>
+
+			<!-- 增删改查 -->
+			<div class="am-btn-toolbar" style="float: right; margin-right: 30px;">
+				<div class="am-btn-group am-btn-group-xs">
+					<a href="${basePath}admin/order/showadd.xhtml?supplierid=$supplierid"><button
+							type="button" class="am-btn am-btn-default"
+							style="font-size: 1.2rem;">添加物流规则</button></a>
+				</div>
+			</div>
+		</div>
+		<div class="am-g">
+			<div class="am-u-sm-12">
+					<table class="am-table am-table-striped am-table-hover table-main">
+						<thead>
+							
+								<tr>
+								<th class="table-type">城市</th>
+								<th class="table-type"><200kg时运费(元/公斤)</th>
+								<th class="table-title"><200kg时配送费费(元/公斤)</th>
+								<th class="table-type">>=200kg时运费(元/公斤)</th>
+								<th class="table-author am-hide-sm-only">>=200kg时配送费(元/公斤)</th>
+								<th class="table-date am-hide-sm-only center">操作</th>
+							</tr>
+							
+						</thead>
+						<tbody>
+							#foreach($rule in $rulesList)
+							#if($!rule.citycode ne '310000')
+							<tr>
+								<td id=id>$!itMap.get($!rule.citycode)</td>
+								<!-- <td id=sn><input type="text" id="$!{mch.id}" name="sn" style="width:30%;  text-align:center;" value="$!{mch.sn}" /></td> -->
+								<td id=name>$!VmUtils.getDoubleAmount($!rule.lessfreight)</td>
+								<td class="am-hide-sm-only">$!VmUtils.getDoubleAmount($!rule.lesscost)</td>
+								<td class="am-hide-sm-only">$!VmUtils.getDoubleAmount($!rule.morefreight)</td>
+								<td class="am-hide-sm-only">$!VmUtils.getDoubleAmount($!rule.morecost)</td>
+								<td>
+									<div class="am-btn-toolbar center">
+										<div class="am-btn-group-xs">
+											<a href="${basePath}admin/order/showadd.xhtml?id=$rule.id&supplierid=$supplierid">
+												<button type="button" name="update"
+													class="am-btn am-btn-default am-btn-xs am-text-secondary">
+													<span> 修改 </span>
+												</button>
+											</a>
+											<button type="button" class="am-btn am-btn-default am-btn-xs" name="delete">
+												删除
+												<input type="hidden" name="deleteid" id="$!{rule.id}" value="删除" />
+												
+											</button>
+										</div>
+									</div>
+								</td>
+							</tr>
+							#end
+							#end 
+						</tbody>
+					</table>
+				#parse('include/pageUtil.vm') 
+				#end
+				 #if($supplierid==2)
+				<div class="am-btn-toolbar"
+					style="float: right; margin-right: 30px;">
+					<div class="am-btn-group am-btn-group-xs">
+						<a
+							href="${basePath}admin/order/xiangadd.xhtml?supplierid=$supplierid"><button
+								type="button" class="am-btn am-btn-default"
+								style="font-size: 1.2rem;">添加物流规则</button></a>
+					</div>
+				</div>
+				<table class="am-table am-table-striped am-table-hover table-main">
+						<thead>
+							<tr>
+								<th class="table-type">城市</th>
+								<th class="table-type">每公斤运费</th>
+								<th class="table-title">配送费</th>
+								<th class="table-date am-hide-sm-only center">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						#foreach($rule in $rulesList)
+							<tr>
+								<td id=id>$!itMap.get($!rule.citycode)</td>
+								<td id=name>$!VmUtils.getDoubleAmount($!rule.morefreight)</td>
+								<td class="am-hide-sm-only">$!VmUtils.getDoubleAmount($!rule.morecost)</td>
+								<td>
+									<div class="am-btn-toolbar center">
+										<div class="am-btn-group-xs">
+											<a href="${basePath}admin/order/xiangadd.xhtml?id=$!rule.id&supplierid=$supplierid">
+												<button type="button" name="update"
+													class="am-btn am-btn-default am-btn-xs am-text-secondary">
+													<span> 修改 </span>
+												</button>
+											</a>
+											<button type="button" class="am-btn am-btn-default am-btn-xs" name="delete">
+												删除
+												<input type="hidden" name="deleteid" id="$!{rule.id}"  value="删除" />												
+											</button>
+										</div>
+									</div>
+								</td>
+							</tr>
+							#end 
+						</tbody>
+					</table>
+					#parse('include/pageUtil.vm') 
+					#end
+			</div>
+
+		</div>
+	</div>
+
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+<script>
+$('button[name=delete]').click(function() {
+	if(confirm("确认删除吗")){
+		var id = $(this).children().attr('id');
+		var node = $(this).parent().parent().parent().parent().remove();
+		$.ajax({
+			url: "${basePath}admin/order/delrule.xhtml",
+			type:'post',
+			dataType : 'json',
+			data: 'id=' + id,
+			success : function(data) {}
+		});
+	}
+});
+function submitForm_2() {
+	var data = {};
+	$('#inputList input').each(function(e, a) {
+		var attr = $(a).attr('name');
+		data[attr] = $(a).val();
+	})
+
+	$.ajax({
+		url : "${basePath}admin/order/shrule.xhtml",
+		type : 'post',
+		dataType : 'json',
+		data : data,
+		success : function(data) {
+			if (data.success) {
+				location.href = '${basePath}admin/order/showruleList.xhtml';
+			}else {
+				alert(data.msg);
+			}
+		}
+	});
+}
+
+</script>
+</body>
+</html>

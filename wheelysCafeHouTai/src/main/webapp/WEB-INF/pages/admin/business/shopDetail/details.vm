@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<style>
+.itemMod{margin-top:30px;}
+.itemMod h2{color:#000; font-size:18px; margin:10px 0;}
+.itemMod .titleList li{float:left; background:#e1e1e1; color:#000;border:1px solid #fff; width:19%; display:block; text-align:center; padding:5px 0;font-size:16px;}
+.cafeMod{font-size:14px;display:inline-block; width:19%;border:1px solid #fff; height:40px; line-height:30px; background:#f9f9f9; text-align:center; float:left; padding:5px 0;}
+.cafeMod input{height:100%; }
+.cafeMod a{margin:0 5px;}
+.buygreen{color:green}
+.buyred{color:red}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+	
+
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp; $!cafeShop.shopname商品列表</strong> </div>
+    <br><br>
+    
+     <!-- 增删改查 -->
+       <div class="am-btn-toolbar" style="float:right;margin-right:30px;">
+         <div class="am-btn-group am-btn-group-xs">
+
+          <a href="${basePath}admin/shop/cafeItem.xhtml?shopid=$cafeShop.shopid"><button type="button" class="am-btn am-btn-default" style="font-size: 1.2rem;"> 添加新品</button></a>    
+         </div>
+       </div>
+	#foreach($key in $productMap.keySet())
+    <div class="itemMod">
+		<h2>$key.name</h2>
+  		<ul class="titleList clearfix">
+  			<li>商品名称</li>
+  			<li>商品单价</li>
+  			<li>商品状态</li>
+  			<li>排序</li>
+  			<li>操作</li>
+  		</ul>
+  	#foreach($mitem in $productMap.get($key))
+		<div class="clearfix">
+			<div class="cafeMod">
+			$!mitem.cafeProduct.name
+			</div>
+			<div class="cafeMod">
+			$!mitem.cafeProduct.price
+			</div>
+			<div class="cafeMod" id="on_$mitem.productShop.psid">
+			#if($!mitem.productShop.display=='0')
+			<span style='color: red;'>已下架</span>
+			#elseif($!mitem.productShop.display=='1')  
+            <span style='color: green;'>售卖中</span>
+            #end  	
+			</div>
+			<div class="cafeMod">
+				<input type="text" id="$!{mitem.productShop.psid}" name="psorder" style="width:30%;  text-align:center;" value="$!{mitem.productShop.psorder}" />
+			</div>
+			
+			<div class="cafeMod">
+			   <td>
+                      <input type="submit" name="display" id="submit$!{mitem.productShop.psid}" psid="$!{mitem.productShop.psid}" 
+                       #if(${mitem.productShop.display} == 0) 
+                       value="上架" 
+                       style="width:40px;height:25px;border-radius:5px;background:#fff;color:green"
+                       #else 
+                       value="下架"  
+                       style="width:40px;height:25px;border-radius:5px;background:#fff;color:red"
+                       #end >
+                  </td>
+                   <div class="am-btn-group am-btn-group-xs">
+                      <button type="submit" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" name="delete">
+                      		删除
+                      	  <input type="hidden" name="deleteid" id="$!{mitem.productShop.psid}" value="$mitem.productShop.delstatus" />
+                      	</button>
+                    
+                    </div>
+			</div>
+			
+		</div>
+		 #end
+    </div>
+    #end
+
+  </div>
+
+</div>
+
+
+<script>
+$('input[name=psorder]').blur(function (){
+    var psid = $(this).attr('id');
+    var psorder = $(this).val();
+	$.ajax({
+       url:"${basePath}admin/shop/updateProductProperty.xhtml",
+       type:'get',
+       dataType:'json',
+       data:'psid='+psid+'&psorder='+psorder,
+       success:function(data){}
+	});
+});
+
+
+  $('input[type=submit]').click(function(e){
+	if($(this).val() =='上架'){
+		if(confirm("确认上架吗")){
+			var psid = $(this).attr('psid');          //  接收当前商品的id
+		    var display = '';
+		    var neir = $(this).val();
+		    if(neir == '上架'){
+		      display = 1;                                      // 判断当前商品是否上架
+		    }else if(neir == '下架'){  
+		      display = 0;
+		    }
+			var obj = $(this);
+			$.ajax({
+				url:"${basePath}admin/shop/updateProductProperty.xhtml",
+				type:'get',
+				dataType:'json',
+				data:'psid='+psid+'&display='+display,
+				success:function(data){
+					var id = 'on_'+psid;
+					var text = display == '1'?"售卖中":"已下架";
+					var thisText = '1'?"下架":"上架";
+					//改变文字
+					$('#'+id).html(text);
+					$(obj).val(thisText)
+					//设置字体颜色
+					$('#'+id).css({"color":(display == '0'?"red":"green")})
+					$(obj).css({"color":(display == '1'?"red":"green")})
+				}
+			});
+		}
+	}else if($(this).val() =='下架'){
+		if(confirm("确认下架吗")){
+			var psid = $(this).attr('psid');          //  接收当前商品的id
+			var display = '';
+			var neir = $(this).val();
+			if(neir == '上架'){
+				display = '1';                                // 判断当前商品是否上架
+			}else if(neir == '下架'){
+				display = '0';
+			}
+			var obj = $(this);
+			$.ajax({
+				url:"${basePath}admin/shop/updateProductProperty.xhtml",
+				type:'get',
+				dataType:'json',
+				data:'psid='+psid+'&display='+display,
+				success:function(data){
+					var id = 'on_'+psid;
+					var text = display =='1'?"售卖中":"已下架";
+					var thisText = '1'?"上架":"下架";
+					//改变文字
+					$('#'+id).html(text)
+					$(obj).val(thisText)
+					//设置字体颜色
+					$('#'+id).css({"color":(display == '0'?"red":"green")})
+					$(obj).css({"color":(display == '1'?"red":"green")})
+				}
+			});
+		}
+	}
+});
+ 
+$('button[name=delete]').click(function() {
+		if(confirm("确认删除吗")){
+			var id = $(this).children().attr('id');
+			var delstatus =$(this).children().val();
+			if(delstatus =='N'){
+				delstatus = 'Y'
+			}
+			
+			var node = $(this).parent().parent().parent().remove();
+			$.ajax({
+				url : "${basePath}admin/shop/upProductShop.xhtml",
+				type : 'get',
+				dataType : 'json',
+				data : 'psid='+id+'&delstatus='+delstatus,
+				success : function(data) {}
+		});
+	}
+});
+  
+  
+</script>
+</body>
+</html>

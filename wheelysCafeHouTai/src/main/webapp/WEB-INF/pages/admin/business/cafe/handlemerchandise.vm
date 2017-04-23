@@ -1,0 +1,86 @@
+
+<!doctype html>
+<html class="no-js">
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<style>
+.wheelys1{
+border:1px solid #000; 
+margin:auto 0px; 
+width:320px;
+heiht:100px;
+overflow:hidden;
+}
+.wh1{
+	font-family:"楷体"; font-size:22px;
+}
+.wheelys2{
+margin—top:20px;
+border:1px solid #000; 
+width:50px;
+heiht:120px;
+overflow:hidden;
+}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm") 
+
+    <div class="am-cf am-padding">
+     
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;商家管理</strong> / <small>全部商品管理</small></div>
+    <br><br>
+   <div class="admin-content"> 
+      <div class="am-u-sm-12 am-u-md-4">
+        <div class="am-input-group am-input-group-sm">
+          
+        </div>
+      </div>
+    
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form" action="" method="post">
+          <table class="am-table am-table-striped am-table-hover table-main">
+       #foreach($item in $cafeItemList)    
+          <div class="wheelys1">
+          	<span class="wh1" >$item.name</span>	
+          	#foreach($mitem in $productMap.get($item.id))
+ 			<input type="checkbox" name="psshopid" value="1" /> 
+          		<div class=".wheelys2">
+          		<span class="wh1" >$mitem.name</span>	
+          		
+          		</div>
+          	#end
+          </div>
+          #end
+
+           
+        </table>
+      <div class="am-cf">
+      
+      &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+      共 126 条记录
+      <div class="am-fr">
+      <ul class="am-pagination">
+        <li ><div>  <span class="current">1</span><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/2.html">2</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/3.html">3</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/4.html">4</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/5.html">5</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/6.html">6</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/7.html">7</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/8.html">8</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/9.html">9</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/10.html">10</a><a class="num" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/11.html">11</a> <a class="next" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/2.html">>></a> <a class="end" href="/wheelysadmin/index.php/Home/Order/addmerchandise/shopid/1/p/13.html">13</a></div></li>
+      </ul>
+  </div>
+  </div>
+	#parse("/admin/common/footer.vm")
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- content end -->
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+</body>
+</html>

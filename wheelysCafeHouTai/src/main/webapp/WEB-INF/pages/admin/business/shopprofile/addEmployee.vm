@@ -1,0 +1,62 @@
+<!doctype html>
+<head>
+<title>Wheelys</title>
+ #parse("/admin/common/head.vm")
+ 
+<script type="text/javascript">
+ 	
+ 		
+ </script>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+   
+<div class="admin-content">
+  <div class="am-cf am-padding">
+      
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">商家管理</strong> / <small>员工信息</small></div>
+  </div>
+
+  <div class="am-tabs am-margin" data-am-tabs>
+    <ul class="am-tabs-nav am-nav am-nav-tabs" id="tab_t">
+      <li class="am-active" ><a href="#tab1">员工信息</a></li>
+       
+    </ul>
+         
+     <table class="am-table am-table-striped am-table-hover table-main tbmod_2">
+	            <thead>
+	             <tr>
+	                <!-- <th class="table-check"><input type="checkbox" /></th> -->
+	                <th class="table-author am-hide-sm-only">姓名</th>
+	                <th class="table-date am-hide-sm-only">角色</th>
+	                <th class="table-date am-hide-sm-only">账号</th>
+	                <th class="table-date am-hide-sm-only">操作</th>
+	               
+	              </tr>
+	          </thead>
+	          <tbody>
+			   
+			            <tr>              
+			                <td></td>
+			                <td>
+			          
+			                </td>
+			                 <td></td>
+			                <td></td>
+			                <td></td>
+			                <td></td>
+			           </tr>
+			
+			    </tbody>
+			  </table>
+</div>
+<!-- content end -->
+
+</div>
+
+<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+
+</body>
+</html>

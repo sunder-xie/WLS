@@ -1,0 +1,659 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> 
+#parse("/admin/common/head.vm")
+<link rel="stylesheet" type="text/css" href="${staticPath}css/ticket/newticket.css" /> 
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+td{
+   font-size: 12px;
+   color: #444;
+   font-style:normal;
+}
+
+.wselect {
+	width: 70px;
+	float: right;
+	height: 30px;
+	margin-left: 300px;
+}
+
+.wselect {
+	width: 100px;
+	height：50px;
+}
+.con-t4-button {
+	width: 1573px;
+	float: left;
+	margin-top: 40px;
+	height: 30px;
+}
+.cardType_2{display:none}
+.categroy-ul2 li{width:220px;}
+.item-rigth{width:600px; margin:10px 0; }
+
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div id="inputList" class="admin-content">
+		<!--右侧开始-->
+		<div class="am-cf am-padding">
+			 <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;优惠券管理</strong> / <small>添加优惠券</small></div>
+			<br/>
+			<hr width="100%" />
+			<div class="con-t2-left">
+				<table width="100%" border="0" cellspacing="0">
+					<tr>
+						<td style="text-align:right" width="60">分类<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<select class="cardTypeTitle" name="cardtype" onchange="selectValue(this);">
+								 	#foreach($key in $cardMap.keySet())
+									<option value="$key"#if($key == $!elecCardBatch.cardtype)
+									selected="selected" 
+									#end>
+										$!cardMap.get($key)
+									</option>
+									#end
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">名称<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input data-type="must" name="cardname" id="cardname" type="text" maxlength="10" value="$!elecCardBatch.cardname"/>
+						</td>
+					</tr>
+					<tr class="cardType cardType_1">
+						<td style="text-align:right" width="60">券额<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<select name="mark">
+						#foreach($key in $priceMAP.keySet())
+								<option value="$key" #if($key == $!elecCardBatch.amountmark) selected="selected" #end >
+									$!priceMAP.get($key)
+								</option>
+						#end
+							</select>
+							<input style="width: 50px" id="amount" name="amount" type="text" maxlength="4" value="$!elecCardBatch.amount"/><!-- onblur="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" -->
+						</td>
+					</tr>
+					<!-- <tr class="cardType cardType_1">
+						<td style="text-align:right" width="60"></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input type="radio" name="radiotic" width="10" id="bargainid">特价定额(元) 
+							<input style="width: 50px" id="amount" name="amount" type="text" maxlength="4" value="$!elecCardBatch.amount"/>
+						</td>
+					</tr>  -->
+					
+					<tr class="cardType cardType_1">
+						<td style="text-align:right" width="60">最低消费</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input data-type="" name="minPrice" id="minPrice" type="text" maxlength="4"   oninput="OnInput(event)" onpropertychange="OnPropChanged(event)" value="$!elecCardBatch.minPrice"/>
+						</td>
+					</tr>
+					<tr class="cardType cardType_1">
+						<td style="text-align:right" width="60">最低几杯</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input data-type="" name="limitcup" id="limitcup" type="text" maxlength="4"   oninput="OnInput(event)" onpropertychange="OnPropChanged(event)" value="$!elecCardBatch.limitcup"/>
+						</td>
+					</tr>
+				
+					<tr class="cardType cardType_2 cardType_2_must">
+						<td style="text-align:right" width="60">兑换名称<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input data-type="" name="dhname" type="text" maxlength="4" #if($!elecCardBatch.dhname) value="$!elecCardBatch.dhname" #else placeholder="限制四字"#end/>
+						</td>
+					</tr>
+					<tr class="cardType cardType_2">
+						<td style="text-align:right" width="60">最高兑换额</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input data-type="" name="maxPrice" id="maxPrice" type="text" maxlength="4"  oninput="OnInput(event)" onpropertychange="OnPropChanged(event)" value="$!elecCardBatch.maxPrice" />
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">期限<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input style="width: 30px;" type="radio" name="radio" id="qixian"  checked="checked"/>
+							<input type="text"  class="am-form-field" name="timefrom" id="time1" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})"  placeholder="开始时间" value="$!elecCardBatch.timefrom" style="width: 120px;display:inline-block">
+								至
+							<input type="text"  class="am-form-field" name="timeto" id="time2" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" placeholder="结束时间" value="$!elecCardBatch.timeto" style="width: 120px;display:inline-block">
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60"></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<!--  #if($!elecCardBatch.daynum)
+							 #end  -->
+							<input style="width: 30px;" type="radio" name="radio" id="tianshu" />
+							<input  maxlength="3" style="width: 100px; font-size:16px; padding:5px; border-color:#ccc" name="daynum" id="totalday" type="text"  placeholder="有效期天数"   value="$!elecCardBatch.daynum"/>&nbsp;天
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">说明<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<textarea style="width: 260px;" name="description" maxlength="100" >$!elecCardBatch.description</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">结算分类<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<select data-type="" name="jstype">
+									#foreach($key in $jsMap.keySet())
+									<option value="$key" #if($key == $!elecCardBatch.jstype)
+									selected="selected"#end>
+										$!jsMap.get($key)
+									</option>
+									#end
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">数量<span style="color:red;size: 10">*</span></td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input data-type="must" name="cardcount" id="cardcount" maxlength="10"  type="text" value="$!elecCardBatch.cardcount"/>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">口令</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input name="command" type="text" maxlength="20" value="$!elecCardBatch.command" />
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">备注</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<textarea style="width: 260px;" name="remark" maxlength="500" >$!elecCardBatch.remark</textarea>
+						</td>
+					</tr>
+						<tr>
+						<td style="text-align:right" width="60">附赠商品ID</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input name="annexation" id="annexation"  type="text" maxlength="99" value="$!elecCardBatch.annexation"/>
+							<br>
+							<span id="annexationinfo"></span>
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">每次领取数量 (张)</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input name="receivenum" id="receivenum" type="text" maxlength="5" value="$!elecCardBatch.receivenum" />
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">每人领取周期 (天)</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input name="cycleday" id="cycleday" type="text" maxlength="5" value="$!elecCardBatch.cycleday" />
+						</td>
+					</tr>
+					<tr>
+						<td style="text-align:right" width="60">本券成本额 (元)</td>
+						<td width="10">&nbsp;</td>
+						<td style="text-align:left" width="260">
+							<input name="costprice" id="costprice" type="text" maxlength="5" value="$!elecCardBatch.costprice" />
+						</td>
+					</tr>
+					
+					
+				</table>
+			</div>
+			<div class="con-t3" id="allshopclass">
+				<div style="width: 30%; float: left; text-align: right;margin-right: 10px;">
+				 	<span style="font-size: 20px">参与店铺</span><span style="color:red;size: 10">*</span> &nbsp;&nbsp;
+					<input type="checkbox" id="checkAllshopID" name="checkAllshop"> 全部
+				</div>
+			<input type="hidden" id="shopid">
+				<div class="shopidids" style="width: 56%; float: left; background:#E4E4E4 ;">
+				<ul class="categroy-ul">
+					#foreach($shop in $shopList)
+ 				<li>
+					<input type="checkbox" id="shoponeID" name="validshopid" value="$shop.shopid" 
+					#if($idList.contains($shop.esname)) checked="checked"#end
+					>$!shop.esname
+ 				</li>
+ 					#end
+				</ul>
+				</div>
+			</div>
+			<div class="con-t4">
+				<div class="con-t4-left" style="width:20%;">
+					<span style="font-size: 20px">商品分类</span><span style="color:red;size: 10">*</span> &nbsp;&nbsp;
+					<input type="checkbox" id="allItemID" />全品类
+				</div>
+				
+				<div id="allClass" class="con-t4-right" style="width:80%">
+				<input type="hidden" id="productid" >
+					<div class="con-t4-right-item" style="width:100%" id="itemClass">
+						#foreach($item in $cafeItemList)
+						<div class="clearfix">
+							<div class="item-left">
+							<input type="checkbox" name="validitemid" id="$!item.id" #if($!itemList.contains($!item.id)) checked="checked"#end  value="$!item.id">
+								$!item.name
+							</div>
+							<div class="item-rigth productidids" data-id="$item.id">
+								<ul class="categroy-ul2">
+								#foreach($product in $productMap.get($item.id))
+	   								<li><input class="validproductid_$item.id" type="checkbox" name="validproductid" data-type="$item.id" id="$product.id" value="$product.id" 
+	   								#if($!productList.contains($!product.id)) checked="checked"#end />$!product.name</li>
+								#end
+								</ul>
+							</div>
+						</div>
+						#end
+					</div>
+				</div>
+			</div> 
+			<div class="con-t4-button" style="text-align:center;">
+				<input class="am-btn am-btn-primary am-btn-xs" type="button" id="cancels" onclick="submitForm_1();" value="取消" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="submit"  id="submit" onclick="submitForm();" class="am-btn am-btn-primary am-btn-xs" value="提交保存" />
+			</div>
+		</div> 
+		<!--右侧结束-->			
+   </div>
+  <script type="text/javascript">
+  $('.cardTypeTitle option').each(function(e,a){
+	  if($(a).attr('selected')) {
+		  selectValue(a ,'star');
+	  }
+  })
+  	$('#checkAllshopID').change(function(){
+  		var check = $(this).attr('checked');
+  		$('#allshopclass input[type="checkbox"]').each(function(e,a){
+  			$(a).attr('checked',check);
+  		})
+  	})
+  	$('#allItemID').change(function(){
+  		var check = $(this).attr('checked');
+  		$('#allClass input[type="checkbox"]').each(function(e,a){
+  			$(a).attr('checked',check);
+  		})
+  	})
+  	$('input[name="validitemid"]').change(function(){
+  		var check = $(this).attr('checked');
+  		var tid = $(this).val();
+  		$('input[data-type="'+tid+'"]').each(function(e,a){
+  			$(a).attr('checked',check);
+  		})
+  		checkAllType()
+  	})
+  	$('#allClass input[name="validproductid"]').change(function(){
+  		var check = $(this).attr('checked');
+  		var tid = $(this).attr('data-type');
+  		
+  		if(check==false){
+  			$('#allClass input[name="validitemid"]').each(function(e,a){
+  				if($(a).val()==tid)$(a).attr('checked',check);
+  			})
+  		}else{
+  			var isok = true;
+  			$('.validproductid_'+tid+'').each(function(e,a){
+  				if(!$(a).attr('checked')){
+  					isok = false
+  					return
+  				}
+  			})
+  			$('#'+tid+'').attr('checked',isok);
+  		}
+  		checkAllType()
+  	})
+  	function checkAllType(){
+  		var isAll = true;
+  		$('#allClass input[type="checkbox"]').each(function(e,a){
+  			if(!$(a).attr('checked')){
+  	  			isAll = false;
+  			} 
+  		})
+  		$('#allItemID').attr('checked',isAll);
+  	}
+	function selectValue(that ,star){
+		var v = $(that).val();
+		if(star != 'star')$('.cardType input').val('');
+		$('.cardType').hide();
+		$('.cardType input').attr('data-type',''); 
+		$('.cardType_'+v).show();
+		$('.cardType_'+v+'_must input').attr('data-type','must');
+		
+	}
+	//鼠标离焦获取商品名称
+	$("#annexation").mouseleave(function(){
+		var queryids=$("#annexation").val();
+		var data={"annexation":queryids}
+		$.ajax({
+			url:"${basePath}admin/ticket/findShopById.xhtml",
+			type:'get',
+			data:data,
+			success:function(data){
+				$("#annexationinfo").html(data)
+			}
+		})
+	}); 
+	//校验抵扣金额只能二选一
+/* 	$("#deductionid").mouseleave(function(){
+  		if($("#deductionid").attr('checked')){
+  			$("#amount").attr("disabled",true);
+  			$("#amount").val("")
+  			$("#deduction").attr("disabled",false);
+  		}else{
+  			$("#amount").attr("disabled",false);
+  		}
+  	})
+	$("#bargainid").mouseleave(function(){
+  		if($("#bargainid").attr('checked')){
+  			$("#deduction").attr("disabled",true);
+  			$("#deduction").val("")
+  			$("#amount").attr("disabled",false);
+  		}else{
+  			$("#deduction").attr("disabled",false);
+  		}
+  	}) */
+  	
+	
+	function OnPropChanged(event){
+		console.info(event);
+	}
+	function OnInput(event){
+		console.info(event)
+	}
+	$('#inputList input').focus(function(){
+		$('.errMod').remove();
+	})
+	
+	function submitForm(){
+		var isgo = true;
+		var asgo = true;
+		$('.errMod').remove();
+		$('#inputList input').each(function(e,a){
+			//检验领取输入框
+			if($.trim($("#receivenum").val()) != ""){
+				if($(a).attr('name') == 'receivenum' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+			}
+			if($.trim($("#cycleday").val()) != ""){
+				if($(a).attr('name') == 'cycleday' && !(/^[\+\-]?(([1-9]\d*)|\d)$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+			}
+			if($.trim($("#costprice").val()) != ""){
+				if($(a).attr('name') == 'costprice' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+			}
+			if($(a).val()=='' && $(a).attr('data-type')=="must"){
+				var html = '<div class="errMod" style="color:#ed2626">选项不能为空</div>';
+				$(a).after(html);
+				isgo = false;
+			}
+		 })
+		 console.info(isgo+'1');
+		 //名称不能为空格   
+		 if($.trim($("#cardname").val())==""){
+				var html = '<div class="errMod" style="color:#ed2626">名称不能为空</div>';
+				$("#cardname").after(html);
+				isgo = false;
+		 }
+		 //校验数量必须是每次领取数量的倍数
+		 if($.trim($("#receivenum").val()) !=""){
+			 var amount=$("#cardcount").val();
+			 var receivenum=$("#receivenum").val();
+			 if(amount % receivenum !=0){
+				 var html = '<div class="errMod" style="color:#ed2626">数量需为每次领取数量的倍数</div>';
+				 $("#receivenum").after(html);
+				 isgo = false;
+			 }
+		 }
+		 
+		  if($("select[name='cardtype']").val()==1){
+		 //最低消费和最低几杯 只能二选一
+			if($("#minPrice").val()=="0" && $("#limitcup").val()=="0"){
+				asgo =false;
+			}	
+			if(asgo){
+			 if($("#minPrice").val()!="" && $("#limitcup").val()!="" && $("#limitcup").val()!="0"){
+				 	var html = '<div class="errMod" style="color:#ed2626">最低消费和最低几杯 只能二选一</div>';
+					$("#limitcup").after(html);
+					isgo = false;
+			 	}
+			}
+			//如果两个单选都没选提示两个必须选一个
+			/* var valpri=$('input:radio[name="radiotic"]:checked').val();
+			if(valpri==null){
+				var html = '<div class="errMod" style="color:#ed2626">券额需要二选一</div>';
+				$("#amount").after(html);
+				isgo = false;
+				} */
+		  $('#inputList input').each(function(e,a){
+			/*   if($("#bargainid").attr('checked')){
+			  } */
+			 /*  if($("#deductionid").attr('checked')){
+				if($(a).attr('name') == 'deduction' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+			  } */
+			if($(a).attr('name') == 'amount' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+			var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+			$(a).after(html);
+			isgo = false;
+			}
+		  
+			if($("#minPrice").val()!="" && $("#limitcup").val()==""){
+			if($(a).attr('name') == 'minPrice' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;    
+			  	}
+		   	 }
+			  if($("#minPrice").val()=="" && $("#limitcup").val()!=""){
+			 	if($(a).attr('name') == 'limitcup' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;    
+				 } 
+			  }
+			  
+		  }) 
+		  }else{
+		 $('#inputList input').each(function(e,a){
+			 if($("#maxPrice").val()!=""){
+			if($(a).attr('name') == 'maxPrice' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+				var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+				$(a).after(html);
+				isgo = false;
+				}
+			}
+		  }) 
+		 }
+
+			 console.info(isgo+'4');
+		if($("#totalday").val()!=""){
+			 $('#inputList input').each(function(e,a){
+					if($(a).attr('name') == 'daynum' && $(a).prev().attr('checked') && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+						var html = '<div class="errMod" style="color:#ed2626">请输入正确的有效天数</div>';
+						$(a).after(html);
+						isgo = false;
+					}
+				  }
+				)
+			   } 
+
+		 console.info(isgo+'5');
+		   if($("#qixian").attr('checked')){
+			   $("#tianshu").val('')
+			  if($("#time1").val()=="" || $("#time2").val()==""){
+				  var html = '<div class="errMod" style="color:#ed2626">请选择有效日期</div>'; 
+				  $("#time2").after(html);
+				  isgo = false;
+			  }
+		  }
+
+		   if($("#tianshu").attr('checked')){
+			  $("#time1").val('')
+			  $("#time2").val('')
+			  if($("#totalday").val()==""){
+				  var html = '<div class="errMod" style="color:#ed2626">请选择有效日期</div>';
+				  $("#totalday").after(html);
+				  isgo = false;
+			  }
+		  	}
+			 console.info(isgo+'6');
+		 $('#inputList input').each(function(e,a){
+				if($(a).attr('name') == 'cardcount' && !(/^[1-9]\d*$/.test($.trim($(a).val())))){
+					var html = '<div class="errMod" style="color:#ed2626">请输入正确的数字</div>';
+					$(a).after(html);
+					isgo = false;
+				}
+			  })
+			  
+			/*时间校验 */
+		 	 if($("#totalday").val()==""||$("#totalday").val()=="0"){
+					 var time1 = $("#time1").val();
+					 var time2 = $("#time2").val();
+					var currentTime='$DateUtil.getCurDateStr()';
+					if(time1>time2 || time1<currentTime){
+						var html = '<div class="errMod" style="color:#ed2626">请选择需要的时间段</div>';
+						$("#time2").after(html);
+					 	isgo = false;
+					}
+				}
+
+		 console.info(isgo+'7');
+		 //判断商品是否为空
+		 var cbox = false;
+		 $('.productidids input[type="checkbox"]').each(function(e,a){
+			 if($(a).attr('checked')){
+				cbox = true;
+			 }
+		 }) 
+		 
+			 console.info(isgo+'8');
+		 if(!cbox){
+			 var html = '<div class="errMod" style="color:#ed2626">请选择你所需要的商品</div>';
+			 $("#productid").after(html);
+			 isgo = false;
+		 }
+		 //判断商铺是否为空
+		 var cbox1 = false;
+		 $('.shopidids input[type="checkbox"]').each(function(e,a){
+			 if($(a).attr('checked')){
+				cbox1 = true;
+			 }
+		 }) 
+		 
+			 console.info(isgo+'9');
+		 if(!cbox1){
+			 var html = '<div class="errMod" style="color:#ed2626">请选择你所需要的店铺</div>';
+			 $("#shopid").after(html);
+			 isgo = false;
+		 }
+		 console.info(isgo);
+		 
+		if(isgo){
+			if(confirm("确认提交吗?")){
+				submitForm_2();
+			}
+		}else{
+			$('.errMod').each(function(e,a){
+				if(e==0){
+					var top = $(a).offset().top - 30;
+					window.scrollTo('0',top);
+				};
+			})
+			
+		  }
+		} 
+	
+	
+	function submitForm_1(){
+		if(confirm("您所填写的信息不会保留,确定取消吗?")){
+			location.href = '${basePath}admin/ticket/showTicketList.xhtml';
+		}
+	}
+	function submitForm_2(){
+		 var data = {};
+		$('#inputList select').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		})
+		$('#inputList input').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();	
+		})
+		$('#inputList textarea').each(function(e,a){
+			var attr = $(a).attr('name');
+			data[attr] = $(a).val();
+		})
+		//店铺ids
+		var validshopid=new Array();
+        $("input[name='validshopid']:checked").each(function (e,a) {
+        	validshopid.push($(a).val());
+        });
+        //判断店铺如果不选
+        data['validshopid']= validshopid.join(",");
+		//品类ids
+        var validitemid=new Array();
+		var itemidJson = '{';
+        $('#itemClass .item-rigth').each(function (e,a) {
+        	var productidJson = '';
+            $(a).find('input[type=checkbox]:checked').each(function (e,a) {
+            	productidJson += ','+$(a).val();
+            });
+            if(productidJson != ''){
+            	itemidJson += '"'+$(a).attr('data-id') + '":"' + productidJson.substring(1,productidJson.length) +'",';
+            }
+        });
+     	//判断商品如果不选
+        itemidJson = itemidJson.substring(0,itemidJson.length-1) + '}';
+        data['producrids']= itemidJson;
+		$.ajax({
+			url:"${basePath}admin/ticket/updateTicket.xhtml",
+			type:'get',
+			dataType:'json',
+			data:data,
+			success:function(data){
+				if(data.success){
+					location.href = '${basePath}admin/ticket/showTicketList.xhtml';
+				}else{
+					alert(data.msg);
+				}
+			}
+		})
+	}
+	
+  </script>
+	
+</body>
+</html>

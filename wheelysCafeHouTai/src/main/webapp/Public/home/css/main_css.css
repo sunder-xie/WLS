@@ -1,0 +1,909 @@
+body{
+    font-family: "Microsoft YaHei";
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+a {
+
+}
+input,textarea,button {
+    outline: none;
+}
+.clear{
+    zoom: 1;
+}
+.clear:after{
+    display: block;
+    clear: both;
+    content: "";
+}
+@font-face {
+    font-family: 'Brandon_med';
+    src: url('../fonts/Brandon_med.otf') ;
+    src: url('../fonts/Brandon_med.otf?#iefix&v=4.5.0') format('embedded-opentype'), url('../fonts/Brandon_med.otf?v=4.5.0') format('woff2'), url('../fonts/Brandon_med.otf?v=4.5.0') format('woff'), url('../fonts/Brandon_med.otf?v=4.5.0') format('truetype'), url('../fonts/Brandon_med.otf?v=4.5.0#fontawesomeregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.Brandon_med {
+    font-family: Brandon_med,"Microsoft YaHei";
+}
+.icon {
+    background: url("http://houtai.wheelyschina.com/houtai/Public/home/img/icon_bg.png") no-repeat;
+    display: inline-block;
+}
+/* ../img/icon_bg.png */
+/*   index   */
+.Iwrap {
+    min-width: 1200px;
+}
+#Iheader{
+    height: 60px;
+    background: #ed2323;
+
+}
+.Iheader_left{
+    padding-left: 22px;
+    float: left;
+}
+.logo_left {
+    float: left;
+}
+.Iheader_left .icon-ul {
+    background-position: 0 0;
+    width: 28px;
+    height: 20px;
+    margin: 22px 28px 0 0;
+}
+.Iheader_left .colse {
+    background-position:-111px 0;
+}
+.Iheader_left .logo {
+    float: left;
+    margin-top: 10px;
+}
+.logo p {
+    font-family: Brandon_med;
+    font-weight: bold;
+    font-size: 12px;
+    color: #fff;
+    margin-bottom: 6px;
+}
+.icon-wx,.icon-wb {
+    width: 20px;
+    height: 16px;
+}
+.icon-wx {
+    background-position: -72px 0;
+}
+.icon-wb {
+    margin-left: 6px;
+    background-position: -92px 0;
+}
+
+/*.Iheader_left img{
+    margin-top: -12px;
+}*/
+.wheely {
+    text-align: center;
+    line-height: 60px;
+}
+.wheely a{color:#fff; font-size:1.4rem; padding:0 20px; height:100%; display:inline-block;}
+.wheely a.select{background:rgba(0,0,0,.5)}
+.wheely a:hover{color:#fff;}
+.wheely img {
+    margin-left: 170px;
+}
+.menuList{position:absolute; top:60px; background:rgba(0,0,0,.5);display:none; z-index:100;}
+.menuList a{display:block;}
+.menuList a:hover{color:#fff;}
+.Iheader_right {
+    float: right;
+    padding-top: 14px;
+    margin-bottom: 0;
+}
+.Iheader_right li{
+    float: left;
+    color: #fff;
+}
+.join {
+    font-size: 14px;
+    margin: 4px 12px 0 0;
+    text-align: center;
+    height: 24px;
+    background:url("http://houtai.wheelyschina.com/houtai/Public/home/img/icon_bg.png") no-repeat;
+    line-height: 24px;
+    width: 112px;
+    border-radius: 2px 0 0 2px;
+    background-position: 0 -20px;
+}
+.join span {
+    font-family: Brandon_med;
+}
+.my {
+    font-family: Brandon_med,"Microsoft YaHei";
+    margin: 8px 24px 0 0;
+}
+.icon-my {
+    width: 16px;
+    height: 18px;
+    background-position: 0 -44px;
+    margin:0 6px -3px 0;
+}
+.English {
+    font-size: 12px;
+    margin:10px 0 0 26px;
+}
+.icon-English {
+    width: 42px;
+    height: 40px;
+    background-position: 0 -66px;
+}
+.border_und {
+    font-size: 12px;
+    margin: 8px 22px 0;
+}
+.Iheader_right .China {
+    color: #f06671;
+    font-size: 12px;
+    margin:10px 40px  0 0 ;
+}
+.icon-China {
+    width: 42px;
+    height: 40px;
+    background-position:-42px -66px;
+}
+/*  header弹框   */
+.nav_warp {
+    display: none;
+    position: absolute;
+    z-index: 11;
+    width: 1070px;
+}
+.nav_warp .left {
+    float: left;
+    width: 670px;
+}
+.nav_warp .left .name1,.nav_warp .left .name2 {
+    padding-top: 170px;
+   /*  height: 460px; */
+    height: 400px;
+    text-align: center;
+}
+.nav_warp .left .name1 {
+    color: #fff;
+    background: #ed2323;
+}
+.nav_warp .left .name2 {
+    color:#ed2323 ;
+    background: #fff;
+}
+.nav_warp .left p {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 35px;
+    margin: 0;
+}
+.nav_warp .right_nav {
+    /* height: 920px; */
+    height: 800px;
+    background: #fff;
+    width: 400px;
+    float: left;
+}
+.right_nav dl{
+    padding-left: 50px;
+}
+.right_nav dt{
+    padding-bottom: 14px;
+    margin-top: 50px;
+    color: #ed2323;
+    font-size: 16px;
+    line-height: 30px;
+}
+.right_nav .no {
+    padding-bottom: 0;
+}
+.right_nav dd{
+    font-size: 14px;
+    line-height: 28px;
+    color: #000;
+}
+/* end  header弹框   */
+.wheelysCoffeeCar {
+    position: relative;
+    z-index: 9;
+}
+.wheelysCoffeeCar img{
+    width: 100%;
+}
+.soll {
+    position: absolute;
+    top: 22px;
+    right: 40px;
+}
+.float_bot {
+    width: 390px;
+    height: 176px;
+    position: fixed;
+    bottom: 178px;
+    left: 32px;
+    z-index: 100;
+    background: #fff;
+    padding-top: 14px;
+    border: 2px solid #ed2323;
+
+}
+.float_bot p {
+    color: #030000;
+    font-size: 18px;
+
+    padding-left: 18px;
+    margin-bottom: 0;
+    line-height: 34px;
+}
+.float_bot .Email_form {
+    margin-left: 14px;
+    margin-top: 16px;
+}
+.float_bot .Email_form input {
+    padding: 10px 0 10px 12px;
+    font-size: 14px;
+    width: 288px;
+    color: #949494;
+    background: #ebebeb;
+    border: 1px solid #eabfbe;
+    border-radius: 4px 0 0 4px;
+    border-right: none;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+}
+.float_bot .Email_form button {
+    background: #ebebeb;
+    height: 42px;
+    width: 66px;
+    text-align: center;
+    color: #949494;
+    font-size: 14px;
+    border: 1px solid #eabfbe;
+    border-radius: 0 4px 4px 0;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+}
+.myShop {
+
+}
+.myShop .left,.myShop .right {
+    float: left;
+    width: 50%;
+}
+.myShop img {
+    width: 100%;
+}
+.myShop .left {
+    position: relative;
+}
+.coffer_hairstyles {
+    height:20px;
+    width: 100%;
+    line-height:20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #ed2323;
+}
+.coffer_hairstyles p {
+    color: #fff;
+    padding-left:18px;
+    margin-bottom: 0;
+    font-size:12px;
+    display: inline-block;
+    width:90%;
+}
+.arrow {
+    width: 9%;
+    float: right;
+     position: relative;
+    top:-5px;
+    //line-height: 16px;
+    font-size:12px;
+    text-align: right;
+}
+.icon-arrow {
+    background-position: -28px 0;
+    width: 24px;
+    height: 8px;
+    margin:11px 24px 0 0;
+}
+.cof {
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    padding-top: 30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 82px;
+    -webkit-border-radius: 82px;
+    -moz-border-radius: 82px;
+    background: #ed2323;
+    color: #fff;
+}
+.cof p {
+    font-size: 12px;
+    line-height: 13px;
+    margin-bottom: 0;
+}
+.cof strong {
+    font-size: 15px;
+    line-height: 20px;
+}
+.dreamCoffee {
+
+}
+.dreamCoffee img {
+    width: 100%;
+}
+.myCoffee {
+    text-align: center;
+    background: #f6f7f7;
+    padding:44px 0 100px 0;
+}
+.myCoffee h3{
+    font-weight: bold;
+    font-size: 46px;
+    margin: 0;
+    line-height: 84px;
+}
+.myCoffee p{
+    font-size: 28px;
+    line-height: 52px;
+    margin-bottom: 0;
+}
+.inf_form {
+    margin-top: 38px;
+}
+.Fill_infor {
+    width: 1014px;
+    margin: 0 auto;
+}
+.Fill_infor .left {
+    width: 508px;
+    float: left;
+    margin-right: 10px;
+}
+.Fill_infor .right {
+    width: 496px;
+    float: left;
+}
+.Fill_infor .right textarea {
+    width: 494px;
+    height: 184px;
+    padding:10px 6px 10px 12px;
+    font-size: 18px;
+    color: #9f9fa0;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+.group-input input {
+    width: 506px;
+    font-size: 18px;
+    color: #9f9fa0;
+    border: 1px solid #fff;
+    padding: 12px 0 10px 14px;
+    margin-bottom: 18px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+.inf_btn {
+    margin-top: 22px;
+}
+.inf_btn button {
+    width: 226px;
+    padding: 6px 0 ;
+    color: #fff;
+    font-size: 20px;
+    background: #ed2323;
+    border: 1px solid #ed2323;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+.sealCoffee {
+    position: relative;
+}
+.sealCoffee img {
+    width: 100%;
+}
+.btn_coming {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -320px;
+    margin-top: -92px;
+}
+.btn_coming p {
+    font-size: 40px;
+    margin-bottom: 0;
+    color: #fff;
+    font-weight: bold;
+    font-family: "Microsoft YaHei";
+}
+.btn_coming button {
+    width: 278px;
+    margin-top: 18px;
+    color: #fff;
+    padding: 10px 0;
+    font-size: 18px;
+    border: 1px solid #ed2323;
+    background: #ed2323;
+}
+.btn_coming button span {
+    font-size: 22px;
+    font-family: Brandon_med,"Microsoft YaHei";
+}
+#Ifooter {
+    background: #ed2323;
+    position: relative;
+    padding:40px 0 42px;
+    min-width: 1200px;
+}
+.Ifooter_nav {
+    width: 900px;
+    margin: 0 auto;
+    padding-bottom: 90px;
+}
+.Ifooter_nav li {
+    float: left;
+    text-align: center;
+    margin-right: 104px;
+}
+.Ifooter_nav dt {
+    color: #fff;
+    line-height: 32px;
+    font-size: 16px;
+}
+.Ifooter_nav dd {
+    text-align: left;
+    color: #fff;
+    line-height: 28px;
+    font-size: 12px;
+}
+.img-gif img {
+    width: 45%;
+}
+.icon-rabbit {
+    width: 68px;
+    height: 130px;
+    background-position:-83px -50px;
+}
+.Ifooter_nav .coffee_about {
+    text-align: left;
+    margin-right: 0;
+}
+.coffee_about p {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 0;
+}
+.coffee_about .logo p {
+
+    margin-bottom: 6px;
+}
+.Email_form {
+    margin:4px 0 16px;
+}
+.Email_form input {
+    padding: 6px 0 6px 12px;
+    width: 216px;
+    color: #949494;
+    font-size: 14px;
+    border: 1px solid #fff;
+    border-radius: 4px 0 0 4px;
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    background: #fff;
+    margin: 0;
+}
+.Email_form button {
+    height: 34px;
+    width: 44px;
+    color: #fff;
+    font-size: 14px;
+    border: 1px solid #ec8c8c;
+    border-radius: 0 4px 4px 0;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    background: #ec8c8c;
+    margin-left: -4px;
+}
+.copyInfor {
+    width: 1200px;
+    border-top: 1px solid #fff;
+    margin: 0 auto;
+}
+.copyInfor .left {
+    float: left;
+    font-size: 12px;
+    color: #fff;
+    line-height:36px;
+}
+
+.copyInfor .right {
+    float: right;
+}
+.icon-loving {
+    margin-top: 12px;
+    width: 14px;
+    height: 12px;
+    background-position: -58px 0;
+}
+.question_btn {
+    position: absolute;
+    bottom: 0;
+    right: 20px;
+}
+.question_btn button {
+    width: 368px;
+    height: 44px;
+    font-size: 16px;
+    color: #70706f;
+    font-weight: bold;
+    border: 1px solid #efeeed;
+    border-radius: 4px 4px 0 0;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    background: #efeeed;
+    box-shadow:-2px -2px 8px #000;
+}
+
+/*  end index  */
+
+/*  Team   */
+.Twrap {
+    width: 650px;
+    margin: 0 auto;
+}
+.Twrap p {
+    font-size: 16px;
+    line-height: 30px;
+}
+.venture_team {
+    text-align: center;
+    margin: 56px auto 0;
+}
+.venture_team .cotton {
+    margin-bottom:16px;
+    width: 48px;
+    height: 5px;
+    display: inline-block;
+    background: #000;
+}
+.icon-W {
+    width: 36px;
+    height: 36px;
+    background-position: -112px -20px;
+}
+.venture_team h2 {
+    font-size: 30px;
+    line-height: 50px;
+    margin: 0;
+    text-align: center;
+    color: #000;
+    font-weight: bold;
+}
+.venture_team .bottom {
+    margin: 0 auto;
+    width: 70px;
+}
+.venture_team .bottom span {
+    width: 70px;
+    height: 5px;
+    display:inline-block;
+    background: #000;
+}
+.icon-points {
+    margin: 32px 0 0;
+    width: 6px;
+    height: 120px;
+    background-position: -148px 0;
+}
+.birth_grown h3 {
+    margin: 30px 0;
+    line-height: 46px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.P_text p {
+    font-size: 16px;
+    line-height:30px;
+    color: #000;
+    margin-bottom: 30px;
+}
+.P_text .right {
+    text-align: right;
+    font-weight: bold;
+}
+.team_member {
+    margin-top:60px;
+}
+.team_member h4 {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 18px 0;
+}
+.team_member p {
+    line-height: 30px;
+    font-size: 16px;
+    margin: 8px 0;
+}
+.then {
+    margin: 50px auto 100px;
+}
+.then p {
+    line-height: 30px;
+    font-size: 16px;
+    margin: 8px 0;
+}
+.then .center {
+    text-align: center;
+}
+
+/*  end Team  */
+/*  Technology  */
+.techology_car {
+    margin-top: 32px;
+}
+.techology_car img {
+    width: 100%;
+}
+.green_warrior {
+
+}
+.green_warrior h2 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+.green_warrior h2 span {
+    font-family: "Microsoft YaHei";
+}
+.green_warrior h3 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+.green_warrior p {
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 32px;
+}
+.warrior_img {
+    padding: 26px 0;
+    text-align: center;
+}
+.warrior_img img {
+    width: 554px;
+    margin-top: 20px;
+}
+.warrior_img p {
+    text-align: left;
+    font-size: 16px;
+    line-height: 30px;
+}
+.win {
+    width: 554px;
+    margin: 12px auto;
+}
+.win span {
+    border-bottom: 1px solid #000;
+    width: 232px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+.win strong {
+    font-size: 18px;
+    margin: 0 4px;
+}
+
+.warrior_img .wheely_fous {
+    width: 100%;
+    margin: 40px 0 10px;
+}
+
+.wheely_Num {
+    color: #000;
+    font-size: 16px;
+    line-height: 30px;
+    margin-top: 12px;
+}
+.wheely_Num strong {
+
+}
+.wheely_Num p {
+
+}
+.wheely_Num img {
+    margin: 10px 0;
+}
+.coffee_app {
+    text-align: center;
+    margin-bottom: 70px;
+}
+.coffee_app h3 {
+    color: #ef3936;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 30px 0;
+}
+.coffee_app p {
+    font-size: 16px;
+    line-height: 30px;
+    margin: 20px 0;
+}
+.coffee_app .left {
+    text-align: left;
+}
+/*  end Technology   */
+
+
+/*  worth  */
+.worth_content {
+    min-width: 1240px;
+    position: relative;
+}
+.worth_left {
+    /*padding:120px 0 0 22px;*/
+    width: 260px;
+    position: absolute;
+    top: 120px;
+    left: 22px;
+}
+.year_nav {
+
+}
+.year_left,.year_right {
+    float: left;
+}
+.year_left {
+    width: 50px;
+    text-align: center;
+}
+.year_left .icon-points {
+    margin: 8px 0;
+}
+.icon-Wmax {
+    width: 50px;
+    height: 50px;
+    background-position: -83px -56px;
+}
+.year_right {
+    width: 206px;
+    padding: 4px 0 0 8px;
+    color: #000;
+}
+.year_right strong {
+
+}
+.year_right p {
+    line-height: 18px;
+}
+
+.worth_right {
+    /*width: 68%;
+    float: left;*/
+    margin: 0 auto;
+    padding-bottom: 80px;
+}
+.worth_text {
+    padding-top: 40px;
+}
+.worth_text p {
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 32px;
+}
+.worth_text h3 {
+    font-weight: bold;
+    margin-top: 10px;
+}
+.arabica {
+
+}
+.arabica img {
+    margin: 32px 0;
+    width: 100%;
+}
+.arabica p {
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 32px;
+}
+.arabica ul {
+    padding-bottom: 32px;
+}
+.arabica li {
+    line-height: 32px;
+    font-size: 16px;
+    color: #000;
+}
+/*  end worth  */
+
+
+
+/*  partner  */
+.partner_wheelys {
+    text-align: center;
+}
+.partner_wheelys img {
+    margin: 32px 0;
+}
+.partner_wheelys p {
+
+}
+.partner_wheelys .bold {
+    font-size: 20px;
+    font-weight: bold;
+}
+.Qme {
+    text-align: center;
+    padding: 62px 0;
+    margin-bottom: 60px;
+}
+.Qme a {
+    color: #ed2323;
+}
+
+/*  end partner  */
+
+/*  wisdom  */
+.icon-bean {
+    width: 50px;
+    height: 50px;
+    background-position: 0 -99px;
+}
+.wisdom_text {
+    text-align: center;
+}
+.wisdom_text p {
+    text-align: left;
+    margin: 32px 0;
+}
+.wisdom_text .right {
+    text-align: right;
+}
+
+.wisdom_list {
+    padding-top: 20px;
+}
+.wisdom_list h3 {
+    font-weight: bold;
+    font-size: 18px;
+}
+.wisdom_list img {
+    margin: 20px 0;
+}
+.wisdom_list p {
+    margin-bottom: 32px;
+}
+.Twrap .green_choose {
+    font-size: 20px;
+    margin-bottom: 0;
+}
+.wisdom_over {
+    margin-top: 70px;
+}
+.wisdom_over .center {
+    text-align: center;
+}
+
+/*  end wisdom  */  

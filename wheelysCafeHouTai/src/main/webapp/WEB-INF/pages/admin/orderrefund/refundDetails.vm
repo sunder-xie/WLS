@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+#inputMod input {
+	width: 150px;
+	float: left;
+	margin-right: 5px;
+}
+
+.clickMod a {
+	display: block;
+	width: 30%;
+	margin: 0 10%;
+	padding: 5px 0;
+	float: left;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+	background: #ed2626;
+	border-radius: 5px;
+	border: 1px solid #ed2626
+}
+
+.tbMod {
+	min-width: 800px;
+}
+
+.tbmod_2, .tbmod_2 th {
+	text-align: center !important;
+}
+
+.listMod {
+	margin: 20px 0 20px 15px;
+}
+
+.listMod h3 {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.listMod .money {
+	float: right;
+	width: 160px;
+	text-align: center;
+}
+.body
+
+{
+font-family : 微软雅黑,宋体;
+font-size : 1.5em;
+
+color : #000000;
+}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+
+	<div id="pop_1"
+		style="width: 500px; min-height: 300px; background: #fff; border-radius: 5px; padding: 20px 0; display: none;">
+		<h2 style="width: 100%; text-align: center; padding: 20px 0;">审核不通过</h2>
+		<p>
+			<textarea id="expressInfo" name="expressInfo"
+				placeholder="请输入审核不通过的理由"
+				
+				style="margin-left: 20px; max-width: 443px; max-height: 596px;"
+				rows="10" cols="70" maxlength="1500">$!mchorder.expressInfo</textarea>
+		</p>
+		<div class="clickMod" style="margin-top: 10px;">
+			<a style="background: #fff; color: #ed2626;"
+				href="javascript:topop.close();">取消</a> <a onclick="submit_2()">是的</a>
+		</div>
+	</div>
+
+	<div id="pop_2"
+		style="width: 500px; height: 150px; background: #fff; border-radius: 5px; padding: 20px 0; display: none;">
+		<h2 style="width: 100%; text-align: center">确认后系统将自动退款</h2>
+		<div class="clickMod" style="margin-top: 10px;">
+			<a style="background: #fff; color: #ed2626;"
+				href="javascript:topop.close();">取消</a> <a
+				href="javascript:toajax('通过');">是的</a>
+		</div>
+	</div>
+
+	<div class="am-cf am-padding">
+	<div class="am-fl am-cf tbMod" style="width: 75%;">
+		<strong class="am-text-primary am-text-lg">
+			&nbsp;&nbsp;&nbsp;订单详情</strong> <br> <br>
+		
+		<div  class="am-g">
+			<div class="am-u-sm-12"> 
+                <div class="topshow">
+                    <form id="inputMod" class="am-input-group am-input-group-sm" action="${basePath}admin/orderrefund/showRefundListByTime.xhtml" method="get"  onSubmit="return checkDate();">
+                        <p class="am-input-group-btn">
+                            <select name="shopid" class="am-input-sm" placeholder="店铺名字" style="width:150px;height:33px;float:left;">
+                                <option value="">全部店铺</option>
+                                #foreach($shop in $shopList)
+                                <option #if($shop.shopid eq $params.shopid) selected="selected" #end value="$shop.shopid">$!citymap.get($shop.citycode)$!shop.shopname</option>
+                                #end
+                            </select>
+                            <input type="text" class="am-form-field" name="begin" id="time1" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.begin" placeholder="开始时间(退款)" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                            <input type="text" class="am-form-field" name="end" id="time2" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.end" placeholder="结束时间(退款)" style="width:150px;height:33px;float:left;">
+                            <span>
+                            <button id="btn" class="am-btn am-btn-default" type="submit"  style="float:left;margin-left: 10px;" >搜索</button>
+                            </span>
+                        </p>
+                    </form>
+            	</div>	
+			</div>
+           </div>
+			<div>
+				<table >
+				<strong class="body">
+					&nbsp;&nbsp;&nbsp;退款成功金额合计:&nbsp;  $!totalPrice 元</strong> <br> <br>
+                </table>
+            </div>
+		<div class="am-g">
+			<div class="am-u-sm-12">
+				<table
+					class="am-table am-table-striped am-table-hover table-main tbmod_2">
+					<thead>
+						<tr>
+
+							<th class="table-author am-hide-sm-only">订单ID</th>
+							<th class="table-date am-hide-sm-only">店铺</th>
+							<th class="table-date am-hide-sm-only">联系人</th>
+							<th class="table-date am-hide-sm-only">电话</th>
+							<th class="table-date am-hide-sm-only">金额</th>
+							<th class="table-date am-hide-sm-only">下单时间</th>
+							<th class="table-date am-hide-sm-only">退款申请时间</th>
+							<th class="table-date am-hide-sm-only">退款时间</th>
+							<th class="table-date am-hide-sm-only">状态</th>
+							<th class="table-date am-hide-sm-only">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($refund in $refundList)
+						<tr>
+							<td><a
+								href="${basePath}admin/orderrefund/showOrderDetail.xhtml?tradeno=$!refund.tradeno "
+								target="_blank">$!refund.tradeno</a></td>
+								
+							<td>$!refund.shopname</td>
+							<td>$!refund.shoprole</td>
+							<td>$!refund.shoptelephone</td>
+							<td>$VmUtils.getDoubleAmount($!refund.refundamount)</td>
+							<td>$!refund.createtime</td>
+							<td>$!refund.refundtime</td>
+							<td>$!refund.refundcompletetime</td> 
+							
+							<td title="$!refund.status">#if($!refund.status
+								=='pending_audit') 待审核 #elseif($!refund.status
+								=='already_passed') 已通过 #elseif($!refund.status
+								=='refund_finish') 已退款 #elseif($!refund.status =='no_passed')
+								未通过 #elseif($!refund.status =='refund_ failed') 退款失败 #end</td>
+							<td><span> #if(${refund.status} =='refund_finish'
+									||${refund.status} =='cancel'|| ${refund.status}
+									=='already_passed') <a
+									href="${basePath}admin/orderrefund/showinfo.xhtml?id=$refund.id&userid=$user.id"
+									target="_blank">
+										<button type="button" name="update"
+											class="am-btn am-btn-default am-btn-xs am-text-secondary">
+											<span> 审核详情 </span>
+										</button>
+								</a> #elseif(${refund.status} =='pending_audit'||${refund.status}
+									=='refund_ failed') <input type="submit"
+									onclick="topop('pop_2','submit$!{refund.id}');"
+									class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+									id="submit$!{refund.id}" mchid="$!{refund.id}"  value="通过" /> <input
+									type="submit" onclick="topop('pop_1','submit$!{refund.id}');"
+									class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+									id="submit$!{refund.id}" mchid="$!{refund.id}" value="不通过" />
+
+									<a
+									href="${basePath}admin/orderrefund/showRefundinfo.xhtml?id=$refund.id "
+									target="_blank">
+										<button type="button" name="update"
+											class="am-btn am-btn-default am-btn-xs am-text-secondary">
+											<span> 原因 </span>
+										</button>
+								</a> #elseif(${refund.status} =='no_passed') <a
+									href="${basePath}admin/orderrefund/showinfo.xhtml?id=$refund.id&userid=$user.id"
+									target="_blank">
+										<button type="button" name="update"
+											class="am-btn am-btn-default am-btn-xs am-text-secondary">
+											<span> 审核详情 </span>
+										</button>
+								</a> <input type="submit"
+									onclick="topop('pop_2','submit$!{refund.id}');"
+									class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"
+									id="submit$!{refund.id}" mchid="$!{refund.id}" value="通过" />
+									#end
+							</span></td>
+						</tr>
+					
+						#end
+					</tbody>
+				</table>
+				#parse('include/pageUtil.vm')
+			</div>
+		</div>
+	</div>
+	</div>
+	<script type="text/javascript">
+	
+		function checkDate(){
+		 var time1 = $("#time1").val();
+		 var time2 = $("#time2").val();
+		if(time1 !=""&& time2 !=""){
+			var date1 = time1.split("-");          
+			var date2 = time2.split("-");        
+			var myDate1 = new Date(date1[0],date1[1],date1[2].substring(0,2)); 
+
+			var myDate2 = new Date(date2[0],date2[1],date2[2].substring(0,2));  
+	
+			if (myDate1 <= myDate2){  
+				return true; 
+			}else{	
+		 	alert ("提示: 开始时间不能大于结束时间！");
+			 return false; 
+		}
+	}
+}
+		
+		var n1 = ''
+		function submit_2() {
+			if ($('#expressInfo').val() == '') {
+				alert('表单不能为空')
+				return false;
+			} else {
+				n1 = '不通过'
+				toajax();
+			}
+		}
+
+		var mchel;
+		function topop(el, elmchid) {
+			var el = $('#' + el);
+			mchel = $('#' + elmchid);
+
+			var zIndex = 500;
+			var cover = $("<div />", {});
+			el.show();
+			cover.css({
+				'background' : 'rgba(0,0,0,.6)',
+				'position' : 'fixed',
+				'left' : '0',
+				'top' : '0',
+				'width' : '100%',
+				'height' : '100%',
+				'z-index' : zIndex - 1
+			});
+			$('body').append(cover);
+			topop.close = function() {
+				cover.remove();
+				el.hide();
+			}
+			$(cover).click(function() {
+				topop.close();
+			})
+			var width = el.css('width') / 2;
+			var height = el.css('width') / 2;
+			el.css({
+				'left' : '50%',
+				'margin-left' : -el.width() / 2 + 'px',
+				'margin-top' : -el.height() / 2 + 'px',
+				'top' : '50%',
+				'display' : 'block',
+				'transform-style' : 'preserve-3D',
+				'-webkit-transform-style' : 'preserve-3D',
+				'z-index' : zIndex,
+				'position' : 'fixed'
+
+			})
+		}
+
+		function toajax() {
+			var id = mchel.attr('mchid');
+			var status = '';
+			var expressInfo = '';
+			var neir = mchel.val();
+			var n2 = n1;
+			if (n2 == '不通过') {
+				status = 'no_passed';
+				expressInfo = $('#expressInfo').val();
+			} else if (neir == '通过') {
+				status = 'already_passed';
+			}
+			var obj = $(this);
+			$.ajax({
+				url : "${basePath}admin/orderrefund/refundStatus.xhtml",
+				type : 'get',
+				dataType : 'json',
+				data : 'id=' + id + '&showstatus=' + status + "&expressInfo="
+						+ expressInfo,
+				success : function(data) {
+					location.href = location.href;
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>

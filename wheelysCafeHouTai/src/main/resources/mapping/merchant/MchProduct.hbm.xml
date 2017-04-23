@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.merchant.MchProduct" table="MCHPRODUCT">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="ukey" column="UKEY" type="string" />
+		<property name="name" column="NAME" type="string" />
+		<property name="itemid" column="ITEMID" type="long" />
+		<property name="unit" column="UNIT" type="string" />
+		<property name="weight" column="WEIGHT" type="integer" />
+		<property name="description" column="DESCRIPTION" type="string" />
+		<property name="price" column="PRICE" type="integer" />
+		<property name="status" column="STATUS" type="string" />
+		<property name="delstatus" column="DELSTATUS" type="string" />
+		<property name="sortkey" column="SORTKEY" type="integer" />
+		<property name="imgurl" column="IMGURL" type="string" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+		<property name="supplierid" column="SUPPLIERID" type="long" />
+		<property name="sn" column="SN" type="integer" />
+	</class>
+</hibernate-mapping>
+

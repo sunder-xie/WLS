@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.news.WheelysNews" table="WHEELYS_NEWS">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="title" column="TITLE" type="string"/>
+		<property name="overview" column="OVERVIEW" type="string"/>
+		<property name="writer" column="WRITER" type="string"/>
+		<property name="newspicture" column="NEWSPICTURE" type="string"/>
+		<property name="category" column="CATEGORY" type="string"/>
+		<property name="pageview" column="PAGEVIEW" type="integer"/>
+		<property name="publishstatus" column="PUBLISHSTATUS" type="string"/>
+		<property name="delstatus" column="DELSTATUS" type="string"/>
+		<property name="publishtime" column="PUBLISHTIME" type="timestamp"/>
+		<property name="appeartime" column="APPEARTIME" type="timestamp"/>
+		<property name="createtime" column="CREATETIME" type="timestamp"/>
+		<property name="updatetime" column="UPDATETIME" type="timestamp"/>
+		
+	</class>
+</hibernate-mapping>
+

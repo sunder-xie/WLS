@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+.select {
+	border: 1px #7F9DB9 solid;
+	width: 80px;
+	float: left;
+	margin-left: 90px;
+	height: 30px;
+	overflow: hidden;
+}
+
+.wselect {
+	width: 70px;
+	float: right;
+	height: 30px;
+	margin-left: 300px;
+}
+.wselect {
+	width: 100px;
+	height：50px;
+}
+.topshow {
+	float: left;
+	margin: 8px;
+	
+} 
+.topshow1 {
+	float: right;
+} 
+</style>
+</head>
+
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+			<div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;优惠活动管理</strong> / <small>优惠活动展示</small></div>
+			<br/>
+			<hr width="100%" />
+			<div>
+			<div class="topshow">
+			<button style="height: 30px" type="button" class="am-btn am-btn-default am-btn-xs"
+				name="add">
+				新建优惠活动
+			</button>
+			</div>
+			<div class="topshow">
+				<form class="am-input-group am-input-group-sm"
+					action="${basePath}admin/ticket/activitysearch.xhtml" method="get">
+					<input type="text" name="actname" height="10px" style="height: 30px"
+						id="txtSeach" placeholder="活动名称"> <span 
+						>
+						<button class="am-btn am-btn-default" type="submit" name="sou">搜索</button>
+					</span>
+				</form>
+				</div>
+				<div class="topshow1">
+					<a style="margin-right:60px;" class="am-btn am-btn-primary am-btn-xs" href="${basePath}admin/ticket/showDiscountList.xhtml">返回列表页面</a>	
+				</div>
+			</div>
+			
+		</div>
+		<div class="am-g">
+			<div class="am-u-sm-12">
+				<table class="am-table am-table-striped am-table-hover table-main">
+					<thead>
+						<tr>
+							<th class="table-type">编号</th>
+							<th class="table-type">分类</th>
+							<th class="table-title">名称</th>
+							<th class="table-author am-hide-sm-only">使用期限</th>
+							<th class="table-type">优先级</th>
+							<th class="table-set">状态</th>
+							<th class="table-date am-hide-sm-only center">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						#foreach($dis in $showactList)
+						<tr>
+							<td>$!dis.id</td>
+							<td>
+								$!activitymap.get($!dis.type)
+							</td>
+							<td>$!dis.name</td>
+							<td>$DateUtil.formatDate($!dis.begintime)~$DateUtil.formatDate($!dis.endtime)</td>
+							<td>
+								$!prioritymap.get($!dis.priority)
+							</td>
+							<td>
+								<!-- 当前时间   $DateUtil.getCurDateStr() -->
+								<font color="red">$!dis.getActive()</font> 
+							</td>
+							
+							<td>
+								<div class="am-btn-toolbar center">
+									<div class="am-btn-group-xs">
+										<a href="${basePath}admin/ticket/activitydetail.xhtml?id=$dis.id">
+										<button style="color: blue" type="button" class="am-btn am-btn-default am-btn-xs"
+											name="detail">详情 
+										</button> &nbsp;
+										</a>
+										#if($!dis.getbz()=="y")
+										<span style="display: none"> <button  style="color: blue" class="am-btn am-btn-default am-btn-xs" id="zz">
+											<a style="color: blue;" href="${basePath}admin/activity/actstop.xhtml?id=$dis.id" >中止</a>
+										</button></span>
+										<span style="display: none"> <button style="color: blue" class="am-btn am-btn-default am-btn-xs" id="kq">
+											<a style="color: blue;" href="${basePath}admin/activity/actbegin.xhtml?id=$dis.id" >开启</a>
+										</button></span>
+										#end
+										#if($!dis.getbz()=="k")
+										<span style="display: none"> <button  style="color: blue" class="am-btn am-btn-default am-btn-xs" id="zz">
+											<a style="color: blue;" href="${basePath}admin/activity/actstop.xhtml?id=$dis.id" >中止</a>
+										</button></span>
+										<span style="display: blank"> <button style="color: blue" class="am-btn am-btn-default am-btn-xs" id="kq">
+											<a style="color: blue;" href="${basePath}admin/activity/actbegin.xhtml?id=$dis.id" >开启</a>
+										</button></span>
+										#end
+										#if($!dis.getbz()=="z")
+										<span style="display: blank"> <button  style="color: blue" class="am-btn am-btn-default am-btn-xs" id="zz">
+											<a style="color: blue;" href="${basePath}admin/activity/actstop.xhtml?id=$dis.id" >中止</a>
+										</button></span>
+										<span style="display: none"> <button style="color: blue" class="am-btn am-btn-default am-btn-xs" id="kq">
+											<a style="color: blue;" href="${basePath}admin/activity/actbegin.xhtml?id=$dis.id" >开启</a>
+										</button></span>
+										#end
+									</div>
+								</div>
+							</td>
+							
+						</tr>
+						#end
+					</tbody>
+				</table>
+				#parse('include/pageUtil.vm')
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+		$('button[name=add]').click(
+				function() {
+					window.location.href="${basePath}admin/ticket/addDiscount.xhtml"					
+				});
+		
+		$('button[name=sou]').click(function(){
+			var v = $.trim($("#txtSeach").val());
+			$("#txtSeach").attr("value",v);
+		})
+		
+	</script>
+</body>
+</html>

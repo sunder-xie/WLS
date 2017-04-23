@@ -1,0 +1,201 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+</head>
+<body style="padding:0px">
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;报表统计</strong> / <small>销售统计报表</small></div>
+    <br><br>
+    <br>
+    <div class="am-g">
+      <div class="am-u-sm-12" style="overflow-x:scroll;">
+      
+          <table style="width: 1000px" class="am-table am-table-striped am-table-hover table-main" >
+            <thead >
+             <tr>
+                 <th class="table-title" colspan="2"  style="min-width:60px;font-size: 17px">直营店当期数据统计</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:10px;">直营店当期经营天数</th>
+                 <th class="table-title">$ziVo.diffDay </th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">直营店当期直营店营业点数量</th>
+                 <th class="table-title">#if($ziVo.shopcount)$ziVo.shopcount #else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">直营店当期收入合计</th>
+                 <th class="table-title"> #if($ziVo.subnetpaid) $VmUtils.getAmount($ziVo.subnetpaid)#else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">直营店当期杯数合计</th>
+                 <th class="table-title"> #if($ziVo.subquantity)$ziVo.subquantity #else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">直营店当期店均日均收入</th>
+                 <th class="table-title"> #if($ziVo.dayshopnetpaid)$VmUtils.getAmount($ziVo.dayshopnetpaid) #else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">直营店当期店均日均杯数</th>
+                 <th class="table-title"> #if($ziVo.avquantity)$ziVo.avquantity #else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">直营店当期均价</th>
+                 <th class="table-title"> #if($ziVo.avnetpaid) $VmUtils.getAmount($ziVo.avnetpaid)#else 0#end</th>
+              </tr>
+              <tr>
+                 <th class="table-title" colspan="2"  style="min-width:60px;font-size: 17px">运营商店当期数据统计</th>
+              </tr>
+                
+               <tr>
+                 <th class="table-title"  style="min-width:60px;">当期运营商营业点数量</th>
+                 <th class="table-title">#if($yunVo.shopcount)$yunVo.shopcount #else 0#end</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">运营商营业点当期收入合计</th>
+                 <th class="table-title">#if($yunVo.subnetpaid ) $VmUtils.getAmount($yunVo.subnetpaid )#else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">运营商营业点当期杯数合计</th>
+                 <th class="table-title">#if($yunVo.subquantity )$yunVo.subquantity #else 0#end</th>
+              </tr> 
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">运营商营业点当期店均日均收入</th>
+                 <th class="table-title">#if($yunVo.dayshopnetpaid) $VmUtils.getAmount($yunVo.dayshopnetpaid)#else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">运营商营业点当期店均收入</th>
+                 <th class="table-title">#if($yunVo.avshopprice) $VmUtils.getAmount($yunVo.avshopprice)#else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">运营商营业点当期店均日均杯数</th>
+                 <th class="table-title">#if($yunVo.avquantity)$yunVo.avquantity #else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">运营商营业点当期均价(含非饮料)</th>
+                 <th class="table-title">#if($yunVo.avnetpaid) $VmUtils.getAmount($yunVo.avnetpaid)#else 0#end</th>
+              </tr> 
+               <tr>
+                 <th class="table-title" colspan="2"  style="min-width:60px; text-align: left;" >
+                 <span style="font-size: 15px"> 停业营业点:</span>
+                 #foreach($shop in $yunVo.cafeShops)
+                 	#if($shop.shopname)
+                 	 $shop.shopname,
+                 	 #end
+                 #end
+                  </th>
+              </tr>
+              
+               <tr>
+                 <th class="table-title" colspan="2"  style="min-width:60px;font-size: 17px">市场活动店当期数据统计
+                 <span style="font-size: 15px">(含停业活动店)</span>
+                 </th>
+              </tr>
+               <tr>
+                 <th class="table-title"  style="min-width:60px;">市场活动当期收入合计</th>
+                 <th class="table-title">#if($activeVo.subnetpaid) $VmUtils.getAmount($activeVo.subnetpaid)#else 0#end</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">市场活动当期日均店均杯数</th>
+                 <th class="table-title">#if($activeVo.avquantity)$activeVo.avquantity #else 0#end</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">市场活动当期均价</th>
+                 <th class="table-title">#if($activeVo.avnetpaid) $VmUtils.getAmount($activeVo.avnetpaid)#else 0#end</th>
+              </tr>
+             
+              <tr>
+                 <th class="table-title" colspan="2"  style="min-width:60px;font-size: 17px">wheelys平台当期数据统计</th>
+              </tr>
+              #set($totalnetpaid=$ziVo.subnetpaid+$yunVo.subnetpaid+$activeVo.subnetpaid+$yunVo.subclosenetpaid)
+              #set($totalquantity=$ziVo.subquantity+$yunVo.subquantity+$activeVo.subquantity+$yunVo.subclosequantity)
+              #set($totalavquantity1=$ziVo.avquantity+$yunVo.avquantity+$activeVo.avquantity+$yunVo.avclosequantity )
+              #if($totalshopsize !=0)
+              #set($totalavquantity=$totalavquantity1/$totalshopsize)
+              #set($totalavnetpaid1=$totalnetpaid/$totalquantity)
+              #else
+              #set($totalavquantity=0)
+              #set($totalavnetpaid1=0)
+              #end
+              #set($totalavnetpaid=$VmUtils.getAmount($totalavnetpaid1))
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">wheelys平台当期收入合计</th>
+                 <th class="table-title">$VmUtils.getAmount($totalnetpaid) </th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">wheelys平台当期杯数合计</th>
+                 <th class="table-title">$totalquantity</th>
+              </tr>  
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">wheelys平台店均日均杯数</th>
+                 <th class="table-title">
+                 $totalavquantity
+                 </th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">wheelys平台当期均价(含非饮料)</th>
+                 <th class="table-title">$totalavnetpaid</th>
+              </tr>
+          </thead>
+        </table>
+        <br>
+        	<!-- 提点比例&nbsp;<input id="ratio1" style="width: 40px" value="$!ratio1">%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	供应商返点比例&nbsp;<input id="ratio2" style="width: 40px" value="$!ratio2">%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        	BOM成本比率&nbsp;<input id="ratio3" style="width: 40px" value="$!ratio3">% -->
+        	<table>
+        		<tr>
+        			<th>提点比例:$!ratio1%</th>
+        			<th>供应商返点比例:$!ratio2%</th>
+        			<th>BOM成本比率:$!ratio3%</th>
+        		</tr>
+        	</table>
+     	<br>
+          <table style="width: 1000px" class="am-table am-table-striped am-table-hover table-main" >
+            <thead>
+              <tr>
+                 <th class="table-title" colspan="3" style="min-width:60px;font-size: 17px">当期业务假设与推算</th>
+              </tr>
+              <tr>
+                 <th class="table-title" rowspan="3" style="min-width:60px;">wheelys对运营商的提成预测</th>
+                 <th class="table-title">提点比例</th>
+                 <th class="table-title" id="tdratio">$!ratio1</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">提成基数</th>
+                 <th class="table-title" id="tcjishu">#if($yunVo.subnetpaid ) $VmUtils.getAmount($yunVo.subnetpaid )#else 0#end</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">提成金额</th>
+                 <th class="table-title" id="tcPrice">$VmUtils.getAmount($!tcprice)</th>
+              </tr>
+              <tr>
+                 <th class="table-title" rowspan="4" style="min-width:60px;">wheelys从供应商得到的返点预测</th>
+                 <th class="table-title" style="min-width:60px;">BOM成本比率</th>
+                 <th class="table-title" id="bomratio">$!ratio3</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">BOM成本金额</th>
+                 <th class="table-title" id="bomcbprice">$VmUtils.getAmount($!bomcbprice)</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">供应商返点比例</th>
+                 <th class="table-title" id="gysratio"> $!ratio2</th>
+              </tr>
+              <tr>
+                 <th class="table-title"  style="min-width:60px;">供应商返点金额(不含开办)</th>
+                 <th class="table-title" id="gysfdprice">$VmUtils.getAmount($!gysfdprice)</th>
+              </tr>
+              <tr>
+                 <th class="table-title" colspan="2" style="min-width:60px;">wheelys当期合计收入预估</th>
+                 <th class="table-title" id="subprice">$VmUtils.getAmount($!subprice)</th>
+              </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

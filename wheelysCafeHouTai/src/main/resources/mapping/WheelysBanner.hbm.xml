@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.banner.WheelysBanner" table="WHEELYS_BANNER">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="sn" column="SN" type="integer"/>
+		<property name="shopid" column="shopid" type="long"/>
+		<property name="title" column="TITLE" type="string"/>
+		<property name="tourl" column="TOURL" type="string"/>
+		<property name="imageurl" column="IMAGEURL" type="string"/>
+		<property name="type" column="BANNERTYPE" type="string"/>
+		<property name="showstatus" column="SHOWSTATUS" type="string"/>
+		<property name="delstatus" column="DELSTATUS" type="string"/>
+		<property name="begintime" column="BEGINTIME" type="timestamp"/>
+		<property name="endtime" column="ENDTIME" type="timestamp"/>
+		<property name="createtime" column="CREATETIME" type="timestamp"/>
+		<property name="updatetime" column="UPDATETIME" type="timestamp"/>
+	</class>
+</hibernate-mapping>
+

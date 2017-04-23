@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Wheelys Coffee</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<link rel="stylesheet" href="${pcPath}Public/home/css/main_css.css">
+<link rel="stylesheet" href="${pcPath}Public/home/css/bootstrap.min.css" >
+<script src="${pcPath}Public/home/js/main.js"></script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<style>
+    a{
+		cursor:pointer;
+       color:#000;
+       text-decoration:none;
+    }
+    a:hover{
+        text-decoration:none;
+       /**/
+    }
+</style>
+<script>
+$(document).ready(function(){
+    NavShow();
+    $(".wheelysCoffeeCar").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+     $(".left").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+      $(".right").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+	$('.class_dis').mouseover(function(){
+         $('.disc').css('display','block');
+    }).mouseout(function(){
+         $('.disc').css('display','none');
+    })
+
+    $('.class_dis_').mouseover(function(){
+         $('.disc_').css('display','block');
+    }).mouseout(function(){
+         $('.disc_').css('display','none');
+    })
+    $('.menuBox').each(function(e,a){
+    	$(a).on('click',function(){
+    		$('.menuList').slideUp();
+    		if($(a).hasClass('select')){
+        		$('.menuBox').removeClass('select');
+    			return;
+    		}else{
+        		$('.menuBox').removeClass('select');
+    		}
+    		$(a).addClass('select');
+    		var left = $(this).offset().left+'px';
+    		var width = $(this).width()+40+'px';
+    		$('.menuList').each(function(i,z){
+    			if(i == e){
+        			$(z).css({
+        				'left':left,
+        				'min-width':width
+        			});
+        			$(z).slideDown();
+    			}
+    		})
+    	})
+    })
+ //     $('.displaymy').mouseover(function(){
+ //   $(this).prev().css('display','block');
+ // }).mouseout(function(){
+ //    $(this).prev().css('display','none');
+ // });
+ })
+</script>
+</head>
+<body>
+#parse("/pc/header.vm")
+<div class="nav_warp clear" id="test">
+    <div class="left">
+        <div class="name1">
+        <a href="${basePath}pc/wisdom.xhtml" style="color:#fff;">
+            <span>咖啡世界</span>
+            <span>新潮流</span>
+        </a>
+        </div>
+        <div class="name2">
+        <a href="${basePath}pc/worth.xhtml"style="color:red">
+            <span>霸道而纯粹的</span>
+            <span>咖啡原味</span>  
+        </a>
+        </div>
+    </div>
+     <div class="right_nav">
+        <dl>
+            <dt>关于 WHEELYS CAFÉ</dt>
+            <dd><a href="${basePath}pc/wisdom.xhtml">智慧范</a></dd>
+            <dd><a href="${basePath}pc/technology.xhtml">科技范</a></dd>
+            <dd><a href="${basePath}pc/worth.xhtml">品质范</a></dd>
+            <dt>风靡全球的WHEELYS</dt>
+            <dd><a href="${basePath}pc/team.xhtml">也许是最酷的创业团队！</a></dd>
+            <dd><a href="https://wheelyscafe.com/">看看全球还有哪些WHEELYS？</a></dd>
+            <dt>加入WHEELYS</dt>
+            <dd><a href="http://mp.weixin.qq.com/s?__biz=MzIxMDE4MjMwNw==&mid=503749680&idx=1&sn=58ecd77a87812214f1bc11afb1efc5fa&scene=18#rd">城市运营商招募计划</a></dd>
+            <dd><a href="${basePath}pc/showSignupForm.xhtml">报名表</a></dd>
+            <dt class="no"><a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzIxMDE4MjMwNw==&hid=2&sn=aa0793a5d27620b905c876b8d0d59638&uin=Mjc3OTQxMTk1&key=c3acc508db720376ee29711487ac69cecad3f491555c8e84cba8fdae7428454067e308ba0cb26de1017a570325c47b8e&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1">媒体报道</a></dt>
+        </dl>
+    </div>
+</div>
+<div class="Iwrap dis_" >
+     <div style=" position:absolute;left:3%;top:15%;width:258px;height:258px;display:none" class="disc">
+                    <img src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/2016-11-21/erwei.jpg" width="258" height="258" />
+    </div>
+    <div class="venture_team Twrap">
+        <span class="cotton"></span>
+        <i class="icon icon-W"></i>
+        <span class="cotton"></span>
+        <h2><span class="Brandon_med">Wheelys</span>创业团队</h2>
+        <div class="bottom">
+            <span></span>
+        </div>
+        <i class="icon icon-points"></i>
+    </div>
+    <div class="birth_grown Twrap">
+        <h3>Wheelys的诞生与成长</h3>
+        <div class="P_text">
+            <p>2014年深冬的一天，一群朋友聚在马尔默城外一个小酒吧里，一杯又一杯的酒下肚，却依旧百无聊赖。我们刚刚做出一个疯狂的举动，关掉了利润丰厚、小有名气的广告公司，心心念念着要改变世界的进程。也许你觉得好笑，但Wheelys的创业愿景就是在那晚形成的。</p>
+            <p>经历过跟一些大名鼎鼎的牌子的合作，我们比大多数人都更清楚品牌惊人的影响力。有没有方法向他们发起挑战？ </p>
+            <p class="right">答案是Wheelys咖啡。</p>
+            <p>我们要在由体力和阳光驱动的咖啡车上供应有机食品，让这个世界再一次感受到咖啡原原本本的味道，感受到自己经营生意的乐趣。我们要加入“远离” 的大潮，远离灵魂麻木的大品牌。Wheelys就是我们挑战全球食品工业霸权的工具。</p>
+            <p>一辆Wheelys咖啡车仅花费3000美元，而开一家星巴克要花费50万美元。能拿出50万的人恐怕只有1%，而能支付3000美元的人或许不止99%，这使得一个全新的群体可以开得起一家咖啡馆。</p>
+            <p>但是在第一年，我们遭遇了“滑铁卢”。我们花了很多钱，然而……并没有什么成效。一半的人因此弃船了，这也无可厚非。但是我们剩下的人还在坚持。捱过了这一段，Wheelys的运营渐入佳境。第一批咖啡车在2014年秋付运，一共30辆，打头阵的分别是Wheelys约旦和Wheelys智利。2015年的第一季度，我们又卖出60辆咖啡车。紧接着，2015年夏天卖掉了120辆，从此，每6个月业绩便翻一番。在被Y Combinator孵化并获得硅谷顶级投资人的青睐后，Wheelys已然成为一家资金充足、经营稳定、不断成长的公司。然而，我们的征程才刚刚起步。</p>
+        </div>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member1.jpg" />
+        <h4 class="Brandon_med">总部人员——老大MARIA DE LA CROIX</h4>
+        <p>她是全球食品公司中唯一的一位蓝头发的CEO——MARIA DE LA CROIX。</p>
+        <p>她足智多谋，所以每天我们都惶惶不安，担心她被外国的情报机构挖走。</p>
+        <p>她是十足的工作狂人。凌晨4点给她打电话问她要在危地马拉维拉努埃瓦的车主电话，她会说：“稍等，”听她的声音，我敢打赌她一定还没睡。</p>
+        <p>希望这样的描述可以给Maria施加点压力。果然，在此之后，她真的开始出现人类的行为了！比如，据说上个月有一天她晚上11点便结束了工作……</p>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member2.jpg" />
+        <h4 class="Brandon_med">总部人员——脚踏车大王PER CROMWELL</h4>
+        <p>在我们准备非法飞跃白俄罗斯的前一天，我们意识到我们的飞机可能要迫降在敌方领土。飞行员Tomas发了条信息给Per，当时Per正躲在白俄罗斯东部一个军营旁边的逃亡汽车里，信息里说：“如果我们迫降后又被困在树林里，我们需要准备食物。”当时正值白俄罗斯的深夜，这个国家连个24小时购物中心有没有都不知道。</p>
+        <p>三小时后，Tomas得到回复说：“我已经搞到了馅饼，好多鸡蛋，还有夏布丽白葡萄酒。”一个人用假护照溜进白俄罗斯已经很难了，更难的是他有足够的社交本事大半夜的从疑心重重的农民那里买到珍贵的馅饼，最最不可思议的是他在如此紧迫的关头，居然还记得馅饼和夏布丽白葡萄酒更配哦!</p>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member3.jpg" />
+        <h4 class="Brandon_med">总部人员——意见领袖TOMAS MAZETTI</h4>
+        <p>Tomas是个爱唱反调的人。“为什么以前没有人做过？”这是你跟Tomas待一块儿的时候听到最多的话，随之而来的还有无底洞的好奇心，总部的人没一个能猜得透他的大脑。无穷的好奇心和对于他人认为理所应当的事情的质疑，使得他成为Wheelys的关键人物。</p>
+        <p>他是第一个问出这种问题的人，“为什么没有一个全球有机咖啡连锁品牌在孟买用脚踏车来运营？”这便是Wheelys的出发点。Tomas常质疑广告业，因此他在广告方面做得非常成功，还获了奖。他后来又质疑独裁者卢卡申科，也获了奖。现在他质疑全球的咖啡业，虽然还未因此获奖，但我们都相信这是迟早的事。</p>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member4.jpg" />
+        <h4 class="Brandon_med">总部人员——销售大帝HANNAH LINA FREY</h4>
+        <p>销售很麻烦。你最不希望你的销售人员是个……麻烦。但对于Hannah来说，却是格外简单，因为她生来就是这块料。她懂得人心，懂得人们想要什么，懂得人们真正需要什么，然后确保人们得到他们必须的或者偶尔得到他们想要的。这带给人们快乐，带给Hannah快乐，带给Wheelys的伙伴快乐。</p>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member5.jpg" />
+        <h4 class="Brandon_med">总部人员——数码公爵CENK ÖZBAKIR</h4>
+        <p>没有Cenk，就没法儿工作。他可以把东西都连接起来，让所有数码设备运作起来。他有魔力化腐朽为神奇，在这个数字时代，他简直就是个男神般的存在。BTW，Cenk还是一名设计师呢！</p>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member6.jpg" />
+        <h4 class="Brandon_med">总部人员——工程元首SIMON LESNIK</h4>
+        <p>Simon是我们自己的superhero, 他能用一个回形针和一颗乒乓球造出一架直升机。总有一天，我们要给他一个月时间和一百万瑞典克朗，然后静观其变，结果一定非常壮观。Simon主要和Per搭档，但是基本每个人都需要他。</p>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member7.jpg" />
+        <h4 class="Brandon_med">总部人员——后援统帅EMMA FITZSIMONS</h4>
+        <p>因为Emma的存在，总部团队里达成了一个共识：爱尔兰一定是个伟大的国家。因为如果没有爱尔兰就没有Emma，而没有Emma将是Wheelys的灾难。</p>
+        <p>Emma是那个会帮助你的人，同时她也帮助许多其他需要帮助的人。当有东西要加固、修理…的时候，Emma就是那个你要找的爱尔兰女孩。</p>
+    </div>
+    <div class="team_member Twrap">
+        <img src="${pcPath}Public/home/img/Team_member8.jpg" />
+        <h4 class="Brandon_med">总部人员——咖啡哈里发JAMIE WILLIAM CORLEY</h4>
+        <p>要开一家咖啡公司，你需要热爱咖啡的人。我们都爱，但Jamie比我们其他人爱得更深沉而热烈，他做梦都梦到咖啡。</p>
+        <p>如果Jamie可以按他的方式生活，他会住在一个偏远的农村照看咖啡地，在朦胧的清晨温柔地采摘下豆子，以最佳温度烘焙后，用1923年产的旧式英国研磨器细细研磨，然后仔细地收集起刚磨好的咖啡粉，不让一粒粉末洒落。当水加热到正好97.2摄氏度时，小心翼翼地将水倒进滤网，在品尝之前，置身于咖啡香气中看着晨雾慢慢散去。此时，呷一口完美的Robusta咖啡。</p>
+        <p>现在Jamie是我们团队中给予我们灵感的人物，也给那些尝试过Jamie咖啡魔力的斯德哥尔摩的客户以灵感。</p>
+    </div>
+    <div class="venture_team Twrap">
+        <span class="cotton"></span>
+        <i class="icon icon-W"></i>
+        <span class="cotton"></span>
+        <h2><span class="Brandon_med">Wheelys</span>创业团队</h2>
+        <div class="bottom">
+            <span></span>
+        </div>
+        <i class="icon icon-points"></i>
+    </div>
+    <div class="then Twrap">
+        <p>Wheelys咖啡也有在上海的分部，一项全球性的革命离了中国也就不能称之为革命了。不仅因为中国是制造脚踏车的专家，而且他们正好也热爱咖啡。</p>
+        <p class="center">他们神秘的面纱即将揭开，敬请留意……</p>
+        
+	    <div style="text-align:center; margin-top:30px;">
+	    	<div style="display:inline-block; padding:5px 40px;border-bottom:1px solid #000; width:60%;"><img width="100%" src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/mobile/redLogo.png?v=00000" /></div>
+        	<p style="font-size:16px; margin-top:5px;">一杯好咖啡的正确打开方式</p>
+        	<img width="80%" src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/mobile/erwei.jpg?v=00000" />
+        	<p style="font-size:16px; margin-top:10px;">扫描二维码 开启Wheelys咖啡2.0时代</p>
+	    </div>
+    </div>
+</div>
+#parse("/pc/footer.vm")
+<script>
+    $(document).ready(function(){
+        inputValue();
+        NavShow();
+    });
+</script>
+<script>
+    $(document).ready(function(){
+       $(".dis_").click(function(){
+            $(".nav_warp").css("display",'none')
+            var dis = 'icon icon-ul';
+           $(".logo_left > .icon").attr('class',dis);
+       })
+    })
+</script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<script src="${pcPath}Public/home/js/bootstrap.min.js"></script>
+<!-- [if IE 6]  --> 
+<script src="${pcPath}Public/home/js/DD_belatedPNG_0.0.8a.js"> </script>
+<script>
+    DD_belatedPNG.fix('*')
+</script>
+<!-- [end if] --> 
+</body>
+</html>

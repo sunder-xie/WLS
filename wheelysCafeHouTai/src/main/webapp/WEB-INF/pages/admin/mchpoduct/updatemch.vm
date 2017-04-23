@@ -1,0 +1,228 @@
+
+<!doctype html>
+<html class="no-js">
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+
+</head>
+<style>
+ .am-text-right,.am-u-md-6{
+    height:32.16px;
+    line-height:32.16px;
+    
+ }
+ 
+</style>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm") 
+		<div class="admin-content">
+			<div class="am-cf am-padding">
+				<div class="am-fl am-cf">
+					<strong class="am-text-primary am-text-lg">商品管理</strong> /
+					#if($!idMchproduct.id)
+					<small>	
+					修改商品	
+					</small>
+					#else
+					<small>	
+					添加商品	
+					</small>
+					#end
+				</div>
+			</div>
+			<div class="am-tabs am-margin" data-am-tabs>
+				<ul class="am-tabs-nav am-nav am-nav-tabs">
+					<li class="am-active"><a href="#tab1">商品信息</a></li>
+				</ul>
+				
+				<div class="am-tabs-bd" id="inputList">
+					<div class="am-form">
+
+						<input type="hidden" value="$!idMchproduct.id" name="id" data-id="null">
+						#if($!idMchproduct.id)
+						<input type="hidden" value="$!idMchproduct.id" name="id">
+						#end
+						#if(!$idMchproduct.id)
+						<input type="hidden" value="$!supplierid" data-id="null" name="supplierid">
+						#end
+							<!-- <form class="am-form"> -->
+						
+							<div class="am-g am-margin-top">
+								<div class="am-u-sm-4 am-u-md-2 am-text-right" >名称</div>
+								<div class="am-u-sm-8 am-u-md-4">
+									<input type="text" class="am-input-sm" id="mchname"  value="$!idMchproduct.name"  name="mchname" maxlength="25">
+								</div>
+								<div class="am-hide-sm-only am-u-md-6">
+									<span style="color: red">*</span>必填，为汉字
+								</div>
+							</div>
+						
+							<div class="am-g am-margin-top">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">分类</div>
+						<div class="am-u-sm-8 am-u-md-4">
+							<div class="am-input-sm">
+								<select id="MySelect" name="itemid" class="am-input-sm"
+									style="width: 100px; float: left;">
+									<option value=" ">请选择分类</option>
+									#foreach($key in $itemMap.keySet())
+									<option value="$key" 
+									#if($key == $!idMchproduct.itemid)
+									selected="selected"
+									#end
+									>$!itemMap.get($key).name</option>
+									#end
+								</select>
+							</div>
+						</div>
+						<div class="am-hide-sm-only am-u-md-6">
+							<span style="color: red">*</span>必填
+						</div>
+					</div>
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">一级单位</div>
+							<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+								<input type="text" id="text" class="am-input-sm" name="unit" maxlength="1" value="$!idMchproduct.unit" onblur="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" 
+								onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))">
+							</div>
+							<div class="am-hide-sm-only am-u-md-6">
+								<span style="color: red">*</span>必填
+							</div>
+						</div>
+
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">重量</div>
+							<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+								<input type="text" class="am-input-sm" id="weid" name="weight" maxlength="8"
+									value="$!idMchproduct.weight" onkeyup="value=value.replace(/[^1234567890-]+/g,'')" onBlur="value=value.replace(/[^1234567890-]+/g,'')" >
+							</div>
+							<div class="am-hide-sm-only am-u-md-6">
+								<span style="color: red">*</span>单位为g，此重量为物流核算用，请输入毛重
+							</div>
+						</div>
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">规格说明</div>
+							<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+								<input type="text" class="am-input-sm" name="description" data-exception="null" maxlength="30" value="$!idMchproduct.description">
+							</div>
+							<div class="am-hide-sm-only am-u-md-6">
+								<span style="color: red"></span>非必填
+							</div>
+						</div>
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">价格</div>
+							<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+								<input type="text" class="am-input-sm" name="price" maxlength="7"
+								#if($!idMchproduct.price)value="$VmUtils.getDoubleAmount($!idMchproduct.price)"#end
+								onkeyup="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" onBlur="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" >
+							</div>
+							<div class="am-hide-sm-only am-u-md-6">
+								<span style="color: red">*</span>必填，为元
+							</div>
+						</div>
+						<div class="am-g am-margin-top">
+							<div class="am-u-sm-4 am-u-md-2 am-text-right">排序</div>
+							<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+								<input type="text" class="am-input-sm" name="sn" data-exception="null" maxlength="30" value="$!idMchproduct.sn"
+								onkeyup="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]" onBlur="this.value=(this.value.match(/\d+(\.\d{0,1})?/)||[''])[0]"
+								>
+							</div>
+							<div class="am-hide-sm-only am-u-md-6">
+								<span style="color: red"></span>必填
+							</div>
+						</div>
+						
+						<div class="am-g am-margin-top" style="margin-left:300px;">
+							<iframe id="iframeImg" name="iframeImg"  src="${basePath}admin/shop/touploadimg.xhtml?imgurl=$!idMchproduct.imgurl" width="100%">
+							</iframe>
+						</div>
+					</div>
+				</div>
+				
+				<div class="am-margin">
+					<input type="submit" onclick="submitForm();" class="am-btn am-btn-primary am-btn-xs" 
+						value="提交保存" />
+				</div>
+				</div>
+			</div>
+			<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+		<footer>
+			<hr>
+			<p class="am-padding-left">2016 Wheelys.com.cn</p>
+		</footer>
+     <script >
+     var nameZero = false;
+     $('#inputList input').focus(function(){
+    		$('.errMod').remove();
+    })
+     function submitForm(){
+    	 var isgo = true;
+    	 $('.errMod').remove();
+        $('#inputList input').each(function(e,a){
+          if($(a).val() == '' && $(a).attr('name') != 'imgurl' && $(a).attr('data-exception') != 'null'&& $(a).attr('data-id') != 'null'){
+        		var idT = 'tip'+$(a).attr('id');
+    			if($('#'+idT).length>0){
+    				isgo = false;
+    				return false;
+    			}
+	        	var html = '<div class="errMod" id="'+idT+'" style="color:#ed2626">此内容不能为空</div>';
+	        	$(a).after(html);
+				isgo = false;
+				return false;
+          	}
+          })
+          if(isgo)submitForm_2();
+  }	    
+     function submitForm_2(){
+  		var data = {};
+          if($('#iframeImg').contents().find('#imgurl').val() == ''){
+          	alert('图片没有上传成功');
+          	return false;
+          }else{
+          	data['imgurl'] = $('#iframeImg').contents().find('#imgurl').val();
+          }
+  		$('#inputList select').each(function(e,a){
+  			var attr = $(a).attr('name');
+  			data[attr] = $(a).val();	
+  		});
+  		$('#inputList input').each(function(e,a){
+  			var attr = $(a).attr('name');
+  			data[attr] = $(a).val();
+  		});
+  		$.ajax({
+  		      url:"${basePath}admin/order/mch/updatch.xhtml",
+  		      type:'post',
+  		      dataType:'json',
+  		      data:data,
+  		      success:function(data){
+  		    	  if(data.success){
+  		    		location.href = '${basePath}admin/order/mchproduct.xhtml?supplierid=$!supplierid';
+  		    	  }else{
+  		    		  if(data.msg == "Y"){
+  		    			if(confirm("页面未修改，确认页面不修改吗")){
+  		    				location.href = '${basePath}admin/mchproduct.xhtml';
+  		    			}
+  		    		  }else{
+  		    			if(data.msg=="商品名称已存在"){
+  		    				if($('#tipshopname').length>0){
+  		    					isgo = false;
+  		    					return false;
+  		    				}
+  		    				var html = '<div class="errMod" id="tipshopname" style="color:#ed2626">商品名称重复</div>';
+  		    				$('#mchname').after(html);
+  		    				isgo = false;
+  		    			  }else{ 
+  	  		    			alert(data.msg);
+  		    			  }
+
+  		    		   }
+  		    	  }
+  		      }
+  		});
+  	}
+  	
+
+</script>
+</body>
+</html>

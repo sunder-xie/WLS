@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+</head>
+<body style="padding:0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+   
+<div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;动态报表</strong></div>
+    <br><br>
+	</div>
+
+    <div class="am-g">
+      <div class="am-u-sm-12">
+        <form class="am-form">
+          <table class="am-table am-table-striped am-table-hover table-main" style="table-layout: fixed;">
+            <thead>
+              <tr>
+              	 <th class="table-type">分类</th>
+                 <th class="table-type">报表名称</th>
+                 <th class="table-type">报表说明</th>
+                 <th class="table-type">测试</th>
+                 <th class="table-type">操作[<a href="${basePath}admin/sysmgr/report/modifyReport.xhtml" target="_blank">增加</a>]</th>
+              </tr>
+          </thead>
+          <tbody>
+        #foreach($category in $reportMap.keySet())
+            <tr>
+                 <th class="table-type">$category</th>
+                 <td class="table-type" colspan="3"></td>
+            </tr>
+        #foreach($report in $reportMap.get($category))
+        	<tr>
+        		 <td>&nbsp;</td>
+                 <th class="table-type">$report.name</th>
+                 <td class="table-type">$report.description</td>
+                 <td class="table-type"><a href="${basePath}admin/sysmgr/report/getQry.xhtml?rid=$report.id" target="_blank">测试</a></td>
+                 <td class="table-type"><a href="${basePath}admin/sysmgr/report/modifyReport.xhtml?rid=$report.id" target="_blank">修改</a></td>
+            </tr>
+		#end
+		#end
+		</tbody>
+        </table>
+        </form>
+      </div>
+    </div>
+</div>
+
+.
+</body>
+</html>

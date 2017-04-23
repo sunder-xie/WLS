@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Wheelys Coffee</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<link rel="stylesheet" href="${pcPath}Public/home/css/main_css.css">
+<link rel="stylesheet" href="${pcPath}Public/home/css/bootstrap.min.css" >
+<script src="${pcPath}Public/home/js/main.js"></script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<style>
+    a{
+		cursor:pointer;
+       color:#000;
+       text-decoration:none;
+    }
+    a:hover{
+        text-decoration:none;
+       /**/
+    }
+</style>
+<script>
+$(document).ready(function(){
+    NavShow();
+    $(".wheelysCoffeeCar").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+     $(".left").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+
+      $(".right").click(function(){
+        $(".nav_warp").css("display",'none');
+        var dis = 'icon icon-ul';
+        $(".logo_left > .icon").attr('class',dis);
+    })
+	$('.class_dis').mouseover(function(){
+         $('.disc').css('display','block');
+    }).mouseout(function(){
+         $('.disc').css('display','none');
+    })
+
+    $('.class_dis_').mouseover(function(){
+         $('.disc_').css('display','block');
+    }).mouseout(function(){
+         $('.disc_').css('display','none');
+    })
+    $('.menuBox').each(function(e,a){
+    	$(a).on('click',function(){
+    		$('.menuList').slideUp();
+    		if($(a).hasClass('select')){
+        		$('.menuBox').removeClass('select');
+    			return;
+    		}else{
+        		$('.menuBox').removeClass('select');
+    		}
+    		$(a).addClass('select');
+    		var left = $(this).offset().left+'px';
+    		var width = $(this).width()+40+'px';
+    		$('.menuList').each(function(i,z){
+    			if(i == e){
+        			$(z).css({
+        				'left':left,
+        				'min-width':width
+        			});
+        			$(z).slideDown();
+    			}
+    		})
+    	})
+    })
+ //     $('.displaymy').mouseover(function(){
+ //   $(this).prev().css('display','block');
+ // }).mouseout(function(){
+ //    $(this).prev().css('display','none');
+ // });
+ })
+</script>
+</head>
+<body>
+#parse("/pc/header.vm")
+<div class="nav_warp clear" id="test">
+    <div class="left">
+        <div class="name1">
+        <a href="${basePath}pc/wisdom.xhtml" style="color:#fff;">
+            <span>咖啡世界</span>
+            <span>新潮流</span>
+        </a>
+        </div>
+        <div class="name2">
+        <a href="${basePath}pc/worth.xhtml"style="color:red">
+            <span>霸道而纯粹的</span>
+            <span>咖啡原味</span>  
+        </a>
+        </div>
+    </div>
+     <div class="right_nav">
+        <dl>
+            <dt>关于 WHEELYS CAFÉ</dt>
+            <dd><a href="${basePath}pc/wisdom.xhtml">智慧范</a></dd>
+            <dd><a href="${basePath}pc/technology.xhtml">科技范</a></dd>
+            <dd><a href="${basePath}pc/worth.xhtml">品质范</a></dd>
+            <dt>风靡全球的WHEELYS</dt>
+            <dd><a href="${basePath}pc/team.xhtml">也许是最酷的创业团队！</a></dd>
+            <dd><a href="https://wheelyscafe.com/">看看全球还有哪些WHEELYS？</a></dd>
+            <dt>加入WHEELYS</dt>
+            <dd><a href="http://mp.weixin.qq.com/s?__biz=MzIxMDE4MjMwNw==&mid=503749680&idx=1&sn=58ecd77a87812214f1bc11afb1efc5fa&scene=18#rd">城市运营商招募计划</a></dd>
+            <dd><a href="${basePath}pc/showSignupForm.xhtml">报名表</a></dd>
+            <dt class="no"><a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzIxMDE4MjMwNw==&hid=2&sn=aa0793a5d27620b905c876b8d0d59638&uin=Mjc3OTQxMTk1&key=c3acc508db720376ee29711487ac69cecad3f491555c8e84cba8fdae7428454067e308ba0cb26de1017a570325c47b8e&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1">媒体报道</a></dt>
+        </dl>
+    </div>
+</div>
+<div class="Iwrap">
+    <div style=" position:absolute;left:3%;top:15%;width:258px;height:258px;display:none" class="disc">
+		<img src="http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/2016-11-21/erwei.jpg" width="258" height="258" />
+    </div>
+    <div class="venture_team">
+        <span class="cotton"></span>
+        <i class="icon icon-W"></i>
+        <span class="cotton"></span>
+        <h2>如何成为<span class="Brandon_med">Wheelys</span>合伙人</h2>
+        <div class="bottom">
+            <span></span>
+        </div>
+        <i class="icon icon-points"></i>
+    </div>
+    <div class="partner_wheelys">
+        <img src="${pcPath}Public/home/img/wheelys_p.jpg" />
+        <p class="Brandon_med bold">Wheelys，</p>
+        <p> 一个环保的“脚踏车上的咖啡”连锁品牌，</p>
+        <p>它让每个人都能拥有自己的咖啡车，</p>
+        <p>它让我们的创业梦想变的唾手可得。</p>
+    </div>
+    <div class="partner_wheelys">
+        <img src="${pcPath}Public/home/img/partner_img1.jpg">
+        <p class="Brandon_med bold">To become a Wheeler，</p>
+        <p>不需要倾尽50万积蓄去开个咖啡厅，</p>
+        <p>只要拥有一辆<span class="Brandon_med">Wheelys</span>咖啡车，</p>
+        <p>就能用心去品尝咖啡纯粹的味道，</p>
+        <p>尽情去享受自己经营生意的乐趣。</p>
+        <img src="${pcPath}Public/home/img/partner_img2.jpg">
+        <p>伴着早晨的阳光醒来，</p>
+        <p>叫醒你沉睡的脚踏车，</p>
+        <p>驶过一条条街道，</p>
+        <p>打开炉子，</p>
+        <p>闻着自己制作的新鲜咖啡。</p>
+    </div>
+    <div class="partner_wheelys">
+        <img src="${pcPath}Public/home/img/partner_img3.jpg">
+        <p>渐渐地，</p>
+        <p>人们开始排起队来，</p>
+        <p>你为他们奉上咖啡，</p>
+        <p>一边朝着新顾客微笑，</p>
+        <p>一边陪着老顾客闲聊。</p>
+        <img src="${pcPath}Public/home/img/partner_img4.jpg">
+        <p>一天很快就结束了，</p>
+        <p>你数着你的收入，</p>
+        <p>登录到电脑上，</p>
+        <p>跟<span class="Brandon_med">Wheelys</span>的全世界同行们聊聊天，</p>
+        <p>告诉他们你的咖啡车停在哪里，</p>
+        <p>与他们交流煮咖啡的小窍门，</p>
+        <p>或者探讨不同的销售技巧，</p>
+        <p>甚至只是简单地聊聊天。</p>
+    </div>
+    <div class="partner_wheelys">
+        <img src="${pcPath}Public/home/img/partner_img5.jpg">
+        <p>没有朝九晚五的打卡高峰，</p>
+        <p>只有自由随性的时间安排，</p>
+        <p>没有枯燥无味的工作内容，</p>
+        <p>只有充满乐趣的咖啡社交。</p>
+    </div>
+    <div class="Qme">
+        <p>这就是<span class="Brandon_med">Wheeler</span>有趣的一天，</p>
+        <p>如果你想说，</p>
+        <p>这才是我想要的！</p>
+        <p>那么，<a href="${basePath}pc/pcIndex.xhtml#lianxi">点击这里</a>，请速速留下你的姓名、联系方式和邮箱</p>
+        <p>成为创业范大玩咖Wheelys咖啡最酷炫的Wheelys车主，</p>
+        <p>与我们一起探索全新的商业模式，践行时尚、健康的咖啡生活！</p>
+    </div>
+</div>
+#parse("/pc/footer.vm")
+<script>
+    $(document).ready(function(){
+        inputValue();
+        NavShow();
+        
+       $(".venture_team").click(function(){
+            $(".nav_warp").css("display",'none')
+            var dis = 'icon icon-ul';
+           $(".logo_left > .icon").attr('class',dis);
+       })
+
+    });
+</script>
+<script src="${pcPath}Public/home/js/jquery-1.11.2.min.js"></script>
+<script src="${pcPath}Public/home/js/bootstrap.min.js"></script>
+<!-- [if IE 6] --> 
+<script src="${pcPath}Public/home/js/DD_belatedPNG_0.0.8a.js"> </script>
+<script>
+    DD_belatedPNG.fix('*')
+</script>
+<!-- [end if] -->  
+</body>
+</html>

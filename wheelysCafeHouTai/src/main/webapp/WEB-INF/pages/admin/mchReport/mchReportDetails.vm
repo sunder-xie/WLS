@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Wheelys</title>
+#parse("/admin/common/head.vm")
+<style>
+#inputMod input{width:150px; float:left; margin-right:5px;}
+.clickMod a{display:block; width:30%; margin:0 10%; padding:5px 0; float:left; text-align:center; font-size:16px; color:#fff; background:#ed2626; border-radius:5px; border:1px solid #ed2626}
+.tbMod{min-width:800px;}
+.tbmod_2 ,.tbmod_2 th{ text-align:center !important;}
+.listMod{margin:20px 0 20px 15px;}
+.listMod h3{font-size:16px; font-weight:bold;}
+.listMod .money{float:right; width:160px; text-align:center;}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") 
+	#parse("/admin/common/menu.vm")
+	<div class="am-fl am-cf tbMod" style="width: 75%;">
+		<strong class="am-text-primary am-text-lg"> &nbsp;&nbsp;&nbsp;订单详情</strong>
+	    <br><br>
+	    <p class="am-padding-left">补货清单</p>
+	     <!-- 增删改查 -->
+	        <div class="am-btn-toolbar" style="float:right;margin-right:30px;">
+	          <div class="am-btn-group am-btn-group-xs">
+	           <button type="button" class="am-btn am-btn-default"  disabled="true" style="font-size: 1.2rem;">
+	         	#if($!mchorder.status =='accept')
+					已接单
+				#elseif($!mchorder.status =='send')		
+				           已发货
+				#elseif($!mchorder.status =='new_confirm')
+					已下单
+				#elseif($!mchorder.status =='finish')
+					交易完成
+				#elseif($!mchorder.status =='cancel')
+					已取消
+				#elseif($!mchorder.status =='paid')
+					已支付
+				#end
+	           </button>
+	          </div>
+	        </div>
+	
+	    <div class="am-g">
+	      <div class="am-u-sm-12">
+	          <table class="am-table am-table-striped am-table-hover table-main tbmod_2">
+	            <thead>
+	             <tr>
+	                <th class="table-author am-hide-sm-only">名称</th>
+	                <th class="table-date am-hide-sm-only">规格</th>
+	                <th class="table-date am-hide-sm-only">单位</th>
+	                <th class="table-date am-hide-sm-only">单价</th>
+	                <th class="table-date am-hide-sm-only">数量</th> 
+	                <th class="table-date am-hide-sm-only">金额</th>
+	              </tr>
+	          </thead>
+	          <tbody>
+			    #foreach($mchD in $mchDetailList)
+			            <tr>              
+			                <td>$mchD.productname</td>
+			                <td>
+			                #if(!$mchD.description)
+			               	#elseif($mchD.description)
+			               		$mchD.description
+			     			#end
+			                </td>
+			                 <td>$!mchD.unit</td>
+			                <td>$VmUtils.getDoubleAmount($mchD.price)</td>
+			                <td>$mchD.quantity</td>
+			                <td>$VmUtils.getDoubleAmount($mchD.totalfee)</td>
+			           </tr>
+			    #end
+			    </tbody>
+			  </table>
+			  <div class="mod_list">
+				  <div class="listMod">
+				  	<h3>物流费用</h3>
+				  	<ul>
+				  		<li><span>$!mchorder.expressDes</span><span class="money">$VmUtils.getDoubleAmount($mchorder.expressfee)</span></li>
+				  	</ul>
+				  	
+				  </div>
+				  <div class="listMod">
+				  	<h3>邮寄信息</h3>
+				  	<ul>
+				  		<li><span>收货人：$!mchorder.contacts</span></li>
+				  		<li><span>收货地址：$!mchorder.address</span></li>
+				  		<li><span>联系电话：$!mchorder.mobile</span></li>
+				  	</ul>
+				  </div>
+				#if($mchorder.remark)
+				  <div class="listMod">
+					<h3>备注信息</h3>
+				  	 	<ul>
+				  		<li><span> $!mchorder.remark</span></li>
+				  	</ul>
+				  	</div>
+					#end
+			
+				
+				  <div class="listMod">
+						<h3>优惠信息</h3>
+						<ul>	
+						#if($!mchorder.discount == 0)
+						暂无优惠信息	
+						#elseif($!mchorder.discount > 0)			
+					  	<li><span>优惠理由:满$mchorder.disreason有优惠</span><span class="money">优惠金额:-￥$VmUtils.getDoubleAmount($!mchorder.discount)</span></li>
+					  	</ul>
+					  	</div>
+				
+						#end	
+					
+					  	#if($mchorder.expressInfo)
+						  <div class="listMod">
+					 	 	<h3>物流信息</h3>
+					  	 	<ul>
+					  			<li><span>$!mchorder.expressInfo</span></li>
+							</ul>
+						  </div>
+						#end
+				  <div style="clear:both; margin-top:30px;height:50px;"><b style="float:right; min-width:160px; text-align:center;display:block">合计:￥$VmUtils.getDoubleAmount($mchorder.payfee)</b></div>
+			  </div>
+	     </div>
+	     </div>
+</div>
+</body>
+   
+</html>

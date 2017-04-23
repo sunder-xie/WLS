@@ -1,0 +1,343 @@
+<!doctype html>
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+
+<script type="text/javascript">
+ 		function _clean(){
+ 			$('#inputList input').each(function(e,a){
+ 				var attr = $(a).attr('name');
+				if($(a).val()!=''){
+					$(a).val('')
+				}
+ 			})
+ 		}
+ 		function _clear(){
+ 			$('#timeList input').each(function(e,a){
+ 				var attr = $(a).attr('name');
+				if($(a).val()!=''){
+					$(a).val('')
+				}
+ 			})
+ 		}
+ 		function _timeclear(){
+ 			$('#dateList input').each(function(e,a){
+ 				var attr = $(a).attr('name');
+				if($(a).val()!=''){
+					$(a).val('')
+				}
+ 			})
+ 		}
+ 		function _deleteAddr(addr,id){
+ 			/* var parentTr = $(addr).parent("tr");
+ 			alert(parentTr);
+ 			$("#addressTable").remove(parentTr); */
+ 			var tdNode = addr.parentNode;
+			var trNode = tdNode.parentNode;
+			var tableNode = trNode.parentNode;
+			tableNode.removeChild(trNode);
+ 			
+ 			$.ajax({
+ 			       url:"${basePath}admin/shop/deleteExprAddr.xhtml",
+ 			       type:'get',
+ 			       dataType:'json',
+ 			       data:'id='+id,
+ 			       success:function(data){
+ 			    	   if(data.success){
+ 			    		   alert("删除成功");
+ 			    	   }
+ 			       }
+ 				});
+ 		};
+ 		
+ 		function _addAddr(){
+ 			
+ 			$("#_span").remove();
+ 			var newAddress = $("#addAddress").val();
+ 			$.ajax({
+ 			       url:"${basePath}admin/shop/addExprAddr.xhtml",
+ 			       type:'post',
+ 			       dataType:'json',
+ 			       data:'shopid='+$cafeShop.shopid+'&address='+newAddress,
+ 			       success:function(result){
+		    		 	if(!result.success){
+		    		 		newTr.remove();
+		    		 		alert("不能添加重复地址");
+		    		 	}else{
+		    	 			var newTr = $("<tr></tr>");
+		    	 			var newTd1 = $("<td></td>");
+		    	 			newTd1.text(newAddress);
+		    	 			var newTd2 = $("<td><a onclick = _deleteAddr(this,"+result.data+")>删除</a></td>");
+		    	 			newTr.append(newTd1);
+		    	 			newTr.append(newTd2);
+		    	 			$("#addressTable").prepend(newTr);
+		    	 			$("#addAddress").attr("value","");
+		    		 	}
+ 			       }
+ 				});
+ 		};
+ 		
+ 		function submitForm_2(){
+ 		if(checkDate()!=false){	  
+ 			var data = {};
+ 			$('#prileList input').each(function(e,a){
+ 				var attr = $(a).attr('name');
+ 			
+ 				if(attr == 'takeawaystatus' || attr == 'reservedstatus'){
+ 					if($(a).attr('checked')){
+ 						data[attr] = $(a).val();
+ 					}
+ 				}else{
+ 					data[attr] = $(a).val();
+ 				}
+ 			});
+ 			console.info(data);
+ 			$.ajax({
+ 			      url:"${basePath}admin/shop/configExprInfo.xhtml",
+ 			      type:'get',
+ 			      dataType:'json',
+ 			      data:data,
+ 			      success:function(data){
+ 			    	  if(data.success){
+ 			    		  alert('保存成功')
+ 			    		location.href = '${basePath}admin/shop/store.xhtml';
+ 			    	  }else{
+ 		  		    	alert(data.msg);
+ 			      }
+ 			      }
+ 			});
+ 		}
+ 	 } 
+ 		
+ 		/* $("form").submit(function (){
+ 			return _onblur();
+ 		}) */
+ 		 function checkDate(){
+ 			 var time1 = $("#time1").val();
+ 			 var time2 = $("#time2").val();
+ 			 var time3 = $("#time3").val();
+ 			 var time4 = $("#time4").val();
+ 			 var time5 = $("#time5").val();
+ 			 var time6 = $("#time6").val();
+ 			if(time1 !=""&& time2 !=""||time3 !=""&& time4 !=""||time5 !=""&& time6 !=""){
+ 				var date1 = time1.split(":");          
+ 				var date2 = time2.split(":");
+ 				var date3 = time3.split(":");          
+ 				var date4 = time4.split(":");
+ 				var date5 = time5.split(":");          
+ 				var date6 = time6.split(":");
+ 				var myDate1 = new Date(0000,0,1,date1[0],date1[1],00); 
+ 				var myDate2 = new Date(0000,0,1,date2[0],date2[1],00);
+ 				var myDate3 = new Date(0000,0,1,date3[0],date3[1],00); 
+ 				var myDate4 = new Date(0000,0,1,date4[0],date4[1],00);  
+ 				var myDate5 = new Date(0000,0,1,date5[0],date5[1],00); 
+ 				var myDate6 = new Date(0000,0,1,date6[0],date6[1],00); 
+ 				console.info(myDate1)
+ 				console.info(myDate2)
+ 				console.info(myDate3)
+ 				console.info(myDate4)
+ 				console.info(myDate5)
+ 				console.info(myDate6)
+ 				console.info(myDate1 < myDate2)
+ 				console.info(myDate3 < myDate4)
+ 				console.info(myDate5 < myDate6)
+ 			
+ 			if(myDate1!=null && myDate2!=null){
+ 				if (myDate1 < myDate2){  
+ 					return true; 
+ 				}else{
+ 				 	alert ("提示: 开始时间不能大于结束时间或者开始时间等于结束时间！");
+ 					return false; 
+ 				}
+ 			}
+ 				
+ 			if(myDate3!=null && myDate4!=null){
+ 				if ( myDate3 < myDate4 ){  
+ 					return true; 
+ 				}else{
+ 				 	alert ("提示: 开始时间不能大于结束时间或者开始时间等于结束时间！");
+ 					return false; 
+ 				}
+ 			}
+ 				
+ 			if(myDate5!=null && myDate6!=null){
+ 				if ( myDate5 < myDate6){  
+ 					return true; 
+ 				}else{
+ 				 	alert ("提示: 开始时间不能大于结束时间或者开始时间等于结束时间！");
+ 					return false; 
+ 				}
+ 			}
+ 			
+ 		}
+ 	}
+ 		
+ </script>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+
+	<div class="admin-content">
+		<div class="am-cf am-padding">
+
+			<div class="am-fl am-cf">
+				<strong class="am-text-primary am-text-lg">商家管理</strong> / <small>外送配置</small>
+			</div>
+		</div>
+
+		<div class="am-tabs am-margin" data-am-tabs>
+			<ul class="am-tabs-nav am-nav am-nav-tabs" id="tab_t">
+				<li class="am-active"><a href="#tab1">商家信息</a></li>
+			</ul>
+			<div id="prileList">
+				<!-- <form action="${basePath}admin/shop/configExprInfo.xhtml"
+				method="post" class="am-form" onsubmit="return _onblur()"> -->
+				<input type="hidden" value="$cafeShop.shopid" name="shopid">
+				<div class="am-tabs-bd"></div>
+
+				<div class="am-g am-margin-top">
+					<div class="am-u-sm-4 am-u-md-2 am-text-right">店铺名称</div>
+					<div class="am-hide-sm-only am-u-md-10">
+						<span style="color: black">$cafeShop.shopname</span>
+					</div>
+				</div>
+
+
+				<div class="am-g am-margin-top">
+					<div class="am-u-sm-4 am-u-md-2 am-text-right">外送电话</div>
+					<div class="am-u-sm-8 am-u-md-4 am-u-end col-end">
+						<input type="text" class="am-input-sm"
+							value="$!shopProfile.mobile" name="mobile" maxlength="11">
+					</div>
+					<div class="am-hide-sm-only am-u-md-6">
+						<span style="color: red" id="_mobile"></span>
+					</div>
+				</div>
+				<div id="inputList">
+					<div class="am-g am-margin-top">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">外卖时间段1</div>
+						<div class="am-u-sm-1 am-u-md-10">
+							<input type="text" style="width: 100px;" class="am-form-field"
+								name="time1" id="time1"
+								onfocus="new WdatePicker({dateFmt:'HH:mm'})" placeholder="开始时间"
+								value=$!date.get("time1")> <input type="text"
+								style="width: 100px;" class="am-form-field" name="time2"
+								id="time2" onfocus="new WdatePicker({dateFmt:'HH:mm'})"
+								placeholder="结束时间" value=$!date.get("time2") > <a
+								id="clean" style="width: 100px;" onclick="_clean()">清空</a>
+						</div>
+					</div>
+				</div>
+
+				<div id="timeList">
+					<div class="am-g am-margin-top">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">外卖时间段2</div>
+						<div class="am-u-sm-1 am-u-md-10">
+							<input type="text" style="width: 100px;" class="am-form-field"
+								name="time3" id="time3"
+								onfocus="new WdatePicker({dateFmt:'HH:mm'})" placeholder="开始时间"
+								value=$!date.get("time3")> <input type="text"
+								style="width: 100px;" class="am-form-field" name="time4"
+								id="time4" onfocus="new WdatePicker({dateFmt:'HH:mm'})"
+								placeholder="结束时间" value=$!date.get("time4")> <a
+								id="clean" style="width: 100px;" onclick="_clear()">清空</a>
+						</div>
+					</div>
+				</div>
+
+				<div id="dateList">
+					<div class="am-g am-margin-top">
+						<div class="am-u-sm-4 am-u-md-2 am-text-right">外卖时间段3</div>
+						<div class="am-u-sm-1 am-u-md-10">
+							<input type="text" style="width: 100px;" class="am-form-field"
+								name="time5" id="time5"
+								onfocus="new WdatePicker({dateFmt:'HH:mm'})" placeholder="开始时间"
+								value=$!date.get("time5")> <input type="text"
+								style="width: 100px;" class="am-form-field" name="time6"
+								id="time6" onfocus="new WdatePicker({dateFmt:'HH:mm'})"
+								placeholder="结束时间" value=$!date.get("time6")> <a
+								id="clean" style="width: 100px;" onclick="_timeclear()">清空</a>
+						</div>
+					</div>
+				</div>
+				
+				<div class="am-g am-margin-top">
+					<div class="am-u-sm-4 am-u-md-2 am-text-right">是否外送</div>
+					<div class="am-u-sm-1 am-u-md-10">
+						<input type="radio" class="am-input-sm" value="Y"
+							name="takeawaystatus" #if($!shopProfile.takeawaystatus
+							eq 'Y')checked="checked" #end>可以外送
+						&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" class="am-input-sm"
+							value="N" name="takeawaystatus" #if($!shopProfile.takeawaystatus
+							ne 'Y')checked="checked" #end>暂不外送
+					</div>
+				</div>
+
+				<div class="am-g am-margin-top">
+					<div class="am-u-sm-4 am-u-md-2 am-text-right">是否预定</div>
+					<div class="am-u-sm-1 am-u-md-10">
+						<input type="radio" class="am-input-sm" value="Y"
+							name="reservedstatus" #if($!shopProfile.reservedstatus
+							eq 'Y')checked="checked" #end>可以预定
+						&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" class="am-input-sm"
+							value="N" name="reservedstatus" #if($!shopProfile.reservedstatus
+							ne 'Y')checked="checked" #end>暂不预定
+					</div>
+				</div>
+
+				<div class="am-g am-margin-top">
+
+					<div class="am-margin">
+						<input type="submit" class="am-btn am-btn-primary am-btn-xs"
+							onclick="submitForm_2()" value="提交保存" />
+					</div>
+					<table class="am-table am-table-striped am-table-hover table-main"
+						id="addressTable">
+						<thead>
+							<tr>
+								<th class='table-title' style="width: 60%;">地址</th>
+								<th class="table-type">操作</th>
+							</tr>
+							<tr>
+								<td>
+									<div id="addresses"
+										class="am-u-sm-8 am-u-md-1 am-u-end col-end"
+										style="width: 500px;"></div> <input id="addAddress"
+									type="text" class="am-input-sm" name="shopaddress"
+									maxlength="50">
+								</td>
+								<td>
+									<button type="button" onclick=_addAddr();
+										class="am-btn am-btn-default am-btn-xs am-text-secondary">
+										<span> 添加 </span>
+									</button>
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+
+
+
+							#foreach($expr in $addressList) #if($!{addressList.size()} == 0)
+							<span id="_span" style='color: red'>该店铺还没有配置外送地址</span> #else
+							<tr>
+								<td>$!expr.address</td>
+								<td><a onclick=_deleteAddr(this,$expr.id)>删除</a>
+								</td>
+							</tr>
+							#end #end
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- content end -->
+
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+
+	#parse("/admin/common/footer.vm")
+</body>
+
+</html>

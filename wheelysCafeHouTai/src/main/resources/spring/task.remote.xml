@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	<!-- common service -->
+	<bean id="jobLockService" class="com.wheelys.job.JobLockService">
+		<property name="jobJdbcTemplate" ref="jdbcTemplate"/>
+		<property name="jobLockTable" value="JOBLOCK"/>
+	</bean>
+	<bean id="jobDetail" class="org.quartz.impl.JobDetailImpl">
+		<property name="jobClass" value="com.wheelys.job.GewaJob" />
+		<property name="name" value="jobDetail"/>
+		<property name="durability" value="true"/>
+	</bean>
+	
+	<!-- 清除jobLock数据 -->
+	<bean id="cleanLockJob" class="com.wheelys.job.impl.CleanLockJob"/>
+	<bean id="cleanLockJobTrigger" class="com.wheelys.job.GewaJobTrigger">
+		<property name="targetMethod" value="cleanJoblock" />
+		<property name="jobService" ref="cleanLockJob" />
+		<property name="jobDetail" ref="jobDetail"/>
+		<property name="cronExpression">
+			<value>0 5 1 ? * *</value>
+		</property>
+	</bean>
+	<bean id="reportHoutaiJob" class="com.wheelys.job.impl.ReportJobImpl"/>
+	<!-- 每天23点触发 -->
+	<bean id="reportHoutaiJobTrigger" class="com.wheelys.job.GewaJobTrigger">
+		<property name="targetMethod" value="everyDayReport" />
+		<property name="jobService" ref="reportHoutaiJob" />
+		<property name="jobDetail" ref="jobDetail"/>
+		<property name="cronExpression">
+			<value>0 0 23 * * ?</value>
+		</property>
+	</bean>
+	
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey" value="SCHEDULERCONTEXTKEY"/>
+		<property name="triggers">
+			<list>
+				<ref bean="cleanLockJobTrigger"/>
+				<ref bean="reportHoutaiJobTrigger"/>
+			</list>
+		</property>
+	</bean>
+</beans>

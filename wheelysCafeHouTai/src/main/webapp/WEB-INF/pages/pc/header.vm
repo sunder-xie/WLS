@@ -1,0 +1,39 @@
+
+<div id="Iheader" class="Iwrap">
+    <div class="Iheader_left">
+        <div class="logo_left" style="margin:10px 20px 0 0;">
+       		<a href="${basePath}pc/pcIndex.xhtml"><img src="${pcPath}Public/home/img/wheelys.png" alt="" style="margin-right:20%;"/></a>
+            <!-- <i class="icon icon-ul"></i> -->
+        </div>
+        <div class="logo">
+            <p>LOVE US & WE LOVE YOU</p>
+            <i class="icon icon-wx class_dis" ></i>
+            <!-- <i class="icon icon-wb"></i> -->
+        </div>
+    </div>
+    <ul class="Iheader_right">
+        <li class="English" ><a href="http://wheelyscafe.com"    style="color: #ffffff;" >EN</a></li>
+        <li class="border_und">|</li>
+        <li class="China"><a href="${basePath}pc/pcIndex.xhtml" style="color:rgb(240, 102, 113);">中文</a></li>
+    </ul>
+    <div class="wheely" id="wheelysMenu">
+    	<a class="menuBox">关于 WHEELYS CAFÉ</a>
+    	<a class="menuBox">风靡全球的WHEELYS</a>
+    	<a class="menuBox">加入WHEELYS</a>
+        <a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzIxMDE4MjMwNw==&hid=2&sn=aa0793a5d27620b905c876b8d0d59638&uin=Mjc3OTQxMTk1&key=c3acc508db720376ee29711487ac69cecad3f491555c8e84cba8fdae7428454067e308ba0cb26de1017a570325c47b8e&devicetype=android-23&version=26031b31&lang=zh_CN&nettype=WIFI&wx_header=1&scene=1">媒体报道</a>
+    	<div class="menuList">
+            <a href="${basePath}pc/wisdom.xhtml">智慧范</a>
+        	<a href="${basePath}pc/technology.xhtml">科技范</a>
+            <a href="${basePath}pc/worth.xhtml">品质范</a>
+    	</div>
+    	<div class="menuList">
+            <a href="${basePath}pc/team.xhtml">也许是最酷的创业团队！</a>
+            <a href="https://wheelyscafe.com/">看看全球还有哪些WHEELYS？</a>
+    	</div>
+    	<div class="menuList">
+           	<a href="http://mp.weixin.qq.com/s?__biz=MzIxMDE4MjMwNw==&mid=503749680&idx=1&sn=58ecd77a87812214f1bc11afb1efc5fa&scene=18#rd">城市运营商招募计划</a>
+            <a href="${basePath}pc/showSignupForm.xhtml">报名表</a>
+    	</div>
+    </div>
+
+</div>

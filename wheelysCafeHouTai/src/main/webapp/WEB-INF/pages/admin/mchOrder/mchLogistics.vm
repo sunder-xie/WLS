@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+<style>
+#inputMod input {
+	width: 150px;
+	float: left;
+	margin-right: 5px;
+}
+
+.clickMod a {
+	display: block;
+	width: 30%;
+	margin: 0 10%;
+	padding: 5px 0;
+	float: left;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+	background: #ed2626;
+	border-radius: 5px;
+	border: 1px solid #ed2626
+}
+
+.tbMod {
+	min-width: 800px;
+}
+
+.tbmod_2, .tbmod_2 th {
+	text-align: center !important;
+}
+
+.listMod {
+	margin: 20px 0 20px 15px;
+}
+
+.listMod h3 {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.listMod .money {
+	float: right;
+	width: 160px;
+	text-align: center;
+}
+</style>
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+
+	<!-- 增删改查 -->
+
+	<div class="admin-content">
+		<div class="am-u-sm-12">
+			<table
+				class="am-table am-table-striped am-table-hover table-main tbmod_2">
+				<thead>
+				</thead>
+
+			</table>
+			<div class="mod_list">
+				<div class="listMod">
+					<h3>物流规则设置</h3>
+					<h4>-------------------------------</h4>
+					<h3>自营店</h3>
+					<ul>
+					<li>收费时段</li>
+						
+					</ul>
+				</div>
+			
+
+		<div style="clear: both; margin-top: 30px; height: 50px;">
+			<b
+				style="float: right; min-width: 160px; text-align: center; display: block"></b>
+		</div>
+	</div>
+
+	<h3></h3>
+
+</body>
+
+</html>

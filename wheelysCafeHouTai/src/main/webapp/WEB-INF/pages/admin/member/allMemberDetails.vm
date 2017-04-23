@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<head>
+    <title>Wheelys</title> #parse("/admin/common/head.vm")
+    <style>
+    #inputMod input {
+        width: 150px;
+        float: left;
+        margin-right: 5px;
+    }
+    
+    #inputMod.am-input-group.am-input-group-sm {
+        width: 800px;
+        float: left;
+        margin-right: 5px;
+    }
+    
+    .clickMod a {
+        display: block;
+        width: 30%;
+        margin: 0 10%;
+        padding: 5px 0;
+        float: left;
+        text-align: center;
+        font-size: 16px;
+        color: #fff;
+        background: #ed2626;
+        border-radius: 5px;
+        border: 1px solid #ed2626
+    }
+    
+    .tbMod {
+        min-width: 800px;
+    }
+    
+    .tbmod_2,
+    .tbmod_2 th {
+        text-align: center !important;
+    }
+    
+    .listMod {
+        margin: 20px 0 20px 15px;
+    }
+    
+    .listMod h3 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    
+    .listMod .money {
+        float: right;
+        width: 160px;
+        text-align: center;
+    }
+    </style>
+</head>
+
+<body style="padding: 0px">
+    #parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf tbMod" style="width: 75%;">
+            <strong class="am-text-primary am-text-lg">
+            &nbsp;&nbsp;&nbsp;用户管理</strong>
+            <br>
+            <br>
+            <div class="admin-content">
+                <div class="am-u-sm-12 am-u-md-4">
+                    <div class="am-input-group am-input-group-sm">
+                        <form id="inputMod" class="am-input-group am-input-group-sm" action="${basePath}admin/member/getAllMember.xhtml" method="get">
+                            <select id="region" name="region" class="am-input-sm" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                                <option value="">全部大区</option>
+                                #foreach($key in $regionList)
+                                <option value="$key.name">$key.name</option>
+                                #end
+                            </select>
+                            <select id="cityCode" name="cityCode" class="am-input-sm" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                                <option value="">全部城市</option>
+                                #foreach($key in $cityMap.keySet())
+                                <option value="$key">$!cityMap.get($!key)</option>
+                                #end
+                            </select>
+                            <select id="shopId" name="shopId" class="am-input-sm" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                                <option value="">全部店铺</option>
+                                #foreach($!shop in $!shopList)
+                                <option value="$shop.shopid">$!shop.shopname</option>
+                                #end
+                            </select>
+                            <input type="text" class="am-form-field" name="phone" maxlength="20" id="orderId" value="" placeholder="手机号">
+                            <input type="text" class="am-form-field" name="createTimeBegin" id="createTimeBegin" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.begin" placeholder="开始时间" style="width:150px;height:33px;float:left;margin-left: 10px;">
+                            <input type="text" class="am-form-field" name="createTimeEnd" id="createTimeEnd" onfocus="new WdatePicker({dateFmt:'yyyy-MM-dd'})" value="$!params.end" placeholder="结束时间" style="width:150px;height:33px;float:left;">
+                            <span class="am-input-group-btn">
+                                <button class="am-btn am-btn-default" name="sou" type="submit">搜索</button>
+                            </span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="am-g">
+                <div class="am-u-sm-12">
+                    <table class="am-table am-table-striped am-table-hover table-main tbmod_2">
+                        <thead>
+                            <tr>
+                                <th class="table-author am-hide-sm-only">用户ID</th>
+                                <th class="table-date am-hide-sm-only">城市</th>
+                                <th class="table-date am-hide-sm-only">手机号</th>
+                                <th class="table-date am-hide-sm-only">首次注册时间</th>
+                                <th class="table-date am-hide-sm-only">总订单数</th>
+                                <th class="table-date am-hide-sm-only">总消费额</th>
+                                <th class="table-date am-hide-sm-only">上次消费店铺</th>
+                                <th class="table-date am-hide-sm-only">上次消费时间</th>
+                                #if($!haveAuth==true)
+                                <th class="table-date am-hide-sm-only">操作</th>
+                                #end
+                            </tr>
+                        </thead>
+                        <tbody>
+                            #foreach($member in $memberList)
+                            <tr>
+                                <td>$!member.id</td>
+                                <td>$!cityMap.get($!member.cityCode)</td>
+                                <td>$!member.mobile</td>
+                                <td>$!member.addtime</td>
+                                <td>$!member.totalOrderQuantity</td>
+                                <td>$!member.totalFee</td>
+                                <td>$!member.lastConsumerShop</td>
+                                <td>$!member.lastConsumerTime</td>
+                                #if($!haveAuth==true && $!member.latestTradeno)
+                                <td>
+                                    <a href="${basePath}admin/orderrefund/showAllOrder.xhtml?tradeno=$!member.latestTradeno" target="_blank">订单</a>
+                                </td>
+                                #end
+                            </tr>
+                            #end
+                        </tbody>
+                    </table>
+                    #parse('include/pageUtil.vm')
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html class="no-js">
+<head>
+<title>Wheelys</title> #parse("/admin/common/head.vm")
+
+</head>
+<body style="padding: 0px">
+	#parse("/admin/common/top.vm") #parse("/admin/common/menu.vm")
+
+	<div class="admin-content">
+		<div class="am-tabs am-margin" data-am-tabs>
+			<ul class="am-tabs-nav am-nav am-nav-tabs">
+				<li class="am-active"><a href="#tab1">活动说明</a></li>
+			</ul>
+			<div class="am-tabs-bd" id="inputList">
+				<input type="hidden" name="newsimg" id="newsimg"
+					value="$!news.newspicture">
+				<div class="am-g am-margin-top">
+					<div class="am-u-sm-4 am-u-md-2 am-text-right">活动说明&nbsp;&nbsp;</div>
+					<div class="am-u-sm-8 am-u-md-4">
+						<textarea rows="5" class="am-input-sm" cols="200"
+							name="actityinfo" id="actityinfo" maxlength="2000"
+							style="width: 600px; height: 300px;"></textarea>
+					</div>
+					<div class="am-hide-sm-only am-u-md-6"></div>
+				</div>
+				<input type="submit" class="am-btn am-btn-primary am-btn-xs"
+					onclick="submitForm_2();" value="保存" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="am-btn am-btn-default am-btn-xs"
+					value="取消" />
+			</div>
+		</div>
+	</div>
+	<a href="#"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
+	#parse("/admin/common/footer.vm")
+	<script type="text/javascript">
+		function submitForm_2() {
+			var data = {};
+			var actity = $('#actityinfo').val();
+			;
+			$('#inputList input').each(function(e, a) {
+				var attr = $(a).attr('name');
+				data[attr] = $(a).val();
+			});
+			$
+					.ajax({
+						url : "${basePath}admin/operator/updateactity.xhtml",
+						type : 'post',
+						dataType : 'json',
+						data : data + '&actityinfo=' + actity,
+						success : function(data) {
+							if (data.success) {
+								alert('保存成功')
+								location.href = '${basePath}admin/shop/actityDetails.xhtml';
+							} else {
+								alert(data.msg);
+							}
+						}
+					})
+		};
+	</script>
+</body>
+</html>

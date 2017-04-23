@@ -1,0 +1,6 @@
+<gcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="gcache.xsd">
+
+	<cache id="dramaSalesPromotion" class="com.wheelys.model.pay.DramaSalesPromotion" maxnumSize="300"/>
+	
+</gcache>
