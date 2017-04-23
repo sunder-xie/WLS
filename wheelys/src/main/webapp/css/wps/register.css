@@ -1,0 +1,37 @@
+body{background:#fff;}
+.login_logo{background-position:0 0; width:110px; margin:40px auto 10px;}
+.inputList{padding:20px 5%;}
+.inputList li{border-bottom:1px solid #F1E8E8; height:40px; padding:10px 0 5px;}
+.inputList li.err{border-color:#ee2624}
+.inputList li span ,.inputList li input{float:left; display:block;}
+.inputList li span{width:22px; height:35px; margin:4px 5% 4px 2%;}
+.inputList li.phone span.login_icon{background-position:-9px 0px;}
+.inputList li.phoneCode span.login_icon{background-position:-9px -35px;}
+.inputList li.picCode span.login_icon{background-position:-9px -72px;}
+.inputList li.password span.login_icon{background-position:-9px -78px;}
+.inputList li.passwordAgain span.login_icon{background-position:-9px -112px;}
+
+.inputList li input{height:40px; line-height:40px; width:50%; font-size:1rem;}
+.inputList li.phone input{width:40%;}
+.inputList li a{float:right; display:block; height:30px; line-height:30px; margin-top:6px; display:block;min-width:30px;}
+.getPhoneCode{color:#fff; background:#e73d3d; border-radius:20px; padding:0 15px; font-size:.8rem;}
+.getPhoneCode.wait{background:#848484;}
+.inputList li .isee{background-position:-53px 0; margin-right:10px;}
+.inputList li .isee.off{background-position:-53px -37px;}
+.tiRegister ,.tiLogin{border-radius:20px; height:35px; line-height:35px; width:40%;background:#e73d3d; color:#fff;
+border:1px solid #e73d3d; display:block; margin:20px 2%; text-align:center; font-size:1.2rem; }
+.BigRegister{border-radius:30px; height:40px; line-height:40px; width:100%;background:#e73d3d; color:#fff;
+border:1px solid #e73d3d; display:block; margin:20px auto; text-align:center; font-size:1.2rem;}
+.loginBt ,.registerBt{text-align:center;}
+.loginBt .tiRegister{background:#fff; color:#e73d3d;}
+.tiRegister ,.tiLogin{display:inline-block;}
+
+#erroList{height:60px; font-size:.8rem; color:#e73d3d}
+.registerFast ,.loginFast{width:80%; background:#fff; padding-top:20px; border-radius:8px;}
+.registerFast h2 ,.loginFast h2{display:block; width:100%; text-align:center; color:#e73d3d; font-size:1rem; font-weight:100;}
+.agreement{text-align:center; height:30px; line-height:30px;}
+.agreement span{display:inline-block;width:20px; height:14px; position:relative; top:2px;}
+.agreement span{background:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/myCenter/check_1.png) no-repeat;background-size:auto 100%;}
+.agreement span.noCheck{background:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/myCenter/check_3.png) no-repeat;background-size:auto 100%;}
+.agreement span.select{background:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/myCenter/check_2.png) no-repeat;background-size:auto 100%;}
+.agreement a{color:#ee2624;}

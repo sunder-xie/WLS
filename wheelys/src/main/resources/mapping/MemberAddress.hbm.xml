@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.order.MemberAddress" table="MEMBERADDRESS">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="memberid" column="MEMBERID" type="long" />
+		<property name="shopid" column="SHOPID" type="long" />
+		<property name="username" column="USERNAME" type="string" />
+		<property name="mobile" column="MOBILE" type="string" />
+		<property name="address" column="ADDRESS" type="string" />
+		<property name="detailaddress" column="DETAILADDRESS" type="string" />
+		<property name="type" column="TYPE" type="string" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+	</class>
+</hibernate-mapping>
+

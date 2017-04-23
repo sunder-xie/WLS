@@ -1,0 +1,245 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta id="metaDataList" data-basePath="${basePath}" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/swiper-3.4.0.min.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/shopDetail.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/swiper-3.4.0.jquery.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wps/buyCart.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm")
+	<style type="text/css">
+	</style>
+</head>
+<body>
+<!-- <header>
+	<div class="headBox clear">
+		<div class="ui_media left">
+			<span class="ui_pic icon hereIcon"></span>
+			<span id="myaddress" class="ui_text">$shop.shopaddress</span>
+		</div>
+		<div class="ui_media right">
+			<span class="ui_pic icon assIcon" onclick="$('#thisAss').popup();"></span>
+		</div>
+	</div>
+</header> -->
+
+#set($headerTitle=$shop.shopname)
+#set($isShopDetail=true)
+#parse("/wps/modul/header.vm")
+<div class="swiper-container" id="size${bannerList.size()}">
+	<div class="swiper-wrapper">
+		#if(!$VmUtils.isEmptyList($bannerList))
+			#foreach($banner in $bannerList)
+			<div class="swiper-slide" onclick="javascript:window.location.href='$banner.tourl'"><img width="100%" src="${picPath}${banner.imageurl}?v=$VmUtils.version"></div>
+			#end
+		#end
+	</div>
+	<!-- 在图片下方增加小点 -->
+	<!-- <div class="swiper-pagination" style="line-height:18px;"></div> -->
+</div>
+
+<!-- 产品列表 -->
+<div id="cofeMod" class="cofeMod ui_media">
+	<div id="classList" class="classList ui_pic">
+		<ul>
+			#foreach($item in $cafeProductMap.keySet())
+			<li id="cafeitem$item.id"><a #if($velocityCount eq 1)class="select"#end>$item.name</a></li>
+			#end
+		</ul>
+	</div>
+	<div id="cofeList" class="cofeList ui_text">
+		<div class="cofeListMod">
+			#foreach($item in $cafeProductMap.keySet())
+			<ul class="clear">
+				#foreach($product in $cafeProductMap.get($item))
+				<li data-id="$product.id" data-price="$product.price" #if($product.cafehot eq 1)data-hot="1"#end #if($product.cafebean eq 1)data-bean="1"#end #if($product.cafemilk eq 1)data-milk="1"#end>
+					<div class="cofe">
+						<img class="goodsImg" width="50%" src="${picPath}$product.img" />
+						<p class="goodsCname">$product.name</p>
+						<p class="goodsEname mt5">$!product.enname</p>
+						<p class="goodsPrice">￥$product.price</p>
+					</div>
+				</li>
+				#end
+			</ul>
+			#end
+		</div>
+	</div>
+</div>
+<!-- 购物车 -->
+<div class="shoppingCart">
+	<div class="shoppingCartBox" id="shoppingCartBox">
+		<div class="shoppingCartMod">
+			 <div class="shoppingCartTitle clear">
+				<div class="shoppingCartLeft">商品</div>
+				<div class="shoppingCartMid"><span>数量</span></div>
+				<div class="shoppingCartRight">小计</div>
+			</div>
+			<ul id="shoppingCartList" class="shoppingCartList">
+			</ul>
+		</div>
+	</div>
+	<p id="allPrice" class="allPrice"><span>小&nbsp;&nbsp;计</span>&nbsp;&nbsp;￥<i>$!cartMap.totalfee</i></p>
+	<a id="gotoCart" class="gotoCart icon"><span>$!cartMap.quantity</span></a>
+	<!-- <a id="clearCart" class="clearCart icon"></a> -->
+	#if($shop.isOpen())
+	<a class="tobuy" id="tobuy" onclick="toBuy();">结&nbsp;&nbsp;算</a>
+	#else
+	<a class="tobuy" style="background:#bebebe">店铺打烊</a>
+	#end
+</div>
+<!-- 购物弹窗 -->
+<div id="cofeDetail" class="cofeDetail">
+	<div class="cofeDetailMod" >
+		<div class="cofePic">
+			<img height="100%" class="goodsImg" src="">
+		</div>
+		<p id="goodsCname" class="goodsName"></p>
+		<p id="goodsEname" class="goodsName"></p>
+		<p class="nowPrice"><span class="priceBox">￥<span id="nowPrice"></span><i id="addThree">+3</i></span></p>
+		<div id="cofeNum" class="cofeOption number clear cofeOptionNum">
+			<div class="optionKey">
+				<span>Quantity</span><span class="ml10">数量</span>
+			</div>
+			<div class="optionValue clear">
+				<span class="re"><em></em></span>
+				<input id="newCart" class="num" value="1" disabled="disabled" />
+				<span class="add on"><em></em></span>
+			</div>
+		</div>
+		<a class="toCart">确&nbsp;&nbsp;定</a>
+		<a class="close icon" onclick="$('#cofeDetail').closePopup();"></a>
+	</div>
+</div>
+<script>
+Zepto(function(){
+	if($('.swiper-slide').length > 1){
+		var mySwiper = new Swiper('.swiper-container',{
+			autoplay : 4000,
+			loop : true,
+			pagination: '.swiper-pagination',
+			autoplayDisableOnInteraction : false
+		})
+	}
+	buyCart.init();
+	cofeMod();
+	cofeListMod();
+})
+function cofeMod(){
+	var cofeH = document.documentElement.clientHeight - $('#cofeList').offset().top;
+	cofeHe = cofeH + 'px';
+	$('#classList').css('height',document.documentElement.clientHeight);
+	$('#cofeList').css('height',document.documentElement.clientHeight);
+}
+//左右联动方法
+function cofeListMod(){
+	var cofeH = document.documentElement.clientHeight - $('#cofeList').offset().top;
+	var cofeListT = $('#cofeList').offset().top;
+	var classList = $('#classList ul li a') ,cofeListMod = $('.cofeListMod ul');
+	//滑动右边定位左边
+	var n ;//索引值
+	var y = false;
+	var isClick = false;
+	window.onscroll = function () {
+		ifCofeMod();
+    };
+	$('#cofeList').bind({
+		'scroll':function(){
+			if(isClick){
+				isClick = false;
+				return
+			}
+			ifCofeMod();
+			//scrollFn();
+			scrollFnNew();
+		}
+	})
+	function scrollFn(){
+		var h = -1000 , b ,z = 0;//h为标杆不断循环赋值寻找最小值b为当前值z为当前索引
+		scrollT = $('#cofeList').scrollTop();
+		cofeListMod.each(function(e,a){
+			b = $(a).offset().top-cofeH;
+			if(b < 0 && b > h){
+				h = b;
+				z = e;
+			};
+		})
+		if($('.cofeListMod').offset().top < 0 && Math.abs($('.cofeListMod').offset().top) + document.documentElement.clientHeight + $('#cofeList').offset().top + 100 >= $('.cofeListMod').offset().height){
+			z = cofeListMod.length-1;
+		}
+		if(z==n)return;
+		n = z;//右侧索引赋值给左侧
+		classListChange();
+		function classListChange(a){
+			if(a) z = a;
+			classList.removeClass('select')
+			classList.each(function(e,a){
+				$(classList[z]).addClass('select');
+			})
+		}
+	}
+	function scrollFnNew(){
+		var isG = true ,n;
+		cofeListMod.each(function(e,a){
+			if($(a).offset().top - 200 >= 0){
+				if(isG){
+					n = e<=0?e = 0 :e - 1;
+					isG = false;
+				}
+			}
+		})
+		classList.removeClass('select');
+		classList.each(function(e,a){
+			if(e == n)($(a).addClass('select'))
+		})
+	}
+	function ifCofeMod(){
+		if($('#cofeMod').offset().top - document.body.scrollTop <= 0){
+			if(y)return;
+			$('.cofeMod .cofeList').css({
+				'overflow-y':'auto'
+			})
+			$('#classList').bind("touchmove",function(event){event.preventDefault();});
+			y = true;
+		}else{
+			if(!y)return;
+			$('.cofeMod .cofeList').css({
+				'overflow-y':'hidden'
+			})
+			$('#classList').unbind("touchmove");
+			y = false;
+		}
+	}
+	//点击左侧滑动右侧
+	classList.each(function(e ,a){
+		$(a).on('click',function(){
+			isClick = true;
+			classList.removeClass('select');
+			$('#cofeList').scrollTop(0);
+			$('#cofeList').scrollTop($(cofeListMod[e]).offset().top - $('#classList').offset().top)
+			$(this).addClass('select');
+		})
+	})
+}
+function toBuy(){
+	if($('#gotoCart span').html && $('#gotoCart span').html() != '0'){
+		$('#tobuy').off();
+		window.location.href="${basePath}order/step1.xhtml?shopid=$params.shopid"; 
+	}else{
+		alert('您的购物车是空的，先去选购吧.');
+	}
+}
+</script>
+</body>
+</html>
+	

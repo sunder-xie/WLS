@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+</head>
+<body>
+#set($headerTitle='帮助')
+#parse("/wps/modul/header.vm")
+ <div class="help-content">
+     <ul>
+       <li>
+         <div>
+             <p class="question">问题一：Wheelys咖啡是谁?<span></span></p>
+         </div>
+            <p class="answer">
+                                       答：可以在微信服务号内回复“品牌故事”了解详情。
+            </p>
+       </li>
+       <li>
+         <div>
+            <p class="question">问题二：关于Wheelys咖啡目前售卖的咖啡饮品有哪些?<span></span></p>
+         </div>
+            <p class="answer">
+                                       答：目前Wheelys咖啡售卖两大类咖啡饮品，可以在微信服务号内回复“菜单”了解详细品类，或是回复“意式咖啡”或“手冲咖啡”，了解一杯好咖啡的正确打开方式。
+            </p>
+       </li>
+       <li>
+         <div>
+             <p class="question">问题三：如何查询相关门店的地址和经营时间?<span></span></p>
+         </div>
+            <p class="answer">
+                                       答：进入点咖啡菜单后，每家门店的地址可以在店名和评分下看到详细地址。或经点击相关门店界面右上角ⓘ图标，可以了解详细的门店地址和营业时间。
+            </p>
+       </li>
+       <li>
+         <div>
+            <p class="question">问题四：关于预约Wheelys咖啡的方法?<span></span></p>
+         </div>
+            <p class="answer">
+                                       答：可以在微信服务号内回复“品牌故事”了解详情。
+            </p>
+       </li>
+       <li>
+         <div>
+            <p class="question">问题五：如何购买Wheelys咖啡车，或加盟方式是?<span></span></p>
+         </div>
+            <p class="answer">
+                                       答：Wheelys咖啡并非加盟模式，我们希望通过更为密切的运营商模式开展合作，也希望与志同道合的合作伙伴尽快开展对话。诚邀有实力、有资源、有经验、有想法的你，共同建设一个更为完善的咖啡车网络，从而将Wheelys全球的品牌理念传递给更多中国消费者。同时，Wheelys咖啡承诺将提供强大的资源和资本，为城市运营商的规模化经营保驾护航。了解更多“全国运营商招募计划”，可以在微信服务号内回复“招募计划”了解详情。
+            </p>
+       </li>
+     </ul>
+ </div>	
+</body>
+</html>

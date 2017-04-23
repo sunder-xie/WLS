@@ -1,0 +1,29 @@
+<ul id="storeList" class="storeList" data-address="$!useraddress">
+	#foreach($shop in $shopList)
+	<li>
+		<a href="${basePath}shop/shopDetail.xhtml?shopid=$shop.shopid&isreset=Y&v=$VmUtils.version">
+			<div class="storeLogo ui_media">
+				<span class="ui_pic">
+					<img width="100%" height="auto" src="${picPath}$shop.shopimg" />
+				</span>
+				<div class="ui_text">
+					<h3>$!shop.shopname</h3>
+					<p class="distance">$!VmUtils.getDistance($!shop.distance)<i>km</i></p>
+					<div class="storeAge mt5">
+						<!-- <h4>Rating</h4> -->
+						<p class="markAge clear"><span class="ageNum left">店址 : $!shop.shopaddress</span></p>
+					</div>
+				</div>
+			</div>
+			<span class="cityTag">$!citymap.get($shop.citycode)</span>
+		</a>
+		<!-- <span class="likeStore icon" data-type="like" data-id="123" data-state="on"></span> -->
+	</li>
+	#end
+	#if($VmUtils.isEmptyList($shopList))
+   <div class="close">
+	  <div class="c-img"><img src="${picPath}wps/dummystatus/store%20close.png"></div>
+	  <p class="k-p" style="text-align:center;">我们已经打烊啦，明天见咯^-^</p>
+   </div> 
+	#end
+</ul>

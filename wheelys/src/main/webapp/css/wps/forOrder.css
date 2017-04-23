@@ -1,0 +1,64 @@
+header{padding:40px 0; text-align:center;}
+body{padding-bottom:30px;background:#fff !important;}
+.orderMod{padding:0 5%;}
+.orderMod h2{width:100%; text-align:center; display:block; font-size:1.4rem; padding: 20px 0 10px 0;}
+.listMod{padding-bottom:10px;}
+.liMod{display:inline-block; width:32%; float:left;min-height:60px;}
+.listMod li{border-bottom:1px solid #9c9c9c; }
+.listMod li.give{color:#9c9c9c;}
+.liMod p{line-height:1.6rem;}
+.liMod:nth-child(1){font-size:.8rem;width:38%;padding-left:2%;}
+.liMod:nth-child(1) p{font-size:1rem; font-weight:bold;}
+.liMod:nth-child(1) p:nth-child(3){font-weight:000;font-size:.8rem; color:#9c9c9c;}
+.liMod:nth-child(2){text-align:center; line-height:70px;width:28%;}
+.liMod:nth-child(3){text-align:right; line-height:70px;padding-right:2%; width:28%;}
+.liMod:nth-child(3) .pass{text-decoration:line-through; color:#9c9c9c}
+.liMod:nth-child(3) .new{color:#e63d41; margin-right:3px;}
+.orderDetailTitle{padding:10px 0;border-bottom:1px solid #9c9c9c; color:#9c9c9c; font-size:1.2rem}
+.orderDetailTitle span ,.orderDetailBody ul span ,.orderDetailDis span{float:left; width:30%;text-align:center;}
+.orderDetailTitle span:nth-child(1) ,.orderDetailBody ul span:nth-child(1) ,.orderDetailDis span:nth-child(1){width:40%; text-align:left; text-indent:2%;}
+.orderDetailTitle span:nth-child(3) ,.orderDetailBody ul span:nth-child(3) ,.orderDetailDis span:nth-child(3){text-align:right; width:28%; padding-right:2%;}
+.discount{color:#e63d41; padding:5px 0; border-bottom:1px solid #e63d41}
+.amount{font-size:1rem; height:40px; line-height:40px; border-top:1px solid #ddd; text-indent:10px;}
+.amount .right:nth-child(1){font-size:1.4rem; margin-right:3%;}
+.wxPay{width:80%; text-align:center; margin:20px auto 0; padding:10px 0; border-radius:2px;background:#44b549;display:block; color:#fff;}
+
+.getTakeOut{height:30px; line-height:30px; font-size:1rem; margin-bottom:10px;}
+.getTakeOut span ,.getTakeOut em{ display:inline-block; height:100%; float:right;}
+.getTakeOut span{width:20px; background-position:-2px -205px; margin:0 3% 0 5px; font-size:}
+.getTakeOut span.select{background-position:-2px -230px;}
+.takeOutMod{background:#f5f5f5;}
+.takeOutMod h3{width:100%;height:45px; line-height:45px; font-size:1rem; font-weight:100; color:#373737 !important; display:block;}
+.takeOutMod h3 .left{margin-left:3%;}
+#modifyAss{padding:10px 3%}
+#modifyAss em{background-position:-2px -259px; float:right; height:25px; width:20px; display:inline-block;}
+.assMod{border-top:1px solid #fff; color:#757575; padding:10px 3%;}
+.assMod ul li{margin:5px 0;}
+#getAss{width:80%; background:#fff; border-radius:5px; padding:15px 4%;}
+#getAss h2{ border-bottom:1px solid #f7c1ce; color:#242424; font-size:1.2rem; width:100%; text-align:center; display:block; font-weight:100; padding:10px 0 20px; font-weight:bold;}
+#getAss ul{width:100%; text-align:cebter; margin-top:10px;}
+#getAss ul li{width:94%; margin:15px auto;  height:38px;display:block; border:1px solid #e7e7e7; border-radius:2px;}
+#getAss input ,#getAss select{width:90%; height:38px; line-height:38px; color:#474747;}
+#getAss input ,#getAss select,#getAss lable{-webkit-appearance:none;text-indent:10px; border:none; font-size:0.92rem;}
+#getAss select{color:#d6d6d6; background:#fff;}
+#assSelect option{color:#474747}
+.tagging{color:#ED2626;margin-top:10px; font-size:.92rem; padding:0 2.5%;}
+.btnMod{margin-top:35px; padding-bottom:20px;}
+.btnMod a{display:block; width:38%; margin:0 5%;border-radius:20px; background:#f1221a; border:1px solid #f1221a; color:#fff; font-size:1rem; height:34px; line-height:34px; text-align:center; float:left;}
+.btnMod a.closeP{background:#fff; color:#f1221a}
+
+.takeClose{background-position:-90px -95px;  width:40px; height:40px; display:block; position:absolute; right:10px; top:10px;-webkit-transform:scale(.8,.8); -webkit-transform:scale(.8,.8); }
+.errInput{border-color:#ed2626 !important;}
+.downTo{position:relative;}
+.downTo span{height:38px;background-position:-2px -281px; width:25px;display:block; position:absolute; right:0px; top:0;}
+
+.functionTitle .onlyBefor{width:100%; text-align:left; color:#474747; font-size:0.93rem; position:relative; text-indent:10px; height:30px; line-height:30px;}
+.functionTitle .onlyBefor span{position:absolute; left:0; width:4px; height:10px; top:50%; margin-top:-6px; background:#ed2626}
+.functionTitle .takeAndBefor span{width:50%; float:left; text-align:center;}
+.functionTitle .takeAndBefor span em{border-bottom:3px solid #fff; height:30px; line-height:30px; display:inline-block; font-size:0.928rem;}
+.functionTitle .takeAndBefor span.select em{color:#ed4646;border-color:#ed2626}
+.beforTime{background:#f5f5f5; padding:12px 5%;}
+.beforTimeMod{font-size:0.85rem;background:#fff; color:#474747; border-radius:30px; text-align:center;}
+.beforTimeMod.on{background:#ed2626; color:#fff;}
+.beforMod{ height:28px; line-height:28px; float:left; border-radius:25px; width:25%; margin:8px 4%;}
+.nowTimeMod{ height:30px; line-height:30px; border-radius:30px; width:40%; margin:20px auto 0;}

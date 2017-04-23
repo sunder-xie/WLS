@@ -1,0 +1,31 @@
+body{background:#fff;padding:20px 5%;}
+.shopName{display:block; width:100%; text-align:center; line-height:2rem; height:2rem;}
+.orderBox{ min-height:100%;}
+.orderBox .orderDetail{width:50%; float:left; min-height:100%;}
+.orderDetail h2 ,.otherDetail h2{text-align:center;width:100%; display:block; font-size:1rem; line-height:2.5rem; font-weight:900;}
+.orderDetailTitle{height:2.6rem;line-height:2.6rem; font-size:1rem; color:#a0a0a0;}
+.orderDetailTitle span ,.orderDetailBody ul span ,.orderDetailDis span{float:left; width:30%;text-align:center;}
+.orderDetailTitle span:nth-child(1) ,.orderDetailBody ul span:nth-child(1) ,.orderDetailDis span:nth-child(1){width:40%;}
+.orderDetailBody ul span:nth-child(1) ,.orderDetailDis span:nth-child(1),.orderDetailTotal span:nth-child(1){text-align:left; text-indent:10px;}
+.orderDetailBody ul li{border-top:1px solid #ddd; padding:5px 0;}
+.orderDetailBody ul li.modLi{border-color:#e61111}
+.orderDetailBody ul li p{font-size:.6rem;line-height:16px;}
+.orderDetailDis{border-top:1px solid #ddd; border-bottom:1px solid #e61111; color:#e61111; height:3.8rem; line-height:3.8rem}
+.orderDetailDis span{text-align:center}
+.orderDetailDis span:nth-child(1){width:70%; text-align:left;}
+.orderDetailTotal{border-top:1px solid #e61111}
+.orderDetailTotal span{float:left; width:50%; text-align:center; height:3rem; line-height:3rem; width:30%; font-weight:900; font-size:1.4rem;color:#e61111;}
+.orderDetailTotal span:nth-child(1){width:70%; text-align:right}
+.otherDetail{margin-top:30px;}
+.otherDetail h2{ height:3rem;line-height:3rem; border-top:2px solid #ddd}
+.otherDetail ul li{height:3rem; line-height:3rem; border-top:1px solid #ddd; font-size:1rem;text-indent:5px;}
+.otherDetail ul li:nth-child(1){border:none;}
+.otherDetail ul li:nth-child(1) span:nth-child(2){color:#e61111;font-weight:900;}
+.otherDetail ul li span:nth-child(1){font-weight:900; margin-right:5px;}
+.cofeBuyDetail i{margin:0 2px;}
+.amount{border-top:1px solid #ddd; padding:5px 0;}
+.amount .left{text-indent:10px;}
+.amount .right{width:30%; text-align:center;}
+.close{-webkit-box-shadow: 4px 4px 0 #e61111;box-shadow: 4px 4px 0 #e61111;border:2px solid #000; width:80%; margin:50px auto 0; height:3rem; line-height:3rem; text-align:center; font-size:1.6rem; display:block;}
+span.pass{text-decoration:line-through}
+span.new{color:#e61111}

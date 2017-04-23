@@ -1,0 +1,43 @@
+#foreach($ordervo in $ordervoList)
+	#set($order = $ordervo.order)
+	#set($detailList = $ordervo.detailList)
+	<li class="$order.id clear modLi" data-id="$order.id" data-time="$DateUtil.formatTimestamp($order.paidtime)">
+		<span>
+			<p>用户名：$order.membername</p>
+			<p style="font-size:1rem; line-height:1.2rem;"><b>口令：$order.takekey</b></p>
+			<p>$DateUtil.formatTimestamp($order.paidtime)</p>
+		</span>
+		<span class="liMod">
+			<p>此单共计</p>
+			<p>$order.quantity</p>
+		</span>
+		<span>
+			<a class="overThis" id="$order.id" onclick="removeThis(this);">制作</a>
+		</span>
+	</li>
+	#foreach($detail in $detailList)
+		<li class="$order.id clear">
+			<span style="color:#e60912;">
+				<p><b>$detail.productname</b></p>
+				<p class="cofeBuyDetail clear">
+				#set($map = $VmUtils.readJsonToMap($detail.description))
+				#if($map.hot eq 'hot')
+					<i>hot</i>
+				#elseif($map.hot eq 'cold')
+					<i>cold</i>
+				#end
+				#if($map.milk eq 'y')
+					<i>milk</i>
+				#end
+				#if($map.bean eq 'y')
+					<i>double</i>
+				#end
+					</p>
+			</span>
+			<span class="liMod">
+					<p>$detail.quantity</p>
+			</span>
+			<span></span>
+		</li>
+	#end
+#end

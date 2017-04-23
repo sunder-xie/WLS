@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.CafeProduct" table="wheelys_product" >
+		<id name="id" column="prodid" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="itemid" column="prodclass" type="long" />
+		<property name="name" column="prodname" type="string" />
+		<property name="enname" column="prodenname" type="string" />
+		<property name="desp" column="prodinfo" type="string" />
+		<property name="price" column="prodprice" type="integer" />
+		<property name="img" column="prodimg" type="string" />
+		<property name="cafehot" column="prodoption1" type="integer" />
+		<property name="cafebean" column="prodoption2" type="integer" />
+		<property name="cafemilk" column="prodoption3" type="integer" />
+		<property name="addtime" column="addtime" type="integer" />
+		<property name="display" column="prodisplay" type="integer" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+	</class>
+</hibernate-mapping>
+

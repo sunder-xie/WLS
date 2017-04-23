@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/register.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wps/login.js?v=$VmUtils.version" type="text/javascript"></script>
+	<style>
+	body{background:#fff;}
+	#erroList{padding:0 5%;}
+	</style>
+</head>
+<body>
+#set($headerTitle='绑定手机号')
+#parse("/wps/modul/header.vm")
+<div class="setUpBox">
+	<div id="inputList" class="inputList">
+		<ul>
+			<li class="phone clear">
+				<span class="login_icon"></span>
+				<input type="text" data-type="textover" placeholder="请输入您的手机号" onfocus="" maxlength="11" name="phoneCode" />
+			</li>
+			<li class="phoneCode clear">
+				<span class="login_icon"></span>
+				<input type="text" name="message" maxlength="20" data-type="textover" placeholder="请填写您的短信验证码" />
+				<a id="getPhoneCode" class="getPhoneCode" onclick="getCode();">获取验证码</a>
+			</li>
+		</ul>
+	</div>
+	<div id="erroList">
+	</div>
+	<a onclick="inputPush();" id="tiRegister" class="BigRegister cursorBtn" style="width:40%;">绑定</a>
+</div>
+<script>
+var inputList = ['phoneCode', 'message'];
+Zepto(function(){
+   if(sessionStorage.getItem('getPhoneCode')){
+	   getPhoneCodeFn('getPhoneCode',sessionStorage.getItem('getPhoneCode'));
+   }
+})
+function getCode(){
+	if(!$('.inputList .phone input').inputValCheck('erroList'))return;
+	var ajaxList = inputListCheck(inputList);
+	wheelys.ajax({
+        url: '${basePath}ajax/common/sendPhoneBindCode.xhtml',
+        type: 'POST',
+        data: ajaxList,
+        callback: function(reval) {
+            if (reval.success) {
+            	getPhoneCodeFn('getPhoneCode', '60');
+            }else{
+            	$('#erroList').html(reval.msg);
+            }
+        }
+    })
+}
+function inputPush(){
+	if(!$('.inputList li input').inputValCheck('erroList'))return;
+	var ajaxList = inputListCheck(inputList);
+	wheelys.ajax({
+        url: '${basePath}ajax/common/bindPhone.xhtml',
+        type: 'POST',
+        data: ajaxList,
+        callback: function(reval) {
+            if (reval.success) {
+                location.href = '#if($VmUtils.isBlank($VmUtils.getText($params.TARGETURL)))${basePath}index.xhtml#else$VmUtils.getText($params.TARGETURL)#end';
+            }else{
+            	$('#erroList').html(reval.msg);
+            }
+        }
+    })
+}
+function inputCheck() {
+	var is = true;
+    $(inputList).each(function(e, a) {
+        $('input[name=' + a + ']').on('blur', function() {
+            var html;
+            if (!$(this).attr('value') == "") {
+                if (a == 'username' && !wheelys.isMobile(this.value)) {
+                    html = '<p>您输入的手机号有误，请重新输入</p>';
+                    is = false;
+                }
+            }
+            $('#erroList').html(html);
+        })
+    })
+}
+</script>
+</body>
+</html>

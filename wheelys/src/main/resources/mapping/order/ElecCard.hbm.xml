@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.pay.ElecCard" table="ELECCARD" optimistic-lock="version" >
+		<id name="id" column="id" type="long">
+			<generator class="identity" />
+		</id>
+		<version  name="version" column="VERSION" type="integer"/> 
+		<property name="ebatchid" column="EBATCHID" type="long" />
+		<property name="cardtype" column="CARDTYPE" type="string" />
+		<property name="status" column="STATUS" type="string" />
+		<property name="memberid" column="MEMBERID" type="long" />
+		<property name="mobile" column="MOBILE" type="string" />
+		<property name="ukey" column="UKEY" type="string" />
+		<property name="orderid" column="ORDERID" type="long" />
+		<property name="begintime" column="BEGINTIME" type="timestamp" />
+		<property name="endtime" column="ENDTIME" type="timestamp" />
+		<property name="remark" column="REMARK" type="string" />
+		<property name="bindtime" column="BINDTIME" type="timestamp" />
+		<property name="paidamount" column="PAIDAMOUNT" type="integer" />
+		<property name="costprice" column="COSTPRICE" type="integer" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+	</class>
+</hibernate-mapping>
+

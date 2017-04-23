@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.CartProduct" table="CARTPRODUCT" >
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="productid" column="PRODUCTID" type="long" />
+		<property name="quantity" column="QUANTITY" type="integer" />
+		<property name="price" column="PRICE" type="integer" />
+		<property name="totalfee" column="TOTALFEE" type="integer" />
+		<property name="ukey" column="UKEY" type="string" />
+		<property name="pkey" column="PKEY" type="string" />
+		<property name="otherinfo" column="OTHERINFO" type="string" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+	</class>
+</hibernate-mapping>
+

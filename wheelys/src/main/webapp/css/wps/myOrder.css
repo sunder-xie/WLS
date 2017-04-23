@@ -1,0 +1,27 @@
+header{background:#e93a41;padding:20px 5%; color:#fff;}
+header .ui_pic{width:25%; overflow:hidden; border-radius:10px;}
+header .userName{font-weight:900; font-size:1.4rem}
+.userDetail{margin-top:10px;}
+.userDetail article{display:inline-block; width:48%;}
+.userDetail .icon{padding-left:20px; }
+.userDetail .userCoupon{background-position:-183px -4px;}
+.userDetail .userPoints{background-position:-183px -38px;}
+.userDetail .icon span{margin-right:10%;}
+
+.orderMod{padding:10px 5%;}
+.orderMod .orderClass{color:#a7a7a7}
+.orderMod .orderClass a{display:inline-block; width:32%;text-align:center; height:22px; line-height:22px;}
+.orderMod .orderClass a:nth-child(2){border-left:1px solid #dcdddd; border-right:1px solid #dcdddd;}
+.orderMod .orderClass .select{color:#e63d41;}
+
+.orderList{padding:5px 0;}
+.orderList ul li{border:1px solid #dcdddd; padding:10px; margin:10px 0;}
+.orderDetail .ui_pic{width:20%;overflow:hidden; border-radius:10px;}
+.orderDetail .ui_text .cofeAll{height:40px; overflow:hidden;}
+.orderDetail .ui_text .cofeName{font-size:.8rem; height:20px; line-height:20px;}
+.cofeNum .left{color:#a0a0a0; padding-right:20px; background-position:45px -99px;}
+.cofeNum .left.down{ background-position:45px -116px;}
+.orderTime{margin-top:5px;border-top:1px solid #dcdddd;padding-top:10px;}
+.orderTime .left ,.orderTime .right{ height:30px;line-height:30px;display:inline-block;}
+.orderTime .left{color:#a0a0a0;font-size:.8rem}
+.orderTime .right{color:#fff; background:#e63d41; border-radius:20px; line-height:30px; padding:0 20px;}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no"/>
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+	
+</head>
+<body>
+<!-- <p class="headerTips">注:不能用</p>
+<div class="couponBox">
+	<ul>
+		<li><img src="${picPath}wps/coupon/close.png"></li>
+	</ul>
+</div> -->
+#set($headerTitle='历史优惠券')
+#parse("/wps/modul/header.vm")
+<div class="exist">
+	<div class="content">
+	#foreach($card in $cardList)
+	<div class="history-one" id="$card.id">
+	   <div class="top">
+	   		#if($card.cardtype eq '1')
+			<div class="top-left">
+			     &yen;$card.amount
+			</div>
+			#else
+			<div class="top-left coffee">
+			  	$card.dhname
+			</div>
+			#end
+	      <div class="top-right">
+	         <h3>$!card.cardname</h3>
+	         <ul>
+	   			#if($card.minprice gt 0)
+		   			#if($card.ebatchid eq 238)
+					<li>买1杯立减10元</li>
+		   			#elseif($card.ebatchid eq 236)
+					<li>买2杯立减21元</li>
+		   			#elseif($card.ebatchid eq 237)
+					<li>买3杯立减32元</li>
+					#else
+					<li>消费满${card.minprice}使用</li>
+					#end
+				#end
+	           <li class="last">使用期限$DateUtil.format($card.begintime,'yyyy-MM-dd') ~ $DateUtil.format($card.endtime,'yyyy-MM-dd')</li>
+	         </ul>
+	         #if($card.status eq 'U')
+            <div class="right-img">
+            	<img src="${picPath}wps/coupon/already.png"/>
+            </div>
+            #else
+            <div class="right-img">
+            	<img src="${picPath}wps/coupon/overdue.png"/>
+            </div>
+            #end
+	      </div>
+	   </div>
+	   <div class="bottom">
+	      <p> 说明：${card.description} </p> 
+	   </div>       
+	</div>
+		#end
+	</div>
+	#if($VmUtils.isEmptyList($cardList))
+	<div class="e-img"><img src="${picPath}wps/dummystatus/nocard.png"></div>
+	<div class="footer">
+	  <span>暂无历史优惠券</span>
+	</div>
+	#else
+	<div class="footer">
+	  <span>没有更多历史优惠券了</span>
+	</div>
+	#end
+</div>
+</body>
+</html>

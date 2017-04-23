@@ -1,0 +1,34 @@
+<input type="hidden" value="$!memberAddress.id" id="memberAddressid"/>
+<div id="takeOut" class="takeOut">
+	<div id="takeOutMod" class="takeOutMod" style="display:none;">
+		<h3 class="clear"><span class="left">配送地址</span><span class="right" id="modifyAss"><em class="icon"></em></span></h3>
+		<div class="assMod">
+			<ul>
+				<li id="li_address">地址：$!memberAddress.address</li>
+				<li id="li_detailaddress">详细：$!memberAddress.detailaddress</li>
+				<li id="li_mobile">电话：$!memberAddress.mobile</li>
+				<li id="li_username">称呼：$!memberAddress.username</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div id="getAss" style="display:none;">
+	<h2>编辑配送地址</h2>
+	<ul>
+		<li class="downTo">
+			<select id="assSelect" style=" #if($!memberAddress)color:#474747; #else color:#d6d6d6 #end" onChange="$(this).css('color','#474747')">
+				<option #if(!$memberAddress) selected="selected" #end disabled="disabled">请选择指定配送地点</option>
+				#foreach($address in $exprAddrList)
+				<option #if($!memberAddress.address eq $address) selected="selected" #end value="$address">$address</option>
+				#end
+			</select>
+			<span class="icon"></span>
+		</li>
+		<li><input type="text" maxlength="30" name="detailaddress" placeholder="请输入详细地址，如**层**室" value="$!memberAddress.detailaddress"/></li>
+		<li><input type="text" maxlength="11" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')" name="mobile" placeholder="电话号码" value="$!memberAddress.mobile"/></li>
+		<li><input type="text" maxlength="10" name="username" placeholder="请问如何称呼，如：王磊" value="$!memberAddress.username"/></li>
+	</ul>
+	<p class="tagging">注：如未找到您的配送地点,则不在配送范围，请点击"取消"来店自取。</p>
+	<div class="btnMod clear"><a class="closeP" onclick="$('#getAss').closePopup();">取消</a><a onclick="_addDetail();">确定</a></div>
+	<a class="takeClose icon" onclick="$('#getAss').closePopup();"></a>
+</div>

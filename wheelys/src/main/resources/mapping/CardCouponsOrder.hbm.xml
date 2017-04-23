@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.order.CardCouponsOrder" table="CARDCOUPONSORDER">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="version" column="VERSION" type="integer" />
+		<property name="ordertitle" column="ORDERTITLE" type="string" />
+		<property name="tradeno" column="TRADENO" type="string" />
+		<property name="mobile" column="MOBILE" type="string" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="paidtime" column="PAIDTIME" type="timestamp" />
+		<property name="validtime" column="VALIDTIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+		<property name="status" column="STATUS" type="string" />
+		<property name="paystatus" column="PAYSTATUS" type="string" />
+		<property name="restatus" column="RESTATUS " type="string" />
+		<property name="memberid" column="MEMBERID" type="long" />
+		<property name="membername" column="MEMBERNAME" type="string" />
+		<property name="payseqno" column="PAYSEQNO" type="string" />
+		<property name="payfee" column="PAYFEE" type="integer" />
+		<property name="netpaid" column="NETPAID" type="integer" />
+		<property name="quantity" column="QUANTITY" type="integer" />
+		<property name="citycode" column="CITYCODE" type="string" />
+		<property name="category" column="CATEGORY" type="string" />
+		<property name="gatewayCode" column="GATEWATCODE" type="string" />
+		<property name="merchantCode" column="MERCHANTCODE" type="string" />
+		<property name="paymethod" column="PAYMETHOD" type="string" />
+		<property name="origin" column="ORIGIN" type="string" />
+		<property name="otherinfo" column="OTHERINFO" type="string" />
+		<property name="description" column="DESCRIPTION" type="string" />
+		<property name="remark" column="REMARK" type="string" />
+		<property name="ukey" column="UKEY" type="string" />
+		<property name="shopid" column="SHOPID" type="long" /> 
+		<property name="ebatchid" column="EBATCHID" type="string" /> 
+	</class>
+</hibernate-mapping>
+

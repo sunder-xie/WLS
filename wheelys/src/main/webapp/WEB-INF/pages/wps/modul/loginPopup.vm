@@ -1,0 +1,38 @@
+<div id="loginFast" class="loginFast" style="display:none;">
+	<h2>快速登录</h2>
+	<div class="inputList">
+		<ul>
+			<li class="phone clear">
+				<span class="login_icon"></span>
+				<input id="myPhone" name="" data-type="textover" alt="请输入您得手机号" />
+			</li>
+			<li class="password clear">
+				<span class="login_icon"></span>
+				<input id="myPassword" type="password" data-type="textover" alt="请填写您的密码" />
+				<a onclick="isee(this);" class="login_icon isee off"></a>
+			</li>
+			<li class="picCode clear">
+				<span class="login_icon"></span>
+				<input id="picCheck" data-type="textover" alt="请输入右侧图片验证码" />
+				<a id="getPicCodeP"><img src="" /></a>
+			</li>
+		</ul>
+		<div class="loginBt">
+			<a id="tiRegister" class="tiRegister" href="">注&nbsp;&nbsp;册</a>
+			<a id="tiLogin" class="tiLogin">登&nbsp;&nbsp;录</a>
+		</div>
+	</div>
+</div>
+<script>
+function loginpopup(){
+	$('#loginFast').popup({
+		'callback':function(){
+			wheelys.textOver('loginFast');
+			getPhoneCode('getPhoneCodeP','60');
+			$('#tiLogin').on('click',function(){
+				
+			})
+		}
+	});
+}
+</script>

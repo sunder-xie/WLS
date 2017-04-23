@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.common.Operation" table="OPERATION">
+		<id name="opkey" column="opkey" type="string">
+			<generator class="assigned" />
+		</id>
+		<property name="opnum" column="opnum" type="integer" />
+		<property name="refused" column="refused" type="integer" />
+		<property name="addtime" column="addtime" type="timestamp" />
+		<property name="updatetime" column="updatetime" type="timestamp" />
+		<property name="validtime" column="validtime" type="timestamp" />
+		<property name="tag" column="tag" type="string" />
+	</class>
+</hibernate-mapping>

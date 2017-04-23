@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+</head>
+<body>
+#set($headerTitle='使用说明')
+#parse("/wps/modul/header.vm")
+ <div style="padding:10px;">
+ 	<p class="t">1、购买商品时（除特例商品外），优惠券可抵优惠券券面显示的现金价值;</p>
+	<p class="t">2、原则上每张订单只能使用一张优惠券，且不得与其他优惠方式同时使用;</p>
+	<p class="t">3、本券不得兑换现金不设找零;</p>
+	<p class="t">4、退货时，本券价值不予退还现金;</p>
+	<p class="t">本优惠券最终解释权归Wheelys所有</p>
+ </div>
+ </body>
+ </html>

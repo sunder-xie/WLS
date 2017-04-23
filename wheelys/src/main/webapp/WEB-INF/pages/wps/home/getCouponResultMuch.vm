@@ -1,0 +1,68 @@
+<!doctype html>
+<html >
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+	<style>
+	.page_body{background:url(${picPath}wps/Discountcoupon/bg_much.png) center -10px no-repeat; background-size:130% auto; height:100%; padding:40px 0; border-bottom:4px solid #ee2624;}
+	.loginBtn{text-align:center;}
+	.D-footer{border:none;}
+	</style>
+</head>
+<body style="width:100%;background:#FFF;">
+	<div>
+	   <img width="100%" src="${picPath}wps/Discountcoupon/head_much.png"/>
+	</div>
+	<div class="page_body content">
+		<h3>恭喜您领取成功！</h3>
+	    <div class="one-wrap mt10" style=" padding:0 20px;">
+		    <div class="one">
+				<div class="top">
+			   		#if($elecCardBatch.cardtype eq '1')
+					<div class="top-left" style="font-size:1.8rem;">
+					     &yen;$elecCardBatch.amount
+					</div>
+					#else
+					<div class="top-left coffee">
+					  	$elecCardBatch.dhname
+					</div>
+					#end
+				      <div class="top-right">
+				         <h3>$!elecCardBatch.cardname</h3>
+				         <ul>
+				   			#if($elecCardBatch.minprice gt 0)
+				           <li>消费满${elecCardBatch.minprice}使用</li>
+							#end
+							#if($elecCardBatch.daynum gt 0)
+							<li class="last">使用期限$DateUtil.format($begintime,'yyyy-MM-dd') ~ $DateUtil.format($endtime,'yyyy-MM-dd')</li>
+							#else
+							<li class="last">使用期限$DateUtil.format($elecCardBatch.timefrom,'yyyy-MM-dd') ~ $DateUtil.format($elecCardBatch.timeto,'yyyy-MM-dd')</li>
+							#end
+				         </ul>
+				      </div>
+			      </div>
+			   <div class="bottom">
+			      <p> 说明：${elecCardBatch.description} </p> 
+			   </div>     
+          </div>
+          <!-- <b class="wrapNum">x3</b> -->
+       </div>
+       <div class="D-footer">
+          <img src="${picPath}wps/Discountcoupon/rwm.png"/>
+       </div>
+       <p style="width:100%; text-align:center;">长按关注WheelysCafe去下单</p>
+       <!-- <div class="btnList">
+    	<a href="${basePath}home/cardList.xhtml" style="background:#EB4256">查看优惠券</a>
+    	<a href="${basePath}index.xhtml" style="background:#EB4256">去下单</a>
+       </div> -->
+   </div>
+</body>
+</html>

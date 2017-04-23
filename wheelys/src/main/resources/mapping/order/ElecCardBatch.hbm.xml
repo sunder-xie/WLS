@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	 "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.pay.ElecCardBatch" table="ELECCARDBATCH" >
+		<id name="id"  type="long">
+			<generator class="identity"/>
+		</id>	
+		<property name="category" column="CATEGORY" type="string"/>
+		<property name="maxprice" column="MAXPRICE" type="integer"/>
+		<property name="dhname" column="DHNAME" type="string"/>
+		<property name="cardname" column="CARDNAME" type="string"/>
+		<property name="minprice" column="MINPRICE" type="integer"/>
+		<property name="cardcount" column="CARDCOUNT" type="integer"/>
+		<property name="amount" column="AMOUNT" type="integer"/>
+		<property name="amountmark" column="AMOUNTMARK" type="string"/>
+		<property name="validshopid" column="VALIDSHOPID" type="string"/>
+		<property name="validitemid" column="VALIDITEMID" type="string"/>
+		<property name="validproductid" column="VALIDPRODUCTID" type="string"/>
+		<property name="cardtype" column="CARDTYPE" type="string"/>
+		<property name="daynum" column="DAYNUM" type="integer"/>
+		<property name="citycode" column="CITYCODE" type="string"/>
+		<property name="activation" column="ACTIVATION" type="integer"/>
+		<property name="description" column="DESCRIPTION" type="string"/>
+		<property name="remark" column="REMARK" type="string"/>
+		<property name="timefrom" column="TIMEFROM" type="timestamp"/>
+		<property name="timeto" column="TIMETO" type="timestamp"/>
+		<property name="createtime" column="CREATETIME" type="timestamp"/>
+		<property name="updatetime" column="UPDATETIME" type="timestamp"/>
+		<property name="lqcount" column="LQCOUNT" type="integer"/>
+		<property name="delstatus" column="DELSTATUS" type="string"/>
+	    <property name="command" column="COMMAND" type="string"/>
+	    <property name="costprice" column="COSTPRICE" type="integer"/>
+	    <property name="cycleday" column="CYCLEDAY" type="integer"/>
+	    <property name="annexation" column="ANNEXATION" type="string"/>
+	    <property name="receivenum" column="RECEIVENUM" type="integer"/>
+	    <property name="ukey" column="UKEY" type="string"/>
+	</class>
+</hibernate-mapping>
+

@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="keywords" content="咖啡/咖啡豆/咖啡烘焙/咖啡店加盟/Wheelyscafe/Wheelyschina/Wheelys/味乐思/乐味思/意式咖啡/手冲咖啡/拿铁/卡布奇诺/摩卡/星冰乐/咖啡拉花/拉花咖啡/COSTA/太平洋咖啡/星巴克/咖啡外卖/连咖啡/咖啡app/咖啡研磨/萃取咖啡/手冲步骤">
+	<meta name="description" content="咖啡/咖啡豆/咖啡烘焙/咖啡店加盟/Wheelyscafe/Wheelyschina/Wheelys/味乐思/乐味思/意式咖啡/手冲咖啡/拿铁/卡布奇诺/摩卡/星冰乐/咖啡拉花/拉花咖啡/COSTA/太平洋咖啡/星巴克/咖啡外卖/连咖啡/咖啡app/咖啡研磨/萃取咖啡/手冲步骤">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/swiper-3.4.0.min.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/index.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/swiper-3.4.0.jquery.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=$VmUtils.ak"></script>
+	#parse("/common/baidu.vm") 
+	<style type="text/css">
+	</style>
+</head>
+<body>
+<header>
+	<div class="headBox clear">
+		<div class="ui_media left">
+			<span class="ui_pic icon hereIcon"></span>
+			<span id="myaddress" class="ui_text">定位中...</span>
+		</div>
+		<div class="ui_media right">
+			<span class="ui_pic icon searchIcon"></span>
+			<a class="ui_text" href="${basePath}shop/search.xhtml">更换地址</a>
+		</div>
+	</div>
+</header>
+<div class="swiper-container">
+	<div class="swiper-wrapper">
+		#foreach($banner in $bannerList)
+		<div class="swiper-slide" onclick="javascript:window.location.href='$banner.tourl'"><img src="${picPath}$banner.imageurl" alt="$!banner.title"></div>
+		#end
+	</div>
+	<!-- 在图片下方增加小点 -->
+	<div class="swiper-pagination" style="line-height:18px;"></div>
+</div>
+<div id="shopList">
+	
+</div>
+<div class="k-shopList">
+   <img src="${picPath}wps/dummystatus/loading.png" width="20%" />
+</div> 
+#set($isIndex='true')
+#parse("/wps/modul/footMenu.vm")
+<script type="text/javascript">
+var isBaiduGet = false;
+Zepto(function(){
+	var mySwiper = new Swiper('.swiper-container',{
+		autoplay : 4000,
+		loop : true,
+		pagination: '.swiper-pagination',
+		autoplayDisableOnInteraction : false
+	})
+	var latitude,longitude;
+	#if($params.longitude)
+		latitude = $params.latitude;
+		longitude = $params.longitude;
+	#else
+	if(getCookie('latitude')){
+		latitude = getCookie('latitude');
+		longitude = getCookie('longitude');
+	}
+	#end
+	if(!latitude){
+		var geolocation = new BMap.Geolocation();
+		geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				ajax({lat:r.point.lat,lng:r.point.lng});
+				var geoc = new BMap.Geocoder(); 
+				var pt = r.point;
+				geoc.getLocation(pt, function(rs){
+					var addComp = rs.address;
+					$('#myaddress').html(addComp);
+				});
+			}
+			else {
+				alert('failed'+this.getStatus());
+			}        
+		},{enableHighAccuracy: true});
+	}else{
+		ajax({lat:latitude,lng:longitude});
+		var geoc = new BMap.Geocoder(); 
+		var pt = new BMap.Point(longitude,latitude);
+		geoc.getLocation(pt, function(rs){
+			var addComp = rs.address;
+			$('#myaddress').html(addComp);
+		});
+	}
+	setTimeout(function(){
+		if(!isBaiduGet){
+			window.location.href = "${basePath}shop/search.xhtml";
+		}
+	},5000);
+})
+
+function ajax(params){
+	wheelys.ajax({
+		dataType: 'html',
+		url:'${basePath}shop/queryList.xhtml',
+		data:params,
+		callback:function(data){
+			$('#shopList').append(data);
+		    $('.k-shopList').remove();
+		    isBaiduGet = true;
+			setCookie('latitude',params.lat,1/24/6);
+			setCookie('longitude',params.lng,1/24/6);
+		}
+	});
+	
+}
+</script>
+</body>
+</html>

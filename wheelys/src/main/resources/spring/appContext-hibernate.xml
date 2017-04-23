@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd ">
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory" class="com.wheelys.support.GewaSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mappingDirectoryLocations">
+			<list>
+				<value>classpath:mapping</value>        
+			</list>
+		</property> 
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+				<prop key="hibernate.default_schema">wheelys</prop>
+				<prop key="hibernate.cache.use_second_level_cache">false</prop>
+			</props>
+		</property>
+		<!--<property name="gcacheNotifier" ref="gcacheNotifier" />-->
+	</bean>
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	<bean id="baseDao" class="com.wheelys.dao.impl.BaseDaoHibernate" />
+	
+	<bean id="daoService" depends-on="baseDao" class="com.wheelys.service.impl.DaoServiceImpl" />
+	<bean id="cacheObjectService" depends-on="daoService" class="com.wheelys.untrans.impl.CacheObjectServiceImpl">
+		<property name="daoService" ref="daoService"/>
+	</bean>
+	
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="rollbackOnCommitFailure" value="true"/>
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>

@@ -1,0 +1,22 @@
+header{background:#ee2624;padding:10px 0; font-size:1.125rem; text-align:center; color:#fff;}
+.headMod{background:#fff; width:100%; padding-bottom:70px; box-shadow:0 1px 1px #d7d7d7; position:relative;}
+.userBox{ position:absolute; left:50%; margin-left:-60px; bottom:60px; width:120px; height:120px;}
+.userHeadBox{border-radius:50% 50%; background-color:rgba(255,255,255,.4); width:90%; height:90%; padding:5%; margin:auto;animation: cartClear 2s infinite;-webkit-animation: cartClear 2s infinite;}
+.userHead{display:block; width:100%; height:100%;border-radius:50% 50%;overflow:hidden;}
+.userBox p {text-align:center; font-size:1.125rem; color:#333; font-weight:bold; margin-top:10px;}
+
+.bodyMod{border-top:1px solid #ececec; box-shadow:0 1px 1px #d7d7d7;margin-top:10px;background:#fff; padding-left:2%;}
+.bodyMod a{padding:20px 0;border-bottom:1px solid #d7d7d7; height:25px; line-height:25px; color:#474747; font-size:1.125rem; display:block;}
+.bodyMod a img{margin:0 10px;}
+.bodyMod a img ,.bodyMod a span{text-align:left; display:inline-block;}
+.bodyMod a:nth-child(3){border:none;}
+@keyframes cartClear{
+	0% { background-color:rgba(255,255,255,.2);}
+	50% { background-color:rgba(255,255,255,.6);}
+	100% { background-color:rgba(255,255,255,.2);}
+}
+@-webkit-keyframes cartClear{
+	0% { background-color:rgba(255,255,255,.2);}
+	50% { background-color:rgba(255,255,255,.6);}
+	100% { background-color:rgba(255,255,255,.2);}
+}

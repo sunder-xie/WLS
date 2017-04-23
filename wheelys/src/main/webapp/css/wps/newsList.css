@@ -1,0 +1,10 @@
+/* 图片轮播 */
+.swiper-container{width:100%;}
+.swiper-slide img{width:100%;}
+
+.newsList{padding:15px; font-family:'黑体'}
+.newsListMod{border:1px solid #d7d7d7;border-radius:5px; background:#fff; padding:15px; margin-bottom:15px;}
+.time{ color:#787878;}
+.newsListMod h2{font-size:1.5rem; padding:15px 0 20px; display:block; color:#000;}
+.newsText{color:#858585; padding:15px 0; border-bottom:1.5px solid #e7e7e7; margin-bottom:10px;font-size:1.125rem;}
+.originalText{color:#000;font-size:1.125rem;background:url('http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/icon/newsList_icon1.png?v=00002') right center no-repeat;background-size:auto 60%;}

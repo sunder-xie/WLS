@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.ShopExpressAddress" table="SHOPEXPRESSADDRESS">
+		<id name="id" column="ID" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="shopid" column="SHOPID" type="long" />
+		<property name="address" column="ADDRESS" type="string" />
+		<property name="ukey" column="UKEY" type="string" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+		
+	</class>
+</hibernate-mapping>

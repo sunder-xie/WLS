@@ -1,0 +1,44 @@
+<div id="registerFast" class="registerFast" style="display:none;">
+	<h2>快速注册</h2>
+	<div class="inputList">
+		<ul>
+			<li class="phone clear">
+				<span class="login_icon"></span>
+				<input id="myPhone" name="" data-type="textover" alt="请输入您得手机号" />
+				<a id="getPhoneCodeP" class="getPhoneCode">获取验证码</a>
+			</li>
+			<li class="phoneCode clear">
+				<span class="login_icon"></span>
+				<input id="phoneMessage" data-type="textover" alt="请填写您的短信验证码" />
+			</li>
+			<li class="password clear">
+				<span class="login_icon"></span>
+				<input id="myPassword" type="password" data-type="textover" alt="请填写您的密码" />
+				<a onclick="isee(this);" class="login_icon isee off"></a>
+			</li>
+			<li class="passwordAgain clear">
+				<span class="login_icon"></span>
+				<input id="rePassword" type="password" data-type="textover" alt="请再次填写您的密码" />
+				<a onclick="isee(this);" class="login_icon isee off"></a>
+			</li>
+			<li class="picCode clear">
+				<span class="login_icon"></span>
+				<input id="picCheck" data-type="textover" alt="请输入右侧图片验证码" />
+				<a id="getPicCodeP"><img src="" /></a>
+			</li>
+		</ul>
+		<div class="registerBt">
+			<a id="tiRegister" class="tiRegister">注&nbsp;&nbsp;册</a>
+		</div>
+	</div>
+</div>
+<script>
+function registerpopup(){
+	$('#registerFast').popup({
+		'callback':function(){
+			wheelys.textOver('registerFast');
+			getPhoneCode('getPhoneCodeP','60');
+		}
+	});
+}
+</script>

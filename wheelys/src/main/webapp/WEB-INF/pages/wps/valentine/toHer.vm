@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>WheelysCafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no"/>
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/orderDetail.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/valentine.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm") 
+<style>
+</style>
+</head>
+<body>
+	<div class="toHerMod">
+		<div class="imgBox">
+			<img width="30%" src="${picPath}wps/activity2017/valentine/logo.png" />
+		</div>
+		<div class="imgBox mt20">
+			<img width="30%" src="${picPath}wps/activity2017/valentine/title.png" />
+		</div>
+		<p class="toHerTitle mt20">想对TA说： </p>
+		#if($isedit)
+		<textarea id="toHerText" placeholder="想对TA说什么" maxlength="1000">$!orderVo.otherinfo</textarea>
+		<a class="subToHer" onclick="saveOtherInfo()">确认</a>
+		#else
+		<div id="toHerTextBox">$!orderVo.otherinfo</div>
+		#end
+	</div>
+	<div class="orderBox" style="padding-bottom:20px;">
+		<div class="orderTitle">请依照以下订单信息领取商品</div>
+		 <div class="orderDetailBody">
+           <ul>
+				#foreach($detail in $orderVo.detailList)
+	             <li class="ui_flex">
+	               <div class="liMod">
+	                  <p>$detail.productname $!detail.description</p>
+	                  <P>$detail.productename</P>
+	               </div>
+					#if($discount.type eq 'ONEBUYONE' && $detail.discountnum > 0)
+						<div class="liMod">X$detail.discountnum</div>
+					#else
+						<div class="liMod">X$detail.quantity</div>
+					#end
+					#if($detail.productid eq 1031)
+              		<div class="liMod o-red">赠送</div>
+					#else
+					<div class="liMod">￥$VmUtils.getAmount($detail.totalfee)</div>
+					#end
+	             </li>
+			#end
+           </ul>	
+           #if($orderVo.discount gt 0 && $discount.type ne 'ONEBUYONE')
+           <div class="discount clear">
+				<div class="left">$!orderVo.disreason</div>
+				<div class="right" style="font-size:1rem; ">-￥$VmUtils.getAmount($orderVo.discount)</div>
+			</div>
+			#end
+			<div style="border:none;" class="discount clear">
+				<div class="right" style="font-size:1.14rem;">实付￥$VmUtils.getAmount($orderVo.payfee)</div>
+			</div>
+        </div>
+		<div class="otherDetail" style="box-shadow:0px 1px 1px 0px rgba(203,203,203,0.70);">
+			<h2>其他信息</h2>
+			<ul>
+				<li><span>取杯口令：</span><span>"$!orderVo.takekey"</span></li>	
+				#if($!orderVo.category eq 'TAKE')
+				<li><span>配送方式：</span><span>当日自取</span></li>
+				<li><span>店铺地址：</span><span>$orderVo.shop.shopaddress</span></li>
+				#elseif($!orderVo.category eq 'RESERVED')
+				<li><span>配送方式：</span><span>预约自取</span></li>
+				<li><span>取杯时间：</span><span>$DateUtil.formatTimestamp($!orderVo.taketime)</span></li>
+				<li><span>店铺地址：</span><span>$orderVo.shop.shopaddress</span></li>
+				#elseif($!orderVo.category eq 'TAKEAWAY')
+				<li><span>配送方式：</span><span>配送上门</span></li>
+				<li><span>收货地址：</span><span>$memberAddress.address &nbsp; $memberAddress.detailaddress</span></li>
+				<li><span>配送员电话：</span><a class="tel" href="tel:${shopProfile.mobile}" style="color:#e61111">${shopProfile.mobile}(点击可拨打)</a></li>
+				#end
+				<li><span>订单编号：</span><span>$orderVo.tradeno</span></li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+function saveOtherInfo(){
+	var v = $('#toHerText').val();
+	if(v==''){
+		alert('请填写想对TA说的话')
+	}else{
+		var data ={'tradeno':'$orderVo.tradeno', 'otherinfo':$('#toHerText').val()};
+		$.ajax({
+    		url:"${basePath}valentine/otherinfo.xhtml",
+    		type:'post',
+			data:data,
+    		dataType:'json',
+			success:function(result){
+				location.href="${basePath}valentine/order.xhtml?tradeno=$orderVo.tradeno";
+			}
+		});
+	}
+}
+</script>
+</html>

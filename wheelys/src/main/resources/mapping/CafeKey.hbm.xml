@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.CafeKey" table="wheelys_key">
+		<id name="id" column="kid" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="name" column="kname" type="string" />
+		<property name="status" column="status" type="string" />
+		<property name="imgurl" column="kurl" type="string" />
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+	</class>
+</hibernate-mapping>
+

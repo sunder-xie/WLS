@@ -1,0 +1,27 @@
+<!doctype html>
+<html >
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+</head>
+<body style="height:100%;width:100%;background:#FFF2E2;">
+	<div class="D-header">
+	   <div class="D-img"><img src="${picPath}wps/Discountcoupon/345767378299377099.png"/></div>
+	   <p class="D-text">喊你来领福利啦</p>
+	</div>
+	<div class="D-body">
+	    <h3  style="font-size:1rem;padding-top:80px;display:block;">此次活动已经结束啦！</br>关注公众号可获取其他活动信息。</h3>
+       <div class="D-footer">
+          <img src="${picPath}wps/Discountcoupon/rwm.png"/>
+       </div>
+   </div>
+</body>
+</html>

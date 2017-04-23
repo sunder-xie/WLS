@@ -1,0 +1,106 @@
+<div id="orderPageBox" class="order">
+	<div class="wrap">
+		<div class="header">
+			<div class="layout" style="text-align:center; color:#fff;">
+				选择优惠券<div class="header-img" id="closeBtn" style="right:10px; left:auto;"><img src="${picPath}wps/coupon/close.png"/></div>
+			</div>
+		</div>
+		<div class="note">
+		          注：优惠券与优惠活动不同享
+		</div>
+        #if(!$member.isBindMobile())
+		<div class="goBindPhone">
+			绑定手机号，享更多优惠！<a href="${basePath}bindPhone.xhtml">去绑定</a>
+		</div>
+        #end
+	</div>
+	#if($VmUtils.isEmptyList($cardYList) && $VmUtils.isEmptyList($cardNList))
+	<div class="e-img" style="margin-top:200px;"><img src="${picPath}wps/dummystatus/nocard.png"></div>
+	<div class="footer">
+	  <span>暂无优惠券</span>
+	</div>
+	#end
+	<div class="content" id="couponList">
+		#foreach($card in $cardYList)
+   		#if($card.cardtype eq '1')
+   		#set($payfee=$totalfee - $card.useamount)
+		<div class="one #if($card.id eq $params.cardid)red-one #end" data-id="$card.id" data-payfee="$payfee" data-discount="$card.useamount" data-desc="">
+		#else
+   		#set($payfee=$totalfee - $card.useamount)
+		<div class="one #if($card.id eq $params.cardid)red-one #end" data-id="$card.id" data-payfee="$payfee" data-discount="$card.useamount" data-desc="$!card.desc">
+		#end
+		   <div class="top">
+		   		#if($card.cardtype eq '1')
+				<div class="top-left">
+				     &yen;$card.amount
+				</div>
+				#else
+				<div class="top-left coffee">
+				  	$card.dhname
+				</div>
+				#end
+		      <div class="top-right">
+		         <h3>$!card.cardname</h3>
+		         <ul>
+		   			#if($card.minprice gt 0)		   			
+			   			#if($card.ebatchid eq 238)
+						<li>买1杯立减10元</li>
+			   			#elseif($card.ebatchid eq 236)
+						<li>买2杯立减21元</li>
+			   			#elseif($card.ebatchid eq 237)
+						<li>买3杯立减32元</li>
+						#else
+						<li>消费满${card.minprice}使用</li>
+						#end
+					#end
+		           <li class="last">使用期限$DateUtil.format($card.begintime,'yyyy-MM-dd') ~ $DateUtil.format($card.endtime,'yyyy-MM-dd')</li>
+		         </ul>
+		      </div>
+		    </div>
+		   <div class="bottom">
+		      <p> 说明：${card.description} </p> 
+		   </div>       
+		</div>
+		#end
+		#foreach($card in $cardNList)
+   		#if($card.cardtype eq '1')
+   		#set($payfee=$totalfee - $card.amount)
+		<div class="cont-one" data-id="$card.id" data-payfee="$payfee" data-discount="$card.amount">
+		#else
+   		#set($payfee=$totalfee - $price)
+		<div class="cont-one" data-id="$card.id" data-payfee="$payfee" data-discount="$price">
+		#end
+		   <div class="top">
+		   		#if($card.cardtype eq '1')
+				<div class="top-left">
+				     &yen;$card.amount
+				</div>
+				#else
+				<div class="top-left coffee">
+				  	$card.dhname
+				</div>
+				#end
+		      <div class="top-right">
+		         <h3>$!card.cardname</h3>
+		         <ul>
+		   			#if($card.minprice gt 0)
+		           <li>消费满${card.minprice}使用</li>
+					#end
+		           <li class="last">使用期限$DateUtil.format($card.begintime,'yyyy-MM-dd') ~ $DateUtil.format($card.endtime,'yyyy-MM-dd')</li>
+		         </ul>
+				<div class="right-img">
+					<img src="${picPath}wps/coupon/disable.png"/>
+				</div>
+		      </div>
+		      </div>
+		   <div class="bottom">
+		      <p> 说明：${card.description} </p> 
+		   </div>       
+		</div>
+		#end
+	</div>
+	<div class="sure-wrap">
+		<div class="sure">确定</div>
+	</div>
+	</div>
+</div>

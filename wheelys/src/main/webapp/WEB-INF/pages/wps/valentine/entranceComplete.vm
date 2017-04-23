@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>WheelysCafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no"/>
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/valentine.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm") 
+<style>
+.btnList{text-align:center; padding:20px 0;}
+.btnList a{display:inline-block; color:#fff; background:#ee2624; width:30%; padding:5px 0; text-align:center; margin:0 5%; border-radius:50px;}
+.imgBox{position:relative;}
+.imgBox .explain{position:absolute; left:15%; bottom:-1%; font-size:.8rem;transform:scale(.9,.9); color:#7a7a7a; }
+</style>
+</head>
+<body>
+<div class="body">
+	<div class="imgBox">
+		<img width="25%" src="${picPath}wps/activity2017/valentine/logo.png?v=$VmUtils.version" />
+	</div>
+	<div class="imgBox mt20">
+		<img width="40%" src="${picPath}wps/activity2017/valentine/title.png?v=$VmUtils.version" />
+	</div>
+	<div class="payOver mt10">
+		购买成功！
+	</div>
+	<div class="imgBox mt20">
+		#if($order.otherinfo eq '13')
+		<img width="75%" src="${picPath}wps/activity2017/valentine/cop1_1.png?v=$VmUtils.version" />
+		#else
+		<img width="75%" src="${picPath}wps/activity2017/valentine/cop1_2.png?v=$VmUtils.version" />
+		#end
+		<p class="explain">说明:本券仅限于${shop.shopname}使用</p>
+	</div>
+	<div class="imgBox mt10">
+		<img width="75%" src="${picPath}wps/activity2017/valentine/cop2.png?v=$VmUtils.version" />
+		<p class="explain">说明:本券仅限于${shop.shopname}使用</p>
+	</div>
+	<div class="imgBox mt20">
+		<img width="60%" src="${picPath}wps/activity2017/valentine/sysm.png?v=$VmUtils.version" />
+	</div>
+	<div class="imgBox mt20">
+		<img width="25%" src="${picPath}wps/activity2017/valentine/ewm.png?v=$VmUtils.version" />
+		<p style="font-size:0.825rem;">长按关注WheelysCafe</p>
+	</div>
+	<div class="btnList"><a href="${basePath}home/cardList.xhtml">查看优惠券</a><a href="http://mp.weixin.qq.com/s/Tdd-Ax_psXEsBBNGgx-6qg">活动介绍</a></div>
+</div>
+		
+</body>
+</html>

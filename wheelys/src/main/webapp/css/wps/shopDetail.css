@@ -1,0 +1,154 @@
+*{
+-webkit-touch-callout:none;
+-webkit-user-select:none;
+-khtml-user-select:none;
+-moz-user-select:none;
+-ms-user-select:none;
+user-select:none;
+-o-user-select:none;
+}
+body{background:#fff;}
+#thisAss{background:#fff; border-radius:5px; width:80%;}
+#thisAss .thisAssMod{padding:20px; position:relative;text-align:left; }
+#thisAss .thisAssMod h2{color:#e73d3d;border-bottom:1px solid #dcdddd;display:block; padding:0 30px 5px 0;font-size:1.4rem;}
+#thisAss .thisAssMod p{color:#5f5f5f; font-size:1rem;}
+#thisAss .thisAssMod p.time{font-weight:bold; padding-top:5px;}
+.close{background-position:-90px -95px; width:40px; height:40px; display:block; position:absolute; right:10px; top:10px;}
+/* 图片轮播 */
+.swiper-container{width:100%;}
+.swiper-slide img{width:100%;border:0;margin:0; padding:0;}
+/* 产品列表 */
+.cofeMod{height:100%;display:block; text-align:center;background:#f7f7f7;}
+.cofeMod .classList{width:30%; margin:0;}
+.cofeMod .classList ul{height:100%; display:block;background:#ffffff;}
+.cofeMod .classList ul li{padding:12px 0;  font-size:1.2rem}
+.cofeMod .classList ul li a{width:80%;height:2rem; line-height:2rem ;color:#333; margin:0 auto; display:block; border-radius:25px; font-size:1rem;}
+.cofeMod .classList ul li a.select{background:#ee2624; color:#fff;}
+.cofeMod .cofeList{width:70%; background:#F7F7F7;}
+.cofeMod .cofeListMod{padding:2px 2px 50px; border-left:1px solid #e8e8e8;}
+.cofeMod .cofeListMod li{width:48%; padding:1%;float:left;font-size:1rem;}
+.cofeMod .cofeListMod li .goodsEname{width:1%;height:2rem; line-height:1rem; overflow:hidden; color:#787878; font-size:0.875rem; font-weight:bold;display:table-cell;vertical-align:middle; text-align:center;}
+.cofeMod .cofeListMod li p{font-size:1rem; color:#333333;}
+.cofeMod .cofeListMod li .goodsCname{font-weight:bold;}
+.cofeMod .cofeListMod li p.goodsPrice{font-size:1.2rem; color:#ee2624; height:1.6rem; line-height:1.8rem; display:block; width:100%; text-align:center;}
+.cofeMod .cofeListMod li .cofe{padding:5px;border-radius:3px;box-shadow:0 1px 1px #d7d7d7;background:#ffffff;}
+
+/* 购物车 */
+.shoppingCart{height:50px; border-top:1px solid #e9e9e9; position:fixed; bottom:0; left:0; width:100%; background:#fff; z-index:501;}
+.gotoCart{background-position:-85px 0px;}
+.gotoCart ,.clearCart{ width:46px;height:45px;position:absolute; left:20px; top:-23px;}
+.clearCart{ left:80px; background-position:-88px -45px; display:none;}
+.clearCart.on{animation: cartClear .5s;-webkit-animation: cartClear .5s; display:block;}
+.gotoCart span{width:30px; color:#ee2624; background:#fff;border:1px solid #ee2624;border-radius:10px; position:absolute; right:-15px; top:-5px;text-align:center; font-size:.8rem; height:15px; line-height:15px;}
+.tobuy{color:#fff; background:#ee2624; border-radius:20px; height:30px; line-height:30px; position:absolute; right:10px; bottom:8px; padding:2px 25px;}
+.allPrice{position:absolute; bottom:12px; width:100%; text-align:center; font-size:1.2rem}
+.allPrice span{font-size:1rem;}
+.shoppingCart.cartUp{height:80%;animation: cartUp .5s;-webkit-animation: cartUp .5s;}
+.shoppingCart.cartDown{height:50px;animation: cartDown .5s;-webkit-animation: cartDown .5s;}
+.shoppingCartMod{padding-top:20px;}
+.shoppingCartBox{margin:6% 10px;height:90%; text-align:center;overflow-y:auto;opacity:0; position:relative;}
+.shoppingCartBox.up{animation: cartBoxUp .5s;-webkit-animation: cartBoxUp .5s;opacity:1}
+.shoppingCartBox.down{animation: cartBoxDown .5s;-webkit-animation: cartBoxDown .5s;opacity:0}
+.shoppingCartTitle{color:#9c9c9c; font-size:1.2rem; margin:0 8%; position:sticky;top:30px; width:84%;}
+.shoppingCartLeft ,.shoppingCartMid ,.shoppingCartRight{width:30%;float:left; height:100%;}
+.shoppingCartTitle .shoppingCartMid span{float:left;  padding-left:20%; text-indent:3px;}
+.shoppingCartLeft{width:40%;text-align:left; height:100%;}
+.shoppingCartList{border-bottom:1px solid #e93a41; margin-bottom:20px; height:80%; overflow:hidden;}
+.shoppingCartList li{border-top:1px solid #dcdcdc;padding:8px 8%; position:relative;}
+.shoppingCartList .shoppingCartLeft h3{font-size:1rem;color:#030303;line-height:1rem;}
+.shoppingCartList .shoppingCartLeft h4{font-size:1rem;font-weight:300;color:#3b3b3b;line-height:1.4rem;}
+.shoppingCartList .shoppingCartLeft h5{font-size:0.4rem;font-weight:300;color:#838383;line-height:1.4rem;display:block;border-radius:10px; margin-top:5px;}
+.shoppingCartList .shoppingCartLeft h5 span{padding:2px 5px;}
+.shoppingCartList .shoppingCartLeft h5 span.hot{border:1px solid #e93a41;color:#e93a41;border-right:none;border-radius:10px 0 0 10px}
+.shoppingCartList .shoppingCartLeft h5 span.cold{border:1px solid #32bae7;color:#32bae7;border-left:none;border-radius:0 10px 10px 0}
+.shoppingCartList .shoppingCartLeft h5 span.hot.on{background:#e93a41;color:#fff;}
+.shoppingCartList .shoppingCartLeft h5 span.cold.on{background:#32bae7;color:#fff;}
+.carNumMod{text-align:center; padding-top:24px;}
+
+.carNumMod .re{background:url('/wheelyscafe/img/minus_d.png?v=0001'); background-size:100% 100%;}
+.carNumMod .re.on{background:url('/wheelyscafe/img/minus.png?v=0001'); background-size:100% 100%;}
+.carNumMod .add.on{ background:url('/wheelyscafe/img/add.png?v=0001'); background-size:100% 100%;}
+.carNumMod span{width:20px; height:20px;}
+.carNumMod input{width:40%; height:20px;line-height:20px; font-size:1.2rem}
+.carNumMod span ,.carNumMod input{float:left;display:block;text-align:center;padding:0;}
+.shoppingCartList .shoppingCartRight{font-size:1.2rem;  line-height:70px;}
+.delectCart{position:absolute; right:0; bottom:0; background-position:-142px -6px; width:30px; height:30px;}
+.cofeBuyDetail span{display:inline-block; line-height:20px; height:20px;font-size:.8rem; text-align:center;color:#7d7d7d;float:left; margin-right:5px;}
+.cofeBuyDetail .hot{background-color:#e63744}
+.cofeBuyDetail .milk{background-color:#ffa734;background-position:3px -136px;}
+.cofeBuyDetail .bean{background-color:#6d181e;background-position:-19px -136px;}
+.cofeBuyDetail .cold{background-color:#11c4ff}
+.cofeBuyDetail .milk.off{background-color:#ddd}
+.cofeBuyDetail .bean.off{background-color:#ddd}
+/* 咖啡选项弹窗 */
+#cofeDetail{display:none; width:100%;}
+#cofeDetail .cofeDetailMod{background:#fff; position:relative; padding:50px 5% 20px;}
+#cofeDetail .cofePic{width:25%; text-align:center; padding:2%;height:95px;border-radius:70px 70px 0 0; position:absolute;top:-62px;background:#fff;left:50%;margin-left:-14%; overflow:hidden; }
+#cofeDetail .goodsName{text-align:center; height:2rem;line-height:2rem; display:block; width:100%; font-size:1.4rem; font-weight:bold;}
+#cofeDetail #goodsEname{font-size:1.2rem; color:#bebebe;}
+.priceBox{position:relative;}
+.nowPrice{text-align:center; font-size:1.4rem; margin:5px 0; color:#ee2624; }
+#addThree{ font-size:1rem; margin-left:5px; display:none; position:absolute;right:-22px;width:20px; bottom:-2px;}
+.cofeOption{padding:10px 0;}
+.cofeOption .optionKey{float:left; color:#a1a1a1; height:30px; line-height:35px;}
+.cofeOption .optionValue{float:right;}
+.cofeOption span{ margin:0 2px; font-size:1.2rem;}
+.addOption .optionValue{color:#fff;width:90px; height:30px; line-height:32px; border-radius:17px; border:2px solid #ee2624;}
+.addOption .optionValue .temperature{width:60px; height:100%; text-align:center; display:inline-block; margin:0;}
+.addOption .optionValue.on{background:#ee2624;}
+.addOption .optionValue.off{background:#bebebe;border-color:#bebebe;}
+.addOption .optionValue .switch{display:block; float:right; margin:0; width:30px; height:30px; border-radius:15px;background:#fff;}
+.addOption .optionValue.off .switch{float:left}
+.hotCold .optionValue.off{background:#32bae7;border-color:#32bae7}
+.cofeOption.number .optionValue{height:30px; line-height:30px; padding:0 7px;}
+.cofeOption.number .optionValue .re em{background:url('/wheelyscafe/img/minus_d.png?v=0001'); background-size:100% 100%;}
+.cofeOption.number .optionValue .re.on em{background:url('/wheelyscafe/img/minus.png?v=0001'); background-size:100% 100%;}
+.cofeOption.number .optionValue .add.on em{ background:url('/wheelyscafe/img/add.png?v=0001'); background-size:100% 100%;}
+.cofeOption.number .optionValue input{width:40px; height:20px; margin:5px 0; padding:0;}
+.cofeOption.number .optionValue span{width:20px; height:20px; font-weight:bold; padding:5px; margin:0;}
+.cofeOption.number .optionValue span em{display:block; width:100%; height:100%;}
+.cofeOption.number .optionValue span ,.cofeOption.number .optionValue input{float:left; height:20px;font-size:1.2rem; display:inline-block;  line-height:20px; text-align:center;}
+.toCart{color:#fff; background:#ee2624; border-radius:20px; width:30%; margin:20px auto; display:block; height:30px; line-height:30px; text-align:center; font-size:1.4rem;}
+.close{background-position:-88px -95px;}
+@keyframes cartUp{
+	0% {height: 50px;}
+	100% {height:80%;}
+}
+@-webkit-keyframes cartUp{
+	0% {height: 50px;}
+	100% {height:80%;}
+}
+@keyframes cartDown{
+	0% {height:80%;}
+	100% {height:50px;}
+}
+@-webkit-keyframes cartDown{
+	0% {height:80%;}
+	100% {height:50px;}
+}
+@keyframes cartBoxUp{
+	0% {opacity:0}
+	100% {opacity:1}
+}
+@-webkit-keyframes cartBoxUp{
+	0% {opacity:0}
+	100% {opacity:1}
+}
+@keyframes cartBoxDown{
+	0% {opacity:1}
+	100% {opacity:0}
+}
+@-webkit-keyframes cartBoxDown{
+	0% {opacity:1}
+	100% {opacity:0}
+}
+@keyframes cartClear{
+	0% {left:20px;}
+	100% {left:80px;}
+}
+@-webkit-keyframes cartClear{
+	0% {left:20px;}
+	100% {left:80px;}
+}
+/* swiper */
+.swiper-pagination-bullet-active{background-color:#c9caca;}

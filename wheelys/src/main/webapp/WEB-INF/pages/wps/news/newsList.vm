@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/swiper-3.4.0.min.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/newsList.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/swiper-3.4.0.jquery.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm") 
+	<style type="text/css">
+	body{padding-bottom:50px;}
+	</style>
+</head>
+<body>
+#set($headerTitle='发现')
+#set($noHistory=true)
+#parse("/wps/modul/header.vm")
+<header>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			#foreach($banner in $bannerList)
+			<div class="swiper-slide" onclick="javascript:window.location.href='$banner.tourl'"><img src="${picPath}$banner.imageurl" alt="$!banner.title"></div>
+			#end
+		</div>
+		<!-- 在图片下方增加小点 -->
+		<div class="swiper-pagination" style="line-height:18px;"></div>
+	</div>
+</header>
+<div class="newsList">
+#foreach($news in $newsList)
+	<div class="newsListMod" onclick="javascript:window.location.href='${basePath}news/newsDetail.xhtml?id=$news.id'">
+		<p class="time">$!DateUtil.format($news.publishtime,'yyyy年MM月dd日HH:mm')</p>
+		<h2>$!news.title</h2>
+		<img width="100%" src="${picPath}$!news.newspicture" />
+		<p class="newsText">$!news.overview</p>
+		<p class="originalText">阅读原文</p>
+	</div>
+#end
+</div>
+#set($isFind='true')
+#parse("/wps/modul/footMenu.vm")
+<script type="text/javascript">
+Zepto(function(){
+	var mySwiper = new Swiper('.swiper-container',{
+		autoplay : 4000,
+		loop : true,
+		pagination: '.swiper-pagination',
+		autoplayDisableOnInteraction : false
+	})
+})
+</script>
+</body>
+</html>

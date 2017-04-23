@@ -1,0 +1,31 @@
+#foreach($cart in $cartProductVoList)
+<li id="key_$cart.pkey" class="clear" data-price="$cart.price">
+	<div class="shoppingCartLeft">
+		<h3>$cart.product.enname</h3>
+		<h4>$cart.product.name</h4>
+		<!-- <h5><span class="hot on">Hot</span><span class="cold">Cold</span></h5> -->
+		<div class="cofeBuyDetail clear">
+		#if($cart.map.hot eq 'hot')
+			<span>hot</span>
+		#elseif($cart.map.hot eq 'cold')
+			<span>cold</span>
+		#end
+		#if($cart.map.milk eq 'y')
+			<span>milk</span>
+		#end
+		#if($cart.map.bean eq 'y')
+			<span>double</span>
+		#end
+		</div>
+	</div>
+	<div class="shoppingCartMid">
+		<div class="carNumMod clear">
+			<span class="re"></span>
+			<input class="num" disabled="disabled" value="$cart.quantity" />
+			<span class="add on"></span>
+		</div>
+	</div>
+	<div class="shoppingCartRight">￥<i class="price">$cart.totalfee</i></div>
+	<span class="delectCart icon"></span>
+</li>
+#end

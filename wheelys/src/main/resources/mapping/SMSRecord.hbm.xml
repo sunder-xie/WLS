@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.SMSRecord" table="SMSRECORD" dynamic-update="true" lazy="false">
+		<id name="id" type="long" column="RECORDID">
+			<generator class="identity" />
+		</id>
+		<property name="smstype" type="string" column="TIMETAG" />
+		<property name="contact" type="string" column="CONTACT" />
+		<property name="content" type="string" column="CONTENT" />
+		<property name="tradeno" type="string" column="TRADENO" />
+		<property name="status" type="string" column="STATUS"/>
+		<property name="sendtime" type="timestamp" column="SENDTIME"/>
+		<property name="realtime" type="timestamp" column="REALTIME"/>
+		<property name="validtime" type="timestamp" column="VALIDTIME"/>
+		<property name="sendnum" type="integer" column="SENDNUM" />
+		<property name="seqno" type="string" column="SEQNO2" />
+		<property name="channel" type="string" column="CHANNEL" />
+		<property name="memberid" type="long" column="MEMBERID" />
+		<property name="relatedid" type="long" column="RELATEDID" />
+		<property name="tag" type="string" column="TAG" />
+	</class>
+</hibernate-mapping>

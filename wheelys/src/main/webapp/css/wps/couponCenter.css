@@ -1,0 +1,350 @@
+body{
+	background:#F7F7F7;
+}
+.wrap{
+	width:100%;
+}
+.wrap-fixed{
+	position:fixed;
+	top:0;
+	z-index:99;
+}
+.header{
+	width:100%;
+	height:3rem;
+	background:#EE2624;
+}
+.layout{
+	padding:7px 15px;
+}
+.header-img{
+	width:1.8rem;
+	height:1.8rem;
+}
+.header-img img{
+	width:100%;
+	height:100%;
+}
+.header-text1{
+	font-size:1.28rem;
+	color:#ffffff;
+}
+.header-text2{
+	font-style:none;
+	font-size:1.14rem;
+	color:#ffffff;
+}
+.content{
+	padding:15px;
+	background:#f7f7f7;
+}
+.one ,.cont-one{
+	width:100%; 
+	border:1px solid #ffffff;
+	background:#FFFFFF url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/coupon/leftcou.png) no-repeat left top;
+	border-radius:5px;
+	background-size:0.875rem 100%;
+	box-shadow:0 1px 1px #d7d7d7;
+	margin-bottom:10px;
+    position: relative;
+}
+.top{
+	padding-top:5px;
+	border-bottom:1px #CDCDCD dashed;
+	margin-left:15px;
+	display:flex;
+	-webkit-display:flex;
+	-moz-display:flex;
+	margin-right:5px;
+}
+.top-left{width:30%;
+	font-size:2.14rem;
+	color:#F02622;
+	border-right:1px #CDCDCD dashed;
+	text-align:center;
+	padding:10px 0;
+	line-height:5rem;
+	margin-bottom:5px;
+}
+.top-right{width:70%;
+	padding-top:12px;
+	padding-left:12px;
+	coloar:#474747;
+	font-size:1.28rem;
+}
+.top-right h3{font-size:1.4rem;}
+.content ul{
+	padding-left:12px;
+	margin:5px 0;
+	min-height:42px;
+}
+.content ul li{text-align:left;
+	list-style:disc;
+	font-size:0.875rem;	
+	line-height:1.5rem;
+}
+.bottom{
+    margin-left:25px;
+    padding:4px 0;
+	clear:both;
+	color:#787878;
+	font-size:0.875rem;
+}
+.bottom p{
+	text-align:left;
+}
+.footer{
+	width:100%;
+	text-align:center;
+	padding-bottom:30px;
+}
+/*历史优惠券*/
+.history-one{
+	width:100%; 
+	border-radius:3px;
+    border:1px solid #F7F7F7;
+	background:#FFFFFF url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/coupon/leftcou-g.png) no-repeat left top;
+	background-size:0.857rem 100%;
+	box-shadow:0px 1px 1px #d7d7d7;
+	margin-bottom:10px;
+	position:relative;
+}
+.history-one .top-left{
+	color:#AEACAD;
+}
+.right-img{
+	position:absolute;
+	top:0;
+	right:0;
+	width:4.07rem;
+	height:3.5rem;
+}
+.right-img img{
+	width:100%;
+	height:100%;	
+}
+.k-p{
+	text-align:center;
+	color:#474747;
+	font-size:1.14rem;
+	line-height:1.14rem;
+	margin-top:10px;
+}
+.e-img{
+	width:110px;
+	height:120px;
+	margin:100px auto 20px;
+}
+.e-img img{
+	width:100%;
+	height:100%;
+}
+/*优惠券弹窗*/
+.note{
+	font-size:0.875rem;
+	padding:7px 7px;
+	background:#ECECEC;
+	color:#474747;
+	line-height:12px;
+}
+.red-one{
+	border:1px solid #ed2626;
+}
+.coffee{
+	font-size:1.4rem;
+	color:#F02622;
+	border-right:1px #CDCDCD dashed;
+	text-align:center;
+    padding:20px 0; 
+	line-height:3rem;
+	font-weight:bold;
+}
+.sure-wrap{
+	background:#F7F7F7;
+	width:100%;
+	padding:15px 0;
+}
+.sure{
+	width:296px;
+	height:38px;
+	border-radius:40px;
+	background:#EE2624;
+	text-align:center;
+	line-height:38px;
+	font-size:1.14rem;
+	color:#ffffff;
+	margin:0 auto;
+}
+.sure-fixed{
+	position:fixed;
+	bottom:0;
+	z-index:100;
+} 
+.couponEx{color:#7E7E7E;width:34%;text-align:right;height:1rem;line-height:1rem;
+ padding-right:6%; display:inline-block;background:url('http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/coupon/jt.png') right center no-repeat; background-size:auto 100%}
+/*领取优惠券*/
+.D-header{
+	width:100%;
+    height:30%;
+	background:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/Discountcoupon/bg1.png) no-repeat;
+	background-size:100% 100%;
+}
+.D-img{
+	width:200px;
+	height:75px;
+	margin:0 auto;
+	padding-top:9%;
+}
+.D-img img{
+	width:100%;
+	height:100%;
+}
+.D-text{
+	font-size:1.42rem;
+	color:#ffffff;
+	text-align:center;
+    font-weight:bold;
+    padding-top:1rem;
+}
+.D-body{
+	width:100%;
+	background:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/Discountcoupon/bg2.png) no-repeat ;
+	background-size:100% 100%;
+	margin-top:-10px; 
+}
+.D-body{
+	colro:#474747;
+	font-size:1.28rem;
+	text-align:center;
+}
+.D-body .h3-text{
+	line-height:60px;
+}
+.D-loginMod input{
+    width:229px;
+	height:40px;
+	padding-left:15px;
+	font-size:1.14rem;
+	color:#474747;
+	display:block;
+	margin:0 auto;
+}
+.d-input{
+	position:relative;
+	width:229px;
+	height:45px;
+	margin:20px auto;
+	background:#ffffff;
+	border-radius:50px;
+	box-shadow:0 3px 3px #cdcdcd;
+}
+.yz-img{
+	border-radius:0 50px 50px 0;
+	width:70px;
+	height:40px;
+	display:inline-block;
+	position:absolute;
+    right:-15px;
+    top:0;
+}
+#myLoginCaptchaImg{
+	border-radius:0 50px 50px 0;
+	width:100%;
+	height:100%;
+}
+#get{
+	width:70px;
+	height:45px;
+	position:absolute;
+	color:#ffffff;
+	position:absolute;
+	right:0;
+	top:0;
+	border:none;
+	border-radius:0 50px 50px 0;
+	outline:none;	
+	background:#ee2624;
+	font-size:1.14rem;
+}
+#get.wait{
+	  background:#D9D9D9;
+	  font-size:0.857rem;
+	}
+.loginBtn{
+	 background:#ee2624;
+	 border-radius:50px;
+	 width:126px;
+	 height:40px;
+	 color:#ffffff;
+	 font-size:1.14rem;
+	 display:block;
+	 line-height:40px;
+	 margin:0 auto;
+	 margin-top:30px;
+}
+.one-wrap{position:relative;
+	 padding:0 20px;
+}
+.D-footer{
+	width:150px;
+	height:150px;
+	margin:0 auto;
+	margin-top:30px;
+	border:5px solid #ee2624;
+	border-radius:8px;
+}
+.D-footer img{
+	width:100%;
+	height:100%;
+}
+
+.btnList{
+	text-align:center;
+	margin:20px 0;
+}
+.btnList a{color:#fff; background:#ed2624; border-radius:20px; width:115px; text-align:center; height:35px; line-height:35px; font-size:1rem; display:inline-block; margin:0 30px;}
+/* 帮助 */
+.help-content li{
+	padding:14px 10px 5px;
+	background:#ffffff;
+	margin-top:10px;
+}
+.left-style{
+	float:left;
+	width:2px;
+	height:15px;
+	background:#EE2624;
+	margin-right:10px;
+}
+.question{position:relative;
+	padding-left:10px;
+	line-height:24px;
+	color:#474747;
+	font-size:1.28rem;
+}
+.question span{width:3px; height:12px;background:#ed2624; position:absolute; left:0; top:5px;}
+.answer{
+	padding:10px 24px 0 17px;
+	color:#7a7a7a;
+	font-size:1rem;
+	line-height:1.4rem;
+}
+#orderPageBox .goBindPhone{background:#fce3c8; color:#676767; padding:0 2%; font-size:.8rem;}
+#orderPageBox .goBindPhone a{float:right;color:#ed2626;}
+/* 我的设置 */
+.setUpBox a{display:block;background:#fff;height:25px; line-height:25px; padding:20px 2% 20px 5%;border-bottom:1px solid #ECECEC;}
+.setUpBox a span{margin-left:20px;}
+.setUpBox a em{height:1.7rem;line-heght:1.7rem;}
+.setUpBox a em img{vertical-align:middle;}
+/* 用户协议 */
+.user-text{padding:10px 5%;}
+.user-text p {margin:10px 0;}
+
+.wrapNum{color:#ed2624; font-size:1.8rem;position:absolute; right:35px; top:50%; margin-top:-15px; height:30px; line-height:30px;}
+.oneNum{background:url(http://wheelysoss.oss-cn-shanghai.aliyuncs.com/img/wps/coupon/red_q.png) no-repeat; background-size:100% auto; width:45px; height:45px; color:#fff;
+position:absolute; right:0; top:0; text-align:right; padding-right:5px; font-size:.8rem;}
+
+
+
+
+ 

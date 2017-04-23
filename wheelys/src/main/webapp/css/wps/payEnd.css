@@ -1,0 +1,24 @@
+body{background:#fff;}
+header{margin:30px 0; text-align:center; font-size:1.6rem; color:#e61111; font-weight:900;}
+.passwordMod { text-align:center; margin:20px 0;}
+.passwordMod h2{display:block; height:3rem; line-height:3rem;}
+.passwordMod p{color:#e61111;font-size:1.6rem; height:2rem; line-height:2rem; font-weight:900; font-size:2rem;}
+.getFlash{padding:10px 10%; position:relative; margin-top:30px;}
+.getFlash img{margin:0 auto;display:block;}
+.getCup{position:absolute;left:60%; bottom:54%;width:22%;animation: getCup 2s infinite;-webkit-animation: getCup 2s infinite;}
+.goBtn{margin-top:20px;}
+.goBtnMod{width:50%;float:left; font-size:1.2rem;}
+.goBtnMod a{border-radius:20px; height:2.2rem; line-height:2.4rem;color:#fff; background:#e61111;text-align:center;width:70%; margin:0 auto; display:block;}
+
+@keyframes getCup{
+	0% {width:18%;opacity:0}
+	40% {width:22%;opacity:1}
+	60% {width:22%;opacity:1}
+	100% {width:18%;opacity:0}
+}
+@-webkit-keyframes getCup{
+	0% {width:18%;opacity:0}
+	40% {width:22%;opacity:1}
+	60% {width:22%;opacity:1}
+	100% {width:18%;opacity:0}
+}

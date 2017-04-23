@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/payEnd.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm") 
+	<style type="text/css">
+	
+	</style>
+</head>
+<body>
+	<header>
+		下单成功
+	</header>
+	<div class="passwordMod">
+		<h2>取杯口令</h2>
+		<p>"&nbsp;$!cafeKey.name&nbsp;"</p>
+	</div>
+	#if($orderVo.category ne 'TAKEAWAY')
+	<div class="passwordMod">
+		<h2>取杯时间</h2>
+		<p>$DateUtil.format($orderVo.taketime, "HH:mm")</p>
+	</div>
+	#end
+	<div class="getFlash">
+	#if($cafeKey)
+		<img width="100%" src="${picPath}${cafeKey.imgurl}" />
+	#else
+		<img width="100%" src="${staticPath}img/cake-get.jpg?v=$VmUtils.version" />
+		<img class="getCup" src="${staticPath}img/getCup.png?v=$VmUtils.version" />
+	#end
+	</div>
+	<div class="goBtn clear">
+		<div class="goBtnMod"><a href="${basePath}order/orderDetail.xhtml?tradeno=$orderVo.tradeno">订单详情</a></div>
+		#if($!orderVo.shopid eq 59)
+		<div class="goBtnMod"><a href="${basePath}valentine/order.xhtml?tradeno=$orderVo.tradeno&isedit=Y" style="background:#e61111 url(${picPath}wps/activity2017/valentine/flower.png) 15px 8px no-repeat; background-size:auto 50%; text-indent:20px;">“分享传情”</a></div>
+		#else
+		<div class="goBtnMod"><a href="${basePath}shop/shopDetail.xhtml?shopid=$orderVo.shopid">确&nbsp;&nbsp;&nbsp;定</a></div>
+		#end
+	</div>
+</body>
+</html>

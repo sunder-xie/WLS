@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<style>
+		h3{margin:10px 0; display:block; text-algin:center;}
+		.user-text img{margin:10px 0;}
+	</style>
+</head>
+<body>
+#set($headerTitle='Wheelys是谁？')
+#parse("/wps/modul/header.vm")
+<div class="user-text">
+	<p class="t">
+		Wheelys咖啡成立于2014年，运用智能移动咖啡车制作及售卖优质美味的咖啡，并通过移动互联网提高经营效益。2015年，在获得硅谷著名孵化器Y Combinator的投资后，Wheelys咖啡成为一家资金充足、经营稳定、不断成长的公司。只用了两年的时间，这辆智能移动咖啡车便席卷了全球60多个国家和地区。	
+	</p>
+	<img src="${picPath}wps/myCenter/0.jpg" width="100%" />
+	<h3>霸道纯粹，一杯好喝的咖啡</h3>
+	<p>不同于连锁经营的方式，Wheelys咖啡希望通过节省经营实体店面的运营成本，补贴每一杯咖啡的原料成本，使咖啡爱好者享用品质与价格优势兼备的咖啡。</p>
+	<img src="${picPath}wps/myCenter/1.jpg" width="100%"  />
+	<p>Wheelys咖啡对咖啡豆的选择有自己的坚持，由全球统一采购和供应的咖啡豆，一定要符合绿色、无农药和无公害、公平贸易等条件。这些咖啡豆不常出现在连锁咖啡馆中，带来不一样的惊喜口味。</p>
+	<h3>创新科技，一杯互联网+的咖啡</h3>
+	<p>互联网时代讲究不断优化迭代，而Wheelys智能移动咖啡车在短短一年多的时间已升级3次，目前在中国市场运营的即是第四代智能移动咖啡车“绿色骑士”。</p>
+	<img src="${picPath}wps/myCenter/2.jpg" width="100%"  />
+	<p>很快，Wheelys咖啡将推出专为中国市场度身定制的下一代智能移动咖啡车。未来，消费者还可以通过手机寻找距离自己最近的Wheelys智能移动咖啡车，通过线上预约、路过自取，告别排队买咖啡的漫长等待。</p>
+	<h3>打破常规，一杯有个性的咖啡</h3>
+	<p>大型连锁品牌在咖啡行业占据领导地位，却只提供缺乏差异化和惊喜的克隆产品。Wheelys咖啡希望打破这一局面，为消费者提供更优质、更健康、更个性、更好喝的咖啡。</p>
+	<img src="${picPath}wps/myCenter/3.jpg" width="100%" />
+	<p>除了优质的产品，Wheelys咖啡还为中国消费者带来一系列好玩的品牌体验活动， 并跨界文化、艺术、运动等领域，为消费者提供便捷有趣的“咖啡+”生活方式。</p>
+	<img style="border-bottom:1px solid #000; padding:10px 4%; margin:20px 21% 0; width:50%;" src="${picPath}wps/logo_big.png" />
+	<p style="text-align:center; color:#000;">一杯好咖啡的正确打开方式</p>
+	<img src="${picPath}wps/erwei.png" width="50%" style="margin:20px 25% 10px" />
+	<p style="text-align:center;color:#000;">扫描二维码&nbsp;&nbsp;&nbsp;&nbsp;开启Wheelys咖啡2.0时代</p>
+</div>
+</body>
+</html>

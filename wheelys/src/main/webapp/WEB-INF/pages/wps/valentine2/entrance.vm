@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>WheelysCafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no"/>
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/valentine.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/wps/login.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm") 
+<style>
+.d-input select{border:none; width:91%; margin:0 auto; font-size:1.14rem; height:43px; background:none; padding-left:9%;appearance:none;
+-moz-appearance:none;background:url(${picPath}wps/activity2017/valentine/triangle.png) right 19px no-repeat;background-size:auto 17%;
+-webkit-appearance:none;}
+.d-input select option{color:#474747}
+	</style>
+</head>
+<body>
+	<div class="body">
+		<div class="imgBox">
+			<img width="25%" src="${picPath}wps/activity2017/valentine/logo.png" />
+		</div>
+		<div class="imgBox mt20">
+			<img width="40%" src="${picPath}wps/activity2017/valentine/title.png" />
+		</div>
+		<div class="imgBox mt10">
+			<img width="50%" src="${picPath}wps/activity2017/valentine2/text.png" />
+		</div>
+		<div class="imgBox mt10">
+			<img width="50%" src="${picPath}wps/activity2017/valentine/pic.gif" />
+		</div>
+		<div class="imgBox mt20">
+			<img width="50%" src="${picPath}wps/activity2017/valentine2/font.png" />
+		</div>
+		#if($isBeforeClosetime)
+		<div class="inputBox">
+			<div class="D-loginMod">
+	        	#if(!$VmUtils.isNotEmpty($member.mobile))
+	 			<div class="d-input"><input data-type="mobile" data-text="enter" maxlength="11" id="mobile" name="mobile" type="text"  placeholder="输入手机号"/></div>
+	 			<div class="d-input">
+					<input data-type="captcha" type="text" data-text="enter" maxlength="4" class="G_input captcha" id="cardcaptcha" name="captcha" placeholder="短信验证码">
+					<button id="get" onclick="getCode();">获取</button>
+	 			</div>
+	 			#end
+	 		</div>
+	 		<p class="selectTitle">请选择套餐</p>
+	 		<div class="selectDataBox selectFlowerBox">
+	 			<div class="selectData select" data-value="5">1个单品花束及花瓶+5杯咖啡券</div>
+	 			<div class="selectData" data-value="3">1个单品花束及花瓶+3杯咖啡券</div>
+	 		</div>
+	 		<p class="selectTitle mt20">请选择取鲜花时间</p>
+	 		<div class="selectDataBox">
+				#if($isBefore)
+	 			<div class="selectData select" data-value="20">2月20日取鲜花</div>
+	 			<div class="selectData" data-value="27">2月27日取鲜花</div>
+	 			#else
+	 			<div class="selectData select" data-value="27">2月27日取鲜花</div>
+	 			#end
+	 		</div>
+			<div class="imgBox mt10">
+		 		<img class="fontPic pic13" width="50%" src="${picPath}wps/activity2017/valentine/font1.png" />
+		 		<img class="fontPic pic13" style="display:none;" width="50%" src="${picPath}wps/activity2017/valentine2/font5.png" />
+	 		</div>
+	 		<a class="justDo" onclick="onBridgeReady();">立即支付</a>
+		</div>
+ 		#else
+		<div class="imgBox mt10">
+			<img class="fontPic pic13" width="50%" src="${picPath}wps/activity2017/valentine/ewm.png" />
+			<p style="font-size:0.825rem;">长按关注WheelysCafe</p>
+		</div>
+		<div class="imgBox mt10">
+			<img class="fontPic pic13" width="50%" src="${picPath}wps/activity2017/valentine/hd.png" />
+		</div>
+		#end
+	</div>
+	<script>
+	var isCallpay = true;
+	var isGetCode = true;
+	$('.selectDataBox .selectData').on('click',function(e){
+		if($(this).hasClass('select'))return;
+		$(this).siblings().removeClass('select');
+		$(this).addClass('select');
+		if($(this).parent('.selectDataBox').hasClass('selectFlowerBox')){
+			$('.fontPic').toggle();
+		}
+	})
+	function getCode(){
+		if(!isGetCode) return
+		var v = $('#mobile').val();
+		if(v==''){
+			alert('请输入手机号')
+		}else if(!wheelys.isMobile(v)){
+			alert('请正确输入手机号') 
+		}else{
+			if(!isGetCode || $('#get').hasClass('wait'))return
+			var data ={'mobile':v};
+			$.ajax({
+	    		url:"${basePath}hongbao/sendmsg.xhtml",
+	    		type:'post',
+				data:data,
+	    		dataType:'json',
+				success:function(result){
+					getPhoneCodeFn('get',60);
+					isGetCode = true;
+				}
+			});
+		}
+	}
+	function justDo(){
+		var isNull = false;
+		$('.D-loginMod input').parent().removeClass('err');
+		if($('.D-loginMod input').length != 0){
+			$('.D-loginMod input').each(function(e,a){
+				var v = $(a).val();
+				if(v == ''){
+					$(a).parent().addClass('err')
+					isNull = true;
+					return
+				}else if($(a).attr('name')=='mobile' && !wheelys.isMobile(v)){
+					$(a).parent().addClass('err')
+					isNull = true;
+					return
+				}
+			})
+		}
+		if($('#assSelect').val() == '选择使用店铺'){
+			alert('请选择店铺');
+			isNull = true;
+			return
+		}
+		if(isNull)return;
+		//callpay();
+		onBridgeReady();
+	}
+	function onBridgeReady(){
+		var data = {'captcha':$('#cardcaptcha').val(), 'mobile':$('#mobile').val(),'shopid':'59'};
+		$('.selectDataBox .select').each(function(e,a){
+			data['datetype'+e] = $(a).attr('data-value')
+		})
+		$.ajax({
+			url:'${basePath}valentine/topay2.xhtml',
+			type:'post',
+			dataType:'json',
+			data:data,
+			success:function(retuslt){
+				if(retuslt.success){
+					isCallpay = true;
+					var data = retuslt.data;
+					weixinPay(data.payparams,data.tradeno);
+				}else{
+					alert(retuslt.msg);
+				}
+			}
+		});
+	}
+	
+	function weixinPay(pay,tradeno){
+		WeixinJSBridge.invoke(
+		    'getBrandWCPayRequest', 
+		    pay,
+		    function(res){
+				if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+					window.location.href="${basePath}valentine/payresult2.xhtml?tradeno="+tradeno;
+				}
+		    }
+		); 
+	}
+	function callpay(){
+		if(!isCallpay)return
+		if (typeof WeixinJSBridge == "undefined"){
+		   if( document.addEventListener ){
+		       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+		   }else if (document.attachEvent){
+		       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+		       document.attachEvent('onWeixinJSBridgeReady',onBridgeReady);
+		   }
+		}else{
+			onBridgeReady();
+		}
+	}
+	</script>
+</body>	
+</html>
+	

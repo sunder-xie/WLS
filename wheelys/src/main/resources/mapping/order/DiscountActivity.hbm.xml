@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.discount.DiscountActivity" table="DISCOUNTACTIVITY">
+		<id name="id" column="id" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="name" column="NAME" type="string"/>
+		<property name="type" column="DTYPE" type="string"/>
+		<property name="discountrate" column="DISCOUNTRATE" type="integer"/>
+		<property name="fixamount" column="FIXAMOUNT" type="integer"/>
+		<property name="begintime" column="BEGINTIME" type="timestamp"/>
+		<property name="endtime" column="ENDTIME" type="timestamp"/>
+		<property name="createtime" column="CREATETIME" type="timestamp"/>
+		<property name="updatetime" column="UPDATETIME" type="timestamp"/>
+		<property name="shopids" column="SHOPIDS" type="string"/>
+		<property name="status" column="STATUS" type="string"/>
+		<property name="discountmark" column="DISCOUNTMARK" type="string"/>
+		<property name="validitemid" column="VALIDITEMID" type="string"/>
+		<property name="validproductid" column="VALIDPRODUCTID" type="string"/>
+		<property name="remark" column="REMARK" type="string"/>
+		<property name="priority" column="PRIORITY" type="string"/>
+		<property name="week" column="WEEK" type="string"/>
+		<property name="hourfrom" column="HOURFROM" type="string"/>
+		<property name="hourto" column="HOURTO" type="string"/>
+		<property name="addprice" column="ADDPRICE" type="string"/>
+		<property name="discountamount" column="DISCOUNTAMOUNT" type="integer"/>
+		<property name="limitcup" column="LIMITCUP" type="integer"/>
+		<property name="limitamount" column="LIMITAMOUNT" type="integer"/>
+		<property name="limitmaxnum" column="LIMITMAXNUM" type="integer"/>
+		<property name="allowaddnum" column="ALLOWADDNUM" type="integer"/>
+		
+	</class>
+</hibernate-mapping>
+

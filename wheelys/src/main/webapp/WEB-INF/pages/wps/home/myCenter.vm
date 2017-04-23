@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/myCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+</head>
+<body>
+#set($headerTitle='我的') 
+#set($noHistory=true)
+#parse("/wps/modul/header.vm")
+<div class="headMod">
+	<img src="${picPath}wps/header/myCenterHead.png" width="100%" />
+	<div class="userBox">
+		<div class="userHeadBox">
+			<a class="userHead"><img src="$!headpic" width="100%" /></a>
+		</div>
+		<p>$!member.nickname</p>
+	</div>
+</div>
+<div class="bodyMod">
+	<a href="${basePath}home/cardList.xhtml"><img class="left" height="25" src="${picPath}wps/myCenter/icon-coupon.png" /><span class="left">我的优惠券</span><img style="height:16px; padding:4px 0;" class="right" src="${picPath}wps/myCenter/arrow.png" /></a>
+	<a href="${basePath}home/setting.xhtml"><img class="left" height="25" src="${picPath}wps/myCenter/icon-set.png" /><span class="left">设置</span><img style="height:16px; padding:4px 0;" class="right" src="${picPath}wps/myCenter/arrow.png" /></a>
+	<a href="${basePath}home/help.xhtml"><img class="left" height="25" src="${picPath}wps/myCenter/icon-help.png" /><span class="left">帮助</span><img style="height:16px; padding:4px 0;" class="right" src="${picPath}wps/myCenter/arrow.png" /></a>
+</div>
+#set($isMine='true')
+#parse("/wps/modul/footMenu.vm")
+</body>
+</html>
+	

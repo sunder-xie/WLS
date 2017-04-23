@@ -1,0 +1,40 @@
+<style>
+.header_layout{font-size:1.25rem;
+	width:100%;
+	height:3rem;
+	background:#EE2624;
+	line-height:3rem;
+ 	text-align:center;
+ 	color:#fff;
+ 	position:relative;
+}
+.header-img{
+	position:absolute;display:block;width:25px; height:25px;
+	left:10px; top:7px;
+}
+.header-img img{vertical-align:0;}
+</style>
+<div class="header_layout">
+	#if(!$noHistory)
+		#if($isShopDetail)
+		<a class="header-img" href="${basePath}index.xhtml"><img width="100%" src="${picPath}wps/coupon/return.png"/></a>
+		#else
+		<a class="header-img" onclick="window.history.go( -1 );"><img width="100%" src="${picPath}wps/coupon/return.png"/></a>
+		#end
+	#end
+	$headerTitle
+ 	#if($isCardList) <a href="${basePath}card/instructions.xhtml" style="display:block;position:absolute; right:10px; top:0px; font-size:1rem; color:#fff;">使用说明</a> #end
+	#if($isShopDetail)<span class="header-img" onclick="$('#thisAss').popup();" style="left:auto; right:10px;"><img width="100%" src="${picPath}wps/icon/shopDetaile_header.png" /></span> 
+		<div id="thisAss" style="display:none">
+			<div class="thisAssMod">
+				<h2>$shop.shopname</h2>
+				<p class="time">营业时间：$shop.shoptime</p>
+				<p>店铺地址：$shop.shopaddress</p>
+				<!-- <img src="${picPath}$shop.shopimg6"/>
+				<p>$shop.shopintroduce</p>
+				<p>$shop.shopfeature</p> -->
+				<a class="close icon" style="" onclick="$('#thisAss').closePopup();"></a>
+			</div>
+		</div>
+	#end
+</div>

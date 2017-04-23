@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	<style type="text/css">
+	body{position:relative;}
+	.erooMod{width:80%; text-align:center; margin:0 auto; padding-top:20%;}
+	.erooMod p{color:#b4b4b4;font-size:1rem; margin:5px 0;}
+	.erooMod a{display:inline-block; background:#e53a47; font-size:1.4rem; color:#fff; border:5px; padding:7px 25px; border-radius:20px; margin-top:15px;}
+	.time{color:#e53a47;}
+	</style>
+</head>
+<body>
+	<div class="erooMod">
+		<img src="${staticPath}img/erroPic.png?v=$VmUtils.version" width="32%" />
+		<p>$!msg</p>
+		<p>您还有<span class="time"><i>5</i>秒</span>自动跳回首页</p>
+		<a href="">返回首页</a>
+	</div>
+	<script type="text/javascript">
+		Zepto(function(){
+			timer();
+		})
+		function timer(){
+			var time = $('.time i');
+			var i = time.html();
+			setInterval(function(){
+				if(i==0){
+					window.location.href = '${basePath}shop/index.xhtml';
+					return;
+				}
+				i--;
+				time.html(i);
+			},1000);  
+		} 
+	</script>
+</body>
+</html>

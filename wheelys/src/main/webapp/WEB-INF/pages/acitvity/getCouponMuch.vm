@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wps/login.js?v=$VmUtils.version" type="text/javascript"></script>
+	<style>
+	.page_body{background:url(${picPath}wps/Discountcoupon/bg_much.png) center -10px no-repeat; background-size:130% auto; min-height:300px; padding:40px 0;}
+	.loginBtn{text-align:center;}
+	</style>
+</head>
+<body style="width:100%;background:#FFF;">
+	<div>
+	   <img width="100%" src="${picPath}wps/Discountcoupon/head_much.png"/>
+	</div>
+	<div class="d-input" style="display: none;">
+		<input type="hidden" data-type="captchaId" name="captchaId" id="myLoginCaptcha" value="4ntn9Xg4rWRSPArYb12e192f">
+		<label class="verify">
+			<input data-type="captcha" type="text" data-text="enter" maxlength="4" class="G_input captcha" id="myLoginCaptchaInput" name="captcha" placeholder="图片验证码">
+		</label>
+		<span class="yz-img"><img  id="myLoginCaptchaImg"  onclick="refreshCaptcha();" src=""></span>
+	</div>
+	<div class="page_body">
+		<div style="text-align:center;">
+			<img width="60%" src="${picPath}wps/Discountcoupon/text_much.png"/>
+		</div>
+	    <div class="D-loginMod">
+	        #if(!$VmUtils.isNotEmpty($member.mobile))
+ 			<div class="d-input"><input data-type="mobile" data-text="enter" maxlength="11" id="mobile" name="mobile" type="text"  placeholder="输入手机号"/></div>
+ 			<div class="d-input">
+				<input data-type="captcha" type="text" data-text="enter" maxlength="4" class="G_input captcha" id="cardcaptcha" name="captcha" placeholder="短信验证码">
+				<button id="get" onclick="getCode();" style="background:#EB4256">获取</button>
+ 			</div>
+ 			#end
+ 			<a class="loginBtn" onclick="javascript:loginAjax();" style="background:#ee2624">领取</a>
+ 		</div>
+	</div>
+	<script>
+	var isGetCode = true;
+	var isAjax = true;
+	$(document).ready(function(){
+		//refreshCaptcha();
+		
+	}); 
+	function getCode(){
+		if(!isGetCode) return
+		var v = $('#mobile').val();
+		if(v==''){
+			alert('请输入手机号')
+		}else if(!wheelys.isMobile(v)){
+			alert('请正确输入手机号') 
+		}else{
+			if(!isGetCode || $('#get').hasClass('wait'))return
+			var data ={'mobile':v};
+			isGetCode = false;
+			$.ajax({
+	    		url:"${basePath}hongbao/sendmsg.xhtml",
+	    		type:'post',
+				data:data,
+	    		dataType:'json',
+				success:function(result){
+					getPhoneCodeFn('get',60);
+					isGetCode = true;
+				}
+			});
+		}
+	}
+	 function loginAjax(){
+			var data ={'captcha':$('#cardcaptcha').val(),'mobile':$('#mobile').val()};
+			var i = true;
+			$('.D-loginMod input').each(function(e,a){
+				var val = $(a).val();
+				if(val == ""){
+					i = false;
+					return;
+				}else{
+					data[$(a).attr('data-type')] = $(a).val();
+				}
+			});
+			if(!i){
+				alert('所有选项不能为空');
+				return;
+			}
+			if(!isAjax) return
+			isAjax = false
+			$.ajax({
+	    		url:"${basePath}acitvity/getCoupon.xhtml",
+	    		type:'post',
+				data:data,
+	    		dataType:'json',
+				success:function(result){
+					isAjax = true;
+					if(result.success){
+						location.href="${basePath}acitvity/getCouponSuccess.xhtml";
+					}else{
+						alert(result.msg);
+					}
+				}
+			});
+         }	
+	    function refreshCaptcha(){
+	    	$.ajax({
+	    		url:"${basePath}getCaptchaId.xhtml",
+	    		type:'post',
+	    		dataType:'json',
+	    		success:function(ratval){
+	    			if(ratval.success){
+	    				$('#myLoginCaptcha').val(ratval.data);
+	    				$('#myLoginCaptchaImg').attr("src","${basePath}captcha.xhtml?captchaId="+ratval.data+"&r="+(new Date).getTime());
+	    			}
+	    		}
+	    	});
+	    }	 
+	</script> 	
+</body>
+</html>

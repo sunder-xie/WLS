@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.CafeShop" table="wheelys_shop">
+		<id name="shopid" column="shopid" type="long">
+			<generator class="identity" />
+		</id>
+		<property name="shopname" column="shopname" type="string" />
+		<property name="shopaddress" column="shopaddress" type="string" />
+		<property name="shopimg" column="shopimg" type="string" />
+		<property name="shoplon" column="shoplon" type="string" />
+		<property name="shoplat" column="shoplat" type="string" />
+		<property name="shopaccount" column="shopaccount" type="string" />
+		<property name="shoptime" column="shoptime" type="string" />
+		<property name="shoptelephone" column="shoptelephone" type="string" />
+		<property name="shopintroduce" column="shopintroduce" type="string" />
+		<property name="shopfeature" column="shopfeature" type="string" />
+		<property name="citycode" column="citycode" type="string" />
+		<property name="booking" column="booking" type="string" />
+		<property name="esname" column="ESNAME" type="string" />
+	</class>
+</hibernate-mapping>

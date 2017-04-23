@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+	 	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.wheelys.model.order.MemberOrderInfo" table="MEMBERORDERINFO">
+		<id name="memberid" column="MEMBERID" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="regstertime" column="REGSTERTIME" type="timestamp" />
+		<property name="tradeno" column="TRADENO" type="string" />
+		<property name="firstordertime" column="FIRSTORDERTIME" type="timestamp" />
+		<property name="firstshopid" column="FIRSTSHOPID" type="long"/>
+		<property name="lasttradeno" column="LASTTRADENO" type="string" />
+		<property name="lastshopid" column="LASTSHOPID" type="long" />
+		<property name="lastordertime" column="LASTORDERTIME" type="timestamp" />
+		<property name="totalnetpaid" column="TOTALNETPAID" type="integer" />
+		<property name="ordernum" column="ORDERNUM" type="integer"/>
+		<property name="createtime" column="CREATETIME" type="timestamp" />
+		<property name="updatetime" column="UPDATETIME" type="timestamp" />
+		
+	</class>
+</hibernate-mapping>
+
+

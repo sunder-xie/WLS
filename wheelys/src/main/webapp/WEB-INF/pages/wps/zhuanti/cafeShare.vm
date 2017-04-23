@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>WheelysCafe 5元健康咖啡 每周限量供应哦~美罗城店一楼</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm") 
+	<style>
+		html{background:#000;overflow:hidden;}
+		body{background:#000 url('${picPath}wps/zhuanti/cafeShare/bg.jpg?v=$VmUtils.version') no-repeat;background-size:100% auto;overflow:hidden;min-height:100%;}
+		img{display:block;margin:0; padding:0;}
+		.loginLogo{padding:30px 0 10px; width:30%; margin:0 auto;
+		animation:flash_7 1.5s linear 1;-webkit-animation:flash_7 1.5s linear 1;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.modTitle{width:80%; padding:0 10%;}
+		.modTitle .modTitleLeft{width:10%;padding-top:40px;opacity:0;
+		animation:flash_5 1s linear 1 3s;-webkit-animation:flash_5 1s linear 1 3s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.modTitle .modTitleMiddle{width:80%;overflow:hidden;}
+		.modTitle .modTitleMiddle .modTitleMiddleTop{height:50px;position:relative;}
+		.modTitle .modTitleMiddle .modTitleMiddleTop .modTitleMiddleTopLeft{width:20%;position:absolute;bottom:0;left:10%;opacity:0;
+		animation:flash_7 1.5s linear 1 4s;-webkit-animation:flash_7 1.5s linear 1 4s;-webkit-animation-fill-mode:forwards;}
+		.modTitle .modTitleMiddle .modTitleMiddleTop .modTitleMiddleTopMiddle{width:8%;position:absolute;bottom:0;left:35%;opacity:0;
+		animation:flash_1 1s 1 1s;-webkit-animation:flash_1 1s 1 1s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.modTitle .modTitleMiddle .modTitleMiddleTop .modTitleMiddleTopRight{width:40%;position:absolute;bottom:0;left:50%}
+		/* 横线 */
+		.modTitle .modTitleMiddle .modTitleMiddleMiddle{width:100%; height:5px; padding:10px 0;opacity:0;
+		animation:flash_2 1.2s linear 1 1.5s;-webkit-animation:flash_2 1.2s linear 1 1.5s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.modTitle .modTitleMiddle .modTitleMiddleTopRight{opacity:0;
+		animation:flash_3 1s linear 1 3s;-webkit-animation:flash_3 1s linear 1 3s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.modTitle .modTitleMiddle .modTitleMiddleBottom{opacity:0;
+		animation:flash_1 1s linear 1 3s;-webkit-animation:flash_1 1s linear 1 3s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.modTitle .modTitleRight{width:10%;padding-top:40px;text-align:right;opacity:0;
+		animation:flash_6 1s linear 1 3s;-webkit-animation:flash_6 1s linear 1 3s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.modText{width:100%; text-align:center; margin-top:20px;}
+		.modText img{margin:0 1%;display:inline-block;opacity:0;}
+		.youhui{animation:flash_7 1s linear 1 5.5s;-webkit-animation:flash_7 1s linear 1 5.5s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;opacity:0;}
+		.youhuiText{width:20%; margin:20px auto 10px;}
+		.youhuiPic{width:7%; margin:0 auto;
+		animation:flash_9 2s linear infinite;-webkit-animation:flash_9 2s linear infinite;}
+		.tanBox{margin-top:20px;}
+		.tanBox .tanBoxLeft{width:70%;}
+		.tanBox .tanBoxRight{width:30%;}
+		.tanBoxRightTop{animation:flash_10 1s linear 1 5.5s;-webkit-animation:flash_10 1s linear 1 5.5s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;opacity:0;}
+		.tanBoxRightBottom{position:relative; margin-top:40px;overflow:hidden;}
+		.tanBoxRightBottom a{display:block;animation:flash_7 .5s linear 1 7s;-webkit-animation:flash_7 .5s linear 1 7s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;opacity:0;}
+		.tanBoxRightBottomBorder{position:absolute;width:100%;opacity:0;bottom:0;left:0;display:block;
+		animation:flash_11 .7s linear 1 6s;-webkit-animation:flash_11 .7s linear 1 6s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.tanBox .tanBoxRight .tanBoxPic{width:15%;
+		animation:flash_9 2s linear infinite;-webkit-animation:flash_9 2s linear infinite;}
+		.tanBox .tanBoxRight .tanBoxText{width:60%;margin:0 15% 0 10%;}
+		.tanChuang{width:100%; height:100%;width:70%; margin:0 auto; position:relative;}
+		.tanChuangBg{background-color:rgba(0,0,0,.5);padding:7px; opacity:0;}
+		.tanChuang .border_1{width:120%; height:1px;position:absolute;top:0;left:-5%;background:#979797;opacity:0;}
+		.tanChuangGo .border_1{animation:border_1 1s 1;-webkit-animation:border_1 1s 1;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.tanChuang .border_2{width:1px; height:120%;position:absolute;top:-5%;right:0;background:#979797;opacity:0;}
+		.tanChuangGo .border_2{animation:border_2 1s 1;-webkit-animation:border_2 1s 1;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.tanChuang .border_3{width:120%; height:1px;position:absolute;bottom:0;right:-5%;background:#979797;opacity:0;}
+		.tanChuangGo .border_3{animation:border_3 1s 1;-webkit-animation:border_3 1s 1;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.tanChuang .border_4{width:1px; height:120%;position:absolute;bottom:-5%;left:0;background:#979797;opacity:0;}
+		.tanChuangGo .border_4{animation:border_4 1s 1;-webkit-animation:border_4 1s 1;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.tanChuangGo .tanChuangBg{animation:flash_7 1s 1 1s;-webkit-animation:flash_7 1s 1 1s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		.and{color:#ee2624; position:absolute; right:10%; top:10%;opacity:0;
+		animation:flash_7 1s 1 6s;-webkit-animation:flash_7 1s 1 6s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;}
+		@keyframes flash_1{
+			0% {transform: translate(0,-20px);-webkit-transform: -webkit-translate(0,-20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@-webkit-keyframes flash_1{
+			0% {transform: translate(0,-20px);-webkit-transform: -webkit-translate(0,-20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		
+		@keyframes flash_2{
+			0% {transform: translate(-100px);-webkit-transform: -webkit-translate(-300px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@-webkit-keyframes flash_2{
+			0% {transform: translate(-100px);-webkit-transform: -webkit-translate(-300px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		
+		@keyframes flash_3{
+			0% {transform: translate(0,20px);-webkit-transform: -webkit-translate(0,20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@-webkit-keyframes flash_3{
+			0% {transform: translate(0,20px);-webkit-transform: -webkit-translate(0,20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		
+		@keyframes flash_4{
+			0% {transform: translate(0,20px);-webkit-transform: -webkit-translate(0,20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@-webkit-keyframes flash_4{
+			0% {transform: translate(0,20px);-webkit-transform: -webkit-translate(0,20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@keyframes flash_5{
+			0% {transform: translate(-20px);-webkit-transform: -webkit-translate(-20px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@-webkit-keyframes flash_5{
+			0% {transform: translate(-20px);-webkit-transform: -webkit-translate(-20px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@keyframes flash_6{
+			0% {transform: translate(20px);-webkit-transform: -webkit-translate(20px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@-webkit-keyframes flash_6{
+			0% {transform: translate(20px);-webkit-transform: -webkit-translate(20px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@keyframes flash_7{
+			0% {opacity:0;}
+			100% {opacity:1;}
+		}
+		@-webkit-keyframes flash_7{
+			0% {opacity:0;}
+			100% {opacity:1;}
+		}
+		@keyframes flash_8{
+			0% {transform: translate(0,20px);-webkit-transform: -webkit-translate(0,20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@-webkit-keyframes flash_8{
+			0% {transform: translate(0,20px);-webkit-transform: -webkit-translate(0,20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@keyframes flash_9{
+			0% {opacity:0;}
+			50% {opacity:1;}
+			100% {opacity:0;}
+		}
+		@-webkit-keyframes flash_9{
+			0% {opacity:0;}
+			50% {opacity:1;}
+			100% {opacity:0;}
+		}
+		@keyframes flash_10{
+			0% {transform: translate(20px);-webkit-transform: -webkit-translate(20px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@-webkit-keyframes flash_10{
+			0% {transform: translate(20px);-webkit-transform: -webkit-translate(20px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@keyframes flash_11{
+			0% {transform: translate(80px);-webkit-transform: -webkit-translate(80px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@-webkit-keyframes flash_11{
+			0% {transform: translate(80px);-webkit-transform: -webkit-translate(80px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@keyframes border_1{
+			0% {transform: translate(20px);-webkit-transform: -webkit-translate(20px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@-webkit-keyframes border_1{
+			0% {transform: translate(40px);-webkit-transform: -webkit-translate(40px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@keyframes border_2{
+			0% {transform: translate(0,40px);-webkit-transform: -webkit-translate(0,40px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@-webkit-keyframes border_2{
+			0% {transform: translate(0,40px);-webkit-transform: -webkit-translate(0,40px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@keyframes border_3{
+			0% {transform: translate(-40px);-webkit-transform: -webkit-translate(-40px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@-webkit-keyframes border_3{
+			0% {transform: translate(-40px);-webkit-transform: -webkit-translate(-40px);opacity:0;}
+			100% {transform: translate(0);-webkit-transform: -webkit-translate(0);opacity:1;}
+		}
+		@keyframes border_4{
+			0% {transform: translate(0,-40px);-webkit-transform: -webkit-translate(0,-40px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+		@-webkit-keyframes border_4{
+			0% {transform: translate(0,-40px);-webkit-transform: -webkit-translate(0,-40px);opacity:0;}
+			100% {transform: translate(0,0);-webkit-transform: -webkit-translate(0,0);opacity:1;}
+		}
+	</style>
+</head>
+<body>
+<div class="bodyMod">
+	<div id="wx_pic" style="margin:0 auto; display:none;">
+		<img width="300" height="300" src="${picPath}wps/zhuanti/cafeShare/pic300.jpg" />
+	</div>
+	<p style="display:none;">WheelysCafe 5元健康咖啡 每周限量供应哦~美罗城店一楼</p>
+	<div class="loginLogo">
+		<img width="100%" src="${picPath}wps/zhuanti/cafeShare/loginLogo.png" />
+	</div>
+	<div class="modTitle clear">
+		<div class="modTitleLeft left">
+			<img width="50%" src="${picPath}wps/zhuanti/cafeShare/left.png" />
+		</div>
+		<div class="modTitleMiddle left">
+			<div class="modTitleMiddleTop">
+				<div class="modTitleMiddleTopLeft">
+					<img width="100%" src="${picPath}wps/zhuanti/cafeShare/five.png" />
+				</div>
+				<div class="modTitleMiddleTopMiddle">
+					<img width="100%" src="${picPath}wps/zhuanti/cafeShare/xiang.png" />
+				</div>
+				<div class="modTitleMiddleTopRight">
+					<img width="100%" src="${picPath}wps/zhuanti/cafeShare/cafeText.png" />
+				</div>
+			</div>
+			<div class="modTitleMiddleMiddle">
+				<img width="100%" src="${picPath}wps/zhuanti/cafeShare/Line.png" />
+			</div>
+			<div class="modTitleMiddleBottom">
+				<img width="100%" src="${picPath}wps/zhuanti/cafeShare/eng.png" />
+			</div>
+		</div>
+		<div class="modTitleRight right">
+			<img class="right" width="50%" src="${picPath}wps/zhuanti/cafeShare/right.png" />
+		</div>
+	</div>
+	<div class="modText clear">
+		<img style="animation:flash_8 .5s linear 1 5s;-webkit-animation:flash_8 .5s linear 1 5s; animation-fill-mode:forwards; -webkit-animation-fill-mode:forwards;" width="7%" src="${picPath}wps/zhuanti/cafeShare/Group_1.png" />
+		<img style="animation:flash_8 .5s linear 1 5.1s;-webkit-animation:flash_8 .5s linear 1 5.1s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;" width="7%" src="${picPath}wps/zhuanti/cafeShare/Group_2.png" />
+		<img style="animation:flash_8 .5s linear 1 5.2s;-webkit-animation:flash_8 .5s linear 1 5.2s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;" width="7%" src="${picPath}wps/zhuanti/cafeShare/Group_3.png" />
+		<img style="animation:flash_8 .5s linear 1 5.3s;-webkit-animation:flash_8 .5s linear 1 5.3s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;" width="7%" src="${picPath}wps/zhuanti/cafeShare/Group_4.png" />
+		<img style="animation:flash_8 .5s linear 1 5.4s;-webkit-animation:flash_8 .5s linear 1 5.4s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;" width="7%" src="${picPath}wps/zhuanti/cafeShare/Group_5.png" />
+		<img style="animation:flash_8 .5s linear 1 5.5s;-webkit-animation:flash_8 .5s linear 1 5.5s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;" width="7%" src="${picPath}wps/zhuanti/cafeShare/Group_6.png" />
+		<img style="animation:flash_8 .5s linear 1 5.6s;-webkit-animation:flash_8 .5s linear 1 5.6s;animation-fill-mode:forwards;-webkit-animation-fill-mode:forwards;" width="7%" src="${picPath}wps/zhuanti/cafeShare/Group_7.png" />
+	</div>
+	<div class="youhui onClick" data-v="font2">
+		<div class="youhuiText">
+			<img width="100%" src="${picPath}wps/zhuanti/cafeShare/youhuiText.png" />
+		</div>
+		<div class="youhuiPic">
+			<img width="100%" src="${picPath}wps/zhuanti/cafeShare/youhuiPic.png" />
+		</div>
+	</div>
+	<div class="tanBox">
+		<div class="tanBoxLeft left">
+			<div id="tanChuang" class="tanChuang">
+				<div class="tanChuangBg">
+					<img class="fontText font1" width="100%" src="${picPath}wps/zhuanti/cafeShare/font1.png" />
+					<img class="fontText font2" width="100%" src="${picPath}wps/zhuanti/cafeShare/font2.png" />
+				</div>
+				<div class="border_1"></div>
+				<div class="border_2"></div>
+				<div class="border_3"></div>
+				<div class="border_4"></div>
+				<span class="and">AND</span>
+			</div>
+		</div>
+		<div class="tanBoxRight right onClick" data-v="font1">
+			<div class="tanBoxRightTop clear">
+				<div class="tanBoxPic left">
+					<img width="100%" src="${picPath}wps/zhuanti/cafeShare/tanBoxRightPic.png" />
+				</div>
+				<div class="tanBoxText left">
+					<img width="100%" src="${picPath}wps/zhuanti/cafeShare/tanBoxRightText.png" />
+				</div>
+			</div>
+			<div class="tanBoxRightBottom">
+				<a href="${basePath}shop/shopDetail.xhtml?shopid=56&isreset=Y&v=2017030812T">
+					<img width="100%" src="${picPath}wps/zhuanti/cafeShare/button.png" />
+				</a>
+				<div class="tanBoxRightBottomBorder"><img width="100%" src="${picPath}wps/zhuanti/cafeShare/buttonBorder.png" /></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+var isTan;
+	Zepto(function(){
+		zero();
+	})
+	function zero(){
+		$('.onClick').on('click',function(){
+			if($('.and'))$('.and').remove();
+			var d = $(this).attr('data-v');
+			if(d == isTan)return;
+			$('#tanChuang').removeClass('tanChuangGo');
+			$('.fontText').hide();
+			$('.'+d).show();
+			isTan = d;
+			$('#tanChuang').addClass('tanChuangGo');
+		})
+	}
+</script>
+</body>
+</html>

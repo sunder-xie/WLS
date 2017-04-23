@@ -1,0 +1,431 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no"/>
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/forOrder_new.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/wheelys-touch.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+	#parse("/common/baidu.vm") 
+	<style>
+		.header_layout{
+			font-size:1.25rem;
+			width:100%;
+			height:3rem;
+			background:#EE2624;
+			line-height:3rem;
+		 	text-align:center;
+		 	color:#fff;
+		 	position:relative;
+		}
+		.header-img{
+			position:absolute;display:block;width:25px; height:25px;
+			left:10px; top:8px;
+		}
+		.header-img img{vertical-align:0;}
+		body{padding-bottom:80px;}
+	</style>
+	</head>
+	<body>
+		<div class="bodyMoble">
+		#set($order = $container.order)
+		#set($detailList = $container.detailList)
+			<div class="header_layout">
+				<a class="header-img" href="${basePath}shop/shopDetail.xhtml?shopid=$params.shopid"><img width="100%" src="${picPath}wps/coupon/return.png"/></a>
+				订单确认($order.ordertitle)
+			  </div>
+			<div class="orderMod">
+				<div class="listMod">
+					<ul>
+						#foreach($detail in $detailList)
+						<li class="clear ui_flex">
+							<div class="liMod">
+								<p>$detail.productname
+									$VmUtils.getDescription($detail.description)
+								</p>
+								<p style="color:#7E7E7E">$detail.productename</p>
+							</div>
+							#if($discount.type eq 'ONEBUYONE' && $detail.discountnum > 0)
+								<div class="liMod">X$detail.discountnum</div>
+							#else
+								<div class="liMod">X$detail.quantity</div>
+							#end
+							<div class="liMod">
+								#if($discount.type eq 'ONEBUYONE')
+									￥$VmUtils.getAmount($detail.paidfee)
+								#else
+									￥$VmUtils.getAmount($detail.totalfee)
+								#end
+							</div>
+						</li>
+						#end
+					</ul>
+					#if($order.sdid)
+						<div id="vouponInfo" class="discount clear">
+							#if($discount.type eq 'ONEBUYONE')
+							<div class="left">优惠活动:$!order.disreason</div>
+							<div class="right red" data-value="送${order.discountnum}杯">送${order.discountnum}杯</div>
+							#else
+							<div class="left">优惠活动:$!order.disreason</div>
+							<div class="right red" data-value="-￥$VmUtils.getAmount($order.discount)">-￥$VmUtils.getAmount($order.discount)</div>
+							#end
+						</div>
+					#end
+					<div class="discount ui_flex clear">
+						<div style="width:60%; text-align:left;" class="left">
+							<p class="coupon">优惠券</p>
+						</div>
+				       <div id="couponEx" class="couponEx #if($cardVo) red #end" data-id="$!cardVo.id" onclick="rightSlidePage();">
+				       	#if($cardVo)
+				       	-￥$!cardVo.useamount$!cardVo.desc
+				       	#else
+				       	点击使用优惠券
+				       	#end
+				       	</div>
+				        <div style="display:inline-block;width:4%; height:1rem;background:url('${picPath}wps/coupon/jt.png') right center no-repeat; background-size:auto 100%"></div>
+					</div>
+					<div class="discount clear">
+						<div style="width:60%; text-align:left;" class="left">
+							<p style="line-height:1.4rem;display:inline-block;color:#7E7E7E; font-size:0.925rem;">注:&nbsp;优惠活动与优惠券不同享</p>
+						</div>
+						<span class="right red total" id="payfee1">￥$VmUtils.getAmount($order.payfee)</span>
+						<span class="right red">实付</span>
+					</div>
+				</div>
+				<div class="functionBox">
+					<div class="functionTitle">
+					#if($ifTakeoutSupport && $ifReservedstatus)
+						<p class="takeAndBefor clear" id="takeAndBefor"><span class="select" data-type="befor"><em>预约自取</em></span><span data-type="take"><em>配送上门</em></span></p>
+					#elseif($ifTakeoutSupport)
+						<p class="getTakeOut clear"><span class="icon" id="getTakeOut"></span><em>咖啡配送上门(<b>不勾选则来店自取</b>)</em></p>
+					#elseif($ifReservedstatus)
+					<p class="onlyBefor" id="onlyBefor">预约自取<span></span></p>
+					#end
+					</div>
+					<div class="functionMod">
+						#if($ifTakeoutSupport && $ifReservedstatus)
+						<div id="beforTime" class="beforTime">
+							<ul class="clear">
+								<li class="beforTimeMod beforMod" data-value="10">10分钟</li>
+								<li class="beforTimeMod beforMod" data-value="20">20分钟</li>
+								<li class="beforTimeMod beforMod" data-value="30">30分钟</li>
+								<li class="beforTimeMod beforMod" data-value="40">40分钟</li>
+								<li class="beforTimeMod beforMod" data-value="50">50分钟</li>
+								<li class="beforTimeMod beforMod" data-value="60">60分钟</li>
+							</ul>
+							<div class="beforTimeMod nowTimeMod on" data-value="0"><span>现取</span></div>
+						</div>
+						<div id="getAssMod">
+							#parse("/wps/modul/forOrderAddress.vm")
+						</div>
+						#elseif($ifTakeoutSupport)
+						<div id="getAssMod">
+							#parse("/wps/modul/forOrderAddress.vm")
+						</div>
+						#elseif($ifReservedstatus)
+						<div id="beforTime" class="beforTime">
+							<ul class="clear">
+								<li class="beforTimeMod beforMod" data-value="10">10分钟</li>
+								<li class="beforTimeMod beforMod" data-value="20">20分钟</li>
+								<li class="beforTimeMod beforMod" data-value="30">30分钟</li>
+								<li class="beforTimeMod beforMod" data-value="40">40分钟</li>
+								<li class="beforTimeMod beforMod" data-value="50">50分钟</li>
+								<li class="beforTimeMod beforMod" data-value="60">60分钟</li>
+							</ul>
+							<div class="beforTimeMod nowTimeMod on" data-value="0"><span>现取</span></div>
+						</div>
+						#else
+						<div id="beforTime" class="beforTime" style="display: none;">
+							<div class="beforTimeMod nowTimeMod on" data-value="0"><span>现取</span></div>
+						</div>
+						#end
+					</div>
+				</div>
+			</div>
+			<div class="Pay"><p class="total" id="payfee2">￥$VmUtils.getAmount($order.payfee)</p><a id="payBtn" class="wxPay" onclick="callpay()">#if($isWx)确认支付#else支付宝支付#end</a></div>
+		</div>
+		<div id="orderCoupon">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+	var data = {};
+	var isCallpay = true;
+	Zepto(function(){
+		takeOutAlert();
+		beforMod();
+		if($('#takeAndBefor').length>0)beforAndTake();
+	})
+	function rightSlidePage(){
+		var data = {
+				'shopid':'$order.shopid',
+				'price':'$detailList.get(0).price',
+				#if($discount.type eq 'ONEBUYONE')
+					'totalfee':'$VmUtils.getAmount($order.payfee)'
+				#else
+					'totalfee':'$VmUtils.getAmount($order.totalfee)'
+				#end
+		}
+		if($('#couponEx').hasClass('red')){
+			data.cardid = $('#couponEx').attr('data-id');
+		}
+		wheelys.slidePage({
+			url:'${basePath}order/couponPage.xhtml',
+			data:data,
+			ajaxcallback:function(e){
+				$('.content').css({
+					'margin-top':'68px',
+					'padding-bottom':'80px'
+				})
+				$('.wrap').addClass('wrap-fixed');
+				$('.sure-wrap').addClass('sure-fixed');
+			    /* var h2=h-146;
+			    $('.note-content').css({
+			    	 'height':h2,
+			    	 'overflow':'auto'	
+			    }) */
+			    $('#orderPageBox').css({
+					'height':$(window).height(),
+					'overflow-y':'auto'
+				})
+				$('.one').click(function(){
+					if($(this).hasClass('red-one')){
+						$(this).removeClass('red-one');
+					}else{
+						$(this).addClass('red-one').siblings().removeClass('red-one');
+					}
+				})
+				$('#closeBtn').click(function(){
+					e();
+				})
+				$('.sure').click(function(){
+					couponEnter();
+					e();
+				})
+				
+			}
+		});
+	}
+	function couponEnter(){
+		var coupon = $('#couponList .red-one')
+		var voupon = $('#vouponInfo .right');
+		if(coupon.length > 0){
+			$('#couponEx').html('-￥'+$(coupon).attr('data-discount')+$(coupon).attr('data-desc')).attr('data-id',$(coupon).attr('data-id'));
+			$('#couponEx').addClass('red');
+			$('.total').html('￥'+$(coupon).attr('data-payfee'))
+			voupon.html('未享用此优惠')
+			voupon.removeClass('red');
+		}else{
+			voupon.html(voupon.attr('data-value'));
+			$('.total').html('￥$VmUtils.getAmount($order.payfee)')
+			$('#couponEx').removeClass('red');
+			$('#couponEx').attr('data-id','');
+	       	#if($cardVo)
+			$('#payfee1').html('￥$VmUtils.getAmount($order.totalfee)');
+			$('#payfee2').html('￥$VmUtils.getAmount($order.totalfee)');
+			#end
+			$('#couponEx').html('点击使用优惠券')
+			voupon.addClass('red');
+		}
+	}
+	function onBridgeReady(){
+		isCallpay = false;
+		var memberAddressid = $('#memberAddressid').val();
+		var data = 'shopid=$params.shopid&tradeno=${order.tradeno}';
+		if($('#takeAndBefor').length>0){
+			var type = $('#takeAndBefor span.select').attr('data-type');
+			if(type == 'befor'){
+				data += '&category=RESERVED';
+				data += '&reservedtime='+$('#beforTime .on').attr('data-value');
+			}else if(type == 'take'){
+				data += '&category=TAKEAWAY';
+				data += '&addressid='+memberAddressid;
+			}
+		}
+		if($('#getTakeOut').hasClass('select')){
+			data += '&category=TAKEAWAY';
+			data += '&addressid='+memberAddressid;
+		}
+		if($('#onlyBefor').length>0){
+			data += '&category=RESERVED';
+			data += '&reservedtime='+$('#beforTime .on').attr('data-value');
+		}
+		if($('#couponEx').attr('data-id')!=''){
+			data += '&cardid='+$('#couponEx').attr('data-id');
+		}
+		$.ajax({
+			url:'${basePath}order/confirm.xhtml',
+			type:'get',
+			dataType:'json',
+			data:data,
+			success:function(retuslt){
+				isCallpay = true;
+				var data = retuslt.data;
+				if(data.paystatus == 'paid'){
+					window.location.href="${basePath}return/wxmppay.xhtml?tradeno="+data.tradeno;
+				}else{
+					if(data.payparams){
+						weixinPay(data.payparams,data.tradeno);
+					}else{
+						window.location.href= data.wapPayUrl;
+					}
+				}
+			}
+		});
+	}
+	
+	function weixinPay(pay,tradeno){
+		WeixinJSBridge.invoke(
+		    'getBrandWCPayRequest', 
+		    pay,
+		    function(res){
+				if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+					window.location.href="${basePath}return/wxmppay.xhtml?tradeno="+tradeno;
+				}else if(res.err_msg == "get_brand_wcpay_request:cancel"){
+					alert("取消支付");
+					window.location.href="${basePath}shop/shopDetail.xhtml?shopid=$order.shopid";
+				}else{
+					alert("支付失败"+res.err_msg);
+					window.location.href="${basePath}shop/shopDetail.xhtml?shopid=$order.shopid";
+				}
+		    }
+		); 
+	}
+	function callpay(){
+		if(!isCallpay)return
+		#if($isWx)
+			if (typeof WeixinJSBridge == "undefined"){
+			   if( document.addEventListener ){
+			       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+			   }else if (document.attachEvent){
+			       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+			       document.attachEvent('onWeixinJSBridgeReady',onBridgeReady);
+			   }
+			}else{
+				onBridgeReady();
+			}	
+		#else
+			onBridgeReady();
+		#end
+	}
+	function takeOutAlert(){
+		$('#getTakeOut').on('click',function(){
+			if($('#memberAddressid').val() == ''){
+				$('#getTakeOut').toggleClass('select');
+				$('#getAss').popup({
+					closeCallback:function(){
+						if($('#getTakeOut').hasClass('select')){
+							$('#getTakeOut').removeClass('select');
+						}
+					}
+				});
+			}else{
+				$(this).toggleClass('select');
+				if($('.takeOutMod')){
+					$('.takeOutMod').toggle();
+				}else{
+					$('#getAss').popup();
+				}
+				modifyAss();
+			}
+		})
+	}
+	function beforAndTake(){
+		var title = $('.takeAndBefor span')
+		title.on('click',function(){
+			if($(this).hasClass('select'))return;
+			title.removeClass('select');
+			$(this).addClass('select');
+			if($(this).attr('data-type') == 'take'){
+				if($('#memberAddressid').val() != '' && $('#takeOutMod').length > 0){
+					modifyAss();
+					$('.beforTime').hide();
+					$('#takeOutMod').show();
+				}else{
+					$('#getAss').popup({
+						closeCallback:function(){
+							if($('#takeOutMod').css('display') == 'none'){
+								title.removeClass('select');
+								title.each(function(e,a){
+									if(e==0)$(a).addClass('select');
+								})
+							}
+						}
+					});
+				}
+			}else{
+				$('.beforTime').show();
+				if($('#takeOutMod'))$('#takeOutMod').hide();
+			}
+		})
+	}
+	function beforMod(){
+		var mod = $('.beforTime li').add($('.beforTimeMod'));
+		mod.on('click',function(){
+			if($(this).hasClass('on'))return;
+			mod.removeClass('on');
+			$(this).addClass('on');
+		})
+	}
+	function modifyAss(){
+		if($('#modifyAss')){
+			$('#modifyAss').on('click',function(){
+				$('#getAss').popup({
+					callback:function(){
+					}
+				});
+			});
+		}
+	}
+	function checkMobile(mobile){
+		if((/^1(3|4|5|7|8)\d{9}$/.test(mobile))){
+			return true;
+		}else {
+			return false;
+		}
+	};
+	
+	function _addDetail(){
+		var detailaddress = $("input[name='detailaddress']").val();
+		var mobile = $("input[name='mobile']").val();
+		var username = $("input[name='username']").val();
+		var address = $("select option:selected").val();
+		$('.downTo').removeClass('errInput');
+		$('#getAss input').each(function(e ,a){
+			$(a).closest('li').removeClass('errInput');
+			if($(a).val() == '' && ($(a).attr('name') != 'username'|| $(a).attr('name') != 'detailaddress' || $(a).attr('name') != 'mobile')){
+				$(a).closest('li').addClass('errInput');
+				return;
+			}
+		})
+		if(!wheelys.isMobile(mobile)){
+			alert('您填写的手机号码有误');
+			return;
+		}
+		if($.trim(detailaddress) == '' || address == '请选择指定配送地点'){
+			$('.downTo').addClass('errInput');
+			alert('请选择指定配送地点');
+			return false;
+		}
+		wheelys.ajaxHtml('getAssMod','${basePath}order/editMemberAddress.xhtml?shopid=$order.shopid&username='+username+'&mobile='+mobile+'&detailaddress='+detailaddress+'&address='+address,function(data){
+			$('#takeOutMod').show();
+			$('#getAss').closePopup({
+				closeCallback:function(){}
+			});
+			$('#getTakeOut').addClass('select');
+//			$('#getTakeOut').toggleClass('select');
+			if($('.beforTime'))$('.beforTime').hide();
+			if($('#takeOut'))$('#takeOut').show();
+			modifyAss();
+		});
+	}
+	</script>
+</html>

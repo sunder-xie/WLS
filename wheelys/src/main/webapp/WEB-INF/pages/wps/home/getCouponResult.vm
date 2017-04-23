@@ -1,0 +1,64 @@
+<!doctype html>
+<html >
+<head>
+	<meta charset="utf-8" http-equiv="Content-Type" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<title>Wheelys Cafe</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui"/>
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<link href="${staticPath}css/touch.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<link href="${staticPath}css/wps/couponCenter.css?v=$VmUtils.version" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="${staticPath}js/zepto.min.js?v=$VmUtils.version" type="text/javascript"></script>
+	<script type="text/javascript" src="${staticPath}js/zepto_popup.js?v=$VmUtils.version" type="text/javascript"></script>
+</head>
+<body style="height:100%;width:100%;background:#FFF2E2;">
+	<div class="D-header">
+	   <div class="D-img"><img src="${picPath}wps/Discountcoupon/345767378299377099.png"/></div>
+	   <p class="D-text">喊你来领福利啦</p>
+	</div>
+	<div class="D-body content" style="padding:15px 0;">
+	    <h3 class="h3-text">恭喜您领取成功!</h3>
+	    <div class="one-wrap">
+		    <div class="one">
+				<div class="top">
+			   		#if($elecCardBatch.cardtype eq '1')
+					<div class="top-left" style="font-size:1.8rem;">
+					     &yen;$elecCardBatch.amount
+					</div>
+					#else
+					<div class="top-left coffee">
+					  	$elecCardBatch.dhname
+					</div>
+					#end
+				      <div class="top-right">
+				         <h3>$!elecCardBatch.cardname</h3>
+				         <ul>
+				   			#if($elecCardBatch.minprice gt 0)
+				           <li>消费满${elecCardBatch.minprice}使用</li>
+							#end
+							#if($elecCardBatch.daynum gt 0)
+							<li class="last">使用期限$DateUtil.format($begintime,'yyyy-MM-dd') ~ $DateUtil.format($endtime,'yyyy-MM-dd')</li>
+							#else
+							<li class="last">使用期限$DateUtil.format($elecCardBatch.timefrom,'yyyy-MM-dd') ~ $DateUtil.format($elecCardBatch.timeto,'yyyy-MM-dd')</li>
+							#end
+				         </ul>
+				      </div>
+			      </div>
+			   <div class="bottom">
+			      <p> 说明：${elecCardBatch.description} </p> 
+			   </div>
+	          <div class="oneNum">X$!{elecCardBatch.receivenum}</div> 
+          </div>
+          <b class="wrapNum"></b>
+       </div>
+       <div class="D-footer">
+          <img src="${picPath}wps/Discountcoupon/rwm.png"/>
+       </div>
+       <div class="btnList">
+    	<a href="${basePath}home/cardList.xhtml" style="background:#EB4256">查看优惠券</a>
+    	<a href="${basePath}index.xhtml" style="background:#EB4256">去下单</a>
+       </div>
+   </div>
+</body>
+</html>

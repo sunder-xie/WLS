@@ -1,0 +1,14 @@
+<div class="footMenu">
+	<div class="footMenuMod">
+		<a href="${basePath}index.xhtml"><img width="25%" src="${picPath}wps/icon/icon-index#if($isIndex)-c#end.png" /></a>
+	</div>
+	<div class="footMenuMod">
+		<a href="${basePath}news/newsList.xhtml"><img width="25%" src="${picPath}wps/icon/icon-find#if($isFind)-c#end.png" /></a>
+	</div>
+	<div class="footMenuMod">
+		<a href="${basePath}shop/getOrderList.xhtml"><img width="25%" src="${picPath}wps/icon/icon-order#if($isOrder)-c#end.png" /></a>
+	</div>
+	<div class="footMenuMod">
+		<a href="${basePath}home/index.xhtml"><img width="25%" src="${picPath}wps/icon/icon-mine#if($isMine)-c#end.png" /></a>
+	</div>
+</div>
